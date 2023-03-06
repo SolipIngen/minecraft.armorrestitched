@@ -1,0 +1,51 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "solipingen.armorrestitched.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "entity.boss.WitherEntityMixin", 
+    "entity.mob.DrownedEntityMixin", 
+    "entity.mob.HoglinEntityMixin", 
+    "entity.mob.MagmaCubeEntityMixin", 
+    "entity.mob.MobEntityMixin", 
+    "entity.mob.PiglinEntityMixin", 
+    "entity.mob.PillagerEntityMixin", 
+    "entity.mob.ShulkerEntityMixin", 
+    "entity.mob.SkeletonHorseEntityMixin", 
+    "entity.mob.SlimeEntityMixin", 
+    "entity.mob.SpellcastingIllagerEntityMixin", 
+    "entity.mob.VindicatorEntityMixin", 
+    "entity.mob.WardenEntityMixin", 
+    "entity.mob.WitherSkeletonEntityMixin", 
+    "entity.mob.ZoglinEntityMixin", 
+    "entity.mob.ZombieEntityMixin", 
+    "entity.mob.ZombieHorseEntityMixin", 
+    "entity.mob.ZombifiedPiglinEntityMixin", 
+    "entity.passive.IronGolemEntityMixin", 
+    "entity.passive.TurtleEntityMixin", 
+    "entity.passive.VillagerEntityMixin", 
+    "entity.DamageUtilMixin", 
+    "item.ArmorItemMixin", 
+    "item.ArmorMaterialsMixin", 
+    "item.HorseArmorItemMixin", 
+    "item.ItemsMixin"
+  ],
+  "client": [
+    "client.accessors.render.entity.model.IllagerEntityModelAccessor", 
+    "client.accessors.render.entity.model.VillagerResemblingModelAccessor", 
+    "client.render.entity.feature.ArmorFeatureRendererMixin", 
+    "client.render.entity.feature.VillagerClothingFeatureRendererMixin", 
+    "client.render.entity.AbstractHorseEntityRendererMixin", 
+    "client.render.entity.EvokerEntityRendererMixin", 
+    "client.render.entity.IllagerEntityRendererMixin", 
+    "client.render.entity.IllusionerEntityRendererMixin", 
+    "client.render.entity.PillagerEntityRendererMixin", 
+    "client.render.entity.VillagerEntityRendererMixin", 
+    "client.render.entity.VindicatorEntityRendererMixin", 
+    "client.WelcomeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

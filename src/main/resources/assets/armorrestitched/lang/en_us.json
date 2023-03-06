@@ -1,0 +1,15 @@
+{
+    "language.name": "American English",
+    "language.region": "United States",
+    "language.code": "en_us", 
+
+    "item.armorrestitched.copper_helmet": "Copper Helmet", 
+    "item.armorrestitched.copper_chestplate": "Copper Chestplate", 
+    "item.armorrestitched.copper_leggings": "Copper Leggings", 
+    "item.armorrestitched.copper_boots": "Copper Boots", 
+    "item.armorrestitched.copper_horse_armor": "Copper Horse Armor", 
+
+    "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks"
+
+
+}
