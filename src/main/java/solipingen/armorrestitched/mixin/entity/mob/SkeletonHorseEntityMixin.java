@@ -23,11 +23,11 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
-import solipingen.armorrestitched.util.interfaces.entity.mob.INonStandardHorseEntity;
+import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.NonStandardHorseEntityInterface;
 
 
 @Mixin(SkeletonHorseEntity.class)
-public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity implements INonStandardHorseEntity {
+public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity implements NonStandardHorseEntityInterface {
     private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
     
 
