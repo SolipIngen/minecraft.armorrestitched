@@ -4,6 +4,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -40,7 +41,7 @@ public abstract class MobEntityMixin extends LivingEntity {
                         level++;
                     }
                 }
-                Item item = MobEntityMixin.getModEquipmentForSlot(slot, level);
+                Item item = MobEntity.getEquipmentForSlot(slot, level);
                 ItemStack itemStack = new ItemStack(item);
                 this.equipStack(slot, itemStack);
             }
@@ -49,78 +50,79 @@ public abstract class MobEntityMixin extends LivingEntity {
     }
 
     @SuppressWarnings("incomplete-switch")
-    public static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
+    @Inject(method = "getEquipmentForSlot", at = @At("HEAD"), cancellable = true)
+    private static void injectedModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel, CallbackInfoReturnable<Item> cbireturn) {
         switch (equipmentSlot) {
             case HEAD: {
                 if (equipmentLevel == 0) {
-                    return Items.LEATHER_HELMET;
+                    cbireturn.setReturnValue(Items.LEATHER_HELMET);
                 }
                 if (equipmentLevel == 1) {
-                    return ModItems.COPPER_HELMET;
+                    cbireturn.setReturnValue(ModItems.COPPER_HELMET);
                 }
                 if (equipmentLevel == 2) {
-                    return Items.GOLDEN_HELMET;
+                    cbireturn.setReturnValue(Items.GOLDEN_HELMET);
                 }
                 if (equipmentLevel == 3) {
-                    return Items.IRON_HELMET;
+                    cbireturn.setReturnValue(Items.IRON_HELMET);
                 }
                 if (equipmentLevel == 4) {
-                    return Items.DIAMOND_HELMET;
+                    cbireturn.setReturnValue(Items.DIAMOND_HELMET);
                 }
             }
             case CHEST: {
                 if (equipmentLevel == 0) {
-                    return Items.LEATHER_CHESTPLATE;
+                    cbireturn.setReturnValue(Items.LEATHER_CHESTPLATE);
                 }
                 if (equipmentLevel == 1) {
-                    return ModItems.COPPER_CHESTPLATE;
+                    cbireturn.setReturnValue(ModItems.COPPER_CHESTPLATE);
                 }
                 if (equipmentLevel == 2) {
-                    return Items.GOLDEN_CHESTPLATE;
+                    cbireturn.setReturnValue(Items.GOLDEN_CHESTPLATE);
                 }
                 if (equipmentLevel == 3) {
-                    return Items.IRON_CHESTPLATE;
+                    cbireturn.setReturnValue(Items.IRON_CHESTPLATE);
                 }
                 if (equipmentLevel == 4) {
-                    return Items.DIAMOND_CHESTPLATE;
+                    cbireturn.setReturnValue(Items.DIAMOND_CHESTPLATE);
                 }
             }
             case LEGS: {
                 if (equipmentLevel == 0) {
-                    return Items.LEATHER_LEGGINGS;
+                    cbireturn.setReturnValue(Items.LEATHER_LEGGINGS);
                 }
                 if (equipmentLevel == 1) {
-                    return ModItems.COPPER_LEGGINGS;
+                    cbireturn.setReturnValue(ModItems.COPPER_LEGGINGS);
                 }
                 if (equipmentLevel == 2) {
-                    return Items.GOLDEN_LEGGINGS;
+                    cbireturn.setReturnValue(Items.GOLDEN_LEGGINGS);
                 }
                 if (equipmentLevel == 3) {
-                    return Items.IRON_LEGGINGS;
+                    cbireturn.setReturnValue(Items.IRON_LEGGINGS);
                 }
                 if (equipmentLevel == 4) {
-                    return Items.DIAMOND_LEGGINGS;
+                    cbireturn.setReturnValue(Items.DIAMOND_LEGGINGS);
                 }
             }
             case FEET: {
                 if (equipmentLevel == 0) {
-                    return Items.LEATHER_BOOTS;
+                    cbireturn.setReturnValue(Items.LEATHER_BOOTS);
                 }
                 if (equipmentLevel == 1) {
-                    return ModItems.COPPER_BOOTS;
+                    cbireturn.setReturnValue(ModItems.COPPER_BOOTS);
                 }
                 if (equipmentLevel == 2) {
-                    return Items.GOLDEN_BOOTS;
+                    cbireturn.setReturnValue(Items.GOLDEN_BOOTS);
                 }
                 if (equipmentLevel == 3) {
-                    return Items.IRON_BOOTS;
+                    cbireturn.setReturnValue(Items.IRON_BOOTS);
                 }
                 if (equipmentLevel == 4) {
-                    return Items.DIAMOND_BOOTS;
+                    cbireturn.setReturnValue(Items.DIAMOND_BOOTS);
                 }
             }
         }
-        return null;
+        cbireturn.setReturnValue(null);
     }
 
     

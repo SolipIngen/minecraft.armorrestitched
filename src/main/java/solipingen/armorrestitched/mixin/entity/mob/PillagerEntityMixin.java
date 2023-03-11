@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PillagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,7 +36,7 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
                 if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = MobEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.2f + 0.15f*this.world.getDifficulty().getId() ? 3 : 2);
+                Item armorItem = MobEntity.getEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.2f + 0.15f*this.world.getDifficulty().getId() ? 3 : 2);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
             this.updateEnchantments(world.getRandom(), difficulty);
