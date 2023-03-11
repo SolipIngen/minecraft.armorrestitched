@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,7 +34,7 @@ public abstract class SpellcastingIllagerEntityMixin extends IllagerEntity {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
                 if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = MobEntity.getEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.08f ? 4 : 1);
+                Item armorItem = MobEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.08f ? 4 : 1);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
             this.updateEnchantments(world.getRandom(), difficulty);

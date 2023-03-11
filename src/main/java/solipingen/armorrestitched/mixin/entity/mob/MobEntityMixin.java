@@ -2,9 +2,8 @@ package solipingen.armorrestitched.mixin.entity.mob;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -12,7 +11,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.item.ModItems;
 
@@ -25,27 +27,39 @@ public abstract class MobEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @ModifyConstant(method = "initEquipment", constant = @Constant(floatValue = 0.15f))
-    private float modifiedInitEquipmentFloat(float originalf) {
-        if (((MobEntity)(Object)this) instanceof IllagerEntity) {
-            return 0.25f;
+    @Inject(method = "initEquipment", at = @At("HEAD"), cancellable = true)
+    private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
+        float equipThreshold = ((MobEntity)(Object)this) instanceof IllagerEntity ? 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty() : 0.15f*this.world.getDifficulty().getId() + 0.5f*localDifficulty.getClampedLocalDifficulty();
+        float armorTypeThreshold = 0.08f*this.world.getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty();
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            if (random.nextFloat() <= equipThreshold) {
+                int level = 0;
+                for (int j = 0; j <= 4; j++) {
+                    if (random.nextFloat() <= armorTypeThreshold) {
+                        level++;
+                    }
+                }
+                Item item = MobEntityMixin.getModEquipmentForSlot(slot, level);
+                ItemStack itemStack = new ItemStack(item);
+                this.equipStack(slot, itemStack);
+            }
         }
-        return 0.2f;
+        cbi.cancel();
     }
 
     @SuppressWarnings("incomplete-switch")
-    @Redirect(method = "initEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;getEquipmentForSlot(Lnet/minecraft/entity/EquipmentSlot;I)Lnet/minecraft/item/Item;"))
-    private Item redirectedGetEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
+    public static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         switch (equipmentSlot) {
             case HEAD: {
                 if (equipmentLevel == 0) {
                     return Items.LEATHER_HELMET;
                 }
                 if (equipmentLevel == 1) {
-                    return Items.GOLDEN_HELMET;
+                    return ModItems.COPPER_HELMET;
                 }
                 if (equipmentLevel == 2) {
-                    return ModItems.COPPER_HELMET;
+                    return Items.GOLDEN_HELMET;
                 }
                 if (equipmentLevel == 3) {
                     return Items.IRON_HELMET;
@@ -59,10 +73,10 @@ public abstract class MobEntityMixin extends LivingEntity {
                     return Items.LEATHER_CHESTPLATE;
                 }
                 if (equipmentLevel == 1) {
-                    return Items.GOLDEN_CHESTPLATE;
+                    return ModItems.COPPER_CHESTPLATE;
                 }
                 if (equipmentLevel == 2) {
-                    return ModItems.COPPER_CHESTPLATE;
+                    return Items.GOLDEN_CHESTPLATE;
                 }
                 if (equipmentLevel == 3) {
                     return Items.IRON_CHESTPLATE;
@@ -76,10 +90,10 @@ public abstract class MobEntityMixin extends LivingEntity {
                     return Items.LEATHER_LEGGINGS;
                 }
                 if (equipmentLevel == 1) {
-                    return Items.GOLDEN_LEGGINGS;
+                    return ModItems.COPPER_LEGGINGS;
                 }
                 if (equipmentLevel == 2) {
-                    return ModItems.COPPER_LEGGINGS;
+                    return Items.GOLDEN_LEGGINGS;
                 }
                 if (equipmentLevel == 3) {
                     return Items.IRON_LEGGINGS;
@@ -93,16 +107,17 @@ public abstract class MobEntityMixin extends LivingEntity {
                     return Items.LEATHER_BOOTS;
                 }
                 if (equipmentLevel == 1) {
-                    return Items.GOLDEN_BOOTS;
+                    return ModItems.COPPER_BOOTS;
                 }
                 if (equipmentLevel == 2) {
-                    return ModItems.COPPER_BOOTS;
+                    return Items.GOLDEN_BOOTS;
                 }
                 if (equipmentLevel == 3) {
                     return Items.IRON_BOOTS;
                 }
-                if (equipmentLevel != 4) break;
-                return Items.DIAMOND_BOOTS;
+                if (equipmentLevel == 4) {
+                    return Items.DIAMOND_BOOTS;
+                }
             }
         }
         return null;

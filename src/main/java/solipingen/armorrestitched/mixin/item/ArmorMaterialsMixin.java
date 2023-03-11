@@ -78,16 +78,16 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial {
     @Inject(method = "getKnockbackResistance", at = @At("HEAD"), cancellable = true)
     private void injectedGetKnockbackResistance(CallbackInfoReturnable<Float> cbireturn) {
         if (this.name.equals("iron")) {
-            cbireturn.setReturnValue(0.075f);
+            cbireturn.setReturnValue(0.08f);
         }
         else if (this.name.equals("diamond")) {
             cbireturn.setReturnValue(0.15f);
         }
         else if (this.name.equals("netherite")) {
-            cbireturn.setReturnValue(0.1875f);
+            cbireturn.setReturnValue(0.2f);
         }
         else if (this.name.equals("turtle")) {
-            cbireturn.setReturnValue(0.05f);
+            cbireturn.setReturnValue(0.03f);
         }
     }
     
