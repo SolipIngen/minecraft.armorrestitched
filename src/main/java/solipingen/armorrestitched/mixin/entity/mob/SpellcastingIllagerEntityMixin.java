@@ -35,8 +35,8 @@ public abstract class SpellcastingIllagerEntityMixin extends IllagerEntity {
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = SpellcastingIllagerEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.08f ? 4 : 1);
+                if (!this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) continue;
+                Item armorItem = SpellcastingIllagerEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.08f*this.world.getDifficulty().getId() ? 4 : 3);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
             this.updateEnchantments(world.getRandom(), difficulty);

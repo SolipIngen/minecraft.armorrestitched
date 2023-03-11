@@ -30,8 +30,8 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
-        float equipThreshold = ((MobEntity)(Object)this) instanceof IllagerEntity ? 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty() : 0.15f*this.world.getDifficulty().getId() + 0.5f*localDifficulty.getClampedLocalDifficulty();
-        float armorTypeThreshold = 0.08f*this.world.getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty();
+        float equipThreshold = ((MobEntity)(Object)this) instanceof IllagerEntity ? 0.15f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty() : 0.08f*this.world.getDifficulty().getId() + 0.15f*localDifficulty.getClampedLocalDifficulty();
+        float armorTypeThreshold = 0.04f*this.world.getDifficulty().getId() + 0.1f*localDifficulty.getClampedLocalDifficulty();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
             this.equipStack(slot, ItemStack.EMPTY);
