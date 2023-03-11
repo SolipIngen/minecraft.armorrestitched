@@ -15,11 +15,13 @@ import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import solipingen.armorrestitched.item.ModItems;
 
 
 @Mixin(VindicatorEntity.class)
@@ -36,7 +38,7 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
                 if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = MobEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.04f ? 4 : 3);
+                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.04f ? 4 : 3);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
             this.updateEnchantments(world.getRandom(), difficulty);
@@ -46,6 +48,79 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         super.initEquipment(random, localDifficulty);
+    }
+
+    @Nullable
+    private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
+        if (equipmentSlot == EquipmentSlot.HEAD) {
+            if (equipmentLevel == 0) {
+                return Items.LEATHER_HELMET;
+            }
+            else if (equipmentLevel == 1) {
+                return ModItems.COPPER_HELMET;
+            }
+            else if (equipmentLevel == 2) {
+                return Items.GOLDEN_HELMET;
+            }
+            else if (equipmentLevel == 3) {
+                return Items.IRON_HELMET;
+            }
+            else if (equipmentLevel == 4) {
+                return Items.DIAMOND_HELMET;
+            }
+        }
+        else if (equipmentSlot == EquipmentSlot.CHEST) {
+            if (equipmentLevel == 0) {
+                return Items.LEATHER_CHESTPLATE;
+            }
+            else if (equipmentLevel == 1) {
+                return ModItems.COPPER_CHESTPLATE;
+            }
+            else if (equipmentLevel == 2) {
+                return Items.GOLDEN_CHESTPLATE;
+            }
+            else if (equipmentLevel == 3) {
+                return Items.IRON_CHESTPLATE;
+            }
+            else if (equipmentLevel == 4) {
+                return Items.DIAMOND_CHESTPLATE;
+            }
+        }
+        else if (equipmentSlot == EquipmentSlot.LEGS) {
+            if (equipmentLevel == 0) {
+                return Items.LEATHER_LEGGINGS;
+            }
+            else if (equipmentLevel == 1) {
+                return ModItems.COPPER_LEGGINGS;
+            }
+            else if (equipmentLevel == 2) {
+                return Items.GOLDEN_LEGGINGS;
+            }
+            else if (equipmentLevel == 3) {
+                return Items.IRON_LEGGINGS;
+            }
+            else if (equipmentLevel == 4) {
+                return Items.DIAMOND_LEGGINGS;
+            }
+        }
+        else if (equipmentSlot == EquipmentSlot.FEET) {
+            if (equipmentLevel == 0) {
+                return Items.LEATHER_BOOTS;
+            }
+            else if (equipmentLevel == 1) {
+                return ModItems.COPPER_BOOTS;
+            }
+            else if (equipmentLevel == 2) {
+                return Items.GOLDEN_BOOTS;
+            }
+            else if (equipmentLevel == 3) {
+                return Items.IRON_BOOTS;
+            }
+            else if (equipmentLevel == 4) {
+                return Items.DIAMOND_BOOTS;
+            }
+        }
+        return null;
     }
 
 

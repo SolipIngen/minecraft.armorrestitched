@@ -43,7 +43,8 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
     }
 
     @ModifyConstant(method = "equipAtChance", constant = @Constant(floatValue = 0.1f))
-    private float modifiedEquipThreshold(float originalf, Random random, LocalDifficulty localDifficulty) {
+    private float modifiedEquipThreshold(float originalf, EquipmentSlot slot, ItemStack stack, Random random) {
+        LocalDifficulty localDifficulty = this.world.getLocalDifficulty(this.getBlockPos());
         return 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty();
     }
 
