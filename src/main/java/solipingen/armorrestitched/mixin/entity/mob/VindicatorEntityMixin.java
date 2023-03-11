@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
+
 import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,8 +38,8 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.04f ? 4 : 3);
+                if (!this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) continue;
+                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(equipmentSlot, 3);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
             this.updateEnchantments(world.getRandom(), difficulty);
@@ -52,74 +53,74 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
 
     @Nullable
     private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        if (equipmentSlot == EquipmentSlot.HEAD) {
-            if (equipmentLevel == 0) {
-                return Items.LEATHER_HELMET;
+            if (equipmentSlot == EquipmentSlot.HEAD) {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_HELMET;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_HELMET;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.GOLDEN_HELMET;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.IRON_HELMET;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_HELMET;
+                }
             }
-            else if (equipmentLevel == 1) {
-                return ModItems.COPPER_HELMET;
+            else if (equipmentSlot == EquipmentSlot.CHEST) {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_CHESTPLATE;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_CHESTPLATE;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.GOLDEN_CHESTPLATE;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.IRON_CHESTPLATE;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_CHESTPLATE;
+                }
             }
-            else if (equipmentLevel == 2) {
-                return Items.GOLDEN_HELMET;
+            else if (equipmentSlot == EquipmentSlot.LEGS) {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_LEGGINGS;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_LEGGINGS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.GOLDEN_LEGGINGS;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.IRON_LEGGINGS;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_LEGGINGS;
+                }
             }
-            else if (equipmentLevel == 3) {
-                return Items.IRON_HELMET;
+            else if (equipmentSlot == EquipmentSlot.FEET) {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_BOOTS;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_BOOTS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.GOLDEN_BOOTS;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.IRON_BOOTS;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_BOOTS;
+                }
             }
-            else if (equipmentLevel == 4) {
-                return Items.DIAMOND_HELMET;
-            }
-        }
-        else if (equipmentSlot == EquipmentSlot.CHEST) {
-            if (equipmentLevel == 0) {
-                return Items.LEATHER_CHESTPLATE;
-            }
-            else if (equipmentLevel == 1) {
-                return ModItems.COPPER_CHESTPLATE;
-            }
-            else if (equipmentLevel == 2) {
-                return Items.GOLDEN_CHESTPLATE;
-            }
-            else if (equipmentLevel == 3) {
-                return Items.IRON_CHESTPLATE;
-            }
-            else if (equipmentLevel == 4) {
-                return Items.DIAMOND_CHESTPLATE;
-            }
-        }
-        else if (equipmentSlot == EquipmentSlot.LEGS) {
-            if (equipmentLevel == 0) {
-                return Items.LEATHER_LEGGINGS;
-            }
-            else if (equipmentLevel == 1) {
-                return ModItems.COPPER_LEGGINGS;
-            }
-            else if (equipmentLevel == 2) {
-                return Items.GOLDEN_LEGGINGS;
-            }
-            else if (equipmentLevel == 3) {
-                return Items.IRON_LEGGINGS;
-            }
-            else if (equipmentLevel == 4) {
-                return Items.DIAMOND_LEGGINGS;
-            }
-        }
-        else if (equipmentSlot == EquipmentSlot.FEET) {
-            if (equipmentLevel == 0) {
-                return Items.LEATHER_BOOTS;
-            }
-            else if (equipmentLevel == 1) {
-                return ModItems.COPPER_BOOTS;
-            }
-            else if (equipmentLevel == 2) {
-                return Items.GOLDEN_BOOTS;
-            }
-            else if (equipmentLevel == 3) {
-                return Items.IRON_BOOTS;
-            }
-            else if (equipmentLevel == 4) {
-                return Items.DIAMOND_BOOTS;
-            }
-        }
         return null;
     }
 

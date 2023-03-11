@@ -31,12 +31,12 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "initialize", at = @At("RETURN"), cancellable = true)
     private void injectedInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cbireturn) {
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
                 if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (equipmentSlot == EquipmentSlot.HEAD) break;
+                if (!this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) continue;
                 Item armorItem = PillagerEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.2f + 0.15f*this.world.getDifficulty().getId() ? 3 : 2);
                 this.equipStack(equipmentSlot, new ItemStack(armorItem));
             }
