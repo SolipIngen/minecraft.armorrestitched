@@ -27,7 +27,7 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "initEquipment", at = @At("TAIL"))
+    @Inject(method = "initEquipment", at = @At("HEAD"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         super.initEquipment(random, localDifficulty);
     }
