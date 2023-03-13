@@ -20,7 +20,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerDataContainer;
-import net.minecraft.village.VillagerProfession;
 import net.minecraft.village.VillagerType;
 import solipingen.armorrestitched.ArmorRestitched;
 
@@ -48,24 +47,6 @@ public abstract class VillagerClothingFeatureRendererMixin<T extends LivingEntit
         }
         else if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem && livingEntity.getEquippedStack(EquipmentSlot.LEGS).getItem() instanceof ArmorItem) {
             String professionPath = "textures/entity/" + this.entityType + "_armored/type/" + Registries.VILLAGER_TYPE.getId(villagerType).getPath() + "_without_all" + ".png";
-            return new Identifier(ArmorRestitched.MOD_ID, professionPath);
-        }
-        return originalId;
-    }
-
-    @ModifyVariable(method = "render", at = @At(value = "STORE"), ordinal = 1)
-    private Identifier modifiedFindProfessionTexture(Identifier originalId, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
-        VillagerProfession villagerProfession = ((VillagerDataContainer)livingEntity).getVillagerData().getProfession();
-        if ((livingEntity.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ArmorItem || livingEntity.getEquippedStack(EquipmentSlot.LEGS).getItem() instanceof ArmorItem) && !(livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem)) {
-            String professionPath = "textures/entity/" + this.entityType + "_armored/profession/" + Registries.VILLAGER_PROFESSION.getId(villagerProfession).getPath() + "_without_main" + ".png";
-            return new Identifier(ArmorRestitched.MOD_ID, professionPath);
-        }
-        else if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem && (!(livingEntity.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ArmorItem) && !(livingEntity.getEquippedStack(EquipmentSlot.LEGS).getItem() instanceof ArmorItem))) {
-            String professionPath = "textures/entity/" + this.entityType + "_armored/profession/" + Registries.VILLAGER_PROFESSION.getId(villagerProfession).getPath() + "_without_headgear" + ".png";
-            return new Identifier(ArmorRestitched.MOD_ID, professionPath);
-        }
-        else if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem && (livingEntity.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ArmorItem || livingEntity.getEquippedStack(EquipmentSlot.LEGS).getItem() instanceof ArmorItem)) {
-            String professionPath = "textures/entity/" + this.entityType + "_armored/profession/" + Registries.VILLAGER_PROFESSION.getId(villagerProfession).getPath() + "_without_all" + ".png";
             return new Identifier(ArmorRestitched.MOD_ID, professionPath);
         }
         return originalId;
