@@ -9,7 +9,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 public class ModSoundEvents {
 
-    public static final SoundEvent COPPER_ARMOR_EQUIP = registerSoundEvent("copper_armor_equip");
+    public static final SoundEvent COPPER_ARMOR_EQUIP = ModSoundEvents.registerSoundEvent("copper_armor_equip");
 
 
     private static SoundEvent registerSoundEvent(String name) {
