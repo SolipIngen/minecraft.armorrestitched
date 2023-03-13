@@ -28,18 +28,31 @@ public abstract class ZombifiedPiglinEntityMixin extends ZombieEntity implements
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         float armorThreshold = 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty();
-        if (random.nextFloat() < armorThreshold) {
+        float typeThreshold = 0.16f*this.world.getDifficulty().getId() + 0.08f*localDifficulty.getClampedLocalDifficulty();
+        if (random.nextFloat() < typeThreshold) {
             if (random.nextFloat() < armorThreshold) {
                 this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
             }
-            if (random.nextFloat() < armorThreshold) {
+            else {
+                this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+            }
+            if (random.nextFloat() < typeThreshold) {
                 this.equipStack(EquipmentSlot.CHEST, new ItemStack(Items.GOLDEN_CHESTPLATE));
             }
-            if (random.nextFloat() < armorThreshold) {
+            else {
+                this.equipStack(EquipmentSlot.CHEST, new ItemStack(Items.LEATHER_CHESTPLATE));
+            }
+            if (random.nextFloat() < typeThreshold) {
                 this.equipStack(EquipmentSlot.LEGS, new ItemStack(Items.GOLDEN_LEGGINGS));
             }
-            if (random.nextFloat() < armorThreshold) {
+            else {
+                this.equipStack(EquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
+            }
+            if (random.nextFloat() < typeThreshold) {
                 this.equipStack(EquipmentSlot.FEET, new ItemStack(Items.GOLDEN_BOOTS));
+            }
+            else {
+                this.equipStack(EquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
             }
         }
     }
