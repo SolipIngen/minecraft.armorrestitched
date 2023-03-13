@@ -9,7 +9,6 @@
     "entity.mob.HoglinEntityMixin", 
     "entity.mob.MagmaCubeEntityMixin", 
     "entity.mob.MobEntityMixin", 
-    "entity.mob.PatrolEntityMixin", 
     "entity.mob.PiglinEntityMixin", 
     "entity.mob.PillagerEntityMixin", 
     "entity.mob.ShulkerEntityMixin", 
