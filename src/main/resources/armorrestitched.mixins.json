@@ -29,7 +29,8 @@
     "item.ArmorItemMixin", 
     "item.ArmorMaterialsMixin", 
     "item.HorseArmorItemMixin", 
-    "item.ItemsMixin"
+    "item.ItemsMixin", 
+    "world.poi.PointOfInterestTypesMixin"
   ],
   "client": [
     "client.accessors.render.entity.model.IllagerEntityModelAccessor", 
