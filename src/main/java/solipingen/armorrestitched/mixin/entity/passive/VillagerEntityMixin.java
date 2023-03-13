@@ -160,7 +160,7 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
 
     @Inject(method = "talkWithVillager", at = @At("TAIL"))
     private void injectedTalkWithVillager(ServerWorld world, VillagerEntity villager, long time, CallbackInfo cbi) {
-        if (villager.getVillagerData().getProfession() == VillagerProfession.LEATHERWORKER) {
+        if (villager.getVillagerData().getProfession() == VillagerProfession.LEATHERWORKER && !this.isBaby()) {
             int leatherworkerLevel = villager.getVillagerData().getLevel();
             if (leatherworkerLevel >= 1) {
                 if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
@@ -203,7 +203,7 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                 }
             }
         }
-        else if (villager.getVillagerData().getProfession() == VillagerProfession.ARMORER) {
+        else if (villager.getVillagerData().getProfession() == VillagerProfession.ARMORER && !this.isBaby()) {
             int armorerLevel = villager.getVillagerData().getLevel();
             if (armorerLevel >= 2) {
                 for (EquipmentSlot slot : EquipmentSlot.values()) {
