@@ -77,6 +77,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     static {
-        BASE_DURABILITY = new int[]{13, 15, 16, 11};
+        BASE_DURABILITY = new int[]{25, 27, 28, 20};
     }
 }
