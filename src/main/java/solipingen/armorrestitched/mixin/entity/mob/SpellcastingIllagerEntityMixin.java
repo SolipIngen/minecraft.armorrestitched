@@ -8,11 +8,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.village.raid.Raid;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -29,24 +31,31 @@ public abstract class SpellcastingIllagerEntityMixin extends IllagerEntity {
     @Override
     @Nullable
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        this.initEquipment(this.world.getRandom(), difficulty);
+        EntityData entityData2 = super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        Random random = world.getRandom();
+        this.initEquipment(random, difficulty);
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
-            for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
-                if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = MobEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.08f ? 4 : 1);
-                this.equipStack(equipmentSlot, new ItemStack(armorItem));
+            int level = this.random.nextFloat() < 0.08f*this.world.getDifficulty().getId() + 0.04f*difficulty.getClampedLocalDifficulty() ? 4 : 3;
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                if (slot == EquipmentSlot.HEAD && !this.getEquippedStack(slot).isEmpty()) continue;
+                Item armorItem = MobEntity.getEquipmentForSlot(slot, level);
+                this.equipStack(slot, new ItemStack(armorItem));
+                this.setEquipmentDropChance(slot, 0.0f);
             }
-            this.updateEnchantments(world.getRandom(), difficulty);
         }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        this.updateEnchantments(random, difficulty);
+        return entityData2;
     }
 
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         super.initEquipment(random, localDifficulty);
+        if (this.isPatrolLeader()) {
+            this.equipStack(EquipmentSlot.HEAD, Raid.getOminousBanner());
+            this.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0f);
+        }
     }
-
 
     
 }

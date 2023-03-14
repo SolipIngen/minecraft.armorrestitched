@@ -12,11 +12,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.village.raid.Raid;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -30,24 +32,27 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "initialize", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/VindicatorEntity;initEquipment(Lnet/minecraft/util/math/random/Random;Lnet/minecraft/world/LocalDifficulty;)V", shift = At.Shift.AFTER))
     private void injectedInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cbireturn) {
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
-            for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
-                if (equipmentSlot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (equipmentSlot == EquipmentSlot.HEAD) break;
-                Item armorItem = MobEntityMixin.getModEquipmentForSlot(equipmentSlot, this.random.nextFloat() < 0.04f ? 4 : 3);
-                this.equipStack(equipmentSlot, new ItemStack(armorItem));
+            int level = this.random.nextFloat() < 0.2f*this.world.getDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                if (slot == EquipmentSlot.HEAD && !this.getEquippedStack(slot).isEmpty()) continue;
+                Item armorItem = MobEntity.getEquipmentForSlot(slot, level);
+                this.equipStack(slot, new ItemStack(armorItem));
             }
-            this.updateEnchantments(world.getRandom(), difficulty);
         }
     }
 
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         super.initEquipment(random, localDifficulty);
+        if (this.isPatrolLeader()) {
+            this.equipStack(EquipmentSlot.HEAD, Raid.getOminousBanner());
+            this.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0f);
+        }
     }
-
 
     
 }

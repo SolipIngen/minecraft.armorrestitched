@@ -9,7 +9,12 @@
     "item.armorrestitched.copper_boots": "Copper Boots", 
     "item.armorrestitched.copper_horse_armor": "Copper Horse Armor", 
 
-    "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks"
+    "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
+
+    "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
+    "advancements.story.obtain_clothing.title": "Dressed Up", 
+    "advancements.story.obtain_copper_armor.description": "Obtain clothes made of metal", 
+    "advancements.story.obtain_copper_armor.title": "Metal Coating"
 
 
 }

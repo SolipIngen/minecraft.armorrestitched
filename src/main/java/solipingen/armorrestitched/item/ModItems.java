@@ -15,19 +15,19 @@ import solipingen.armorrestitched.item.armor.ModArmorMaterials;
 public class ModItems {
 
     // Copper Armor
-    public static final Item COPPER_HELMET = registerItem("copper_helmet", 
+    public static final Item COPPER_HELMET = ModItems.registerItem("copper_helmet", 
         (Item)new ArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.HEAD, new FabricItemSettings()));
 
-    public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate", 
+    public static final Item COPPER_CHESTPLATE = ModItems.registerItem("copper_chestplate", 
         (Item)new ArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.CHEST, new FabricItemSettings()));
 
-    public static final Item COPPER_LEGGINGS = registerItem("copper_leggings", 
+    public static final Item COPPER_LEGGINGS = ModItems.registerItem("copper_leggings", 
         (Item)new ArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.LEGS, new FabricItemSettings()));
 
-    public static final Item COPPER_BOOTS = registerItem("copper_boots", 
+    public static final Item COPPER_BOOTS = ModItems.registerItem("copper_boots", 
         (Item)new ArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.FEET, new FabricItemSettings()));
 
-    public static final Item COPPER_HORSE_ARMOR = registerItem("copper_horse_armor", 
+    public static final Item COPPER_HORSE_ARMOR = ModItems.registerItem("copper_horse_armor", 
         (Item)new HorseArmorItem(7, "copper", new FabricItemSettings()));
 
 

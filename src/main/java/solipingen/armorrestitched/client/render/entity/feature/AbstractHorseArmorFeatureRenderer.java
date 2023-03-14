@@ -18,7 +18,7 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.DyeableHorseArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
-import solipingen.armorrestitched.util.interfaces.entity.mob.INonStandardHorseEntity;
+import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.NonStandardHorseEntityInterface;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @Environment(value=EnvType.CLIENT)
@@ -39,7 +39,7 @@ public class AbstractHorseArmorFeatureRenderer extends FeatureRenderer<AbstractH
         if (!(horseEntity instanceof SkeletonHorseEntity || horseEntity instanceof ZombieHorseEntity)) {
             return;
         }
-        ItemStack itemStack = ((INonStandardHorseEntity)horseEntity).getArmorType();
+        ItemStack itemStack = ((NonStandardHorseEntityInterface)horseEntity).getArmorType();
         if (!(itemStack.getItem() instanceof HorseArmorItem)) {
             return;
         }

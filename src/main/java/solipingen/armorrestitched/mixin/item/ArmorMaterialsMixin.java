@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ArmorMaterials;
+import net.minecraft.util.math.MathHelper;
 
 
 @Mixin(ArmorMaterials.class)
@@ -26,12 +27,15 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial {
     private void injectedGetDurability(EquipmentSlot slot, CallbackInfoReturnable<Integer> cbireturn) {
         if (slot == EquipmentSlot.HEAD) {
             if (this.name.equals("iron")) {
-                cbireturn.setReturnValue(14 * 2*this.durabilityMultiplier);
+                cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*2*this.durabilityMultiplier);
             }
-            cbireturn.setReturnValue(14 * this.durabilityMultiplier);
+            cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*this.durabilityMultiplier);
         }
         else if (slot != EquipmentSlot.HEAD && this.name.equals("iron")) {
-            cbireturn.setReturnValue(BASE_DURABILITY[slot.getEntitySlotId()] * 2*this.durabilityMultiplier);
+            cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY[slot.getEntitySlotId()])*2*this.durabilityMultiplier);
+        }
+        else {
+            cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY[slot.getEntitySlotId()])*this.durabilityMultiplier);
         }
     }
 
