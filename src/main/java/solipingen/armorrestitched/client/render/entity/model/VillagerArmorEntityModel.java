@@ -20,7 +20,6 @@ import net.minecraft.util.math.MathHelper;
 public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePartEntityModel<T> implements ModelWithHead {
     private final ModelPart root;
     private final ModelPart head;
-    private final ModelPart hat;
     private final ModelPart leftLeg;
     private final ModelPart rightLeg;
     private static final Dilation OUTER_DILATION = new Dilation(1.0f);
@@ -30,8 +29,6 @@ public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePa
     public VillagerArmorEntityModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild(EntityModelPartNames.HEAD);
-        this.hat = root.getChild(EntityModelPartNames.HAT);
-        this.hat.visible = false;
         this.leftLeg = root.getChild(EntityModelPartNames.LEFT_LEG);
         this.rightLeg = root.getChild(EntityModelPartNames.RIGHT_LEG);
     }
@@ -66,8 +63,6 @@ public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePa
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, INNER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.HAT, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 12.0f, 8.0f, new Dilation(0.45f)), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(16, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, INNER_DILATION.add(0.2f)), ModelTransform.NONE);
         modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
         modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
@@ -77,8 +72,6 @@ public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePa
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.HAT, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 12.0f, 8.0f, new Dilation(0.45f)), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(16, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.NONE);
         modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
         modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
@@ -88,8 +81,6 @@ public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePa
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.HAT, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 12.0f, 8.0f, new Dilation(0.45f)), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(16, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.NONE);
         modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
         modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
@@ -99,15 +90,11 @@ public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePa
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.HAT, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 12.0f, 8.0f, new Dilation(0.45f)), ModelTransform.NONE);
         modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(16, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.NONE);
+        modelPartData.addChild(EntityModelPartNames.ARMS, ModelPartBuilder.create().uv(40, 16).cuboid(-8.0f, -2.0f, -2.0f, 4.0f, 8.0f, 4.0f, OUTER_DILATION.add(0.2f)).uv(40, 16).mirrored().cuboid(4.0f, -2.0f, -2.0f, 4.0f, 8.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.of(0.0f, 3.0f, -1.0f, -0.75f, 0.0f, 0.0f));
         modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
         modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
-    }
-
-    public ModelPart getHat() {
-        return this.hat;
     }
 
     @Override

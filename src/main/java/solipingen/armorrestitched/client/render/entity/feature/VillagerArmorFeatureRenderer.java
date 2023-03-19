@@ -30,6 +30,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.client.render.entity.model.VillagerArmorEntityModel;
+import solipingen.armorrestitched.item.armor.ModArmorMaterials;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.VillagerResemblingModelAccessor;
 
 
@@ -101,7 +102,6 @@ public class VillagerArmorFeatureRenderer<T extends VillagerEntity, M extends Vi
         switch (slot) {
             case HEAD: {
                 villagerModel.getHead().visible = true;
-                villagerModel.getHat().visible = true;
                 break;
             }
             case LEGS: {
@@ -117,7 +117,7 @@ public class VillagerArmorFeatureRenderer<T extends VillagerEntity, M extends Vi
     }
 
     private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ArmorItem item, boolean glint, VillagerArmorEntityModel<VillagerEntity> model, boolean legsTextureLayer, boolean headTextureLayer, boolean feetTextureLayer, float red, float green, float blue, @Nullable String overlay) {
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legsTextureLayer, headTextureLayer, feetTextureLayer, overlay)), false, glint);
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legsTextureLayer, overlay)), false, glint);
         ((SinglePartEntityModel<VillagerEntity>)model).render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0f);
     }
 
@@ -140,11 +140,11 @@ public class VillagerArmorFeatureRenderer<T extends VillagerEntity, M extends Vi
         return this.chestModel;
     }
 
-    private Identifier getArmorTexture(ArmorItem item, boolean legsLayer, boolean headLayer, boolean feetLayer, @Nullable String overlay) {
-        String string = "textures/models/armor/villager_armor/" + item.getMaterial().getName() + "_layer_" + (feetLayer ? 4 : (headLayer ? 3 : (legsLayer ? 2 : 1))) + (String)(overlay == null ? "" : "_" + overlay) + ".png";
-        return new Identifier(ArmorRestitched.MOD_ID, string);
+    private Identifier getArmorTexture(ArmorItem item, boolean legsLayer, @Nullable String overlay) {
+        String string = "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (legsLayer ? "2" : "1") + (String)(overlay == null ? "" : "_" + overlay) + ".png";
+        Identifier identifier = item.getMaterial() instanceof ModArmorMaterials ? new Identifier(ArmorRestitched.MOD_ID, string) : new Identifier(string);
+        return identifier;
     }
-
     
 }
 
