@@ -29,6 +29,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.client.render.entity.model.IllagerArmorEntityModel;
+import solipingen.armorrestitched.item.armor.ModArmorMaterials;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.IllagerEntityModelAccessor;
 
 
@@ -75,19 +76,17 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
         model.getRightArm().copyTransform(((IllagerEntityModelAccessor)entityModel).getRightArm());
         this.setVisible(model, armorSlot);
         boolean legsBl = armorSlot == EquipmentSlot.LEGS;
-        boolean headBl = armorSlot == EquipmentSlot.HEAD;
-        boolean feetBl = armorSlot == EquipmentSlot.FEET;
         boolean bl2 = itemStack.hasGlint();
         if (armorItem instanceof DyeableArmorItem) {
             int i = ((DyeableArmorItem)armorItem).getColor(itemStack);
             float f = (float)(i >> 16 & 0xFF) / 255.0f;
             float g = (float)(i >> 8 & 0xFF) / 255.0f;
             float h = (float)(i & 0xFF) / 255.0f;
-            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, headBl, feetBl, f, g, h, null);
-            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, headBl, feetBl, 1.0f, 1.0f, 1.0f, "overlay");
+            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, f, g, h, null);
+            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, 1.0f, 1.0f, 1.0f, "overlay");
         } 
         else {
-            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, headBl, feetBl, 1.0f, 1.0f, 1.0f, null);
+            this.renderArmorParts(matrices, vertexConsumers, light, armorItem, bl2, model, legsBl, 1.0f, 1.0f, 1.0f, null);
         }
         if (((LivingEntity)entity).world.getEnabledFeatures().contains(FeatureFlags.UPDATE_1_20)) {
             ArmorTrim.getTrim(((LivingEntity)entity).world.getRegistryManager(), itemStack).ifPresent(trim -> this.renderTrim(armorItem.getMaterial(), matrices, vertexConsumers, light, (ArmorTrim)trim, bl2, model, legsBl, 1.0f, 1.0f, 1.0f));
@@ -104,12 +103,11 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
         switch (slot) {
             case HEAD: {
                 illagerModel.getHead().visible = true;
-                illagerModel.getHat().visible = true;
                 break;
             }
             case CHEST: {
-                illagerModel.getLeftArm().visible = false;
-                illagerModel.getRightArm().visible = false;
+                illagerModel.getLeftArm().visible = true;
+                illagerModel.getRightArm().visible = true;
                 break;
             }
             case LEGS: {
@@ -124,8 +122,8 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
         }
     }
 
-    private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ArmorItem item, boolean glint, IllagerArmorEntityModel<IllagerEntity> model, boolean legsTextureLayer, boolean headTextureLayer, boolean feetTextureLayer, float red, float green, float blue, @Nullable String overlay) {
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legsTextureLayer, headTextureLayer, feetTextureLayer, overlay)), false, glint);
+    private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ArmorItem item, boolean glint, IllagerArmorEntityModel<IllagerEntity> model, boolean legsTextureLayer, float red, float green, float blue, @Nullable String overlay) {
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legsTextureLayer, overlay)), false, glint);
         ((SinglePartEntityModel<IllagerEntity>)model).render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0f);
     }
 
@@ -148,9 +146,10 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
         return this.chestModel;
     }
 
-    private Identifier getArmorTexture(ArmorItem item, boolean legsLayer, boolean headLayer, boolean feetLayer, @Nullable String overlay) {
-        String string = "textures/models/armor/illager_armor/" + item.getMaterial().getName() + "_layer_" + (feetLayer ? 4 : (headLayer ? 3 : (legsLayer ? 2 : 1))) + (String)(overlay == null ? "" : "_" + overlay) + ".png";
-        return new Identifier(ArmorRestitched.MOD_ID, string);
+    private Identifier getArmorTexture(ArmorItem item, boolean legsLayer, @Nullable String overlay) {
+        String string = "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (legsLayer ? "2" : "1") + (String)(overlay == null ? "" : "_" + overlay) + ".png";
+        Identifier identifier = item.getMaterial() instanceof ModArmorMaterials ? new Identifier(ArmorRestitched.MOD_ID, string) : new Identifier(string);
+        return identifier;
     }
 
     
