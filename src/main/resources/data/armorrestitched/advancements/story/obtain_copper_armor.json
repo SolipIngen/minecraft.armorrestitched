@@ -1,0 +1,77 @@
+{
+    "parent": "armorrestitched:story/obtain_clothing",
+    "criteria": {
+      "copper_boots": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:copper_boots"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "copper_chestplate": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:copper_chestplate"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "copper_helmet": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:copper_helmet"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "copper_leggings": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:copper_leggings"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "display": {
+      "announce_to_chat": true,
+      "description": {
+        "translate": "advancements.story.obtain_copper_armor.description"
+      },
+      "frame": "task",
+      "hidden": false,
+      "icon": {
+        "item": "armorrestitched:copper_chestplate",
+        "nbt": "{Damage:0}"
+      },
+      "show_toast": true,
+      "title": {
+        "translate": "advancements.story.obtain_copper_armor.title"
+      }
+    },
+    "requirements": [
+      [
+        "copper_helmet",
+        "copper_chestplate",
+        "copper_leggings",
+        "copper_boots"
+      ]
+    ]
+}

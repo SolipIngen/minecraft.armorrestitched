@@ -1,0 +1,9 @@
+{
+    "replace": false, 
+    "values": [
+      "armorrestitched:copper_helmet", 
+      "armorrestitched:copper_chestplate", 
+      "armorrestitched:copper_leggings", 
+      "armorrestitched:copper_boots"
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "language.name": "American English",
+    "language.region": "United States",
+    "language.code": "en_us", 
+
+    "item.armorrestitched.copper_helmet": "Copper Helmet", 
+    "item.armorrestitched.copper_chestplate": "Copper Chestplate", 
+    "item.armorrestitched.copper_leggings": "Copper Leggings", 
+    "item.armorrestitched.copper_boots": "Copper Boots", 
+    "item.armorrestitched.copper_horse_armor": "Copper Horse Armor", 
+
+    "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
+
+    "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
+    "advancements.story.obtain_clothing.title": "Dressed Up", 
+    "advancements.story.obtain_copper_armor.description": "Obtain clothes made of metal", 
+    "advancements.story.obtain_copper_armor.title": "Metal Coating"
+
+
+}

@@ -1,0 +1,13 @@
+{
+    "copper_armor_equip": {
+        "subtitle": "subtitles.armorrestitched.copper_armor_equip", 
+        "sounds": [
+            "armorrestitched:copper_armor_equip_ver1", 
+            "armorrestitched:copper_armor_equip_ver2", 
+            "armorrestitched:copper_armor_equip_ver3", 
+            "armorrestitched:copper_armor_equip_ver4", 
+            "armorrestitched:copper_armor_equip_ver5", 
+            "armorrestitched:copper_armor_equip_ver6"
+        ]
+    }
+}
