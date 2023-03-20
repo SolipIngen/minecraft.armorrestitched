@@ -25,7 +25,7 @@ public abstract class IronGolemEntityMixin extends GolemEntity implements Angera
     @Redirect(method = "createIronGolemAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;add(Lnet/minecraft/entity/attribute/EntityAttribute;D)Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"))
     private static Builder redirectedCreateIronGolemAttributes(Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
         if (entityAttribute == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE) {
-            return attributeBuilder.add(EntityAttributes.GENERIC_ARMOR, 16.0).add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2.0).add(entityAttribute, baseValue);
+            return attributeBuilder.add(EntityAttributes.GENERIC_ARMOR, 16.0).add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 3.0).add(entityAttribute, baseValue);
         }
         return attributeBuilder.add(entityAttribute, baseValue);
     }

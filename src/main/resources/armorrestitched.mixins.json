@@ -10,6 +10,7 @@
     "entity.mob.MagmaCubeEntityMixin", 
     "entity.mob.MobEntityMixin", 
     "entity.mob.PiglinEntityMixin", 
+    "entity.mob.PiglinBruteEntityMixin", 
     "entity.mob.PillagerEntityMixin", 
     "entity.mob.ShulkerEntityMixin", 
     "entity.mob.SkeletonHorseEntityMixin", 

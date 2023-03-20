@@ -54,8 +54,8 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
         if (this.name.equals("leather")) {
             newProtectionAmounts = Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 1);
-                map.put(ArmorItem.Type.LEGGINGS, 3);
-                map.put(ArmorItem.Type.CHESTPLATE, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 2);
+                map.put(ArmorItem.Type.CHESTPLATE, 2);
                 map.put(ArmorItem.Type.HELMET, 1);
             });
         }

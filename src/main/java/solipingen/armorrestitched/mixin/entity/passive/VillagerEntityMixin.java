@@ -108,21 +108,21 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                 2, new Factory[]{new BuyForOneEmeraldFactory(Items.COPPER_INGOT, 8, 12, 10), new BuyForOneEmeraldFactory(Items.LAVA_BUCKET, 1, 12, 10), 
                     new SellItemFactory(ModItems.COPPER_HELMET, 2, 1, 5), new SellItemFactory(ModItems.COPPER_CHESTPLATE, 4, 1, 5), 
                     new SellItemFactory(ModItems.COPPER_LEGGINGS, 3, 1, 5), new SellItemFactory(ModItems.COPPER_BOOTS, 2, 1, 5), 
-                    new SellItemFactory(ModItems.COPPER_HORSE_ARMOR, 11, 1, 3, 5)}, 
+                    new SellItemFactory(ModItems.COPPER_HORSE_ARMOR, 6, 1, 3, 5)}, 
                 3, new Factory[]{new BuyForOneEmeraldFactory(Items.GOLD_INGOT, 2, 12, 20), 
                     new SellItemFactory(Items.GOLDEN_HELMET, 5, 1, 10), new SellItemFactory(Items.GOLDEN_CHESTPLATE, 9, 1, 10), 
                     new SellItemFactory(Items.GOLDEN_LEGGINGS, 7, 1, 10), new SellItemFactory(Items.GOLDEN_BOOTS, 4, 1, 10), 
-                    new SellItemFactory(Items.GOLDEN_HORSE_ARMOR, 17, 1, 3, 10), 
+                    new SellItemFactory(Items.GOLDEN_HORSE_ARMOR, 12, 1, 3, 10), 
                     new SellItemFactory(Items.CHAINMAIL_HELMET, 2, 1, 10), new SellItemFactory(Items.CHAINMAIL_CHESTPLATE, 4, 1, 10), 
                     new SellItemFactory(Items.CHAINMAIL_LEGGINGS, 3, 1, 10), new SellItemFactory(Items.CHAINMAIL_BOOTS, 2, 1, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.IRON_INGOT, 4, 12, 30), 
                     new SellItemFactory(Items.IRON_HELMET, 5, 1, 15), new SellItemFactory(Items.IRON_CHESTPLATE, 9, 1, 15), 
                     new SellItemFactory(Items.IRON_LEGGINGS, 7, 1, 15), new SellItemFactory(Items.IRON_BOOTS, 4, 1, 15), 
-                    new SellItemFactory(Items.IRON_HORSE_ARMOR, 17, 1, 3, 15)}, 
+                    new SellItemFactory(Items.IRON_HORSE_ARMOR, 10, 1, 3, 15)}, 
                 5, new Factory[]{new BuyForOneEmeraldFactory(Items.DIAMOND, 1, 12, 30), 
                     new SellEnchantedToolFactory(Items.DIAMOND_HELMET, 13, 3, 15), new SellEnchantedToolFactory(Items.DIAMOND_CHESTPLATE, 21, 3, 15), 
                     new SellEnchantedToolFactory(Items.DIAMOND_LEGGINGS, 19, 3, 15), new SellEnchantedToolFactory(Items.DIAMOND_BOOTS, 13, 3, 15), 
-                    new SellItemFactory(Items.DIAMOND_HORSE_ARMOR, 32, 1, 3, 15)}
+                    new SellItemFactory(Items.DIAMOND_HORSE_ARMOR, 18, 1, 3, 15)}
                 )
             )
 	    );

@@ -13,6 +13,9 @@ import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.attribute.DefaultAttributeContainer.*;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.ItemStack;
@@ -41,6 +44,14 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
             this.equipStack(EquipmentSlot.FEET, new ItemStack(Items.GOLDEN_BOOTS));
             this.updateEnchantments(world.getRandom(), difficulty);
         }
+    }
+
+    @Redirect(method = "createPiglinAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;add(Lnet/minecraft/entity/attribute/EntityAttribute;D)Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"))
+    private static Builder redirectedCreateHoglinAttributes(Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
+        if (entityAttribute == EntityAttributes.GENERIC_ATTACK_DAMAGE) {
+            return attributeBuilder.add(EntityAttributes.GENERIC_ARMOR, 6.0).add(entityAttribute, baseValue);
+        }
+        return attributeBuilder.add(entityAttribute, baseValue);
     }
 
     @ModifyConstant(method = "equipAtChance", constant = @Constant(floatValue = 0.1f))
