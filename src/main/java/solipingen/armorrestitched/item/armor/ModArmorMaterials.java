@@ -7,14 +7,46 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Lazy;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
+import solipingen.armorrestitched.registry.tag.ModItemTags;
 import solipingen.armorrestitched.sound.ModSoundEvents;
 
 @SuppressWarnings("deprecation")
 public enum ModArmorMaterials implements ArmorMaterial, StringIdentifiable {
+    COTTON("cotton", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.COTTON_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ModItemTags.COTTON)), 
+    FUR("fur", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.FUR_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ModItemTags.FUR)), 
+    LINEN("linen", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.LINEN_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ModItemTags.LINEN)), 
+    SILK("wool", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.SILK_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ModItemTags.SILK)), 
+    WOOL("wool", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.WOOL_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ItemTags.WOOL)), 
     COPPER("copper", 15, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 2);
         map.put(ArmorItem.Type.LEGGINGS, 4);

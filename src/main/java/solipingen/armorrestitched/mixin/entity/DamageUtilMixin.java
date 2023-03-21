@@ -23,7 +23,7 @@ public abstract class DamageUtilMixin {
 
     @Inject(method = "getInflictedDamage", at = @At("HEAD"), cancellable = true)
     private static void injectedGetInflictedDamage(float damageDealt, float protection, CallbackInfoReturnable<Float> cbireturn) {
-        float f = MathHelper.clamp(2.25f*protection, 0.0f, 47.5f);
+        float f = MathHelper.clamp(2.25f*protection, 0.0f, 45.0f);
         cbireturn.setReturnValue(damageDealt*(1.0f - f/50.0f));
     }
 

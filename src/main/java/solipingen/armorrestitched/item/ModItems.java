@@ -2,8 +2,10 @@ package solipingen.armorrestitched.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.DyeableHorseArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SaddleItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -12,6 +14,86 @@ import solipingen.armorrestitched.item.armor.ModArmorMaterials;
 
 
 public class ModItems {
+
+    // Cotton Clothing
+    public static final Item COTTON_HELMET = ModItems.registerItem("cotton_helmet", 
+        (Item)new ArmorItem(ModArmorMaterials.COTTON, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item COTTON_CHESTPLATE = ModItems.registerItem("cotton_chestplate", 
+        (Item)new ArmorItem(ModArmorMaterials.COTTON, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item COTTON_LEGGINGS = ModItems.registerItem("cotton_leggings", 
+        (Item)new ArmorItem(ModArmorMaterials.COTTON, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item COTTON_BOOTS = ModItems.registerItem("cotton_boots", 
+        (Item)new ArmorItem(ModArmorMaterials.COTTON, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item COTTON_HORSE_ARMOR = ModItems.registerItem("cotton_horse_armor", 
+        (Item)new HorseArmorItem(3, "cotton", new FabricItemSettings()));
+
+    // Fur Clothing
+    public static final Item FUR_HELMET = ModItems.registerItem("fur_helmet", 
+        (Item)new ArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item FUR_CHESTPLATE = ModItems.registerItem("fur_chestplate", 
+        (Item)new ArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item FUR_LEGGINGS = ModItems.registerItem("fur_leggings", 
+        (Item)new ArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item FUR_BOOTS = ModItems.registerItem("fur_boots", 
+        (Item)new ArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item FUR_HORSE_ARMOR = ModItems.registerItem("fur_horse_armor", 
+        (Item)new HorseArmorItem(3, "fur", new FabricItemSettings()));
+
+    // Linen Clothing
+    public static final Item LINEN_HELMET = ModItems.registerItem("linen_helmet", 
+        (Item)new ArmorItem(ModArmorMaterials.LINEN, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item LINEN_CHESTPLATE = ModItems.registerItem("linen_chestplate", 
+        (Item)new ArmorItem(ModArmorMaterials.LINEN, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item LINEN_LEGGINGS = ModItems.registerItem("linen_leggings", 
+        (Item)new ArmorItem(ModArmorMaterials.LINEN, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item LINEN_BOOTS = ModItems.registerItem("linen_boots", 
+        (Item)new ArmorItem(ModArmorMaterials.LINEN, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item LINEN_HORSE_ARMOR = ModItems.registerItem("linen_horse_armor", 
+        (Item)new HorseArmorItem(3, "linen", new FabricItemSettings()));
+
+    // Silk Clothing
+    public static final Item SILK_HELMET = ModItems.registerItem("silk_helmet", 
+        (Item)new ArmorItem(ModArmorMaterials.SILK, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item SILK_CHESTPLATE = ModItems.registerItem("silk_chestplate", 
+        (Item)new ArmorItem(ModArmorMaterials.SILK, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item SILK_LEGGINGS = ModItems.registerItem("silk_leggings", 
+        (Item)new ArmorItem(ModArmorMaterials.SILK, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item SILK_BOOTS = ModItems.registerItem("silk_boots", 
+        (Item)new ArmorItem(ModArmorMaterials.SILK, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item SILK_HORSE_ARMOR = ModItems.registerItem("silk_horse_armor", 
+        (Item)new HorseArmorItem(3, "silk", new FabricItemSettings()));
+
+    // Silk Clothing
+    public static final Item WOOL_HELMET = ModItems.registerItem("wool_helmet", 
+        (Item)new ArmorItem(ModArmorMaterials.WOOL, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item WOOL_CHESTPLATE = ModItems.registerItem("wool_chestplate", 
+        (Item)new ArmorItem(ModArmorMaterials.WOOL, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item WOOL_LEGGINGS = ModItems.registerItem("wool_leggings", 
+        (Item)new ArmorItem(ModArmorMaterials.WOOL, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item WOOL_BOOTS = ModItems.registerItem("wool_boots", 
+        (Item)new ArmorItem(ModArmorMaterials.SILK, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item WOOL_HORSE_ARMOR = ModItems.registerItem("wool_horse_armor", 
+        (Item)new HorseArmorItem(3, "wool", new FabricItemSettings()));
 
     // Copper Armor
     public static final Item COPPER_HELMET = ModItems.registerItem("copper_helmet", 
@@ -32,6 +114,39 @@ public class ModItems {
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(ArmorRestitched.MOD_ID, name), item);
+    }
+
+    // Replace Vanilla Items with Mod Versions
+    public static void replaceVanillaItems() {
+        for (Item item : Registries.ITEM) {
+            String name = item.getTranslationKey().substring(item.getTranslationKey().lastIndexOf(".") + 1);
+            System.out.println(name);
+            int rawId = Registries.ITEM.getRawId(item);
+            if (item instanceof HorseArmorItem) {
+                if (name.matches("leather_horse_armor")) {
+                    Item newHorseArmorItem = (Item)new DyeableHorseArmorItem(3, "leather", new Item.Settings());
+                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
+                }
+                else if (name.matches("iron_horse_armor")) {
+                    Item newHorseArmorItem = (Item)new HorseArmorItem(9, "iron", new Item.Settings());
+                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
+                }
+                else if (name.matches("golden_horse_armor")) {
+                    Item newHorseArmorItem = (Item)new HorseArmorItem(7, "gold", new Item.Settings());
+                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
+                }
+                else if (name.matches("diamond_horse_armor")) {
+                    Item newHorseArmorItem = (Item)new HorseArmorItem(13, "diamond", new Item.Settings());
+                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
+                }
+            }
+            else if (item instanceof SaddleItem) {
+                if (name.matches("saddle")) {
+                    Item newSaddleItem = (Item)new SaddleItem(new Item.Settings());
+                    Registry.register(Registries.ITEM, rawId, name, newSaddleItem);
+                }
+            }
+        }
     }
 
     public static void registerModItems() {

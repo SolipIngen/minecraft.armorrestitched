@@ -1,4 +1,39 @@
 {
+    "cotton_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.cotton_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
+    "fur_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.fur_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
+    "linen_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.linen_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
+    "silk_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.silk_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
+    "wool_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.wool_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
     "copper_armor_equip": {
         "subtitle": "subtitles.armorrestitched.copper_armor_equip", 
         "sounds": [

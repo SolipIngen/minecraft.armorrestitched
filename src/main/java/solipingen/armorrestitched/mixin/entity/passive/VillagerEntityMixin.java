@@ -103,7 +103,7 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         originalTradeOffers.replace(VillagerProfession.ARMORER, VillagerEntityMixin.copyToFastUtilMap(
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(Items.COAL, 15, 16, 2), new BuyForOneEmeraldFactory(Items.CHARCOAL, 15, 16, 2), 
-                    new BuyForOneEmeraldFactory(Items.STICK, 60, 16, 2), new BuyForOneEmeraldFactory(Items.TINTED_GLASS, 2, 16, 2), 
+                    new BuyForOneEmeraldFactory(Items.STICK, 64, 16, 2), new BuyForOneEmeraldFactory(Items.TINTED_GLASS, 2, 16, 2), 
                     new BuyForOneEmeraldFactory(Items.SMOOTH_STONE_SLAB, 8, 16, 2)}, 
                 2, new Factory[]{new BuyForOneEmeraldFactory(Items.COPPER_INGOT, 8, 12, 10), new BuyForOneEmeraldFactory(Items.LAVA_BUCKET, 1, 12, 10), 
                     new SellItemFactory(ModItems.COPPER_HELMET, 2, 1, 5), new SellItemFactory(ModItems.COPPER_CHESTPLATE, 4, 1, 5), 

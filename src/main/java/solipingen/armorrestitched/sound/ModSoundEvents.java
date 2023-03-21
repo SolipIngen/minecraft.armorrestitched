@@ -9,6 +9,11 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 public class ModSoundEvents {
 
+    public static final SoundEvent COTTON_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("cotton_clothing_equip");
+    public static final SoundEvent FUR_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("fur_clothing_equip");
+    public static final SoundEvent LINEN_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("linen_clothing_equip");
+    public static final SoundEvent SILK_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("silk_clothing_equip");
+    public static final SoundEvent WOOL_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("wool_clothing_equip");
     public static final SoundEvent COPPER_ARMOR_EQUIP = ModSoundEvents.registerSoundEvent("copper_armor_equip");
 
 

@@ -1,6 +1,11 @@
 {
     "replace": false,
     "values": [
-        "minecraft:leather_helmet"
+        "minecraft:leather_helmet", 
+        "armorrestitched:cotton_helmet", 
+        "armorrestitched:fur_helmet", 
+        "armorrestitched:linen_helmet", 
+        "armorrestitched:silk_helmet", 
+        "armorrestitched:wool_helmet"
     ]
 }

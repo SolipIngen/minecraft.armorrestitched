@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:smithing_trim",
+    "category": "equipment",
+    "template": {
+        "tag": "minecraft:trim_templates"
+    },
+    "base": {
+        "tag": "armorrestitched:clothing_boots"
+    },
+    "addition": {
+        "tag": "minecraft:trim_materials"
+    }
+}
