@@ -69,12 +69,23 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
             return;
         }
         IllagerEntityModel<IllagerEntity> entityModel = this.getContextModel();
+        this.setVisible(model, armorSlot);
         model.getHead().copyTransform(entityModel.getHead());
         model.getLeftLeg().copyTransform(((IllagerEntityModelAccessor)entityModel).getLeftLeg());
         model.getRightLeg().copyTransform(((IllagerEntityModelAccessor)entityModel).getRightLeg());
+        model.getArms().copyTransform(((IllagerEntityModelAccessor)entityModel).getArms());
         model.getLeftArm().copyTransform(((IllagerEntityModelAccessor)entityModel).getLeftArm());
         model.getRightArm().copyTransform(((IllagerEntityModelAccessor)entityModel).getRightArm());
-        this.setVisible(model, armorSlot);
+        if (entity.getState() == IllagerEntity.State.CROSSED) {
+            model.getArms().visible = true;
+            model.getLeftArm().visible = false;
+            model.getRightArm().visible = false;
+        }
+        else {
+            model.getArms().visible = false;
+            model.getLeftArm().visible = true;
+            model.getRightArm().visible = true;
+        }
         boolean legsBl = armorSlot == EquipmentSlot.LEGS;
         boolean bl2 = itemStack.hasGlint();
         if (armorItem instanceof DyeableArmorItem) {
@@ -96,6 +107,7 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
     @SuppressWarnings("incomplete-switch")
     protected void setVisible(IllagerArmorEntityModel<IllagerEntity> illagerModel, EquipmentSlot slot) {
         illagerModel.getHead().visible = false;
+        illagerModel.getArms().visible = false;
         illagerModel.getRightArm().visible = false;
         illagerModel.getLeftArm().visible = false;
         illagerModel.getRightLeg().visible = false;
@@ -106,6 +118,7 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
                 break;
             }
             case CHEST: {
+                illagerModel.getArms().visible = true;
                 illagerModel.getLeftArm().visible = true;
                 illagerModel.getRightArm().visible = true;
                 break;

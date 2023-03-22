@@ -120,7 +120,6 @@ public class ModItems {
     public static void replaceVanillaItems() {
         for (Item item : Registries.ITEM) {
             String name = item.getTranslationKey().substring(item.getTranslationKey().lastIndexOf(".") + 1);
-            System.out.println(name);
             int rawId = Registries.ITEM.getRawId(item);
             if (item instanceof HorseArmorItem) {
                 if (name.matches("leather_horse_armor")) {
@@ -136,7 +135,7 @@ public class ModItems {
                     Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
                 }
                 else if (name.matches("diamond_horse_armor")) {
-                    Item newHorseArmorItem = (Item)new HorseArmorItem(13, "diamond", new Item.Settings());
+                    Item newHorseArmorItem = (Item)new HorseArmorItem(12, "diamond", new Item.Settings());
                     Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
                 }
             }
