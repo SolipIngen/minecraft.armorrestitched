@@ -23,13 +23,13 @@
         }
       },
       {
-        "model": "armorrestitched:item/cotton_leggings_copper_trim",
+        "model": "armorrestitched:item/cotton_leggings_redstone_trim",
         "predicate": {
           "trim_type": 0.4
         }
       },
       {
-        "model": "armorrestitched:item/cotton_leggings_diamond_trim",
+        "model": "armorrestitched:item/cotton_leggings_copper_trim",
         "predicate": {
           "trim_type": 0.5
         }

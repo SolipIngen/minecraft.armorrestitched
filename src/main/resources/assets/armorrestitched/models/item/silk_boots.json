@@ -23,13 +23,13 @@
         }
       },
       {
-        "model": "armorrestitched:item/silk_boots_copper_trim",
+        "model": "armorrestitched:item/silk_boots_redstone_trim",
         "predicate": {
           "trim_type": 0.4
         }
       },
       {
-        "model": "armorrestitched:item/silk_boots_diamond_trim",
+        "model": "armorrestitched:item/silk_boots_copper_trim",
         "predicate": {
           "trim_type": 0.5
         }

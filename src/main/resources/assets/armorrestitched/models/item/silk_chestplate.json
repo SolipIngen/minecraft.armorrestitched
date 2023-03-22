@@ -23,13 +23,13 @@
         }
       },
       {
-        "model": "armorrestitched:item/silk_chestplate_copper_trim",
+        "model": "armorrestitched:item/silk_chestplate_redstone_trim",
         "predicate": {
           "trim_type": 0.4
         }
       },
       {
-        "model": "armorrestitched:item/silk_chestplate_diamond_trim",
+        "model": "armorrestitched:item/silk_chestplate_copper_trim",
         "predicate": {
           "trim_type": 0.5
         }
