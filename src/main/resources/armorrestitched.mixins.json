@@ -29,6 +29,7 @@
     "entity.DamageUtilMixin", 
     "item.ArmorItemMixin", 
     "item.ArmorMaterialsMixin", 
+    "item.DyeableItemMixin", 
     "item.HorseArmorItemMixin", 
     "item.ItemStackMixin", 
     "recipe.SmithingTrimRecipeMixin", 
@@ -37,6 +38,7 @@
   "client": [
     "client.accessors.render.entity.model.IllagerEntityModelAccessor", 
     "client.accessors.render.entity.model.VillagerResemblingModelAccessor", 
+    "client.color.item.ItemColorsMixin", 
     "client.render.entity.feature.ArmorFeatureRendererMixin", 
     "client.render.entity.feature.VillagerClothingFeatureRendererMixin", 
     "client.render.entity.AbstractHorseEntityRendererMixin", 
