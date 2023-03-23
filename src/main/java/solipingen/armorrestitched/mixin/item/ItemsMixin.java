@@ -37,7 +37,7 @@ public abstract class ItemsMixin {
                 cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem));
             }
             else if (name.matches("diamond_horse_armor")) {
-                Item newHorseArmorItem = (Item)new HorseArmorItem(13, "diamond", new Item.Settings());
+                Item newHorseArmorItem = (Item)new HorseArmorItem(12, "diamond", new Item.Settings());
                 cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem));
             }
         }
