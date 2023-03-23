@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "item": "armorrestitched:fur"
+      }
+    },
+    "pattern": [
+      "o o",
+      "ooo", 
+      "ooo"
+    ],
+    "result": {
+      "item": "armorrestitched:fur_chestplate"
+    }
+}
