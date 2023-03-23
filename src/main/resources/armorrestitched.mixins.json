@@ -31,6 +31,7 @@
     "item.ArmorMaterialsMixin", 
     "item.DyeableItemMixin", 
     "item.HorseArmorItemMixin", 
+    "item.ItemsMixin", 
     "item.ItemStackMixin", 
     "recipe.SmithingTrimRecipeMixin", 
     "world.poi.PointOfInterestTypesMixin"

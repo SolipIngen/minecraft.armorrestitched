@@ -3,10 +3,8 @@ package solipingen.armorrestitched.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.DyeableArmorItem;
-import net.minecraft.item.DyeableHorseArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.SaddleItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -117,38 +115,6 @@ public class ModItems {
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(ArmorRestitched.MOD_ID, name), item);
-    }
-
-    // Replace Vanilla Items with Mod Versions
-    public static void replaceVanillaItems() {
-        for (Item item : Registries.ITEM) {
-            String name = item.getTranslationKey().substring(item.getTranslationKey().lastIndexOf(".") + 1);
-            int rawId = Registries.ITEM.getRawId(item);
-            if (item instanceof HorseArmorItem) {
-                if (name.matches("leather_horse_armor")) {
-                    Item newHorseArmorItem = (Item)new DyeableHorseArmorItem(3, "leather", new Item.Settings());
-                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
-                }
-                else if (name.matches("iron_horse_armor")) {
-                    Item newHorseArmorItem = (Item)new HorseArmorItem(9, "iron", new Item.Settings());
-                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
-                }
-                else if (name.matches("golden_horse_armor")) {
-                    Item newHorseArmorItem = (Item)new HorseArmorItem(7, "gold", new Item.Settings());
-                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
-                }
-                else if (name.matches("diamond_horse_armor")) {
-                    Item newHorseArmorItem = (Item)new HorseArmorItem(12, "diamond", new Item.Settings());
-                    Registry.register(Registries.ITEM, rawId, name, newHorseArmorItem);
-                }
-            }
-            else if (item instanceof SaddleItem) {
-                if (name.matches("saddle")) {
-                    Item newSaddleItem = (Item)new SaddleItem(new Item.Settings());
-                    Registry.register(Registries.ITEM, rawId, name, newSaddleItem);
-                }
-            }
-        }
     }
 
     public static void registerModItems() {

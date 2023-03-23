@@ -22,7 +22,6 @@ public class ArmorRestitched implements ModInitializer {
 	public void onInitialize() {
 
 		ModBlocks.replaceVanillaBlocks();
-		ModItems.replaceVanillaItems();
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();
 		ModSoundEvents.registerModSoundEvents();

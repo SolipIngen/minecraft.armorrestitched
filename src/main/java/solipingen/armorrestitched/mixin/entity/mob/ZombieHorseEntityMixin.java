@@ -26,7 +26,7 @@ import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.NonStandardHo
 
 @Mixin(ZombieHorseEntity.class)
 public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity implements NonStandardHorseEntityInterface {
-    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
+    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F297");
     
 
     protected ZombieHorseEntityMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
