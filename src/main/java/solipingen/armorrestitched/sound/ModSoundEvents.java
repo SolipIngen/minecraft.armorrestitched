@@ -14,6 +14,7 @@ public class ModSoundEvents {
     public static final SoundEvent LINEN_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("linen_clothing_equip");
     public static final SoundEvent SILK_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("silk_clothing_equip");
     public static final SoundEvent WOOL_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("wool_clothing_equip");
+    public static final SoundEvent PAPER_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("paper_clothing_equip");
     public static final SoundEvent COPPER_ARMOR_EQUIP = ModSoundEvents.registerSoundEvent("copper_armor_equip");
 
 

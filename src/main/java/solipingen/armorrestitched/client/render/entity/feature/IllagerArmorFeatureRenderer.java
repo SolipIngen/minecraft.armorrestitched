@@ -29,7 +29,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.client.render.entity.model.IllagerArmorEntityModel;
-import solipingen.armorrestitched.item.armor.ModArmorMaterials;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.IllagerEntityModelAccessor;
 
 

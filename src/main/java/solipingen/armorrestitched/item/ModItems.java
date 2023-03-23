@@ -11,7 +11,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
-import solipingen.armorrestitched.item.armor.ModArmorMaterials;
 
 
 public class ModItems {
@@ -84,6 +83,19 @@ public class ModItems {
 
     public static final Item WOOL_BOOTS = ModItems.registerItem("wool_boots", 
         (Item)new DyeableArmorItem(ModArmorMaterials.WOOL, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    // Paper Clothing
+    public static final Item PAPER_HELMET = ModItems.registerItem("paper_helmet", 
+        (Item)new DyeableArmorItem(ModArmorMaterials.PAPER, ArmorItem.Type.HELMET, new FabricItemSettings()));
+
+    public static final Item PAPER_CHESTPLATE = ModItems.registerItem("paper_chestplate", 
+        (Item)new DyeableArmorItem(ModArmorMaterials.PAPER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
+    public static final Item PAPER_LEGGINGS = ModItems.registerItem("paper_leggings", 
+        (Item)new DyeableArmorItem(ModArmorMaterials.PAPER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+
+    public static final Item PAPER_BOOTS = ModItems.registerItem("paper_boots", 
+        (Item)new DyeableArmorItem(ModArmorMaterials.PAPER, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
 
     // Copper Armor

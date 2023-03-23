@@ -34,6 +34,13 @@
             "armorrestitched:clothing_armor_equip_ver2"
         ]
     }, 
+    "paper_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.paper_clothing_equip", 
+        "sounds": [
+            "armorrestitched:clothing_armor_equip_ver1", 
+            "armorrestitched:clothing_armor_equip_ver2"
+        ]
+    }, 
     "copper_armor_equip": {
         "subtitle": "subtitles.armorrestitched.copper_armor_equip", 
         "sounds": [

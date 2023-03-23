@@ -1,4 +1,4 @@
-package solipingen.armorrestitched.item.armor;
+package solipingen.armorrestitched.item;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
@@ -47,6 +47,12 @@ public enum ModArmorMaterials implements ArmorMaterial, StringIdentifiable {
         map.put(ArmorItem.Type.CHESTPLATE, 3);
         map.put(ArmorItem.Type.HELMET, 1);
     }), 15, ModSoundEvents.WOOL_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ItemTags.WOOL)), 
+    PAPER("paper", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 3);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 15, ModSoundEvents.PAPER_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.ofItems(Items.PAPER)), 
     COPPER("copper", 15, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 2);
         map.put(ArmorItem.Type.LEGGINGS, 4);

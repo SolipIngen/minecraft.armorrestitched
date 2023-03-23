@@ -16,7 +16,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
-import solipingen.armorrestitched.item.armor.ModArmorMaterials;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 
 
 @Mixin(ArmorFeatureRenderer.class)

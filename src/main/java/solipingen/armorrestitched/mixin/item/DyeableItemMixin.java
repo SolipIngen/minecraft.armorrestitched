@@ -9,7 +9,7 @@ import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.ItemStack;
-import solipingen.armorrestitched.item.armor.ModArmorMaterials;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 
 
 @Mixin(DyeableItem.class)
@@ -35,6 +35,9 @@ public interface DyeableItemMixin {
             }
             else if (material == ModArmorMaterials.WOOL) {
                 return 0xFBFEFE;
+            }
+            else if (material == ModArmorMaterials.PAPER) {
+                return 0xFFF2C4;
             }
             else if (material == ArmorMaterials.LEATHER) {
                 return originalInt;

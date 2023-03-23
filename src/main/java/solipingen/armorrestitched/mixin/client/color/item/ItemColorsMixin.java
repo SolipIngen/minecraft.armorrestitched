@@ -39,7 +39,11 @@ public abstract class ItemColorsMixin {
             ModItems.WOOL_HELMET, 
             ModItems.WOOL_CHESTPLATE, 
             ModItems.WOOL_LEGGINGS, 
-            ModItems.WOOL_BOOTS);
+            ModItems.WOOL_BOOTS, 
+            ModItems.PAPER_HELMET, 
+            ModItems.PAPER_CHESTPLATE, 
+            ModItems.PAPER_LEGGINGS, 
+            ModItems.PAPER_BOOTS);
         return itemColors;
     }
     

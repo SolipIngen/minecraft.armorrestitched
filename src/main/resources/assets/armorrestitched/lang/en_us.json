@@ -7,31 +7,31 @@
     "item.armorrestitched.cotton_chestplate": "Cotton Shirt", 
     "item.armorrestitched.cotton_leggings": "Cotton Pants", 
     "item.armorrestitched.cotton_boots": "Cotton Boots", 
-    "item.armorrestitched.cotton_horse_armor": "Cotton Horse Armor", 
 
     "item.armorrestitched.fur_helmet": "Fur Cap", 
     "item.armorrestitched.fur_chestplate": "Fur Shirt", 
     "item.armorrestitched.fur_leggings": "Fur Pants", 
     "item.armorrestitched.fur_boots": "Fur Boots", 
-    "item.armorrestitched.fur_horse_armor": "Fur Horse Armor", 
 
     "item.armorrestitched.linen_helmet": "Linen Cap", 
     "item.armorrestitched.linen_chestplate": "Linen Shirt", 
     "item.armorrestitched.linen_leggings": "Linen Pants", 
     "item.armorrestitched.linen_boots": "Linen Boots", 
-    "item.armorrestitched.linen_horse_armor": "Linen Horse Armor", 
 
     "item.armorrestitched.silk_helmet": "Silk Cap", 
     "item.armorrestitched.silk_chestplate": "Silk Tunic", 
     "item.armorrestitched.silk_leggings": "Silk Pants", 
     "item.armorrestitched.silk_boots": "Silk Boots", 
-    "item.armorrestitched.silk_horse_armor": "Silk Horse Armor", 
 
     "item.armorrestitched.wool_helmet": "Wool Cap", 
     "item.armorrestitched.wool_chestplate": "Wool Shirt", 
     "item.armorrestitched.wool_leggings": "Wool Pants", 
     "item.armorrestitched.wool_boots": "Wool Boots", 
-    "item.armorrestitched.wool_horse_armor": "Wool Horse Armor", 
+
+    "item.armorrestitched.paper_helmet": "Paper Cap", 
+    "item.armorrestitched.paper_chestplate": "Paper Shirt", 
+    "item.armorrestitched.paper_leggings": "Paper Pants", 
+    "item.armorrestitched.paper_boots": "Paper Boots", 
 
     "item.armorrestitched.copper_helmet": "Copper Helmet", 
     "item.armorrestitched.copper_chestplate": "Copper Chestplate", 
@@ -44,6 +44,7 @@
     "subtitles.armorrestitched.linen_clothing_equip": "Linen clothing rustles", 
     "subtitles.armorrestitched.silk_clothing_equip": "Silk clothing rustles", 
     "subtitles.armorrestitched.wool_clothing_equip": "Wool clothing rustles", 
+    "subtitles.armorrestitched.paper_clothing_equip": "Paper clothing rustles", 
     "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
 
     "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
