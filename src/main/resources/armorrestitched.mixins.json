@@ -4,6 +4,7 @@
   "package": "solipingen.armorrestitched.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block.BlocksMixin", 
     "entity.boss.WitherEntityMixin", 
     "entity.mob.DrownedEntityMixin", 
     "entity.mob.HoglinEntityMixin", 
