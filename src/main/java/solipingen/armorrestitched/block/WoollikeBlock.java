@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 
 
 
-public class WoolBlock extends Block {
+public class WoollikeBlock extends Block {
 
 
-    public WoolBlock(Settings settings) {
+    public WoollikeBlock(Settings settings) {
         super(settings);
     }
 
@@ -37,7 +37,7 @@ public class WoolBlock extends Block {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
-            entity.setVelocity(vec3d.x, -vec3d.y*0.33*d, vec3d.z);
+            entity.setVelocity(vec3d.x, -vec3d.y*0.1*d, vec3d.z);
         }
     }
     

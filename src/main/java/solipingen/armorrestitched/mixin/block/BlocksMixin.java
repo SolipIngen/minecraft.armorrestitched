@@ -10,19 +10,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import solipingen.armorrestitched.block.WoolBlock;
+import solipingen.armorrestitched.block.WoollikeBlock;
 
 @Mixin(Blocks.class)
 public abstract class BlocksMixin {
     
 
     @Inject(method = "register", at = @At("HEAD"), cancellable = true)
-    private static void injectedRegister(String id, Block entry, CallbackInfoReturnable<Block> cbireturn) {
-        if (id.endsWith("wool")) {
-            Registry.register(Registries.BLOCK, id, entry);
+    private static void injectedRegister(String name, Block entry, CallbackInfoReturnable<Block> cbireturn) {
+        if (name.endsWith("wool")) {
+            Registry.register(Registries.BLOCK, name, entry);
             int rawId = Registries.BLOCK.getRawId(entry);
-            Block newEntry = (Block)new WoolBlock(AbstractBlock.Settings.copy(entry));
-            cbireturn.setReturnValue(Registry.register(Registries.BLOCK, rawId, id, newEntry));
+            Block newEntry = (Block)new WoollikeBlock(AbstractBlock.Settings.copy(entry));
+            cbireturn.setReturnValue(Registry.register(Registries.BLOCK, rawId, name, newEntry));
         }
     }
 

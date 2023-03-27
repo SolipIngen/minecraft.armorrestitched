@@ -2,6 +2,7 @@ package solipingen.armorrestitched;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.item.ModItemGroups;
 import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.loot.ModifyLootTableHandler;
@@ -20,6 +21,7 @@ public class ArmorRestitched implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();
 		ModSoundEvents.registerModSoundEvents();

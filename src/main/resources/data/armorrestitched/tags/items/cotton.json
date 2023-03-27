@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "armorrestitched:white_cotton", 
+        "armorrestitched:black_cotton", 
+        "armorrestitched:gray_cotton", 
+        "armorrestitched:light_gray_cotton", 
+        "armorrestitched:red_cotton", 
+        "armorrestitched:pink_cotton", 
+        "armorrestitched:orange_cotton", 
+        "armorrestitched:yellow_cotton", 
+        "armorrestitched:brown_cotton", 
+        "armorrestitched:lime_cotton", 
+        "armorrestitched:green_cotton", 
+        "armorrestitched:light_blue_cotton", 
+        "armorrestitched:blue_cotton", 
+        "armorrestitched:cyan_cotton", 
+        "armorrestitched:purple_cotton", 
+        "armorrestitched:magenta_cotton"
+    ]
+}
