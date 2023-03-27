@@ -10,6 +10,7 @@ import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SaddleItem;
+import net.minecraft.item.ShearsItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -42,10 +43,12 @@ public abstract class ItemsMixin {
             }
         }
         else if (item instanceof SaddleItem) {
-            if (name.matches("saddle")) {
-                Item newSaddleItem = (Item)new SaddleItem(new Item.Settings());
-                cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newSaddleItem));
-            }
+            Item newSaddleItem = (Item)new SaddleItem(new Item.Settings());
+            cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newSaddleItem));
+        }
+        else if (item instanceof ShearsItem) {
+            Item newShearsItem = (Item)new ShearsItem(new Item.Settings().maxDamage(517));
+            cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newShearsItem));
         }
 
     }

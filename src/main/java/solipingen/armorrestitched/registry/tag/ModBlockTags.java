@@ -13,5 +13,10 @@ public class ModBlockTags {
     public static final TagKey<Block> LINEN = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "linen"));
     public static final TagKey<Block> SILK = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "silk"));
 
+    public static final TagKey<Block> COTTON_CARPETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "cotton_carpets"));
+    public static final TagKey<Block> FUR_CARPETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "fur_carpets"));
+    public static final TagKey<Block> LINEN_CARPETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "linen_carpets"));
+    public static final TagKey<Block> SILK_CARPETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "silk_carpets"));
+
 
 }

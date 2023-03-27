@@ -5,6 +5,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DyedCarpetBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 
@@ -85,6 +87,74 @@ public class ModBlocks {
     public static final Block GREEN_SILK = ModBlocks.registerBlock("green_silk", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL)), true);
     public static final Block RED_SILK = ModBlocks.registerBlock("red_silk", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL)), true);
     public static final Block BLACK_SILK = ModBlocks.registerBlock("black_silk", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL)), true);
+
+    public static final Block WHITE_COTTON_CARPET = ModBlocks.registerBlock("white_cotton_carpet", new DyedCarpetBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.WHITE_CARPET)), true);
+    public static final Block ORANGE_COTTON_CARPET = ModBlocks.registerBlock("orange_cotton_carpet", new DyedCarpetBlock(DyeColor.ORANGE, AbstractBlock.Settings.copy(Blocks.ORANGE_CARPET)), true);
+    public static final Block MAGENTA_COTTON_CARPET = ModBlocks.registerBlock("magenta_cotton_carpet", new DyedCarpetBlock(DyeColor.MAGENTA, AbstractBlock.Settings.copy(Blocks.MAGENTA_CARPET)), true);
+    public static final Block LIGHT_BLUE_COTTON_CARPET = ModBlocks.registerBlock("light_blue_cotton_carpet", new DyedCarpetBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_CARPET)), true);
+    public static final Block YELLOW_COTTON_CARPET = ModBlocks.registerBlock("yellow_cotton_carpet", new DyedCarpetBlock(DyeColor.YELLOW, AbstractBlock.Settings.copy(Blocks.YELLOW_CARPET)), true);
+    public static final Block LIME_COTTON_CARPET = ModBlocks.registerBlock("lime_cotton_carpet", new DyedCarpetBlock(DyeColor.LIME, AbstractBlock.Settings.copy(Blocks.LIME_CARPET)), true);
+    public static final Block PINK_COTTON_CARPET = ModBlocks.registerBlock("pink_cotton_carpet", new DyedCarpetBlock(DyeColor.PINK, AbstractBlock.Settings.copy(Blocks.PINK_CARPET)), true);
+    public static final Block GRAY_COTTON_CARPET = ModBlocks.registerBlock("gray_cotton_carpet", new DyedCarpetBlock(DyeColor.GRAY, AbstractBlock.Settings.copy(Blocks.GRAY_CARPET)), true);
+    public static final Block LIGHT_GRAY_COTTON_CARPET = ModBlocks.registerBlock("light_gray_cotton_carpet", new DyedCarpetBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_CARPET)), true);
+    public static final Block CYAN_COTTON_CARPET = ModBlocks.registerBlock("cyan_cotton_carpet", new DyedCarpetBlock(DyeColor.CYAN, AbstractBlock.Settings.copy(Blocks.CYAN_CARPET)), true);
+    public static final Block PURPLE_COTTON_CARPET = ModBlocks.registerBlock("purple_cotton_carpet", new DyedCarpetBlock(DyeColor.PURPLE, AbstractBlock.Settings.copy(Blocks.PURPLE_CARPET)), true);
+    public static final Block BLUE_COTTON_CARPET = ModBlocks.registerBlock("blue_cotton_carpet", new DyedCarpetBlock(DyeColor.BLUE, AbstractBlock.Settings.copy(Blocks.BLUE_CARPET)), true);
+    public static final Block BROWN_COTTON_CARPET = ModBlocks.registerBlock("brown_cotton_carpet", new DyedCarpetBlock(DyeColor.BROWN, AbstractBlock.Settings.copy(Blocks.BROWN_CARPET)), true);
+    public static final Block GREEN_COTTON_CARPET = ModBlocks.registerBlock("green_cotton_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
+    public static final Block RED_COTTON_CARPET = ModBlocks.registerBlock("red_cotton_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
+    public static final Block BLACK_COTTON_CARPET = ModBlocks.registerBlock("black_cotton_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
+
+    public static final Block WHITE_FUR_CARPET = ModBlocks.registerBlock("white_fur_carpet", new DyedCarpetBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.WHITE_CARPET)), true);
+    public static final Block ORANGE_FUR_CARPET = ModBlocks.registerBlock("orange_fur_carpet", new DyedCarpetBlock(DyeColor.ORANGE, AbstractBlock.Settings.copy(Blocks.ORANGE_CARPET)), true);
+    public static final Block MAGENTA_FUR_CARPET = ModBlocks.registerBlock("magenta_fur_carpet", new DyedCarpetBlock(DyeColor.MAGENTA, AbstractBlock.Settings.copy(Blocks.MAGENTA_CARPET)), true);
+    public static final Block LIGHT_BLUE_FUR_CARPET = ModBlocks.registerBlock("light_blue_fur_carpet", new DyedCarpetBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_CARPET)), true);
+    public static final Block YELLOW_FUR_CARPET = ModBlocks.registerBlock("yellow_fur_carpet", new DyedCarpetBlock(DyeColor.YELLOW, AbstractBlock.Settings.copy(Blocks.YELLOW_CARPET)), true);
+    public static final Block LIME_FUR_CARPET = ModBlocks.registerBlock("lime_fur_carpet", new DyedCarpetBlock(DyeColor.LIME, AbstractBlock.Settings.copy(Blocks.LIME_CARPET)), true);
+    public static final Block PINK_FUR_CARPET = ModBlocks.registerBlock("pink_fur_carpet", new DyedCarpetBlock(DyeColor.PINK, AbstractBlock.Settings.copy(Blocks.PINK_CARPET)), true);
+    public static final Block GRAY_FUR_CARPET = ModBlocks.registerBlock("gray_fur_carpet", new DyedCarpetBlock(DyeColor.GRAY, AbstractBlock.Settings.copy(Blocks.GRAY_CARPET)), true);
+    public static final Block LIGHT_GRAY_FUR_CARPET = ModBlocks.registerBlock("light_gray_fur_carpet", new DyedCarpetBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_CARPET)), true);
+    public static final Block CYAN_FUR_CARPET = ModBlocks.registerBlock("cyan_fur_carpet", new DyedCarpetBlock(DyeColor.CYAN, AbstractBlock.Settings.copy(Blocks.CYAN_CARPET)), true);
+    public static final Block PURPLE_FUR_CARPET = ModBlocks.registerBlock("purple_fur_carpet", new DyedCarpetBlock(DyeColor.PURPLE, AbstractBlock.Settings.copy(Blocks.PURPLE_CARPET)), true);
+    public static final Block BLUE_FUR_CARPET = ModBlocks.registerBlock("blue_fur_carpet", new DyedCarpetBlock(DyeColor.BLUE, AbstractBlock.Settings.copy(Blocks.BLUE_CARPET)), true);
+    public static final Block BROWN_FUR_CARPET = ModBlocks.registerBlock("brown_fur_carpet", new DyedCarpetBlock(DyeColor.BROWN, AbstractBlock.Settings.copy(Blocks.BROWN_CARPET)), true);
+    public static final Block GREEN_FUR_CARPET = ModBlocks.registerBlock("green_fur_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
+    public static final Block RED_FUR_CARPET = ModBlocks.registerBlock("red_fur_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
+    public static final Block BLACK_FUR_CARPET = ModBlocks.registerBlock("black_fur_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
+
+    public static final Block WHITE_LINEN_CARPET = ModBlocks.registerBlock("white_linen_carpet", new DyedCarpetBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.WHITE_CARPET)), true);
+    public static final Block ORANGE_LINEN_CARPET = ModBlocks.registerBlock("orange_linen_carpet", new DyedCarpetBlock(DyeColor.ORANGE, AbstractBlock.Settings.copy(Blocks.ORANGE_CARPET)), true);
+    public static final Block MAGENTA_LINEN_CARPET = ModBlocks.registerBlock("magenta_linen_carpet", new DyedCarpetBlock(DyeColor.MAGENTA, AbstractBlock.Settings.copy(Blocks.MAGENTA_CARPET)), true);
+    public static final Block LIGHT_BLUE_LINEN_CARPET = ModBlocks.registerBlock("light_blue_linen_carpet", new DyedCarpetBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_CARPET)), true);
+    public static final Block YELLOW_LINEN_CARPET = ModBlocks.registerBlock("yellow_linen_carpet", new DyedCarpetBlock(DyeColor.YELLOW, AbstractBlock.Settings.copy(Blocks.YELLOW_CARPET)), true);
+    public static final Block LIME_LINEN_CARPET = ModBlocks.registerBlock("lime_linen_carpet", new DyedCarpetBlock(DyeColor.LIME, AbstractBlock.Settings.copy(Blocks.LIME_CARPET)), true);
+    public static final Block PINK_LINEN_CARPET = ModBlocks.registerBlock("pink_linen_carpet", new DyedCarpetBlock(DyeColor.PINK, AbstractBlock.Settings.copy(Blocks.PINK_CARPET)), true);
+    public static final Block GRAY_LINEN_CARPET = ModBlocks.registerBlock("gray_linen_carpet", new DyedCarpetBlock(DyeColor.GRAY, AbstractBlock.Settings.copy(Blocks.GRAY_CARPET)), true);
+    public static final Block LIGHT_GRAY_LINEN_CARPET = ModBlocks.registerBlock("light_gray_linen_carpet", new DyedCarpetBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_CARPET)), true);
+    public static final Block CYAN_LINEN_CARPET = ModBlocks.registerBlock("cyan_linen_carpet", new DyedCarpetBlock(DyeColor.CYAN, AbstractBlock.Settings.copy(Blocks.CYAN_CARPET)), true);
+    public static final Block PURPLE_LINEN_CARPET = ModBlocks.registerBlock("purple_linen_carpet", new DyedCarpetBlock(DyeColor.PURPLE, AbstractBlock.Settings.copy(Blocks.PURPLE_CARPET)), true);
+    public static final Block BLUE_LINEN_CARPET = ModBlocks.registerBlock("blue_linen_carpet", new DyedCarpetBlock(DyeColor.BLUE, AbstractBlock.Settings.copy(Blocks.BLUE_CARPET)), true);
+    public static final Block BROWN_LINEN_CARPET = ModBlocks.registerBlock("brown_linen_carpet", new DyedCarpetBlock(DyeColor.BROWN, AbstractBlock.Settings.copy(Blocks.BROWN_CARPET)), true);
+    public static final Block GREEN_LINEN_CARPET = ModBlocks.registerBlock("green_linen_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
+    public static final Block RED_LINEN_CARPET = ModBlocks.registerBlock("red_linen_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
+    public static final Block BLACK_LINEN_CARPET = ModBlocks.registerBlock("black_linen_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
+
+    public static final Block WHITE_SILK_CARPET = ModBlocks.registerBlock("white_silk_carpet", new DyedCarpetBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.WHITE_CARPET)), true);
+    public static final Block ORANGE_SILK_CARPET = ModBlocks.registerBlock("orange_silk_carpet", new DyedCarpetBlock(DyeColor.ORANGE, AbstractBlock.Settings.copy(Blocks.ORANGE_CARPET)), true);
+    public static final Block MAGENTA_SILK_CARPET = ModBlocks.registerBlock("magenta_silk_carpet", new DyedCarpetBlock(DyeColor.MAGENTA, AbstractBlock.Settings.copy(Blocks.MAGENTA_CARPET)), true);
+    public static final Block LIGHT_BLUE_SILK_CARPET = ModBlocks.registerBlock("light_blue_silk_carpet", new DyedCarpetBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_CARPET)), true);
+    public static final Block YELLOW_SILK_CARPET = ModBlocks.registerBlock("yellow_silk_carpet", new DyedCarpetBlock(DyeColor.YELLOW, AbstractBlock.Settings.copy(Blocks.YELLOW_CARPET)), true);
+    public static final Block LIME_SILK_CARPET = ModBlocks.registerBlock("lime_silk_carpet", new DyedCarpetBlock(DyeColor.LIME, AbstractBlock.Settings.copy(Blocks.LIME_CARPET)), true);
+    public static final Block PINK_SILK_CARPET = ModBlocks.registerBlock("pink_silk_carpet", new DyedCarpetBlock(DyeColor.PINK, AbstractBlock.Settings.copy(Blocks.PINK_CARPET)), true);
+    public static final Block GRAY_SILK_CARPET = ModBlocks.registerBlock("gray_silk_carpet", new DyedCarpetBlock(DyeColor.GRAY, AbstractBlock.Settings.copy(Blocks.GRAY_CARPET)), true);
+    public static final Block LIGHT_GRAY_SILK_CARPET = ModBlocks.registerBlock("light_gray_silk_carpet", new DyedCarpetBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_CARPET)), true);
+    public static final Block CYAN_SILK_CARPET = ModBlocks.registerBlock("cyan_silk_carpet", new DyedCarpetBlock(DyeColor.CYAN, AbstractBlock.Settings.copy(Blocks.CYAN_CARPET)), true);
+    public static final Block PURPLE_SILK_CARPET = ModBlocks.registerBlock("purple_silk_carpet", new DyedCarpetBlock(DyeColor.PURPLE, AbstractBlock.Settings.copy(Blocks.PURPLE_CARPET)), true);
+    public static final Block BLUE_SILK_CARPET = ModBlocks.registerBlock("blue_silk_carpet", new DyedCarpetBlock(DyeColor.BLUE, AbstractBlock.Settings.copy(Blocks.BLUE_CARPET)), true);
+    public static final Block BROWN_SILK_CARPET = ModBlocks.registerBlock("brown_silk_carpet", new DyedCarpetBlock(DyeColor.BROWN, AbstractBlock.Settings.copy(Blocks.BROWN_CARPET)), true);
+    public static final Block GREEN_SILK_CARPET = ModBlocks.registerBlock("green_silk_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
+    public static final Block RED_SILK_CARPET = ModBlocks.registerBlock("red_silk_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
+    public static final Block BLACK_SILK_CARPET = ModBlocks.registerBlock("black_silk_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
 
 
     private static Block registerBlock(String name, Block block, boolean withBlockItem) {
