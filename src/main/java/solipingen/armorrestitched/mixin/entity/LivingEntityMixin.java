@@ -34,6 +34,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.trim.ArmorTrim;
 import net.minecraft.item.trim.ArmorTrimMaterial;
 import net.minecraft.item.trim.ArmorTrimMaterials;
@@ -46,6 +47,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.event.listener.VibrationListener;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.EntityInterface;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.MobEntityInterface;
 
@@ -127,11 +129,13 @@ public abstract class LivingEntityMixin extends Entity {
             if (entity instanceof MobEntity && entity.world instanceof ServerWorld) {
                 MobEntity mobEntity = (MobEntity)entity;
                 if (mobEntity.getTarget() == null && mobEntity.getGroup() != EntityGroup.UNDEAD) {
-                    int duration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 5);
-                    mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(5, Math.max(duration, 5)), 0, true, true, false));
+                    int maxDuration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 5);
+                    mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(5, Math.max(maxDuration, 5)), 0, true, true, false));
                 }
                 else if (mobEntity.getTarget() != null && mobEntity.getGroup() != EntityGroup.UNDEAD && (mobEntity instanceof HostileEntity || mobEntity.getTarget() == ((LivingEntity)(Object)this))) {
-                    ((MobEntityInterface)mobEntity).setEntranced(true, mobEntity.getRandom().nextBetween(10, Math.max(i*20, 10)));
+                    int duration = mobEntity.getRandom().nextBetween(10, Math.max(i*20, 10));
+                    duration *= mobEntity instanceof VibrationListener.Callback ? 2 : 1;
+                    ((MobEntityInterface)mobEntity).setEntranced(true, duration);
                 }
             }
             else if (entity instanceof PlayerEntity) {
@@ -149,18 +153,100 @@ public abstract class LivingEntityMixin extends Entity {
         Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), itemStack);
         if (trimOptional.isPresent()) {
             RegistryEntry<ArmorTrimMaterial> trimMaterial = trimOptional.get().getMaterial();
+            if (itemStack.isOf(Items.ELYTRA)) {
+                if (trimMaterial.matchesKey(ArmorTrimMaterials.COPPER)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.5 : 1.0;
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                    }
+                }
+                else if (trimMaterial.matchesKey(ArmorTrimMaterials.IRON)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 1.0 : 2.0;
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                    }
+                }
+                else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.5 : 1.0;
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                    }
+                }
+                else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 2.0 : 3.0;
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                    }
+                }
+                else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 2.0, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                    }
+                }
+                else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
+                    Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
+                    currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE));
+                    for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                        double addition = currentAttributeModifier.getName().matches("Armor knockback resistance") ? 0.025 : (currentAttributeModifier.getName().matches("Armor toughness") ? 2.0 : 3.0);
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                        multimap.remove(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, currentAttributeModifier);
+                        multimap.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, boostedAttributeModifier);
+                    }
+                }
+                return multimap;
+            }
             if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
                 Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS);
                 for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                    EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), 1.25*currentAttributeModifier.getValue(), currentAttributeModifier.getOperation());
+                    EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 1.0, currentAttributeModifier.getOperation());
                     multimap.remove(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, currentAttributeModifier);
                     multimap.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, boostedAttributeModifier);
+                }
+            }
+            else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
+                Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
+                for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
+                    EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 1.0, currentAttributeModifier.getOperation());
+                    multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
+                    multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
                 }
             }
             else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
                 Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
                 for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                    EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), 1.25*currentAttributeModifier.getValue(), currentAttributeModifier.getOperation());
+                    EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 0.05, currentAttributeModifier.getOperation());
                     multimap.remove(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, currentAttributeModifier);
                     multimap.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, boostedAttributeModifier);
                 }

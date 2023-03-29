@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VexEntity;
@@ -18,6 +19,7 @@ import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
@@ -152,6 +154,19 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         return Items.GOLDEN_BOOTS;
     }
 
+    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+    private void injectedWriteCustomDataToNbt(NbtCompound nbt, CallbackInfo cbi) {
+        nbt.putBoolean("Entranced", this.entranced);
+        nbt.putInt("EntrancedTime", this.entrancedTime);
+    }
+    
+    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+    private void injectedReadCustomDataFromNbt(NbtCompound nbt, CallbackInfo cbi) {
+        this.entranced = nbt.getBoolean("Entranced");
+        this.entrancedTime = nbt.getInt("EntrancedTime");
+        ((MobEntity)(Object)this).setAiDisabled(this.entranced);
+    }
+
     @Override
     public boolean getEntranced() {
         return this.entranced;
@@ -162,6 +177,9 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         this.entranced = entranced;
         this.entrancedTime = duration;
         ((MobEntity)(Object)this).setAiDisabled(entranced);
+        if (((MobEntity)(Object)this) instanceof Angerable && entranced) {
+            ((Angerable)this).setAngryAt(null);
+        }
     }
 
 

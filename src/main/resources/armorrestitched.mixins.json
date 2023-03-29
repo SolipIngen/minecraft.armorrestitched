@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "block.BlocksMixin", 
+    "enchantment.ProtectionEnchantmentMixin", 
     "entity.boss.WitherEntityMixin", 
     "entity.mob.DrownedEntityMixin", 
     "entity.mob.HoglinEntityMixin", 
@@ -34,6 +35,7 @@
     "item.ArmorItemMixin", 
     "item.ArmorMaterialsMixin", 
     "item.DyeableItemMixin", 
+    "item.ElytraItemMixin", 
     "item.HorseArmorItemMixin", 
     "item.ItemsMixin", 
     "item.ItemStackMixin", 

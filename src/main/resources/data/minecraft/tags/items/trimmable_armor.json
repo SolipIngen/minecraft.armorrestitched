@@ -1,6 +1,7 @@
 {
     "replace": false, 
     "values": [
+      "minecraft:elytra", 
       "armorrestitched:cotton_helmet", 
       "armorrestitched:cotton_chestplate", 
       "armorrestitched:cotton_leggings", 
