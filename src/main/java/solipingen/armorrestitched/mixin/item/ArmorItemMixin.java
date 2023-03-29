@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -17,13 +17,16 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ArmorMaterials;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 
 
 @Mixin(ArmorItem.class)
-public abstract class ArmorItemMixin extends Item {
+public abstract class ArmorItemMixin extends Item implements Equipment {
     @Shadow @Final private static EnumMap<ArmorItem.Type, UUID> MODIFIERS;
     @Shadow @Final protected float knockbackResistance;
+    @Shadow @Final protected ArmorMaterial material;
+    @Shadow @Final private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
 
     public ArmorItemMixin(Settings settings) {
@@ -38,6 +41,9 @@ public abstract class ArmorItemMixin extends Item {
         }
         return builder;
     }
+
+
+
     
 }
 

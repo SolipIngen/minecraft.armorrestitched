@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.item.DyeableHorseArmorItem;
+import net.minecraft.item.ElytraItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -14,6 +15,7 @@ import net.minecraft.item.ShearsItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 
 @Mixin(Items.class)
@@ -50,7 +52,10 @@ public abstract class ItemsMixin {
             Item newShearsItem = (Item)new ShearsItem(new Item.Settings().maxDamage(517));
             cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newShearsItem));
         }
-
+        else if (item instanceof ElytraItem) {
+            Item newElytraItem = (Item)new ElytraItem(new Item.Settings().maxDamage(864).rarity(Rarity.UNCOMMON));
+            cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newElytraItem));
+        }
     }
     
 }

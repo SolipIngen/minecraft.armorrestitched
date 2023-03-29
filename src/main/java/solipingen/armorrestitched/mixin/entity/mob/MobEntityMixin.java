@@ -10,23 +10,63 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.VexEntity;
+import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.item.ModItems;
+import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.MobEntityInterface;
 
 
 @Mixin(MobEntity.class)
-public abstract class MobEntityMixin extends LivingEntity {
+public abstract class MobEntityMixin extends LivingEntity implements MobEntityInterface {
+    private boolean entranced;
+    private int entrancedTime;
 
 
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void injectedInit(CallbackInfo cbi) {
+        this.entranced = false;
+        this.entrancedTime = 0;
+    }
+
+    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;baseTick()V", shift = At.Shift.AFTER), cancellable = true)
+    private void injectedBaseTick(CallbackInfo cbi) {
+        if (this.getEntranced()) {
+            if (((MobEntity)(Object)this) instanceof VexEntity && this.random.nextFloat() >= 0.9f + 0.01f*this.entrancedTime) {
+                AllayEntity allayEntity = EntityType.ALLAY.create(world);
+                if (allayEntity != null && this.world instanceof ServerWorld) {
+                    allayEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
+                    allayEntity.initialize((ServerWorld)this.world, world.getLocalDifficulty(allayEntity.getBlockPos()), SpawnReason.CONVERSION, null, null);
+                    allayEntity.setAiDisabled(((MobEntity)(Object)this).isAiDisabled());
+                    if (this.hasCustomName()) {
+                        allayEntity.setCustomName(this.getCustomName());
+                        allayEntity.setCustomNameVisible(this.isCustomNameVisible());
+                    }
+                    allayEntity.setPersistent();
+                    ((MobEntityInterface)allayEntity).setEntranced(false, 0);
+                    ((ServerWorld)this.world).spawnEntityAndPassengers(allayEntity);
+                    this.discard();
+                    cbi.cancel();
+                }
+            }
+            this.entrancedTime -= this.entrancedTime > 0 ? 1 : 0;
+            if (this.entrancedTime <= 0) {
+                this.setEntranced(false, 0);
+            }
+        }
     }
 
     @Inject(method = "initEquipment", at = @At("TAIL"))
@@ -110,6 +150,18 @@ public abstract class MobEntityMixin extends LivingEntity {
     @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;IRON_BOOTS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
     private static Item redirectedIronBoots(EquipmentSlot equipmentSlot, int equipmentLevel) {
         return Items.GOLDEN_BOOTS;
+    }
+
+    @Override
+    public boolean getEntranced() {
+        return this.entranced;
+    }
+
+    @Override
+    public void setEntranced(boolean entranced, int duration) {
+        this.entranced = entranced;
+        this.entrancedTime = duration;
+        ((MobEntity)(Object)this).setAiDisabled(entranced);
     }
 
 

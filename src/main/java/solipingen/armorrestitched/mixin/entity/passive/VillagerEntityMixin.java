@@ -2,8 +2,11 @@ package solipingen.armorrestitched.mixin.entity.passive;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.google.common.collect.Lists;
-
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.InteractionObserver;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -30,23 +33,30 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
+import net.minecraft.item.trim.ArmorTrim;
+import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerDataContainer;
+import net.minecraft.village.VillagerGossips;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.village.TradeOffers.Factory;
 import net.minecraft.world.World;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.village.ModVillagerProfessions;
 
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin extends MerchantEntity implements InteractionObserver, VillagerDataContainer {
+    @Shadow @Final private VillagerGossips gossip;
+
 
     @Invoker("sayNo")
     public abstract void invokeSayNo();
@@ -55,7 +65,6 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
     public VillagerEntityMixin(EntityType<? extends MerchantEntity> entityType, World world) {
         super(entityType, world);
     }
-    
 
     @Inject(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/VillagerEntity;isBaby()Z"), cancellable = true)
     private void injectedInteractMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cbireturn) {
@@ -244,6 +253,43 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                     this.setEquipmentDropChance(slot, 0.0f);
                 }
             }
+        }
+    }
+
+    @Inject(method = "getReputation", at = @At("HEAD"), cancellable = true)
+    private void injectedGetReputation(PlayerEntity player, CallbackInfoReturnable<Integer> cbireturn) {
+        int reputation = this.gossip.getReputationFor(player.getUuid(), gossipType -> true);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = player.getEquippedStack(slot);
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(player.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.EMERALD)) {
+                reputation += 1;
+                reputation = MathHelper.ceil(1.25f*reputation);
+            }
+        }
+        cbireturn.setReturnValue(reputation);
+    }
+
+    @Inject(method = "onStruckByLightning", at = @At("HEAD"), cancellable = true)
+    private void injectedOnStruckByLightning(ServerWorld world, LightningEntity lightning, CallbackInfo cbi) {
+        boolean bl = false;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = this.getEquippedStack(slot);
+            if (equippedStack.getItem() instanceof ArmorItem && ((ArmorItem)equippedStack.getItem()).getMaterial() == ModArmorMaterials.COPPER) {
+                super.onStruckByLightning(world, lightning);
+                bl = true;
+            }
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isEmpty()) continue;
+            if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.COPPER)) {
+                super.onStruckByLightning(world, lightning);
+                bl = true;
+            }
+        }
+        if (bl) {
+            cbi.cancel();
         }
     }
 

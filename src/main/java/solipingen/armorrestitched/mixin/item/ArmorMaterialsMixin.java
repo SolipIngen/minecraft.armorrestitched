@@ -144,7 +144,6 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
             cbireturn.setReturnValue(0.02f);
         }
     }
-    
 
 
 

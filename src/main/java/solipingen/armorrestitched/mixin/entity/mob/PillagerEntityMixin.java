@@ -16,6 +16,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PillagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.village.raid.Raid;
@@ -62,6 +63,24 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
         if (this.isPatrolLeader()) {
             this.equipStack(EquipmentSlot.HEAD, Raid.getOminousBanner());
             this.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0f);
+        }
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            boolean randomBl = this.random.nextBoolean();
+            if (!randomBl || this.isPatrolLeader()) continue;
+            ItemStack equippedStack = this.getEquippedStack(slot);
+            if (equippedStack.isOf(Items.GOLDEN_HELMET)) {
+                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_HELMET));
+            }
+            else if (equippedStack.isOf(Items.GOLDEN_CHESTPLATE)) {
+                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_CHESTPLATE));
+            }
+            else if (equippedStack.isOf(Items.GOLDEN_LEGGINGS)) {
+                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_LEGGINGS));
+            }
+            else if (equippedStack.isOf(Items.GOLDEN_BOOTS)) {
+                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_BOOTS));
+            }
         }
     }
     

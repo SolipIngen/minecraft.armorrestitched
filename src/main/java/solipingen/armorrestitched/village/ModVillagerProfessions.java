@@ -40,7 +40,7 @@ import solipingen.armorrestitched.item.ModItems;
 
 import org.jetbrains.annotations.Nullable;
 
-
+@SuppressWarnings("unused")
 public class ModVillagerProfessions {
 
     // public static final VillagerProfession SWORDSMAN = ModVillagerProfessions.registerVillagerProfession("swordsman",
