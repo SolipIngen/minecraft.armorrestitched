@@ -35,6 +35,26 @@ public abstract class ExperienceOrbEntityMixin extends Entity {
         super(type, world);
     }
 
+    @Redirect(method = "onPlayerCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;addExperience(I)V"))
+    private void redirectedAddExperience(PlayerEntity player, int amount) {
+        int i = amount;
+        int trimLevel = 0;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = player.getEquippedStack(slot);
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(player.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.LAPIS)) {
+                trimLevel++;
+                i = MathHelper.ceil(1.25f*i);
+            }
+        }
+        if (trimLevel > 0 && this.random.nextInt(amount) > 0) {
+            float healAmount = trimLevel/4.0f*Math.abs(i - amount);
+            player.heal(healAmount);
+        }
+        player.addExperience(i);
+    }
+
     @Redirect(method = "repairPlayerGears", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I"))
     private int redirectedMendingRepairAmount(int repairAmount, int stackDamage, PlayerEntity player, int amount) {
         Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.chooseEquipmentWith(Enchantments.MENDING, player, ItemStack::isDamaged);

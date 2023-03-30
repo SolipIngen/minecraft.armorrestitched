@@ -43,7 +43,9 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
@@ -68,7 +70,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @SuppressWarnings("incomplete-switch")
-    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;tickStatusEffects()V"))
+    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;tickStatusEffects()V"), cancellable = true)
     private void injectedBaseTick(CallbackInfo cbi) {
         if (this.age % 4 == 0) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
@@ -93,13 +95,71 @@ public abstract class LivingEntityMixin extends Entity {
                     else {
                         switch (slot) {
                             case LEGS: {
-                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4, 0, true, false));
-                                break;
-                            }
-                            case FEET: {
                                 ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 4, 0, true, false));
                                 break;
                             }
+                            case FEET: {
+                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4, 0, true, false));
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.REDSTONE)) {
+                    int powerLevel = this.world.getReceivedRedstonePower(this.getBlockPos());
+                    if (this.verticalCollision) {
+                        if (this.isOnGround()) {
+                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().down(), Direction.UP), powerLevel);
+                            powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().down()), powerLevel);
+                        }
+                        else {
+                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().up(), Direction.DOWN), powerLevel);
+                            powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().up()), powerLevel);
+                        }
+                    }
+                    if (this.horizontalCollision) {
+                        Box box = this.getBoundingBox();
+                        int minBlockPosX = MathHelper.floor(box.minX);
+                        int minBlockPosY = MathHelper.floor(box.minY);
+                        int minBlockPosZ = MathHelper.floor(box.minZ);
+                        int maxBlockPosX = MathHelper.floor(box.maxX);
+                        int maxBlockPosY = MathHelper.floor(box.maxY);
+                        int maxBlockPosZ =  MathHelper.floor(box.maxZ);
+                        BlockPos touchingBlockPos = this.getBlockPos().offset(Direction.EAST);
+                        double distanceSquared = touchingBlockPos.getSquaredDistance(this.getPos());
+                        for (int y = minBlockPosY; y <= maxBlockPosY; y++) {
+                            for (int x = minBlockPosX; x <= maxBlockPosX; x++) {
+                                for (int z = minBlockPosZ; z <= maxBlockPosZ; z++) {
+                                    BlockPos blockPos = new BlockPos(x, y, z);
+                                    if (blockPos.getSquaredDistance(this.getPos()) < distanceSquared) {
+                                        touchingBlockPos = blockPos;
+                                        distanceSquared = blockPos.getSquaredDistance(this.getPos());
+                                    }
+                                }
+                            }
+                        }
+                        double angle = MathHelper.atan2(touchingBlockPos.getZ() - this.getZ(), touchingBlockPos.getX() - this.getX())*57.2957763671875;
+                        Direction direction = Direction.fromRotation(angle % 360);
+                        powerLevel = Math.max(this.world.getEmittedRedstonePower(touchingBlockPos, direction), powerLevel);
+                        powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(touchingBlockPos), powerLevel);
+                    }
+                    if (powerLevel <= 0) continue;
+                    switch (slot) {
+                        case HEAD: {
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 40*powerLevel, 0, true, false));
+                            break;
+                        }
+                        case CHEST: {
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 40*powerLevel, 0, true, false));
+                            break;
+                        }
+                        case LEGS: {
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 40*powerLevel, 0, true, false));
+                            break;
+                        }
+                        case FEET: {
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 40*powerLevel, 0, true, false));
+                            break;
                         }
                     }
                 }
