@@ -14,7 +14,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.model.VillagerResemblingModel;
 import net.minecraft.entity.passive.VillagerEntity;
 import solipingen.armorrestitched.client.render.entity.feature.VillagerArmorFeatureRenderer;
-import solipingen.armorrestitched.client.render.entity.model.ModEntityLayers;
+import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayers;
 import solipingen.armorrestitched.client.render.entity.model.VillagerArmorEntityModel;
 
 
@@ -31,10 +31,10 @@ public abstract class VillagerEntityRendererMixin extends MobEntityRenderer<Vill
     @Inject(method = "<init>", at = @At("TAIL"))
     private void injectedInit(EntityRendererFactory.Context context, CallbackInfo cbi) {
         this.addFeature(new VillagerArmorFeatureRenderer(this, 
-            new VillagerArmorEntityModel<>(context.getPart(ModEntityLayers.VILLAGER_CHEST_ARMOR_LAYER)), 
-            new VillagerArmorEntityModel<>(context.getPart(ModEntityLayers.VILLAGER_LEGS_ARMOR_LAYER)), 
-            new VillagerArmorEntityModel<>(context.getPart(ModEntityLayers.VILLAGER_HEAD_ARMOR_LAYER)), 
-            new VillagerArmorEntityModel<>(context.getPart(ModEntityLayers.VILLAGER_FEET_ARMOR_LAYER)), context.getModelManager()));
+            new VillagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.VILLAGER_CHEST_ARMOR_LAYER)), 
+            new VillagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.VILLAGER_LEGS_ARMOR_LAYER)), 
+            new VillagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.VILLAGER_HEAD_ARMOR_LAYER)), 
+            new VillagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.VILLAGER_FEET_ARMOR_LAYER)), context.getModelManager()));
     }
 
     

@@ -131,6 +131,7 @@ public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends Illa
             case FEET: {
                 illagerModel.getRightLeg().visible = true;
                 illagerModel.getLeftLeg().visible = true;
+                break;
             }
         }
     }

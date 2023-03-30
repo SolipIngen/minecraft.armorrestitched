@@ -10,7 +10,10 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 
 @Environment(value=EnvType.CLIENT)
-public class ModEntityLayers {
+public class ModEntityModelLayers {
+
+    
+    public static final EntityModelLayer ELYTA_TRIM_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "elytra_trim"), "main");
 
     public static final EntityModelLayer ILLAGER_LEGS_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "illager_legs_armor"), "main");
     public static final EntityModelLayer ILLAGER_HEAD_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "illager_head_armor"), "main");
@@ -25,6 +28,8 @@ public class ModEntityLayers {
     
     public static void registerModEntityLayers() {
 
+        EntityModelLayerRegistry.registerModelLayer(ELYTA_TRIM_LAYER, ElytraTrimEntityModel::getTexturedModelData);
+
         EntityModelLayerRegistry.registerModelLayer(ILLAGER_LEGS_ARMOR_LAYER, IllagerArmorEntityModel::getLegsArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ILLAGER_HEAD_ARMOR_LAYER, IllagerArmorEntityModel::getHeadArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ILLAGER_FEET_ARMOR_LAYER, IllagerArmorEntityModel::getFeetArmorTexturedModelData);
@@ -34,6 +39,9 @@ public class ModEntityLayers {
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_HEAD_ARMOR_LAYER, VillagerArmorEntityModel::getHeadArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_FEET_ARMOR_LAYER, VillagerArmorEntityModel::getFeetArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_CHEST_ARMOR_LAYER, VillagerArmorEntityModel::getChestArmorTexturedModelData);
+
+
+        ArmorRestitched.LOGGER.debug("Registering Mod Entity Model Layers for " + ArmorRestitched.MOD_ID);
 
     }
 

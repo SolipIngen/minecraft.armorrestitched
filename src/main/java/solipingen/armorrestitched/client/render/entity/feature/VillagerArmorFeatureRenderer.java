@@ -112,6 +112,7 @@ public class VillagerArmorFeatureRenderer<T extends VillagerEntity, M extends Vi
             case FEET: {
                 villagerModel.getRightLeg().visible = true;
                 villagerModel.getLeftLeg().visible = true;
+                break;
             }
         }
     }
