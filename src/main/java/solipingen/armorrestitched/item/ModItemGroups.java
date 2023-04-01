@@ -183,6 +183,11 @@ public class ModItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> entries.add(ModBlocks.MAGENTA_SILK_CARPET));
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> entries.add(ModBlocks.PINK_SILK_CARPET));
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(ModBlocks.WHITE_COTTON));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(ModBlocks.WHITE_FUR));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(ModBlocks.WHITE_LINEN));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(ModBlocks.WHITE_SILK));
+
 
         ArmorRestitched.LOGGER.debug("Registering Mod Items to Vanilla Groups for " + ArmorRestitched.MOD_ID);
 

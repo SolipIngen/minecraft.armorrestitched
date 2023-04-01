@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "block.BlocksMixin", 
+    "block.PowderSnowBlockMixin", 
     "enchantment.ProtectionEnchantmentMixin", 
     "entity.boss.WitherEntityMixin", 
     "entity.mob.DrownedEntityMixin", 

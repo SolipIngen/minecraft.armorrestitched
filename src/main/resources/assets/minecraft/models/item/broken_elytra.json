@@ -1,65 +1,65 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-      "layer0": "armorrestitched:item/copper_chestplate"
+      "layer0": "minecraft:item/broken_elytra"
     }, 
     "overrides": [
       {
-        "model": "armorrestitched:item/copper_chestplate_quartz_trim",
+        "model": "armorrestitched:item/broken_elytra_quartz_trim",
         "predicate": {
           "trim_type": 0.1
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_iron_trim",
+        "model": "armorrestitched:item/broken_elytra_iron_trim",
         "predicate": {
           "trim_type": 0.2
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_netherite_trim",
+        "model": "armorrestitched:item/broken_elytra_netherite_trim",
         "predicate": {
           "trim_type": 0.3
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_redstone_trim",
+        "model": "armorrestitched:item/broken_elytra_redstone_trim",
         "predicate": {
           "trim_type": 0.4
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_copper_darker_trim",
+        "model": "armorrestitched:item/broken_elytra_copper_trim",
         "predicate": {
           "trim_type": 0.5
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_gold_trim",
+        "model": "armorrestitched:item/broken_elytra_gold_trim",
         "predicate": {
           "trim_type": 0.6
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_emerald_trim",
+        "model": "armorrestitched:item/broken_elytra_emerald_trim",
         "predicate": {
           "trim_type": 0.7
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_diamond_trim",
+        "model": "armorrestitched:item/broken_elytra_diamond_trim",
         "predicate": {
           "trim_type": 0.8
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_lapis_trim",
+        "model": "armorrestitched:item/broken_elytra_lapis_trim",
         "predicate": {
           "trim_type": 0.9
         }
       },
       {
-        "model": "armorrestitched:item/copper_chestplate_amethyst_trim",
+        "model": "armorrestitched:item/broken_elytra_amethyst_trim",
         "predicate": {
           "trim_type": 1.0
         }

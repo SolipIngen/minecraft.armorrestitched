@@ -39,14 +39,17 @@ import net.minecraft.item.trim.ArmorTrim;
 import net.minecraft.item.trim.ArmorTrimMaterial;
 import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.event.listener.VibrationListener;
@@ -57,6 +60,18 @@ import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.MobEntityInte
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
     @Shadow @Final private Map<StatusEffect, StatusEffectInstance> activeStatusEffects;
+    private static final Vec3d[] COLORS = Util.make(new Vec3d[16], colors -> {
+        for (int i = 0; i <= 15; ++i) {
+            float f = i / 15.0f;
+            float g = f * 0.6f + (f > 0.0f ? 0.4f : 0.3f);
+            float h = MathHelper.clamp(f * f * 0.7f - 0.5f, 0.0f, 1.0f);
+            float j = MathHelper.clamp(f * f * 0.6f - 0.7f, 0.0f, 1.0f);
+            colors[i] = new Vec3d(g, h, j);
+        }
+    });
+    private boolean redstoneCharged = false;
+    private int redstoneChargeTime = 0;
+    private int redstoneChargePower = 0;
 
     @Invoker("onStatusEffectApplied")
     public abstract void invokeOnStatusEffectApplied(StatusEffectInstance effect, @Nullable Entity source);
@@ -72,98 +87,143 @@ public abstract class LivingEntityMixin extends Entity {
     @SuppressWarnings("incomplete-switch")
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;tickStatusEffects()V"), cancellable = true)
     private void injectedBaseTick(CallbackInfo cbi) {
-        if (this.age % 4 == 0) {
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                ItemStack equippedStack = ((LivingEntity)(Object)this).getEquippedStack(slot);
-                Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
-                if (trimOptional.isEmpty()) continue;
-                if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.QUARTZ)) {
-                    int sunlightLevel = this.world.getLightLevel(LightType.SKY, this.getBlockPos()) - this.world.getAmbientDarkness();
-                    if (sunlightLevel <= 7) {
-                        switch (slot) {
-                            case HEAD: {
-                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 4, 0, true, false));
-                                break;
-                            }
-                            case CHEST: {
-                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 4, 0, true, false));
-                                break;
-                            }
-                        }
-                    }
-                    else {
-                        switch (slot) {
-                            case LEGS: {
-                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 4, 0, true, false));
-                                break;
-                            }
-                            case FEET: {
-                                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4, 0, true, false));
-                                break;
-                            }
-                        }
-                    }
-                }
-                else if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.REDSTONE)) {
-                    int powerLevel = this.world.getReceivedRedstonePower(this.getBlockPos());
-                    if (this.verticalCollision) {
-                        if (this.isOnGround()) {
-                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().down(), Direction.UP), powerLevel);
-                            powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().down()), powerLevel);
-                        }
-                        else {
-                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().up(), Direction.DOWN), powerLevel);
-                            powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().up()), powerLevel);
-                        }
-                    }
-                    if (this.horizontalCollision) {
-                        Box box = this.getBoundingBox();
-                        int minBlockPosX = MathHelper.floor(box.minX);
-                        int minBlockPosY = MathHelper.floor(box.minY);
-                        int minBlockPosZ = MathHelper.floor(box.minZ);
-                        int maxBlockPosX = MathHelper.floor(box.maxX);
-                        int maxBlockPosY = MathHelper.floor(box.maxY);
-                        int maxBlockPosZ =  MathHelper.floor(box.maxZ);
-                        BlockPos touchingBlockPos = this.getBlockPos().offset(Direction.EAST);
-                        double distanceSquared = touchingBlockPos.getSquaredDistance(this.getPos());
-                        for (int y = minBlockPosY; y <= maxBlockPosY; y++) {
-                            for (int x = minBlockPosX; x <= maxBlockPosX; x++) {
-                                for (int z = minBlockPosZ; z <= maxBlockPosZ; z++) {
-                                    BlockPos blockPos = new BlockPos(x, y, z);
-                                    if (blockPos.getSquaredDistance(this.getPos()) < distanceSquared) {
-                                        touchingBlockPos = blockPos;
-                                        distanceSquared = blockPos.getSquaredDistance(this.getPos());
-                                    }
-                                }
-                            }
-                        }
-                        double angle = MathHelper.atan2(touchingBlockPos.getZ() - this.getZ(), touchingBlockPos.getX() - this.getX())*57.2957763671875;
-                        Direction direction = Direction.fromRotation(angle % 360);
-                        powerLevel = Math.max(this.world.getEmittedRedstonePower(touchingBlockPos, direction), powerLevel);
-                        powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(touchingBlockPos), powerLevel);
-                    }
-                    if (powerLevel <= 0) continue;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = ((LivingEntity)(Object)this).getEquippedStack(slot);
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isEmpty()) continue;
+            if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.QUARTZ)) {
+                int sunlightLevel = this.world.getLightLevel(LightType.SKY, this.getBlockPos()) - this.world.getAmbientDarkness();
+                if (sunlightLevel <= 7) {
                     switch (slot) {
                         case HEAD: {
-                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 40*powerLevel, 0, true, false));
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 4, 0, true, false));
                             break;
                         }
                         case CHEST: {
-                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 40*powerLevel, 0, true, false));
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 4, 0, true, false));
                             break;
                         }
+                    }
+                }
+                else {
+                    switch (slot) {
                         case LEGS: {
-                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 40*powerLevel, 0, true, false));
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 4, 0, true, false));
                             break;
                         }
                         case FEET: {
-                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 40*powerLevel, 0, true, false));
+                            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 4, 0, true, false));
                             break;
                         }
                     }
                 }
             }
+            else if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.REDSTONE)) {
+                int powerLevel = this.world.getReceivedRedstonePower(this.getBlockPos());
+                if (this.verticalCollision) {
+                    if (this.isOnGround()) {
+                        if (this.world.isEmittingRedstonePower(this.getBlockPos().down(), Direction.UP)) {
+                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().down(), Direction.UP), powerLevel);
+                        }
+                        else {
+                            boolean bl = true;
+                            for (Direction emitDirection : Direction.values()) {
+                                if (emitDirection == Direction.UP || emitDirection == Direction.DOWN) continue;
+                                if (this.world.isEmittingRedstonePower(this.getBlockPos().down(), emitDirection)) {
+                                    bl = false;
+                                    break;
+                                }
+                            }
+                            if (bl) {
+                                powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().down()), powerLevel);
+                            }
+                        }
+                    }
+                    else {
+                        if (this.world.isEmittingRedstonePower(this.getBlockPos().up(MathHelper.ceil(this.getHeight())), Direction.DOWN)) {
+                            powerLevel = Math.max(this.world.getEmittedRedstonePower(this.getBlockPos().up(MathHelper.ceil(this.getHeight())), Direction.DOWN), powerLevel);
+                        }
+                        else {
+                            boolean bl = true;
+                            for (Direction emitDirection : Direction.values()) {
+                                if (emitDirection == Direction.UP || emitDirection == Direction.DOWN) continue;
+                                if (this.world.isEmittingRedstonePower(this.getBlockPos().up(MathHelper.ceil(this.getHeight())), emitDirection)) {
+                                    bl = false;
+                                    break;
+                                }
+                            }
+                            if (bl) {
+                                powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(this.getBlockPos().up(MathHelper.ceil(this.getHeight()))), powerLevel);
+                            }
+                        }
+                    }
+                }
+                if (this.horizontalCollision) {
+                    Box box = this.getBoundingBox();
+                    int minBlockPosY = MathHelper.floor(box.minY);
+                    int maxBlockPosY = MathHelper.floor(box.maxY);
+                    for (int y = minBlockPosY; y <= maxBlockPosY; y++) {
+                        Vec3d centerPosVec3d = new Vec3d(this.getX(), y, this.getZ());
+                        for (Direction currentDirection : Direction.values()) {
+                            if (currentDirection == Direction.UP || currentDirection == Direction.DOWN) continue;
+                            BlockPos currentBlockPos = BlockPos.ofFloored(centerPosVec3d).offset(currentDirection);
+                            if (this.world.isEmittingRedstonePower(currentBlockPos, currentDirection.getOpposite())) {
+                                powerLevel = Math.max(this.world.getEmittedRedstonePower(currentBlockPos, currentDirection.getOpposite()), powerLevel);
+                            }
+                            else {
+                                boolean bl = true;
+                                for (Direction emitDirection : Direction.values()) {
+                                    if (emitDirection == Direction.UP || emitDirection == Direction.DOWN) continue;
+                                    if (this.world.isEmittingRedstonePower(currentBlockPos, emitDirection)) {
+                                        bl = false;
+                                        break;
+                                    }
+                                }
+                                if (bl) {
+                                    powerLevel = Math.max(this.world.getReceivedStrongRedstonePower(currentBlockPos), powerLevel);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (powerLevel <= 0) continue;
+                this.redstoneCharged = true;
+                this.redstoneChargeTime = 40*powerLevel;
+                this.redstoneChargePower = powerLevel;
+                switch (slot) {
+                    case HEAD: {
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, this.redstoneChargeTime, 0, true, false));
+                        break;
+                    }
+                    case CHEST: {
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, this.redstoneChargeTime, 0, true, false));
+                        break;
+                    }
+                    case LEGS: {
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, this.redstoneChargeTime, 0, true, false));
+                        break;
+                    }
+                    case FEET: {
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, this.redstoneChargeTime, 0, true, false));
+                        break;
+                    }
+                }
+            }
+            if (this.world instanceof ServerWorld && this.redstoneCharged && this.redstoneChargeTime % 4 == 0 && this.redstoneChargePower > 0) {
+                ((ServerWorld)this.world).spawnParticles(new DustParticleEffect(COLORS[this.redstoneChargePower].toVector3f(), 0.5f), this.getX(), this.getBodyY(0.5), this.getZ(), this.random.nextInt(this.redstoneChargePower), 0.0, 0.0, 0.0, this.random.nextDouble());
+            }
+        }
+        if (this.redstoneChargeTime > 0) {
+            if (this.redstoneChargeTime % 40 == 0) {
+                this.redstoneChargePower--;
+            }
+            this.redstoneChargeTime--;
+        }
+        if (this.redstoneCharged && this.redstoneChargeTime <= 0) {
+            this.redstoneCharged = false;
+            this.redstoneChargePower = 0;
+            this.redstoneChargeTime = 0;
         }
     }
 
@@ -389,12 +449,18 @@ public abstract class LivingEntityMixin extends Entity {
     private void injectedWriteCustomDataToNbt(NbtCompound nbt, CallbackInfo cbi) {
         nbt.putBoolean("LightningCharged", ((EntityInterface)this).getLightningCharged());
         nbt.putInt("LightningChargeTime", ((EntityInterface)this).getLightningChargeTime());
+        nbt.putBoolean("RedstoneCharged", this.redstoneCharged);
+        nbt.putInt("RedstoneChargeTime", this.redstoneChargeTime);
+        nbt.putInt("RedstoneChargePower", this.redstoneChargePower);
     }
     
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     private void injectedReadCustomDataFromNbt(NbtCompound nbt, CallbackInfo cbi) {
         ((EntityInterface)this).setLightningCharged(nbt.getBoolean("LightningCharged"));
         ((EntityInterface)this).setLightningChargeTime(nbt.getInt("LightningChargeTime"));
+        this.redstoneCharged  = nbt.getBoolean("RedstoneCharged");
+        this.redstoneChargeTime = nbt.getInt("RedstoneChargeTime");
+        this.redstoneChargePower = nbt.getInt("RedstoneChargePower");
     }
 
 

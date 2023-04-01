@@ -35,7 +35,7 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
             }
             cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*this.durabilityMultiplier);
         }
-        else if (type == ArmorItem.Type.HELMET && this.name.equals("iron")) {
+        else if (type != ArmorItem.Type.HELMET && this.name.equals("iron")) {
             cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*2*this.durabilityMultiplier);
         }
         else {
