@@ -95,6 +95,9 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         else if (villagerData.getProfession() == VillagerProfession.LEATHERWORKER) {
             ModVillagerProfessions.replaceLeatherworkerProfessionToLeveledTrade(tradeOffers, this);
         }
+        else if (villagerData.getProfession() == VillagerProfession.SHEPHERD) {
+            ModVillagerProfessions.replaceShepherdProfessionToLeveledTrade(tradeOffers, this);
+        }
         return tradeOffers.get(villagerData.getProfession());
     }
 
@@ -137,6 +140,49 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                         }
                         else if (slot == EquipmentSlot.FEET) {
                             this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(Items.LEATHER_BOOTS, true));
+                        }
+                    }
+                    this.setEquipmentDropChance(slot, 0.0f);
+                }
+            }
+        }
+        else if (villager.getVillagerData().getProfession() == VillagerProfession.SHEPHERD && !this.isBaby()) {
+            int shepherdLevel = villager.getVillagerData().getLevel();
+            if (shepherdLevel >= 1) {
+                if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(ModItems.WOOL_BOOTS, false));
+                }
+            }
+            if (shepherdLevel >= 2) {
+                if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(ModItems.WOOL_HELMET, false));
+                }
+            }
+            if (shepherdLevel >= 3) {
+                if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(ModItems.WOOL_LEGGINGS, false));
+                }
+            }
+            if (shepherdLevel >= 4) {
+                if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(ModItems.WOOL_CHESTPLATE, false));
+                }
+            }
+            if (shepherdLevel == 5) {
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                    if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
+                        if (slot == EquipmentSlot.HEAD) {
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(ModItems.WOOL_HELMET, true));
+                        }
+                        else if (slot == EquipmentSlot.CHEST) {
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(ModItems.WOOL_CHESTPLATE, true));
+                        }
+                        else if (slot == EquipmentSlot.LEGS) {
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(ModItems.WOOL_LEGGINGS, true));
+                        }
+                        else if (slot == EquipmentSlot.FEET) {
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(ModItems.WOOL_BOOTS, true));
                         }
                     }
                     this.setEquipmentDropChance(slot, 0.0f);

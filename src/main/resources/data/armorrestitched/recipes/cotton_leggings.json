@@ -3,7 +3,7 @@
     "category": "equipment",
     "key": {
       "o": {
-        "item": "armorrestitched:cotton"
+        "tag": "armorrestitched:cotton_carpets"
       }
     },
     "pattern": [

@@ -3,7 +3,7 @@
     "category": "equipment",
     "key": {
       "o": {
-        "item": "armorrestitched:linen"
+        "tag": "armorrestitched:linen_carpets"
       }
     },
     "pattern": [

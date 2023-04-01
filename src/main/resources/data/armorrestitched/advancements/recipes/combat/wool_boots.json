@@ -5,9 +5,7 @@
         "conditions": {
           "items": [
             {
-              "tag": [
-                "minecraft:wool_carpets"
-              ]
+              "tag": "minecraft:wool_carpets"
             }
           ]
         },

@@ -5,9 +5,7 @@
         "conditions": {
           "items": [
             {
-              "items": [
-                "armorrestitched:fur"
-              ]
+              "tag": "armorrestitched:fur_carpets"
             }
           ]
         },

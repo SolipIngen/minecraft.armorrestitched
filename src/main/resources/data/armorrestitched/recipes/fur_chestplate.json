@@ -3,7 +3,7 @@
     "category": "equipment",
     "key": {
       "o": {
-        "item": "armorrestitched:fur"
+        "tag": "armorrestitched:fur_carpets"
       }
     },
     "pattern": [

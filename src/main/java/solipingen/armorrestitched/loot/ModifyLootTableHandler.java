@@ -24,16 +24,16 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
     @Override
     public void modifyLootTable(ResourceManager resourceManager, LootManager lootManager, Identifier id, LootTable.Builder tableBuilder, LootTableSource source) {
         for (Identifier identifier : ID_ARRAY) {
-            if (id.getPath().equals(identifier.getPath()) && (source == LootTableSource.REPLACED || source == LootTableSource.MOD)) {
+            if (id.getPath().matches(identifier.getPath()) && (source == LootTableSource.REPLACED || source == LootTableSource.MOD)) {
                 LootPool.Builder trimPoolBuilder = LootPool.builder();
-                if (id.getPath().equals(DESERT_PYRAMID_ID.getPath())) {
+                if (id.getPath().matches(DESERT_PYRAMID_ID.getPath())) {
                     trimPoolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1.0f))
                         .with(EmptyEntry.builder().weight(6))
                         .with(ItemEntry.builder(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1)
                         .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f))));
                 }
-                else if (id.getPath().equals(JUNGLE_TEMPLE_ID.getPath())) {
+                else if (id.getPath().matches(JUNGLE_TEMPLE_ID.getPath())) {
                     trimPoolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1.0f))
                         .with(EmptyEntry.builder().weight(2))

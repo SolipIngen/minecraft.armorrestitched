@@ -14,6 +14,11 @@ public class ModItemTags {
     public static final TagKey<Item> LINEN = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "linen"));
     public static final TagKey<Item> SILK = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "silk"));
 
+    public static final TagKey<Item> COTTON_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "cotton_carpets"));
+    public static final TagKey<Item> FUR_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "fur_carpets"));
+    public static final TagKey<Item> LINEN_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "linen_carpets"));
+    public static final TagKey<Item> SILK_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "silk_carpets"));
+
     public static final TagKey<Item> CLOTHING_HELMETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_helmets"));
     public static final TagKey<Item> CLOTHING_CHESTPLATES = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_chestplates"));
     public static final TagKey<Item> CLOTHING_LEGGINGS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_leggings"));

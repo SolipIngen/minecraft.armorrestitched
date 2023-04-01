@@ -35,7 +35,7 @@ public enum ModArmorMaterials implements ArmorMaterial, StringIdentifiable {
         map.put(ArmorItem.Type.CHESTPLATE, 3);
         map.put(ArmorItem.Type.HELMET, 1);
     }), 15, ModSoundEvents.LINEN_CLOTHING_EQUIP, 0.0f, 0.0f, () -> Ingredient.fromTag(ModItemTags.LINEN)), 
-    SILK("wool", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+    SILK("silk", 5, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 1);
         map.put(ArmorItem.Type.LEGGINGS, 3);
         map.put(ArmorItem.Type.CHESTPLATE, 3);

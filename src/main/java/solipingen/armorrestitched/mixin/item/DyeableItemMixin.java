@@ -22,22 +22,22 @@ public interface DyeableItemMixin {
             DyeableArmorItem armorItem = (DyeableArmorItem)stack.getItem();
             ArmorMaterial material = armorItem.getMaterial();
             if (material == ModArmorMaterials.COTTON) {
-                return 0xDDFDDF;
+                return 0xFDFFF6;
             }
             else if (material == ModArmorMaterials.FUR) {
-                return 0xFF916F;
+                return 0xFFD1B3;
             }
             else if (material == ModArmorMaterials.LINEN) {
-                return 0xE8FFCC;
+                return 0x9B8866;
             }
             else if (material == ModArmorMaterials.SILK) {
-                return 0xFBFEEC;
+                return 0xFFF6D4;
             }
             else if (material == ModArmorMaterials.WOOL) {
-                return 0xFBFEFE;
+                return 0xD5CDA8;
             }
             else if (material == ModArmorMaterials.PAPER) {
-                return 0xFFF2C4;
+                return 0xFFFCF0;
             }
             else if (material == ArmorMaterials.LEATHER) {
                 return originalInt;
