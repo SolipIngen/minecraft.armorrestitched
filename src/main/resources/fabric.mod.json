@@ -23,6 +23,9 @@
     ],
     "client": [
       "solipingen.armorrestitched.ArmorRestitchedClient"
+    ],
+    "fabric-datagen": [
+      "solipingen.armorrestitched.ArmorRestitchedDataGenerator"
     ]
   },
   "mixins": [

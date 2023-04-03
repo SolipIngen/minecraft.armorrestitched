@@ -6,13 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DyedCarpetBlock;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.HayBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
+import net.minecraft.block.TallFlowerBlock;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
@@ -20,6 +25,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 @SuppressWarnings("unused")
 public class ModBlocks {
 
+    // Fabric Blocks
     public static final Block WHITE_COTTON = ModBlocks.registerBlock("white_cotton", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)), true);
     public static final Block ORANGE_COTTON = ModBlocks.registerBlock("orange_cotton", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)), true);
     public static final Block MAGENTA_COTTON = ModBlocks.registerBlock("magenta_cotton", (Block)new WoollikeBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)), true);
@@ -155,6 +161,14 @@ public class ModBlocks {
     public static final Block GREEN_SILK_CARPET = ModBlocks.registerBlock("green_silk_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
     public static final Block RED_SILK_CARPET = ModBlocks.registerBlock("red_silk_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
     public static final Block BLACK_SILK_CARPET = ModBlocks.registerBlock("black_silk_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
+
+    // Cotton & Flax
+    public static final Block FLAX_BLOCK = ModBlocks.registerBlock("flax_block", new HayBlock(AbstractBlock.Settings.copy(Blocks.HAY_BLOCK)), true);
+    public static final Block FLAX_FLOWER = ModBlocks.registerBlock("flax_flower", new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)), true);
+    public static final Block FLAX_CROP = ModBlocks.registerBlock("flax_crop", new FlaxCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT)), false);
+
+    // Scutcher
+    public static final Block SCUTCHER = ModBlocks.registerBlock("scutcher", new ScutcherBlock(AbstractBlock.Settings.copy(Blocks.GRINDSTONE)), true);
 
 
     private static Block registerBlock(String name, Block block, boolean withBlockItem) {

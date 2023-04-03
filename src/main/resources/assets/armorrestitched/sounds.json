@@ -51,5 +51,17 @@
             "armorrestitched:copper_armor_equip_ver5", 
             "armorrestitched:copper_armor_equip_ver6"
         ]
+    }, 
+    "scutcher_used": {
+        "subtitle": "subtitles.armorrestitched.scutcher_used", 
+        "sounds": [
+            "armorrestitched:scutcher_used"
+        ]
+    }, 
+    "weaver_works": {
+        "subtitle": "subtitles.armorrestitched.weaver_works", 
+        "sounds": [
+            "armorrestitched:scutcher_used"
+        ]
     }
 }

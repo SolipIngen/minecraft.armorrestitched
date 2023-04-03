@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestiched:white_linen"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_linen": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:linen"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_linen",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestiched:white_linen"
+      ]
+    }
+}

@@ -139,6 +139,11 @@
     "block.armorrestitched.black_silk_carpet": "Black Silk Carpet", 
     "block.armorrestitched.white_silk_carpet": "White Silk Carpet", 
 
+    "block.armorrestitched.flax_block": "Flax Bale", 
+    "block.armorrestitched.flax_flower": "Flax", 
+    "block.armorrestitched.flax_crop": "Flax Crop", 
+    "block.armorrestitched.scutcher": "Scutcher", 
+
     "item.armorrestitched.cotton_helmet": "Cotton Cap", 
     "item.armorrestitched.cotton_chestplate": "Cotton Shirt", 
     "item.armorrestitched.cotton_leggings": "Cotton Pants", 
@@ -175,6 +180,10 @@
     "item.armorrestitched.copper_boots": "Copper Boots", 
     "item.armorrestitched.copper_horse_armor": "Copper Horse Armor", 
 
+    "item.armorrestitched.flax_stem": "Flax Stem", 
+    "item.armorrestitched.flaxseeds": "Flaxseeds", 
+    "item.armorrestitched.linen": "Linen", 
+
     "subtitles.armorrestitched.cotton_clothing_equip": "Cotton clothing rustles", 
     "subtitles.armorrestitched.fur_clothing_equip": "Fur clothing rustles", 
     "subtitles.armorrestitched.linen_clothing_equip": "Linen clothing rustles", 
@@ -182,6 +191,8 @@
     "subtitles.armorrestitched.wool_clothing_equip": "Wool clothing rustles", 
     "subtitles.armorrestitched.paper_clothing_equip": "Paper clothing rustles", 
     "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
+    "subtitles.armorrestitched.scutcher_used": "Scutcher used", 
+    "subtitles.armorrestitched.weaver_works": "Weaver weaves", 
 
     "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
     "advancements.story.obtain_clothing.title": "Dressed Up", 

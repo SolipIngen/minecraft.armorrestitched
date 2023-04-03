@@ -1,6 +1,7 @@
 package solipingen.armorrestitched.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.HorseArmorItem;
@@ -9,6 +10,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
+import solipingen.armorrestitched.block.ModBlocks;
 
 
 public class ModItems {
@@ -111,6 +113,17 @@ public class ModItems {
 
     public static final Item COPPER_HORSE_ARMOR = ModItems.registerItem("copper_horse_armor", 
         (Item)new HorseArmorItem(7, "copper", new FabricItemSettings()));
+
+
+    // Cotton & Flax
+    public static final Item FLAX_STEM = ModItems.registerItem("flax_stem", 
+        (Item)new Item(new FabricItemSettings()));
+
+    public static final Item FLAXSEEDS = ModItems.registerItem("flaxseeds", 
+        (Item)new AliasedBlockItem(ModBlocks.FLAX_CROP, new Item.Settings()));
+
+    public static final Item LINEN = ModItems.registerItem("linen", 
+        (Item)new Item(new FabricItemSettings()));
 
 
     private static Item registerItem(String name, Item item) {

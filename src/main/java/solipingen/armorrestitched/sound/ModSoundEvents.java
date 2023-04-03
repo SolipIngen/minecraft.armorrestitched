@@ -17,6 +17,9 @@ public class ModSoundEvents {
     public static final SoundEvent PAPER_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("paper_clothing_equip");
     public static final SoundEvent COPPER_ARMOR_EQUIP = ModSoundEvents.registerSoundEvent("copper_armor_equip");
 
+    public static final SoundEvent SCUTCHER_USED = ModSoundEvents.registerSoundEvent("scutcher_used");
+    public static final SoundEvent WEAVER_WORKS = ModSoundEvents.registerSoundEvent("weaver_works");
+
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(ArmorRestitched.MOD_ID, name);

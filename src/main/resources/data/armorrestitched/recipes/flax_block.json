@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "building",
+    "ingredients": [
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      },
+      {
+        "item": "armorrestitched:flax_stem"
+      }
+    ],
+    "result": {
+      "item": "armorrestitched:flax_block"
+    }
+}
