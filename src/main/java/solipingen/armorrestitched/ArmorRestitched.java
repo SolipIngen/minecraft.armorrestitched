@@ -8,6 +8,7 @@ import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.loot.ModifyLootTableHandler;
 import solipingen.armorrestitched.loot.ReplaceLootTableHandler;
 import solipingen.armorrestitched.sound.ModSoundEvents;
+import solipingen.armorrestitched.world.gen.ModWorldGenerator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ public class ArmorRestitched implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();
 		ModSoundEvents.registerModSoundEvents();
+		ModWorldGenerator.generateModWorldGen();
 
 		LootTableEvents.REPLACE.register(new ReplaceLootTableHandler());
 		LootTableEvents.MODIFY.register(new ModifyLootTableHandler());

@@ -36,8 +36,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity {
             itemList.add(stack.getItem());
         }
         itemList.add(ModItems.FLAXSEEDS);
-        ItemConvertible[] breedingItems = new ItemConvertible[]{};
-        itemList.toArray(breedingItems);
+        ItemConvertible[] breedingItems = itemList.toArray(new ItemConvertible[itemList.size()]);
         return Ingredient.ofItems(breedingItems);
     }
 
@@ -49,8 +48,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity {
             itemList.add(stack.getItem());
         }
         itemList.add(ModItems.FLAXSEEDS);
-        ItemConvertible[] breedingItems = new ItemConvertible[]{};
-        itemList.toArray(breedingItems);
+        ItemConvertible[] breedingItems = itemList.toArray(new ItemConvertible[itemList.size()]);
         return Ingredient.ofItems(breedingItems);
     }
 

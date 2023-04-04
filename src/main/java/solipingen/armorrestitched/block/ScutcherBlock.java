@@ -57,7 +57,7 @@ public class ScutcherBlock extends HorizontalFacingBlock implements Waterloggabl
                 ItemUsage.exchangeStack(itemStack, player, itemStack2);
                 world.playSound(null, pos, ModSoundEvents.SCUTCHER_USED, SoundCategory.PLAYERS);
                 player.incrementStat(Stats.USED.getOrCreateStat(this.asItem()));
-                return ActionResult.success(world.isClient);
+                return ActionResult.SUCCESS;
             }
         }
         return ActionResult.PASS;

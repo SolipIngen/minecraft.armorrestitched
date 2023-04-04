@@ -30,8 +30,7 @@ public abstract class SheepEntityMixin extends AnimalEntity {
             itemConvertibleList.add(itemConvertible);
         }
         itemConvertibleList.add(ModItems.FLAX_STEM);
-        ItemConvertible[] itemConvertibles = new ItemConvertible[]{};
-        itemConvertibleList.toArray(itemConvertibles);
+        ItemConvertible[] itemConvertibles = itemConvertibleList.toArray(new ItemConvertible[itemConvertibleList.size()]);
         return Ingredient.ofItems(itemConvertibles);
     }
 

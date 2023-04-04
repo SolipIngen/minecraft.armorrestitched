@@ -35,8 +35,7 @@ public abstract class AbstractHorseEntityMixin extends AnimalEntity {
             itemConvertibleList.add(itemConvertible);
         }
         itemConvertibleList.add(ModItems.FLAX_STEM);
-        ItemConvertible[] itemConvertibles = new ItemConvertible[]{};
-        itemConvertibleList.toArray(itemConvertibles);
+        ItemConvertible[] itemConvertibles = itemConvertibleList.toArray(new ItemConvertible[itemConvertibleList.size()]);
         return Ingredient.ofItems(itemConvertibles);
     }
 
@@ -48,9 +47,8 @@ public abstract class AbstractHorseEntityMixin extends AnimalEntity {
             itemList.add(stack.getItem());
         }
         itemList.add(ModItems.FLAX_STEM);
-        ItemConvertible[] breedingItems = new ItemConvertible[]{};
-        itemList.toArray(breedingItems);
-        return Ingredient.ofItems(breedingItems);
+        ItemConvertible[] itemConvertibles = itemList.toArray(new ItemConvertible[itemList.size()]);
+        return Ingredient.ofItems(itemConvertibles);
     }
 
 

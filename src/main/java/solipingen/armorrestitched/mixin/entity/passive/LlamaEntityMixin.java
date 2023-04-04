@@ -36,8 +36,7 @@ public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
             itemConvertibleList.add(itemConvertible);
         }
         itemConvertibleList.add(ModBlocks.FLAX_BLOCK);
-        ItemConvertible[] itemConvertibles = new ItemConvertible[]{};
-        itemConvertibleList.toArray(itemConvertibles);
+        ItemConvertible[] itemConvertibles = itemConvertibleList.toArray(new ItemConvertible[itemConvertibleList.size()]);
         return Ingredient.ofItems(itemConvertibles);
     }
 
@@ -49,8 +48,7 @@ public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
             itemList.add(stack.getItem());
         }
         itemList.add(ModItems.FLAX_STEM);
-        ItemConvertible[] breedingItems = new ItemConvertible[]{};
-        itemList.toArray(breedingItems);
+        ItemConvertible[] breedingItems = itemList.toArray(new ItemConvertible[itemList.size()]);
         return Ingredient.ofItems(breedingItems);
     }
 

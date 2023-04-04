@@ -9,17 +9,19 @@ import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import solipingen.armorrestitched.ArmorRestitched;
 
 
-public class ModWorldGenerator extends FabricDynamicRegistryProvider {
+public class ModWorldDataGenerator extends FabricDynamicRegistryProvider {
 
 
-    public ModWorldGenerator(FabricDataOutput output, CompletableFuture<WrapperLookup> registriesFuture) {
+    public ModWorldDataGenerator(FabricDataOutput output, CompletableFuture<WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
     protected void configure(WrapperLookup registries, Entries entries) {
+
         entries.addAll(registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE));
         entries.addAll(registries.getWrapperOrThrow(RegistryKeys.PLACED_FEATURE));
+
     }
 
     @Override
