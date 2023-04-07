@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-      "layer0": "armorrestitched:item/flaxseeds"
+      "layer0": "armorrestitched:item/cotton_seeds"
     }
 }

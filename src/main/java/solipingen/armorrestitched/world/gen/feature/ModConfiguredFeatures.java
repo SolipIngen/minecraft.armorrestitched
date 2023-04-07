@@ -14,14 +14,20 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.block.ModBlocks;
 
+
 public class ModConfiguredFeatures {
 
+    public static final RegistryKey<ConfiguredFeature<?, ?>> FLOWER_COTTON_KEY = ModConfiguredFeatures.registerKey("flower_cotton");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FLOWER_FLAX_KEY = ModConfiguredFeatures.registerKey("flower_flax");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
+        ModConfiguredFeatures.register(context, FLOWER_COTTON_KEY, Feature.FLOWER, 
+            new RandomPatchFeatureConfig(24, 4, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, 
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.COTTON_FLOWER))
+        )));
         ModConfiguredFeatures.register(context, FLOWER_FLAX_KEY, Feature.FLOWER, 
-            new RandomPatchFeatureConfig(64, 6, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, 
+            new RandomPatchFeatureConfig(32, 6, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, 
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.FLAX_FLOWER))
         )));
     }

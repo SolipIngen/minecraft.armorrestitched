@@ -8,10 +8,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "armorrestitched:flax_flower",
-              "Properties": {
-                "half": "lower"
-              }
+              "Name": "armorrestitched:cotton_flower"
             }
           }
         }
@@ -26,8 +23,8 @@
         }
       ]
     },
-    "tries": 32,
-    "xz_spread": 6,
+    "tries": 24,
+    "xz_spread": 4,
     "y_spread": 2
   }
 }

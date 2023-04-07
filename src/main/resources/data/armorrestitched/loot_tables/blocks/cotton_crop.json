@@ -16,31 +16,14 @@
                 "type": "minecraft:item",
                 "conditions": [
                   {
-                    "block": "armorrestitched:flax_crop",
-                    "condition": "minecraft:block_state_property",
-                    "properties": {
-                      "age": "5"
-                    }
-                  }
-                ],
-                "name": "armorrestitched:flax_flower"
-              },
-              {
-                "type": "minecraft:item",
-                "conditions": [
-                  {
-                    "block": "armorrestitched:flax_crop",
+                    "block": "armorrestitched:cotton_crop",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "age": "7"
                     }
                   }
                 ],
-                "name": "armorrestitched:flax_stem"
-              },
-              {
-                "type": "minecraft:item",
-                "name": "armorrestitched:flaxseed"
+                "name": "armorrestitched:cotton_flower"
               }
             ]
           }
@@ -51,7 +34,7 @@
         "bonus_rolls": 0.0,
         "conditions": [
           {
-            "block": "armorrestitched:flax_crop",
+            "block": "armorrestitched:cotton_crop",
             "condition": "minecraft:block_state_property",
             "properties": {
               "age": "7"
@@ -72,7 +55,7 @@
                 }
               }
             ],
-            "name": "armorrestitched:flaxseed"
+            "name": "armorrestitched:cotton_seeds"
           }
         ],
         "rolls": 1.0

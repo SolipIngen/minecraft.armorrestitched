@@ -9,10 +9,10 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 public class ModItemTags {
 
-    public static final TagKey<Item> COTTON = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "cotton"));
-    public static final TagKey<Item> FUR = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "fur"));
-    public static final TagKey<Item> LINEN = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "linen"));
-    public static final TagKey<Item> SILK = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "silk"));
+    public static final TagKey<Item> COTTON_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "cotton_blocks"));
+    public static final TagKey<Item> FUR_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "fur_blocks"));
+    public static final TagKey<Item> LINEN_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "linen_blocks"));
+    public static final TagKey<Item> SILK_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "silk_blocks"));
 
     public static final TagKey<Item> COTTON_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "cotton_carpets"));
     public static final TagKey<Item> FUR_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "fur_carpets"));
@@ -23,6 +23,8 @@ public class ModItemTags {
     public static final TagKey<Item> CLOTHING_CHESTPLATES = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_chestplates"));
     public static final TagKey<Item> CLOTHING_LEGGINGS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_leggings"));
     public static final TagKey<Item> CLOTHING_BOOTS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "clothing_boots"));
+
+    public static final TagKey<Item> STRING_INGREDIENTS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "string_ingredients"));
 
     
 }

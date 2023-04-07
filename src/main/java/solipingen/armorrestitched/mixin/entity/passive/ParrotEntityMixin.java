@@ -33,7 +33,8 @@ public abstract class ParrotEntityMixin extends TameableShoulderEntity {
         for (Item item : TAMING_INGREDIENTS) {
             itemList.add(item);
         }
-        itemList.add(ModItems.FLAXSEEDS);
+        itemList.add(ModItems.COTTON_SEEDS);
+        itemList.add(ModItems.FLAXSEED);
         Set<Item> breedingItems = Set.copyOf(itemList);
         return breedingItems;
     }

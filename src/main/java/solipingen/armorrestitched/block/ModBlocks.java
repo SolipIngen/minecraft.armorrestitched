@@ -3,12 +3,10 @@ package solipingen.armorrestitched.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DyedCarpetBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.HayBlock;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.entity.effect.StatusEffects;
@@ -16,13 +14,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 
-@SuppressWarnings("unused")
+
 public class ModBlocks {
 
     // Fabric Blocks
@@ -163,6 +160,10 @@ public class ModBlocks {
     public static final Block BLACK_SILK_CARPET = ModBlocks.registerBlock("black_silk_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
 
     // Cotton & Flax
+    public static final Block COTTON_FLOWER = ModBlocks.registerBlock("cotton_flower", new CottonFlowerBlock(StatusEffects.ABSORPTION, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), true);
+    public static final Block COTTON_CROP = ModBlocks.registerBlock("cotton_crop", new CottonCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT)), false);
+    public static final Block POTTED_COTTON_FLOWER = ModBlocks.registerBlock("potted_cotton_flower", new FlowerPotBlock(COTTON_FLOWER, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque()), false);
+
     public static final Block FLAX_BLOCK = ModBlocks.registerBlock("flax_block", new HayBlock(AbstractBlock.Settings.copy(Blocks.HAY_BLOCK)), true);
     public static final Block FLAX_FLOWER = ModBlocks.registerBlock("flax_flower", new TallFlowerBlock(AbstractBlock.Settings.copy(Blocks.ROSE_BUSH)), true);
     public static final Block FLAX_CROP = ModBlocks.registerBlock("flax_crop", new FlaxCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT)), false);

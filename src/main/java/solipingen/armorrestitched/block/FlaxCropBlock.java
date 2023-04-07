@@ -28,7 +28,7 @@ public class FlaxCropBlock extends CropBlock {
 
     @Override
     protected ItemConvertible getSeedsItem() {
-        return ModItems.FLAXSEEDS;
+        return ModItems.FLAXSEED;
     }
 
     @Override

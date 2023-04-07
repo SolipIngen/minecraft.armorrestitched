@@ -139,6 +139,8 @@
     "block.armorrestitched.black_silk_carpet": "Black Silk Carpet", 
     "block.armorrestitched.white_silk_carpet": "White Silk Carpet", 
 
+    "block.armorrestitched.cotton_flower": "Cotton Flower", 
+    "block.armorrestitched.cotton_crop": "Cotton Crop", 
     "block.armorrestitched.flax_block": "Flax Bale", 
     "block.armorrestitched.flax_flower": "Flax", 
     "block.armorrestitched.flax_crop": "Flax Crop", 
@@ -180,8 +182,10 @@
     "item.armorrestitched.copper_boots": "Copper Boots", 
     "item.armorrestitched.copper_horse_armor": "Copper Horse Armor", 
 
+    "item.armorrestitched.cotton_seeds": "Cotton Seeds", 
+    "item.armorrestitched.cotton": "Cotton", 
     "item.armorrestitched.flax_stem": "Flax Stem", 
-    "item.armorrestitched.flaxseeds": "Flaxseeds", 
+    "item.armorrestitched.flaxseed": "Flaxseed", 
     "item.armorrestitched.linen": "Linen", 
 
     "subtitles.armorrestitched.cotton_clothing_equip": "Cotton clothing rustles", 
@@ -191,6 +195,7 @@
     "subtitles.armorrestitched.wool_clothing_equip": "Wool clothing rustles", 
     "subtitles.armorrestitched.paper_clothing_equip": "Paper clothing rustles", 
     "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
+    "subtitles.armorrestitched.cotton_pick": "Cotton picked", 
     "subtitles.armorrestitched.scutcher_used": "Scutcher used", 
     "subtitles.armorrestitched.weaver_works": "Weaver weaves", 
 

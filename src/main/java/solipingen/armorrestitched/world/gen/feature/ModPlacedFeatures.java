@@ -18,11 +18,15 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 public class ModPlacedFeatures {
 
+    public static final RegistryKey<PlacedFeature> FLOWER_COTTON_PLACED_KEY = ModPlacedFeatures.registerKey("flower_cotton_placed");
     public static final RegistryKey<PlacedFeature> FLOWER_FLAX_PLACED_KEY = ModPlacedFeatures.registerKey("flower_flax_placed");
     
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
+        ModPlacedFeatures.register(context, FLOWER_COTTON_PLACED_KEY, 
+            configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.FLOWER_COTTON_KEY), 
+            List.of(RarityFilterPlacementModifier.of(48), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
         ModPlacedFeatures.register(context, FLOWER_FLAX_PLACED_KEY, 
             configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.FLOWER_FLAX_KEY), 
             List.of(RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));

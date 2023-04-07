@@ -8,7 +8,7 @@ public class ModWorldGenerator {
 
     public static void generateModWorldGen() {
 
-        ModFlowerGenerator.generateFlowers();
+        ModPlantGenerator.generatePlants();
 
 
         ArmorRestitched.LOGGER.debug("Generating Mod World Generation for " + ArmorRestitched.MOD_ID);

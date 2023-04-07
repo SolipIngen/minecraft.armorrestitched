@@ -37,7 +37,7 @@
                     ]
                   }
                 ],
-                "name": "armorrestitched:flax_flower"
+                "name": "armorrestitched:cotton_flower"
               }, 
               {
                 "type": "minecraft:item",
@@ -50,7 +50,7 @@
                     }
                   }
                 ],
-                "name": "armorrestitched:flaxseed"
+                "name": "armorrestitched:cotton_seeds"
               }
             ]
           }

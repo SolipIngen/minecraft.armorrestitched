@@ -3,11 +3,11 @@
     "category": "misc",
     "ingredients": [
       {
-        "item": "armorrestitched:linen"
+        "tag": "armorrestitched:cotton_blocks"
       }
     ],
     "result": {
-        "item": "minecraft:string", 
-        "count": 2
+      "count": 4,
+      "item": "armorrestitched:cotton"
     }
 }

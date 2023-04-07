@@ -52,7 +52,20 @@ public class ScutcherBlock extends HorizontalFacingBlock implements Waterloggabl
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             ItemStack itemStack = player.getStackInHand(hand);
-            if (itemStack.isOf(ModItems.FLAX_STEM)) {
+            if (itemStack.isOf(ModItems.COTTON) && itemStack.getCount() >= 4) {
+                ItemStack itemStack2 = new ItemStack(ModBlocks.WHITE_COTTON);
+                if (!player.isCreative()) {
+                    itemStack.decrement(4);
+                }
+                player.setStackInHand(hand, itemStack);
+                if (!player.getInventory().insertStack(itemStack2)) {
+                    player.dropItem(itemStack2, false);
+                }
+                world.playSound(null, pos, ModSoundEvents.SCUTCHER_USED, SoundCategory.PLAYERS);
+                player.incrementStat(Stats.USED.getOrCreateStat(this.asItem()));
+                return ActionResult.SUCCESS;
+            }
+            else if (itemStack.isOf(ModItems.FLAX_STEM)) {
                 ItemStack itemStack2 = new ItemStack(ModItems.LINEN);
                 ItemUsage.exchangeStack(itemStack, player, itemStack2);
                 world.playSound(null, pos, ModSoundEvents.SCUTCHER_USED, SoundCategory.PLAYERS);

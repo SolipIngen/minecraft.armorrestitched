@@ -116,10 +116,16 @@ public class ModItems {
 
 
     // Cotton & Flax
-    public static final Item FLAX_STEM = ModItems.registerItem("flax_stem", 
-        (Item)new Item(new FabricItemSettings()));
+    public static final Item COTTON_SEEDS = ModItems.registerItem("cotton_seeds", 
+        (Item)new AliasedBlockItem(ModBlocks.COTTON_CROP, new Item.Settings()));
+    
+    public static final Item COTTON = ModItems.registerItem("cotton", 
+        new Item(new FabricItemSettings()));
 
-    public static final Item FLAXSEEDS = ModItems.registerItem("flaxseeds", 
+    public static final Item FLAX_STEM = ModItems.registerItem("flax_stem", 
+        new Item(new FabricItemSettings()));
+
+    public static final Item FLAXSEED = ModItems.registerItem("flaxseed", 
         (Item)new AliasedBlockItem(ModBlocks.FLAX_CROP, new Item.Settings()));
 
     public static final Item LINEN = ModItems.registerItem("linen", 

@@ -52,6 +52,13 @@
             "armorrestitched:copper_armor_equip_ver6"
         ]
     }, 
+    "cotton_pick": {
+        "subtitle": "subtitles.armorrestitched.cotton_pick", 
+        "sounds": [
+            "armorrestitched:cotton_pick_ver1", 
+            "armorrestitched:cotton_pick_ver2"
+        ]
+    }, 
     "scutcher_used": {
         "subtitle": "subtitles.armorrestitched.scutcher_used", 
         "sounds": [
