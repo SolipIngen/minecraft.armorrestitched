@@ -1,0 +1,47 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_green_dye": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "minecraft:green_dye"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestitched:green_silk_carpet_from_white_silk_carpet"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_white_carpet": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:white_silk_carpet"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_white_carpet",
+        "has_green_dye",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:green_silk_carpet_from_white_silk_carpet"
+      ]
+    }
+  }

@@ -30,6 +30,7 @@
     "entity.passive.AnimalEntityMixin", 
     "entity.passive.ChickenEntityMixin", 
     "entity.passive.CowEntityMixin", 
+    "entity.passive.FoxEntityMixin", 
     "entity.passive.IronGolemEntityMixin", 
     "entity.passive.LlamaEntityMixin", 
     "entity.passive.ParrotEntityMixin", 

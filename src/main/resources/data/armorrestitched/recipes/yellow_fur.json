@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_dye"
+    },
+    {
+      "item": "armorrestitched:white_fur"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:yellow_fur"
+  }
+}

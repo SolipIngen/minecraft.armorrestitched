@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:magenta_dye"
+    },
+    {
+      "item": "armorrestitched:white_linen"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:magenta_linen"
+  }
+}

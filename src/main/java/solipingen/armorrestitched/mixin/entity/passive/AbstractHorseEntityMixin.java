@@ -9,13 +9,17 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.world.World;
+import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.item.ModItems;
 
 
@@ -47,8 +51,20 @@ public abstract class AbstractHorseEntityMixin extends AnimalEntity {
             itemList.add(stack.getItem());
         }
         itemList.add(ModItems.FLAX_STEM);
+        itemList.add(ModBlocks.FLAX_BLOCK);
         ItemConvertible[] itemConvertibles = itemList.toArray(new ItemConvertible[itemList.size()]);
         return Ingredient.ofItems(itemConvertibles);
+    }
+
+    @Redirect(method = "receiveFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
+    private boolean redirectedReceiveFoodIsOf(ItemStack itemStack, Item item) {
+        if (item == Items.WHEAT) {
+            return itemStack.isOf(item) || itemStack.isOf(ModItems.FLAX_STEM);
+        }
+        else if (item == Blocks.HAY_BLOCK.asItem()) {
+            return itemStack.isOf(item) || itemStack.isOf(ModBlocks.FLAX_BLOCK.asItem());
+        }
+        return itemStack.isOf(item);
     }
 
 

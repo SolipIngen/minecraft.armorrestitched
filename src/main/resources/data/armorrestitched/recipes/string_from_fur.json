@@ -3,11 +3,11 @@
     "category": "misc",
     "ingredients": [
       {
-        "tag": "armorrestitched:fur"
+        "tag": "armorrestitched:fur_blocks"
       }
     ],
     "result": {
-        "item": "minecraft:string", 
-        "count": 4
+      "item": "minecraft:string", 
+      "count": 4
     }
 }

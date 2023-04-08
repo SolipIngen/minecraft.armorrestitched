@@ -187,6 +187,7 @@
     "item.armorrestitched.flax_stem": "Flax Stem", 
     "item.armorrestitched.flaxseed": "Flaxseed", 
     "item.armorrestitched.linen": "Linen", 
+    "item.armorrestitched.silk": "Silk", 
 
     "subtitles.armorrestitched.cotton_clothing_equip": "Cotton clothing rustles", 
     "subtitles.armorrestitched.fur_clothing_equip": "Fur clothing rustles", 
@@ -197,6 +198,7 @@
     "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
     "subtitles.armorrestitched.cotton_pick": "Cotton picked", 
     "subtitles.armorrestitched.scutcher_used": "Scutcher used", 
+    "subtitles.armorrestitched.llama_sheared": "Llama sheared", 
     "subtitles.armorrestitched.weaver_works": "Weaver weaves", 
 
     "advancements.story.obtain_clothing.description": "Obtain additional clothes", 

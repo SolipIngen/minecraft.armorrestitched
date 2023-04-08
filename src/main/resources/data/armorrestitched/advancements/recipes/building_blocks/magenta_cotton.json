@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestitched:magenta_cotton"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_white": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:white_cotton"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_white",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:magenta_cotton"
+      ]
+    }
+}

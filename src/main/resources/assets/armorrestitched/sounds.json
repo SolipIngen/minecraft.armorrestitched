@@ -65,6 +65,12 @@
             "armorrestitched:scutcher_used"
         ]
     }, 
+    "llama_sheared": {
+        "subtitle": "subtitles.armorrestitched.llama_sheared", 
+        "sounds": [
+            "armorrestitched:llama_sheared"
+        ]
+    }, 
     "weaver_works": {
         "subtitle": "subtitles.armorrestitched.weaver_works", 
         "sounds": [

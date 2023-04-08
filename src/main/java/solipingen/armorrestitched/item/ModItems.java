@@ -131,6 +131,10 @@ public class ModItems {
     public static final Item LINEN = ModItems.registerItem("linen", 
         (Item)new Item(new FabricItemSettings()));
 
+    // Silk
+    public static final Item SILK = ModItems.registerItem("silk", 
+        new Item(new FabricItemSettings()));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(ArmorRestitched.MOD_ID, name), item);

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:lime_dye"
+    },
+    {
+      "item": "armorrestitched:white_cotton"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:lime_cotton"
+  }
+}
