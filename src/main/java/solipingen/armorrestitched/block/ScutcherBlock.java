@@ -61,6 +61,9 @@ public class ScutcherBlock extends HorizontalFacingBlock implements Waterloggabl
                 if (!player.getInventory().insertStack(itemStack2)) {
                     player.dropItem(itemStack2, false);
                 }
+                else {
+                    player.playerScreenHandler.syncState();
+                }
                 world.playSound(null, pos, ModSoundEvents.SCUTCHER_USED, SoundCategory.PLAYERS);
                 player.incrementStat(Stats.USED.getOrCreateStat(this.asItem()));
                 return ActionResult.SUCCESS;

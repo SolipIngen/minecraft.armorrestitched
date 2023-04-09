@@ -4,6 +4,7 @@
   "package": "solipingen.armorrestitched.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block.AbstractCauldronBlockMixin", 
     "block.BlocksMixin", 
     "block.PowderSnowBlockMixin", 
     "enchantment.ProtectionEnchantmentMixin", 
@@ -57,6 +58,7 @@
     "client.accessors.render.entity.model.IllagerEntityModelAccessor", 
     "client.accessors.render.entity.model.VillagerResemblingModelAccessor", 
     "client.color.item.ItemColorsMixin", 
+    "client.gui.screen.ingame.SmithingScreenMixin", 
     "client.render.entity.feature.ArmorFeatureRendererMixin", 
     "client.render.entity.feature.VillagerClothingFeatureRendererMixin", 
     "client.render.entity.AbstractHorseEntityRendererMixin", 

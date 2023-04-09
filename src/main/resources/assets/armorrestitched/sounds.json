@@ -59,6 +59,14 @@
             "armorrestitched:cotton_pick_ver2"
         ]
     }, 
+    "cauldron_used": {
+        "subtitle": "subtitles.armorrestitched.cauldron_used", 
+        "sounds": [
+            "armorrestitched:cauldron_used_ver1", 
+            "armorrestitched:cauldron_used_ver2", 
+            "armorrestitched:cauldron_used_ver3"
+        ]
+    }, 
     "scutcher_used": {
         "subtitle": "subtitles.armorrestitched.scutcher_used", 
         "sounds": [
