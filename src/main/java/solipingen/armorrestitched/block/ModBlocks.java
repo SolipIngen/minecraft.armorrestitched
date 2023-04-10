@@ -7,7 +7,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DyedCarpetBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.HayBlock;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.Material;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.TallFlowerBlock;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -18,6 +20,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
+import solipingen.armorrestitched.world.tree.MulberrySaplingGenerator;
 
 
 public class ModBlocks {
@@ -158,6 +161,11 @@ public class ModBlocks {
     public static final Block GREEN_SILK_CARPET = ModBlocks.registerBlock("green_silk_carpet", new DyedCarpetBlock(DyeColor.GREEN, AbstractBlock.Settings.copy(Blocks.GREEN_CARPET)), true);
     public static final Block RED_SILK_CARPET = ModBlocks.registerBlock("red_silk_carpet", new DyedCarpetBlock(DyeColor.RED, AbstractBlock.Settings.copy(Blocks.RED_CARPET)), true);
     public static final Block BLACK_SILK_CARPET = ModBlocks.registerBlock("black_silk_carpet", new DyedCarpetBlock(DyeColor.BLACK, AbstractBlock.Settings.copy(Blocks.BLACK_CARPET)), true);
+
+    // Mulberry
+    public static final Block MULBERRY_LEAVES = ModBlocks.registerBlock("mulberry_leaves", new LeavesBlock(AbstractBlock.Settings.copy(Blocks.DARK_OAK_LEAVES)), true);
+    public static final Block MULBERRY_SILKWORM_LEAVES = ModBlocks.registerBlock("mulberry_silkworm_leaves", new SilkwormLeavesBlock(AbstractBlock.Settings.copy(Blocks.DARK_OAK_LEAVES)), true);
+    public static final Block MULBERRY_SAPLING = ModBlocks.registerBlock("mulberry_sapling", new SaplingBlock(new MulberrySaplingGenerator(), AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), true);
 
     // Cotton & Flax
     public static final Block COTTON_FLOWER = ModBlocks.registerBlock("cotton_flower", new CottonFlowerBlock(StatusEffects.ABSORPTION, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), true);

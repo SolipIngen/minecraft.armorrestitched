@@ -20,6 +20,10 @@ public class ModBlockRenderLayers {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FLAX_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FLAX_FLOWER, RenderLayer.getCutout());
 
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MULBERRY_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MULBERRY_SILKWORM_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MULBERRY_SAPLING, RenderLayer.getCutout());
+
     }
     
 }

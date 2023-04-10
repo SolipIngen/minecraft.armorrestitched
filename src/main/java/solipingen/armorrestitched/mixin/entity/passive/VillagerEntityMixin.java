@@ -98,6 +98,9 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         else if (villagerData.getProfession() == VillagerProfession.SHEPHERD) {
             ModVillagerProfessions.replaceShepherdProfessionToLeveledTrade(tradeOffers, this);
         }
+        else if (villagerData.getProfession() == ModVillagerProfessions.DRESSER) {
+            ModVillagerProfessions.putWeaverTradeOffers(tradeOffers, this);
+        }
         return tradeOffers.get(villagerData.getProfession());
     }
 
@@ -107,22 +110,22 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
             int leatherworkerLevel = villager.getVillagerData().getLevel();
             if (leatherworkerLevel >= 1) {
                 if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
-                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(Items.LEATHER_BOOTS, false));
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_BOOTS : ModItems.SILK_BOOTS, false));
                 }
             }
             if (leatherworkerLevel >= 2) {
                 if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
-                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(Items.LEATHER_HELMET, false));
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_HELMET : ModItems.SILK_HELMET, false));
                 }
             }
             if (leatherworkerLevel >= 3) {
                 if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
-                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(Items.LEATHER_LEGGINGS, false));
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_LEGGINGS : ModItems.SILK_LEGGINGS, false));
                 }
             }
             if (leatherworkerLevel >= 4) {
                 if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
-                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(Items.LEATHER_CHESTPLATE, false));
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_CHESTPLATE : ModItems.SILK_CHESTPLATE, false));
                 }
             }
             if (leatherworkerLevel == 5) {
@@ -130,16 +133,16 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                     if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
                     if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
                         if (slot == EquipmentSlot.HEAD) {
-                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(Items.LEATHER_HELMET, true));
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_HELMET : ModItems.SILK_HELMET, true));
                         }
                         else if (slot == EquipmentSlot.CHEST) {
-                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(Items.LEATHER_CHESTPLATE, true));
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_CHESTPLATE : ModItems.SILK_CHESTPLATE, true));
                         }
                         else if (slot == EquipmentSlot.LEGS) {
-                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(Items.LEATHER_LEGGINGS, true));
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_LEGGINGS : ModItems.SILK_LEGGINGS, true));
                         }
                         else if (slot == EquipmentSlot.FEET) {
-                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(Items.LEATHER_BOOTS, true));
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_BOOTS : ModItems.SILK_BOOTS, true));
                         }
                     }
                     this.setEquipmentDropChance(slot, 0.0f);
@@ -183,6 +186,49 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                         }
                         else if (slot == EquipmentSlot.FEET) {
                             this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(ModItems.WOOL_BOOTS, true));
+                        }
+                    }
+                    this.setEquipmentDropChance(slot, 0.0f);
+                }
+            }
+        }
+        else if (villager.getVillagerData().getProfession() == ModVillagerProfessions.DRESSER && !this.isBaby()) {
+            int weaverLevel = villager.getVillagerData().getLevel();
+            if (weaverLevel >= 1) {
+                if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_BOOTS : ModItems.LINEN_BOOTS, false));
+                }
+            }
+            if (weaverLevel >= 2) {
+                if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_HELMET : ModItems.LINEN_HELMET, false));
+                }
+            }
+            if (weaverLevel >= 3) {
+                if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_LEGGINGS : ModItems.LINEN_LEGGINGS, false));
+                }
+            }
+            if (weaverLevel >= 4) {
+                if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_CHESTPLATE : ModItems.LINEN_CHESTPLATE, false));
+                }
+            }
+            if (weaverLevel == 5) {
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                    if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
+                        if (slot == EquipmentSlot.HEAD) {
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_HELMET : ModItems.LINEN_HELMET, true));
+                        }
+                        else if (slot == EquipmentSlot.CHEST) {
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_CHESTPLATE : ModItems.LINEN_CHESTPLATE, true));
+                        }
+                        else if (slot == EquipmentSlot.LEGS) {
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_LEGGINGS : ModItems.LINEN_LEGGINGS, true));
+                        }
+                        else if (slot == EquipmentSlot.FEET) {
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_BOOTS : ModItems.LINEN_BOOTS, true));
                         }
                     }
                     this.setEquipmentDropChance(slot, 0.0f);

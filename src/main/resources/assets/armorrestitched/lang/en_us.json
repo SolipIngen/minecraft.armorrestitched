@@ -144,6 +144,9 @@
     "block.armorrestitched.flax_block": "Flax Bale", 
     "block.armorrestitched.flax_flower": "Flax", 
     "block.armorrestitched.flax_crop": "Flax Crop", 
+    "block.armorrestitched.mulberry_leaves": "Mulberry Leaves", 
+    "block.armorrestitched.mulberry_silkworm_leaves": "Mulberry Leaves with Silkworms", 
+    "block.armorrestitched.mulberry_sapling": "Mulberry Sapling", 
     "block.armorrestitched.scutcher": "Scutcher", 
 
     "item.armorrestitched.cotton_helmet": "Cotton Cap", 
@@ -188,6 +191,10 @@
     "item.armorrestitched.flaxseed": "Flaxseed", 
     "item.armorrestitched.linen": "Linen", 
     "item.armorrestitched.silk": "Silk", 
+    "item.armorrestitched.silkworm_cocoon": "Silkworm Cocoon", 
+    "item.armorrestitched.cooked_silkworm_pupa": "Cooked Silkworm Pupa", 
+
+    "entity.armorrestitched.villager.dresser": "Dresser", 
 
     "subtitles.armorrestitched.cotton_clothing_equip": "Cotton clothing rustles", 
     "subtitles.armorrestitched.fur_clothing_equip": "Fur clothing rustles", 
@@ -197,10 +204,11 @@
     "subtitles.armorrestitched.paper_clothing_equip": "Paper clothing rustles", 
     "subtitles.armorrestitched.copper_armor_equip": "Copper armor clinks", 
     "subtitles.armorrestitched.cotton_pick": "Cotton picked", 
+    "subtitles.armorrestitched.silkworm_harvest": "Silkworms harvested", 
     "subtitles.armorrestitched.cauldron_used": "Cauldron used", 
     "subtitles.armorrestitched.scutcher_used": "Scutcher used", 
     "subtitles.armorrestitched.llama_sheared": "Llama sheared", 
-    "subtitles.armorrestitched.weaver_works": "Weaver weaves", 
+    "subtitles.armorrestitched.dresser_works": "Dresser dresses", 
 
     "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
     "advancements.story.obtain_clothing.title": "Dressed Up", 

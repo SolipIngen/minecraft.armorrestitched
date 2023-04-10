@@ -59,6 +59,13 @@
             "armorrestitched:cotton_pick_ver2"
         ]
     }, 
+    "silkworm_harvest": {
+        "subtitle": "subtitles.armorrestitched.silkworm_harvest", 
+        "sounds": [
+            "armorrestitched:cotton_pick_ver1", 
+            "armorrestitched:cotton_pick_ver2"
+        ]
+    }, 
     "cauldron_used": {
         "subtitle": "subtitles.armorrestitched.cauldron_used", 
         "sounds": [
@@ -79,8 +86,8 @@
             "armorrestitched:llama_sheared"
         ]
     }, 
-    "weaver_works": {
-        "subtitle": "subtitles.armorrestitched.weaver_works", 
+    "dresser_works": {
+        "subtitle": "subtitles.armorrestitched.dresser_works", 
         "sounds": [
             "armorrestitched:scutcher_used"
         ]

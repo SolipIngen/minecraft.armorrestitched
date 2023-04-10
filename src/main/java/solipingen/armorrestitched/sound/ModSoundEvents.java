@@ -19,9 +19,10 @@ public class ModSoundEvents {
 
     public static final SoundEvent CAULDRON_USED = ModSoundEvents.registerSoundEvent("cauldron_used");
     public static final SoundEvent COTTON_PICK = ModSoundEvents.registerSoundEvent("cotton_pick");
+    public static final SoundEvent SILKWORM_HARVEST = ModSoundEvents.registerSoundEvent("silkworm_harvest");
     public static final SoundEvent SCUTCHER_USED = ModSoundEvents.registerSoundEvent("scutcher_used");
     public static final SoundEvent LLAMA_SHEARED = ModSoundEvents.registerSoundEvent("llama_sheared");
-    public static final SoundEvent WEAVER_WORKS = ModSoundEvents.registerSoundEvent("weaver_works");
+    public static final SoundEvent DRESSER_WORKS = ModSoundEvents.registerSoundEvent("dresser_works");
 
 
     private static SoundEvent registerSoundEvent(String name) {

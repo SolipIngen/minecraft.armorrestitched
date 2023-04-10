@@ -12,7 +12,9 @@ import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CarpetBlock;
+import net.minecraft.block.FireBlock;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.block.WoollikeBlock;
+import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.registry.tag.ModItemTags;
 import solipingen.armorrestitched.sound.ModSoundEvents;
 
@@ -108,6 +111,36 @@ public abstract class AbstractCauldronBlockMixin extends Block {
         }
         return ActionResult.PASS;
     };
+    private static final CauldronBehavior SILK_EXTRACTION = (state, world, pos, player, hand, stack) -> {
+        if (!world.isClient && stack.isOf(ModItems.SILKWORM_COCOON)) {
+            if (state.isOf(Blocks.WATER_CAULDRON) && (world.getBlockState(pos.down()).getLuminance() >= 15 || world.getBlockState(pos.down()).getBlock() instanceof CampfireBlock || world.getBlockState(pos.down()).getBlock() instanceof FireBlock)) {
+                ItemStack itemStack = new ItemStack(ModItems.SILK, stack.getCount());
+                ItemStack itemStack2 = new ItemStack(ModItems.COOKED_SILKWORM_PUPA, stack.getCount());
+                if (!player.getAbilities().creativeMode) {
+                    player.setStackInHand(hand, itemStack);
+                }
+                else {
+                    if (player.getInventory().insertStack(itemStack)) {
+                        player.playerScreenHandler.syncState();
+                    }
+                    else {
+                        player.dropItem(itemStack, false);
+                    }
+                }
+                if (player.getInventory().insertStack(itemStack2)) {
+                    player.playerScreenHandler.syncState();
+                } 
+                else {
+                    player.dropItem(itemStack2, false);
+                }
+                world.playSound(null, pos, ModSoundEvents.CAULDRON_USED, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                player.incrementStat(Stats.USE_CAULDRON);
+                LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+                return ActionResult.SUCCESS;
+            }
+        }
+        return ActionResult.PASS;
+    };
     @Shadow @Final private Map<Item, CauldronBehavior> behaviorMap;
 
 
@@ -119,6 +152,8 @@ public abstract class AbstractCauldronBlockMixin extends Block {
     private Map<Item, CauldronBehavior> redirectedCauldronBehaviorMap(AbstractCauldronBlock abstractCauldronBlock, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         Map<Item, CauldronBehavior> behaviorMap2 = this.behaviorMap;
         if (!world.isClient && behaviorMap2 == CauldronBehavior.WATER_CAULDRON_BEHAVIOR) {
+            behaviorMap2.putIfAbsent(ModItems.SILKWORM_COCOON, SILK_EXTRACTION);
+
             behaviorMap2.putIfAbsent(ModBlocks.BLACK_COTTON.asItem(), CLEAN_WOOLLIKE_BLOCK);
             behaviorMap2.putIfAbsent(ModBlocks.BLUE_COTTON.asItem(), CLEAN_WOOLLIKE_BLOCK);
             behaviorMap2.putIfAbsent(ModBlocks.BROWN_COTTON.asItem(), CLEAN_WOOLLIKE_BLOCK);

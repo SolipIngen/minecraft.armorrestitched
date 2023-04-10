@@ -135,6 +135,12 @@ public class ModItems {
     public static final Item SILK = ModItems.registerItem("silk", 
         new Item(new FabricItemSettings()));
 
+    public static final Item SILKWORM_COCOON = ModItems.registerItem("silkworm_cocoon", 
+        new Item(new FabricItemSettings()));
+    
+    public static final Item COOKED_SILKWORM_PUPA = ModItems.registerItem("cooked_silkworm_pupa", 
+        new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_SILKWORM_PUPA)));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(ArmorRestitched.MOD_ID, name), item);

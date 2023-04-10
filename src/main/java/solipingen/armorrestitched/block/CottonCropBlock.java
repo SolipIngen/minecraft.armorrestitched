@@ -33,11 +33,11 @@ import solipingen.armorrestitched.sound.ModSoundEvents;
 public class CottonCropBlock extends CropBlock {
     public static final int MAX_AGE = 7;
     public static final IntProperty AGE = Properties.AGE_7;
-    protected static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 2.0, 9.0), 
-        Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 4.0, 9.0), 
-        Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 6.0, 10.0), 
-        Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 8.0, 11.0), 
-        Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0), 
+    protected static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 2.0, 11.0), 
+        Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 4.0, 11.0), 
+        Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0), 
+        Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0), 
+        Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 10.0, 13.0), 
         Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 12.0, 13.0), 
         Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 14.0, 14.0), 
         Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)};

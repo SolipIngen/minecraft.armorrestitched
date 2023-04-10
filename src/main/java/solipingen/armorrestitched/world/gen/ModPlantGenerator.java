@@ -15,12 +15,14 @@ public class ModPlantGenerator {
     private static final List<RegistryKey<Biome>> COTTON_FLOWER_BIOMES = List.of(BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.BAMBOO_JUNGLE);
     private static final List<RegistryKey<Biome>> FLAX_FLOWER_BIOMES = List.of(BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, 
         BiomeKeys.MEADOW, BiomeKeys.CHERRY_GROVE);
+    private static final List<RegistryKey<Biome>> MULBERRY_TREE_BIOMES = List.of(BiomeKeys.DARK_FOREST);
 
 
     public static void generatePlants() {
 
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(COTTON_FLOWER_BIOMES), GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.FLOWER_COTTON_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(FLAX_FLOWER_BIOMES), GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.FLOWER_FLAX_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(MULBERRY_TREE_BIOMES), GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.TREE_MULBERRY_PLACED_KEY);
 
     }
 
