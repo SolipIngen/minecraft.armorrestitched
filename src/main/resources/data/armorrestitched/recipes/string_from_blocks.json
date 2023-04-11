@@ -3,7 +3,7 @@
     "category": "misc",
     "ingredients": [
       {
-        "tag": "minecraft:wool"
+        "tag": "armorrestitched:block_string_ingredients"
       }
     ],
     "result": {

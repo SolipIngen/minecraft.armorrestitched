@@ -11,13 +11,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
@@ -53,6 +56,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.event.listener.VibrationListener;
+import solipingen.armorrestitched.enchantment.ModEnchantments;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.EntityInterface;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.MobEntityInterface;
 
@@ -225,6 +229,13 @@ public abstract class LivingEntityMixin extends Entity {
             this.redstoneChargePower = 0;
             this.redstoneChargeTime = 0;
         }
+    }
+
+    @ModifyConstant(method = "damage", constant = @Constant(floatValue = 0.75f))
+    private float modifiedHelmetDamageModifier(float originalf) {
+        int impactProtectionLevel = EnchantmentHelper.getLevel(ModEnchantments.IMPACT_PROTECTION, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD));
+        float modifier = 0.7f - 0.1f*impactProtectionLevel;
+        return modifier;
     }
 
     @Inject(method = "damage", at = @At("TAIL"), cancellable = true)

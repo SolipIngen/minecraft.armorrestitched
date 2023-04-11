@@ -8,7 +8,7 @@ import net.minecraft.block.CropBlock;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -100,7 +100,7 @@ public class CottonCropBlock extends CropBlock {
     }
 
     @Override
-    public Item asItem() {
+    protected ItemConvertible getSeedsItem() {
         return ModItems.COTTON_SEEDS;
     }
 

@@ -1,11 +1,11 @@
 {
     "parent": "minecraft:recipes/root",
     "criteria": {
-      "has_fur": {
+      "has_magenta": {
         "conditions": {
           "items": [
             {
-              "tag": "armorrestitched:fur_blocks"
+              "tag": "armorrestitched:magenta_woollike_blocks"
             }
           ]
         },
@@ -13,20 +13,20 @@
       },
       "has_the_recipe": {
         "conditions": {
-          "recipe": "armorrestitched:string_from_fur"
+          "recipe": "minecraft:magenta_banner"
         },
         "trigger": "minecraft:recipe_unlocked"
       }
     },
     "requirements": [
       [
-        "has_fur",
+        "has_magenta",
         "has_the_recipe"
       ]
     ],
     "rewards": {
       "recipes": [
-        "armorrestitched:string_from_fur"
+        "minecraft:magenta_banner"
       ]
     }
 }

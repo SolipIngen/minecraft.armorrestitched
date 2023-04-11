@@ -49,7 +49,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler {
         if (item instanceof ArmorItem) {
             Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.playerInventory.player.world.getRegistryManager(), stack);
             if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.GOLD)) {
-                list = EnchantmentHelper.generateEnchantments(this.random, stack, MathHelper.ceil(1.25f*level), false);
+                list = EnchantmentHelper.generateEnchantments(this.random, stack, MathHelper.ceil(1.5f*level), false);
             }
         }
         return list;

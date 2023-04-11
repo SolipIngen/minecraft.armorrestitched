@@ -1,11 +1,11 @@
 {
     "parent": "minecraft:recipes/root",
     "criteria": {
-      "has_wool": {
+      "has_light_gray": {
         "conditions": {
           "items": [
             {
-              "tag": "minecraft:wool"
+              "tag": "armorrestitched:light_gray_woollike_blocks"
             }
           ]
         },
@@ -13,20 +13,20 @@
       },
       "has_the_recipe": {
         "conditions": {
-          "recipe": "armorrestitched:string_from_wool"
+          "recipe": "minecraft:light_gray_bed"
         },
         "trigger": "minecraft:recipe_unlocked"
       }
     },
     "requirements": [
       [
-        "has_wool",
+        "has_light_gray",
         "has_the_recipe"
       ]
     ],
     "rewards": {
       "recipes": [
-        "armorrestitched:string_from_wool"
+        "minecraft:light_gray_bed"
       ]
     }
 }

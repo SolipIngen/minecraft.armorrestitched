@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.block.ModFlammableBlockRegistry;
+import solipingen.armorrestitched.enchantment.ModEnchantments;
 import solipingen.armorrestitched.item.ModItemGroups;
 import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.loot.ModifyLootTableHandler;
@@ -25,6 +26,7 @@ public class ArmorRestitched implements ModInitializer {
 	public void onInitialize() {
 
 		ModBlocks.registerModBlocks();
+		ModEnchantments.registerModEnchantments();
 		ModFlammableBlockRegistry.registerFlammableBlocks();
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();

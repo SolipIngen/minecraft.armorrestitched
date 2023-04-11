@@ -2,6 +2,7 @@ package solipingen.armorrestitched.loot;
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableSource;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootPool;
@@ -20,6 +21,7 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
 
     private static final Identifier DESERT_PYRAMID_ID = new Identifier("chests/desert_pyramid");
     private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("chests/jungle_temple");
+    private static final Identifier GOAT_ENTITY_ID = new Identifier("entities/goat");
     private static final Identifier PANDA_ENTITY_ID = new Identifier("entities/panda");
     private static final Identifier POLAR_BEAR_ENTITY_ID = new Identifier("entities/polar_bear");
     private static final Identifier WOLF_ENTITY_ID = new Identifier("entities/wolf");
@@ -32,7 +34,13 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
         for (Identifier identifier : ID_ARRAY) {
             if (id.getPath().matches(identifier.getPath()) && id.getPath().startsWith("entities")) {
                 LootPool.Builder furPoolBuilder = LootPool.builder();
-                if (id.getPath().matches(PANDA_ENTITY_ID.getPath())) {
+                if (id.getPath().matches(GOAT_ENTITY_ID.getPath())) {
+                    furPoolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1.0f))
+                        .with(ItemEntry.builder(Blocks.WHITE_WOOL)
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                }
+                else if (id.getPath().matches(PANDA_ENTITY_ID.getPath())) {
                     furPoolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1.0f))
                         .with(ItemEntry.builder(ModBlocks.BLACK_FUR)

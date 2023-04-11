@@ -196,6 +196,9 @@
 
     "entity.armorrestitched.villager.dresser": "Dresser", 
 
+    "enchantment.armorrestitched.impact_protection": "Impact Protection", 
+    "enchantment.armorrestitched.soaring": "Soaring", 
+
     "subtitles.armorrestitched.cotton_clothing_equip": "Cotton clothing rustles", 
     "subtitles.armorrestitched.fur_clothing_equip": "Fur clothing rustles", 
     "subtitles.armorrestitched.linen_clothing_equip": "Linen clothing rustles", 
