@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.ProtectionEnchantment;
@@ -24,7 +23,7 @@ import net.minecraft.registry.tag.TagKey;
 @Mixin(ProtectionEnchantment.class)
 public abstract class ProtectionEnchantmentMixin extends Enchantment {
 
-
+    
     protected ProtectionEnchantmentMixin(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes) {
         super(weight, target, slotTypes);
     }
@@ -50,6 +49,11 @@ public abstract class ProtectionEnchantmentMixin extends Enchantment {
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof ArmorItem || (stack.getItem() instanceof ElytraItem && ((ProtectionEnchantment)(Object)this).protectionType != ProtectionEnchantment.Type.FALL) || super.isAcceptableItem(stack);
+    }
+
+    @Override
+    public boolean isTreasure() {
+        return ((ProtectionEnchantment)(Object)this).protectionType == ProtectionEnchantment.Type.FALL && ((ProtectionEnchantment)(Object)this).target == EnchantmentTarget.ARMOR_HEAD;
     }
 
     @ModifyConstant(method = "transformFireDuration", constant = @Constant(floatValue = 0.15f))

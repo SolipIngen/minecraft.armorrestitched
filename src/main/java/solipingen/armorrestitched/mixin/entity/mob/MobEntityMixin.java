@@ -1,11 +1,15 @@
 package solipingen.armorrestitched.mixin.entity.mob;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.google.common.collect.Lists;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -16,6 +20,9 @@ import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VexEntity;
 import net.minecraft.entity.passive.AllayEntity;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.DyeableArmorItem;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,6 +33,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.MobEntityInterface;
+import solipingen.armorrestitched.village.ModVillagerProfessions;
 
 
 @Mixin(MobEntity.class)
@@ -71,6 +79,7 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         }
     }
 
+    @SuppressWarnings("incomplete-switch")
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         float equipThreshold = ((MobEntity)(Object)this) instanceof IllagerEntity ? 0.2f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty() : 0.12f*this.world.getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty();
@@ -86,8 +95,51 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
                     }
                 }
                 Item item = MobEntity.getEquipmentForSlot(slot, level);
+                if (item instanceof DyeableArmorItem) {
+                    int randomInt = random.nextInt(6);
+                    if (randomInt == 0) {
+                        switch (slot) {
+                            case HEAD: item = ModItems.COTTON_HELMET; break;
+                            case CHEST: item = ModItems.COTTON_CHESTPLATE; break;
+                            case LEGS: item = ModItems.COTTON_LEGGINGS; break;
+                            case FEET: item = ModItems.COTTON_BOOTS; break;
+                        }
+                    }
+                    else if (randomInt == 1) {
+                        switch (slot) {
+                            case HEAD: item = ModItems.FUR_HELMET; break;
+                            case CHEST: item = ModItems.FUR_CHESTPLATE; break;
+                            case LEGS: item = ModItems.FUR_LEGGINGS; break;
+                            case FEET: item = ModItems.FUR_BOOTS; break;
+                        }
+                    }
+                    else if (randomInt == 2) {
+                        switch (slot) {
+                            case HEAD: item = ModItems.LINEN_HELMET; break;
+                            case CHEST: item = ModItems.LINEN_CHESTPLATE; break;
+                            case LEGS: item = ModItems.LINEN_LEGGINGS; break;
+                            case FEET: item = ModItems.LINEN_BOOTS; break;
+                        }
+                    }
+                    else if (randomInt == 3) {
+                        switch (slot) {
+                            case HEAD: item = ModItems.SILK_HELMET; break;
+                            case CHEST: item = ModItems.SILK_CHESTPLATE; break;
+                            case LEGS: item = ModItems.SILK_LEGGINGS; break;
+                            case FEET: item = ModItems.SILK_BOOTS; break;
+                        }
+                    }
+                    else if (randomInt == 4) {
+                        switch (slot) {
+                            case HEAD: item = ModItems.PAPER_HELMET; break;
+                            case CHEST: item = ModItems.PAPER_CHESTPLATE; break;
+                            case LEGS: item = ModItems.PAPER_LEGGINGS; break;
+                            case FEET: item = ModItems.PAPER_BOOTS; break;
+                        }
+                    }
+                }
                 if (item != null) {
-                    ItemStack itemStack = new ItemStack(item);
+                    ItemStack itemStack = item instanceof DyeableArmorItem ? this.getRandomlyDyedClothing(item) : new ItemStack(item);
                     this.equipStack(slot, itemStack);
                 }
             }
@@ -180,6 +232,23 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         if (((MobEntity)(Object)this) instanceof Angerable && entranced) {
             ((Angerable)this).setAngryAt(null);
         }
+    }
+
+    private ItemStack getRandomlyDyedClothing(Item dyeableArmorItem) {
+        if (dyeableArmorItem instanceof DyeableArmorItem) {
+            ItemStack itemStack = new ItemStack(dyeableArmorItem);
+            ArrayList<DyeItem> list = Lists.newArrayList();
+            list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
+            if (this.random.nextFloat() > 0.7f) {
+                list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
+            }
+            if (this.random.nextFloat() > 0.8f) {
+                list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
+            }
+            itemStack = DyeableItem.blendAndSetColor(itemStack, list);
+            return itemStack;
+        }
+        return ItemStack.EMPTY;
     }
 
 

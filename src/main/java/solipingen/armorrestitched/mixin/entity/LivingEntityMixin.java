@@ -21,6 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.ThornsEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
@@ -44,6 +46,7 @@ import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -231,6 +234,32 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.75))
+    private double modifiedFallFlyingVerticalFactor(double originald) {
+        int soaringLevel = EnchantmentHelper.getLevel(ModEnchantments.SOARING, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
+        return originald + 0.05*soaringLevel;
+    }
+
+    @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.1))
+    private double modifiedFallFlyingHorizontalFactor(double originald) {
+        if (((LivingEntity)(Object)this).isFallFlying()) {
+            int soaringLevel = EnchantmentHelper.getLevel(ModEnchantments.SOARING, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
+            return originald + 0.01*soaringLevel;
+        }
+        return originald;
+    }
+
+    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(DDD)Lnet/minecraft/util/math/Vec3d;"))
+    private Vec3d redirectedFallFlyingDrag(Vec3d vec3d, double x, double y, double z) {
+        if (((LivingEntity)(Object)this).isFallFlying()) {
+            int soaringLevel = EnchantmentHelper.getLevel(ModEnchantments.SOARING, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
+            x += 0.0025*soaringLevel;
+            y += 0.0015*soaringLevel;
+            z += 0.0025*soaringLevel;
+        }
+        return vec3d.multiply(x, y, z);
+    }
+
     @ModifyConstant(method = "damage", constant = @Constant(floatValue = 0.75f))
     private float modifiedHelmetDamageModifier(float originalf) {
         int impactProtectionLevel = EnchantmentHelper.getLevel(ModEnchantments.IMPACT_PROTECTION, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.HEAD));
@@ -240,6 +269,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("TAIL"), cancellable = true)
     private void injectedDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cbireturn) {
+        int thornsLevel = EnchantmentHelper.getLevel(Enchantments.THORNS, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
+        if (thornsLevel > 0 && source.getAttacker() != null && source.getAttacker() instanceof LivingEntity && ThornsEnchantment.shouldDamageAttacker(thornsLevel, this.random) && !source.isIn(DamageTypeTags.BYPASSES_ARMOR)) {
+            ((LivingEntity)source.getAttacker()).damage(this.getDamageSources().thorns(this), MathHelper.floor(0.2f*thornsLevel*amount) + this.random.nextInt(thornsLevel + 1));
+        }
         int i = 0;
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;

@@ -28,8 +28,7 @@ public abstract class FireworkRocketEntityMixin extends ProjectileEntity {
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = 0.1))
     private double modifiedFallFlyingParameter(double originald) {
         int soaringLevel = EnchantmentHelper.getLevel(ModEnchantments.SOARING, this.shooter.getEquippedStack(EquipmentSlot.CHEST));
-        System.out.println(soaringLevel);
-        return originald + 0.3*soaringLevel;
+        return originald + 0.33*soaringLevel;
     }
 
     

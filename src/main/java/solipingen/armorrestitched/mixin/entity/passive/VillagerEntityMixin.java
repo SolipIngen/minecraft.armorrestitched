@@ -387,14 +387,14 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
 
     private ItemStack getRandomlyDyedClothing(Item dyeableArmorItem, boolean enchanted) {
         if (dyeableArmorItem instanceof DyeableArmorItem) {
-            int i = 5 + random.nextInt(15);
+            int i = 5 + this.random.nextInt(15);
             ItemStack itemStack = new ItemStack(dyeableArmorItem);
             ArrayList<DyeItem> list = Lists.newArrayList();
             list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
-            if (random.nextFloat() > 0.7f) {
+            if (this.random.nextFloat() > 0.7f) {
                 list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
             }
-            if (random.nextFloat() > 0.8f) {
+            if (this.random.nextFloat() > 0.8f) {
                 list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
             }
             itemStack = DyeableItem.blendAndSetColor(itemStack, list);

@@ -39,7 +39,7 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
             int level = this.random.nextFloat() < 0.2f*this.world.getDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (slot == EquipmentSlot.HEAD && !this.getEquippedStack(slot).isEmpty()) continue;
+                if (slot == EquipmentSlot.HEAD && this.getEquippedStack(slot) == Raid.getOminousBanner()) continue;
                 Item armorItem = MobEntity.getEquipmentForSlot(slot, level);
                 this.equipStack(slot, new ItemStack(armorItem));
             }

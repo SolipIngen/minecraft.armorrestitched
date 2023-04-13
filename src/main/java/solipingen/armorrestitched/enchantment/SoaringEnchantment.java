@@ -30,6 +30,16 @@ public class SoaringEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean isTreasure() {
+        return true;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return false;
+    }
+
+    @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof ElytraItem;
     }

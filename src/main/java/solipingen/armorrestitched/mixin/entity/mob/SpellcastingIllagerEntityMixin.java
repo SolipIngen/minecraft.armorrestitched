@@ -34,16 +34,6 @@ public abstract class SpellcastingIllagerEntityMixin extends IllagerEntity {
         EntityData entityData2 = super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
         Random random = world.getRandom();
         this.initEquipment(random, difficulty);
-        if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
-            int level = this.random.nextFloat() < 0.08f*this.world.getDifficulty().getId() + 0.04f*difficulty.getClampedLocalDifficulty() ? 4 : 3;
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (slot == EquipmentSlot.HEAD && !this.getEquippedStack(slot).isEmpty()) continue;
-                Item armorItem = MobEntity.getEquipmentForSlot(slot, level);
-                this.equipStack(slot, new ItemStack(armorItem));
-                this.setEquipmentDropChance(slot, 0.0f);
-            }
-        }
         this.updateEnchantments(random, difficulty);
         return entityData2;
     }
@@ -51,6 +41,13 @@ public abstract class SpellcastingIllagerEntityMixin extends IllagerEntity {
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         super.initEquipment(random, localDifficulty);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            if (slot == EquipmentSlot.HEAD && this.getEquippedStack(slot) == Raid.getOminousBanner()) continue;
+            Item armorItem = MobEntity.getEquipmentForSlot(slot, random.nextFloat() > 0.2f*this.world.getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 4 : 3);
+            this.equipStack(slot, new ItemStack(armorItem));
+            this.setEquipmentDropChance(slot, 0.0f);
+        }
         if (this.isPatrolLeader()) {
             this.equipStack(EquipmentSlot.HEAD, Raid.getOminousBanner());
             this.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0f);
