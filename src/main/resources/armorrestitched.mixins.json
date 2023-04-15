@@ -8,6 +8,7 @@
     "block.BlocksMixin", 
     "block.PowderSnowBlockMixin", 
     "enchantment.EnchantmentHelperMixin", 
+    "enchantment.FrostWalkerEnchantmentMixin", 
     "enchantment.ProtectionEnchantmentMixin", 
     "enchantment.SwiftSneakEnchantmentMixin", 
     "enchantment.ThornsEnchantmentMixin", 

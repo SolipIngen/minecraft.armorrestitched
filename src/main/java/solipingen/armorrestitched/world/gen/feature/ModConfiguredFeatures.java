@@ -44,7 +44,7 @@ public class ModConfiguredFeatures {
             new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.DARK_OAK_LOG), 
                 new StraightTrunkPlacer(4, 1, 0), 
                 new WeightedBlockStateProvider(ModConfiguredFeatures.mulberryLeavesBuilder()), 
-                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 4), 
+                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), 
                 new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
     }
     

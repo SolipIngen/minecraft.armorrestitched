@@ -37,6 +37,8 @@ public class ModBlockTags {
     public static final TagKey<Block> WHITE_WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "white_woollike_blocks"));
     public static final TagKey<Block> YELLOW_WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "yellow_woollike_blocks"));
 
+    public static final TagKey<Block> WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "woollike_blocks"));
+
     public static final TagKey<Block> WHITE_WOOLLIKE_CARPETS = TagKey.of(RegistryKeys.BLOCK, new Identifier(ArmorRestitched.MOD_ID, "white_woollike_carpets"));
 
 

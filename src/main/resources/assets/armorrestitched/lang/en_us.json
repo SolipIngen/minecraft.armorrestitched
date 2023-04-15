@@ -194,7 +194,7 @@
     "item.armorrestitched.silkworm_cocoon": "Silkworm Cocoon", 
     "item.armorrestitched.cooked_silkworm_pupa": "Cooked Silkworm Pupa", 
 
-    "entity.armorrestitched.villager.dresser": "Dresser", 
+    "entity.minecraft.villager.dresser": "Dresser", 
 
     "enchantment.armorrestitched.impact_protection": "Impact Protection", 
     "enchantment.armorrestitched.soaring": "Soaring", 

@@ -69,7 +69,7 @@ public class CottonCropBlock extends CropBlock {
             if (i < 7) {
                 state = (BlockState)state.with(AGE, i + 1);
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
-                if (i == 6) {
+                if (i >= 5) {
                     BlockState downState = world.getBlockState(pos.down());
                     if (downState.isOf(Blocks.FARMLAND) && downState.get(FarmlandBlock.MOISTURE) > 0) {
                         world.setBlockState(pos.down(), downState.with(FarmlandBlock.MOISTURE, 0), Block.NOTIFY_LISTENERS);

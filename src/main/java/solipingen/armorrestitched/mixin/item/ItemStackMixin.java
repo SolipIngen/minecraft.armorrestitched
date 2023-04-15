@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.google.common.collect.ImmutableMultimap;
@@ -15,6 +16,7 @@ import com.google.common.collect.Multimap;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemStack;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -28,6 +30,7 @@ import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
 
 
@@ -56,22 +59,22 @@ public abstract class ItemStackMixin implements FabricItemStack {
                     RegistryEntry<ArmorTrimMaterial> trimMaterial = trimOptional.get().getMaterial();
                     double addition = 0.0;
                     if (trimMaterial.matchesKey(ArmorTrimMaterials.COPPER)) {
-                        addition = 1.0;
+                        addition = 0.5;
                     }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.IRON)) {
-                        addition = 2.0;
-                    }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
                         addition = 1.0;
                     }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
-                        addition = 3.0;
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
+                        addition = 0.5;
                     }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
                         addition = 2.0;
                     }
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
+                        addition = 1.0;
+                    }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
-                        addition = 3.0;
+                        addition = 2.0;
                     }
                     armorModifier = new EntityAttributeModifier(armorModifier.getId(), armorModifier.getName(), armorModifier.getValue() + addition, armorModifier.getOperation());
                 }
@@ -84,19 +87,19 @@ public abstract class ItemStackMixin implements FabricItemStack {
                     RegistryEntry<ArmorTrimMaterial> trimMaterial = trimOptional.get().getMaterial();
                     double addition = 0.0;
                     if (trimMaterial.matchesKey(ArmorTrimMaterials.COPPER)) {
-                        addition = 0.5;
+                        addition = 0.25;
                     }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.IRON)) {
-                        addition = 1.0;
-                    }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
                         addition = 0.5;
                     }
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
+                        addition = 0.25;
+                    }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
-                        addition = 2.0;
+                        addition = 1.0;
                     }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
-                        addition = 2.0;
+                        addition = 1.0;
                     }
                     toughnessModifier = new EntityAttributeModifier(toughnessModifier.getId(), toughnessModifier.getName(), toughnessModifier.getValue() + addition, toughnessModifier.getOperation());
                 }
@@ -119,6 +122,15 @@ public abstract class ItemStackMixin implements FabricItemStack {
             return builder.build();
         }
         return originalMultimap;
+    }
+
+    @Inject(method = "onItemEntityDestroyed", at = @At("HEAD"))
+    private void injectedOnItemEntityDestroyed(ItemEntity entity, CallbackInfo cbi) {
+        Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(entity.world.getRegistryManager(), ((ItemStack)(Object)this));
+        if (entity.world instanceof ServerWorld && trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.NETHERITE)) {
+            ItemEntity itemEntity = new ItemEntity(entity.world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.NETHERITE_SCRAP, 4), 0.0, 0.0, 0.0);
+            entity.world.spawnEntity(itemEntity);
+        }
     }
 
 

@@ -53,7 +53,7 @@ public abstract class ItemsMixin {
             cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newShearsItem));
         }
         else if (item instanceof ElytraItem) {
-            Item newElytraItem = (Item)new ElytraItem(new Item.Settings().maxDamage(864).rarity(Rarity.UNCOMMON));
+            Item newElytraItem = (Item)new ElytraItem(new Item.Settings().maxDamage(888).rarity(Rarity.UNCOMMON));
             cbireturn.setReturnValue(Registry.register(Registries.ITEM, rawId, name, newElytraItem));
         }
     }

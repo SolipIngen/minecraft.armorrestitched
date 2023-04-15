@@ -136,7 +136,7 @@ public class ModItems {
         new Item(new FabricItemSettings()));
 
     public static final Item SILKWORM_COCOON = ModItems.registerItem("silkworm_cocoon", 
-        new Item(new FabricItemSettings()));
+        new SilkwormCocoonItem(new FabricItemSettings()));
     
     public static final Item COOKED_SILKWORM_PUPA = ModItems.registerItem("cooked_silkworm_pupa", 
         new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_SILKWORM_PUPA)));

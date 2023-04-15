@@ -44,6 +44,8 @@ public class ModItemTags {
     public static final TagKey<Item> WHITE_WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "white_woollike_blocks"));
     public static final TagKey<Item> YELLOW_WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "yellow_woollike_blocks"));
 
+    public static final TagKey<Item> WOOLLIKE_BLOCKS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "woollike_blocks"));
+
     public static final TagKey<Item> WHITE_WOOLLIKE_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "white_woollike_carpets"));
 
 

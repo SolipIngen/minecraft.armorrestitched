@@ -99,7 +99,7 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
             ModVillagerProfessions.replaceShepherdProfessionToLeveledTrade(tradeOffers, this);
         }
         else if (villagerData.getProfession() == ModVillagerProfessions.DRESSER) {
-            ModVillagerProfessions.putWeaverTradeOffers(tradeOffers, this);
+            ModVillagerProfessions.putDresserTradeOffers(tradeOffers, this);
         }
         return tradeOffers.get(villagerData.getProfession());
     }

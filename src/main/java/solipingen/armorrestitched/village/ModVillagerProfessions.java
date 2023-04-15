@@ -55,7 +55,7 @@ public class ModVillagerProfessions {
     public static final PointOfInterestType DRESSER_MARKER_POI = ModVillagerProfessions.registerPOI("dresser_poi", ModBlocks.SCUTCHER);
 
 
-    public static void putWeaverTradeOffers(Map<VillagerProfession, Int2ObjectMap<Factory[]>> originalTradeOffers, MerchantEntity villager) {
+    public static void putDresserTradeOffers(Map<VillagerProfession, Int2ObjectMap<Factory[]>> originalTradeOffers, MerchantEntity villager) {
         ArrayList<DyeItem> dyeItemList = new ArrayList<DyeItem>();
         ArrayList<BlockItem> blockItemList = new ArrayList<BlockItem>();
         ArrayList<BlockItem> carpetItemList = new ArrayList<BlockItem>();
@@ -83,10 +83,10 @@ public class ModVillagerProfessions {
         dyeItemList.remove(apprenticeDye);
         DyeItem journeymanDye = dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
         dyeItemList.remove(journeymanDye);
-        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BlockItem journeymanWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BannerItem expertBanner = bannerItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
+        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
+        BlockItem journeymanWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
+        BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(bedItemList.size()));
+        BannerItem expertBanner = bannerItemList.get(villager.getRandom().nextInt(bannerItemList.size()));
         originalTradeOffers.put(DRESSER, ModVillagerProfessions.copyToFastUtilMap(
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(ModItems.COTTON, 24, 16, 2), new BuyForOneEmeraldFactory(ModItems.FLAX_STEM, 24, 16, 2), 
@@ -102,7 +102,7 @@ public class ModVillagerProfessions {
                 3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanWool, 1, 16, 10), 
                     new SellItemFactory(journeymanWoolCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.STONE_SLAB, 16, 16, 30), new SellItemFactory(expertBanner, 1, 3, 15), 
-                    new SellItemFactory(Items.PAINTING, 2, 3, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 8, 3, 15)}, 
+                    new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.COTTON_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.COTTON_CHESTPLATE, 8, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.COTTON_HELMET, 6, 3, 15, true), 
@@ -161,8 +161,8 @@ public class ModVillagerProfessions {
                 carpetItemList.add((BlockItem)item);
             }
         }
-        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BlockItem expertWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
+        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
+        BlockItem expertWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
         originalTradeOffers.replace(VillagerProfession.LEATHERWORKER, ModVillagerProfessions.copyToFastUtilMap(
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(Items.LEATHER, 6, 16, 2), new BuyForOneEmeraldFactory(Items.RABBIT_HIDE, 9, 16, 2), 
@@ -224,10 +224,10 @@ public class ModVillagerProfessions {
         dyeItemList.remove(apprenticeDye);
         DyeItem journeymanDye = dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
         dyeItemList.remove(journeymanDye);
-        BlockItem journeymanWool = woolItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BlockItem journeymanWoolCarpet = woolCarpetItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
-        BannerItem expertBanner = woolBannerItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
+        BlockItem journeymanWool = woolItemList.get(villager.getRandom().nextInt(woolItemList.size()));
+        BlockItem journeymanWoolCarpet = woolCarpetItemList.get(villager.getRandom().nextInt(woolCarpetItemList.size()));
+        BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(bedItemList.size()));
+        BannerItem expertBanner = woolBannerItemList.get(villager.getRandom().nextInt(woolBannerItemList.size()));
         originalTradeOffers.replace(VillagerProfession.SHEPHERD, ModVillagerProfessions.copyToFastUtilMap(
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(Items.WHITE_WOOL, 18, 16, 2), new BuyForOneEmeraldFactory(ModBlocks.WHITE_FUR, 18, 16, 2), new SellItemFactory(Items.SHEARS, 2, 1, 1), 
@@ -244,7 +244,7 @@ public class ModVillagerProfessions {
                 3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanWool, 1, 16, 10), 
                     new SellItemFactory(journeymanWoolCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.WHEAT, 20, 16, 30), new BuyForOneEmeraldFactory(ModItems.FLAX_STEM, 20, 16, 30), new SellItemFactory(expertBanner, 1, 3, 15), 
-                    new SellItemFactory(Items.PAINTING, 2, 3, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 8, 3, 15)}, 
+                    new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.WOOL_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_CHESTPLATE, 8, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_HELMET, 6, 3, 15, true), 
