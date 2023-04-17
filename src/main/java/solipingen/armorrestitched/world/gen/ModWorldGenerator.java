@@ -8,6 +8,7 @@ public class ModWorldGenerator {
 
     public static void generateModWorldGen() {
 
+        ModEntityGenerator.addSpawns();
         ModPlantGenerator.generatePlants();
 
 

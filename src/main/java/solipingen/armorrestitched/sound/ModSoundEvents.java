@@ -24,6 +24,9 @@ public class ModSoundEvents {
     public static final SoundEvent LLAMA_SHEARED = ModSoundEvents.registerSoundEvent("llama_sheared");
     public static final SoundEvent DRESSER_WORKS = ModSoundEvents.registerSoundEvent("dresser_works");
 
+    public static final SoundEvent SILK_MOTH_HURT = ModSoundEvents.registerSoundEvent("silk_moth_hurt");
+    public static final SoundEvent SILK_MOTH_DEATH = ModSoundEvents.registerSoundEvent("silk_moth_death");
+
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(ArmorRestitched.MOD_ID, name);

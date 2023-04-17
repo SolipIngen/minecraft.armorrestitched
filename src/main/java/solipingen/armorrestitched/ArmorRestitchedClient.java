@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import solipingen.armorrestitched.client.render.block.ModBlockRenderLayers;
+import solipingen.armorrestitched.client.render.entity.ModEntityRendererRegistry;
 import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayers;
 
 
@@ -16,6 +17,7 @@ public class ArmorRestitchedClient implements ClientModInitializer {
 
         ModBlockRenderLayers.registerModBlockRenderLayers();
         ModEntityModelLayers.registerModEntityLayers();
+        ModEntityRendererRegistry.registerModEntityRenderers();
         
     }
 

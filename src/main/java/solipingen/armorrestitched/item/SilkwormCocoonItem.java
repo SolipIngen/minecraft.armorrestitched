@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,7 +30,7 @@ public class SilkwormCocoonItem extends Item {
         PlayerEntity playerEntity = context.getPlayer();
         BlockState blockState = world.getBlockState(blockPos);
         ItemStack itemStack = context.getStack();
-        if (blockState.isOf(ModBlocks.MULBERRY_LEAVES) && !itemStack.isEmpty()) {
+        if (blockState.isOf(ModBlocks.MULBERRY_LEAVES) && !blockState.get(Properties.WATERLOGGED) && !itemStack.isEmpty()) {
             world.setBlockState(blockPos, ModBlocks.MULBERRY_SILKWORM_LEAVES.getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
             world.playSound(null, blockPos, SoundEvents.BLOCK_CAVE_VINES_PLACE, SoundCategory.BLOCKS);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity));

@@ -6,11 +6,13 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.block.ModBlocks;
+import solipingen.armorrestitched.entity.ModEntityTypes;
 
 
 public class ModItems {
@@ -140,6 +142,9 @@ public class ModItems {
     
     public static final Item COOKED_SILKWORM_PUPA = ModItems.registerItem("cooked_silkworm_pupa", 
         new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_SILKWORM_PUPA)));
+
+    public static final Item SILK_MOTH_SPAWN_EGG = ModItems.registerItem("silk_moth_spawn_egg", 
+        new SpawnEggItem(ModEntityTypes.SILK_MOTH_ENTITY, 0xf4ebd5, 0xddd0ad, new FabricItemSettings()));
 
 
     private static Item registerItem(String name, Item item) {

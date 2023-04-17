@@ -25,6 +25,8 @@ public class ModEntityModelLayers {
     public static final EntityModelLayer VILLAGER_FEET_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "villager_feet_armor"), "main");
     public static final EntityModelLayer VILLAGER_CHEST_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "villager_chest_armor"), "main");
 
+    public static final EntityModelLayer SILK_MOTH_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "silk_moth"), "main");
+
     
     public static void registerModEntityLayers() {
 
@@ -40,6 +42,8 @@ public class ModEntityModelLayers {
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_FEET_ARMOR_LAYER, VillagerArmorEntityModel::getFeetArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(VILLAGER_CHEST_ARMOR_LAYER, VillagerArmorEntityModel::getChestArmorTexturedModelData);
 
+        EntityModelLayerRegistry.registerModelLayer(SILK_MOTH_LAYER, SilkMothEntityModel::getTexturedModelData);
+        
 
         ArmorRestitched.LOGGER.debug("Registering Mod Entity Model Layers for " + ArmorRestitched.MOD_ID);
 

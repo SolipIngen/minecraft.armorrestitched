@@ -193,8 +193,10 @@
     "item.armorrestitched.silk": "Silk", 
     "item.armorrestitched.silkworm_cocoon": "Silkworm Cocoon", 
     "item.armorrestitched.cooked_silkworm_pupa": "Cooked Silkworm Pupa", 
+    "item.armorrestitched.silk_moth_spawn_egg": "Silk Moth Spawn Egg", 
 
     "entity.minecraft.villager.dresser": "Dresser", 
+    "entity.armorrestitched.silk_moth": "Silk Moth", 
 
     "enchantment.armorrestitched.impact_protection": "Impact Protection", 
     "enchantment.armorrestitched.soaring": "Soaring", 
@@ -212,6 +214,8 @@
     "subtitles.armorrestitched.scutcher_used": "Scutcher used", 
     "subtitles.armorrestitched.llama_sheared": "Llama sheared", 
     "subtitles.armorrestitched.dresser_works": "Dresser dresses", 
+    "subtitles.armorrestitched.silk_moth_hurt": "Silk Moth hurts", 
+    "subtitles.armorrestitched.silk_moth_death": "Silk Moth dies", 
 
     "advancements.story.obtain_clothing.description": "Obtain additional clothes", 
     "advancements.story.obtain_clothing.title": "Dressed Up", 
