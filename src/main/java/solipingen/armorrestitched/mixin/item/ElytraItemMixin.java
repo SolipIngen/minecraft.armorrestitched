@@ -44,7 +44,7 @@ public abstract class ElytraItemMixin extends Item implements Equipment {
 
     @Override
     public int getEnchantability() {
-        return 10;
+        return 8;
     }
 
 

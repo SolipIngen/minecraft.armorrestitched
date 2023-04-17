@@ -22,7 +22,7 @@ public abstract class SpiderEntityMixin extends HostileEntity {
     }
 
     @Redirect(method = "createSpiderAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;add(Lnet/minecraft/entity/attribute/EntityAttribute;D)Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"))
-    private static DefaultAttributeContainer.Builder redirectedCreateIronGolemAttributes(DefaultAttributeContainer.Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
+    private static DefaultAttributeContainer.Builder redirectedCreateSpiderAttributes(DefaultAttributeContainer.Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
         if (entityAttribute == EntityAttributes.GENERIC_MAX_HEALTH) {
             return attributeBuilder.add(entityAttribute, baseValue).add(EntityAttributes.GENERIC_ARMOR, 4.0);
         }

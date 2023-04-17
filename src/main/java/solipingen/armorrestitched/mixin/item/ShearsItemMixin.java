@@ -46,7 +46,7 @@ public abstract class ShearsItemMixin extends Item {
             || state.isOf(Blocks.DEAD_BUSH) || state.isOf(Blocks.HANGING_ROOTS) || state.isOf(Blocks.VINE) || state.isOf(Blocks.GLOW_LICHEN) 
             || state.isIn(BlockTags.WOOL) || state.isIn(BlockTags.WOOL_CARPETS) || state.isIn(ModBlockTags.COTTON) || state.isIn(ModBlockTags.COTTON_CARPETS) || state.isIn(ModBlockTags.FUR) || state.isIn(ModBlockTags.FUR_CARPETS)
             || state.isIn(ModBlockTags.LINEN) || state.isIn(ModBlockTags.LINEN_CARPETS) || state.isIn(ModBlockTags.SILK) || state.isIn(ModBlockTags.SILK_CARPETS)
-            || state.isOf(Blocks.REDSTONE_WIRE) || state.isOf(Blocks.TRIPWIRE) ;
+            || state.isOf(Blocks.REDSTONE_WIRE) || state.isOf(Blocks.TRIPWIRE);
         cbireturn.setReturnValue(bl);
     }
 

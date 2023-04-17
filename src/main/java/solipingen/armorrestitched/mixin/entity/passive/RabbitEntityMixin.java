@@ -22,7 +22,7 @@ public abstract class RabbitEntityMixin extends AnimalEntity {
     }
 
     @Redirect(method = "createRabbitAttributes", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;add(Lnet/minecraft/entity/attribute/EntityAttribute;D)Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"))
-    private static DefaultAttributeContainer.Builder redirectedCreateIronGolemAttributes(DefaultAttributeContainer.Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
+    private static DefaultAttributeContainer.Builder redirectedCreateRabbitAttributes(DefaultAttributeContainer.Builder attributeBuilder, EntityAttribute entityAttribute, double baseValue) {
         if (entityAttribute == EntityAttributes.GENERIC_MAX_HEALTH) {
             return attributeBuilder.add(entityAttribute, 6.0).add(EntityAttributes.GENERIC_ARMOR, 2.0);
         }

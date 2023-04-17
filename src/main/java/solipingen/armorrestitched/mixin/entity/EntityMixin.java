@@ -56,7 +56,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 
     @Inject(method = "onStruckByLightning", at = @At("HEAD"), cancellable = true)
     private void injectedOnStruckByLightning(ServerWorld world, LightningEntity lightning, CallbackInfo cbi) {
-        double randomFactor = Math.abs(lightning.world.random.nextGaussian() + 1.0);
+        double randomFactor = Math.abs(lightning.world.random.nextGaussian()) + 1.0;
         float damageAmount = (float)randomFactor*5.0f*lightning.world.getDifficulty().getId();
         if (((Entity)(Object)this) instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity)(Object)this;
@@ -90,7 +90,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
                     livingEntity.setOnFireFor(8);
                 }
             }
-            livingEntity.damage(livingEntity.getDamageSources().lightningBolt(), damageAmount);
+            livingEntity.damage(lightning.getDamageSources().lightningBolt(), damageAmount);
             cbi.cancel();
         }
     }

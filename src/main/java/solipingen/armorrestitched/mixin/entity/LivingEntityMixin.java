@@ -32,6 +32,8 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -47,6 +49,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -208,11 +211,11 @@ public abstract class LivingEntityMixin extends Entity {
                         break;
                     }
                     case LEGS: {
-                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, this.redstoneChargeTime, 0, true, false));
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, this.redstoneChargeTime, 0, true, false));
                         break;
                     }
                     case FEET: {
-                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, this.redstoneChargeTime, 0, true, false));
+                        ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, this.redstoneChargeTime, 0, true, false));
                         break;
                     }
                 }
@@ -311,6 +314,11 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    @Redirect(method = "applyArmorToDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
+    private boolean redirectedBypassesArmor(DamageSource source, TagKey<DamageType> tag) {
+        return source.isIn(tag) && !(source.isOf(DamageTypes.FALL) || source.isOf(DamageTypes.FLY_INTO_WALL));
+    }
+
     @Redirect(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getAttributeModifiers(Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))
     private Multimap<EntityAttribute, EntityAttributeModifier> redirectedAttributeModifiers(ItemStack itemStack, EquipmentSlot slot) {
         Multimap<EntityAttribute, EntityAttributeModifier> multimap = itemStack.getAttributeModifiers(slot);
@@ -322,7 +330,7 @@ public abstract class LivingEntityMixin extends Entity {
                     Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.25 : 0.5;
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.25 : 1.0;
                         EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
@@ -334,7 +342,7 @@ public abstract class LivingEntityMixin extends Entity {
                     Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.5 : 1.0;
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.5 : 2.0;
                         EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
@@ -346,7 +354,7 @@ public abstract class LivingEntityMixin extends Entity {
                     Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.25 : 0.5;
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 0.25 : 1.0;
                         EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
@@ -358,7 +366,7 @@ public abstract class LivingEntityMixin extends Entity {
                     Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 1.0 : 2.0;
+                        double addition = currentAttributeModifier.getName().matches("Armor toughness") ? 1.0 : 3.0;
                         EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
@@ -369,7 +377,7 @@ public abstract class LivingEntityMixin extends Entity {
                 else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
                     Collection<EntityAttributeModifier> currentAttributeModifiers = itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR);
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 1.0, currentAttributeModifier.getOperation());
+                        EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + 2.0, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);
                     }
@@ -379,7 +387,7 @@ public abstract class LivingEntityMixin extends Entity {
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
                     currentAttributeModifiers.addAll(itemStack.getAttributeModifiers(slot).get(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE));
                     for (EntityAttributeModifier currentAttributeModifier : currentAttributeModifiers) {
-                        double addition = currentAttributeModifier.getName().matches("Armor knockback resistance") ? 0.025 : (currentAttributeModifier.getName().matches("Armor toughness") ? 1.0 : 2.0);
+                        double addition = currentAttributeModifier.getName().matches("Armor knockback resistance") ? 0.025 : (currentAttributeModifier.getName().matches("Armor toughness") ? 1.0 : 3.0);
                         EntityAttributeModifier boostedAttributeModifier = new EntityAttributeModifier(currentAttributeModifier.getId(), currentAttributeModifier.getName(), currentAttributeModifier.getValue() + addition, currentAttributeModifier.getOperation());
                         multimap.remove(EntityAttributes.GENERIC_ARMOR, currentAttributeModifier);
                         multimap.put(EntityAttributes.GENERIC_ARMOR, boostedAttributeModifier);

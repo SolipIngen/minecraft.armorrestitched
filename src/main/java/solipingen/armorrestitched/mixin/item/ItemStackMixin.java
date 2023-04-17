@@ -59,22 +59,22 @@ public abstract class ItemStackMixin implements FabricItemStack {
                     RegistryEntry<ArmorTrimMaterial> trimMaterial = trimOptional.get().getMaterial();
                     double addition = 0.0;
                     if (trimMaterial.matchesKey(ArmorTrimMaterials.COPPER)) {
-                        addition = 0.5;
+                        addition = 1.0;
                     }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.IRON)) {
-                        addition = 1.0;
+                        addition = 2.0;
                     }
                     else if (trimMaterial.matchesKey(ArmorTrimMaterials.GOLD)) {
-                        addition = 0.5;
-                    }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
-                        addition = 2.0;
-                    }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
                         addition = 1.0;
                     }
-                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.DIAMOND)) {
+                        addition = 3.0;
+                    }
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.EMERALD)) {
                         addition = 2.0;
+                    }
+                    else if (trimMaterial.matchesKey(ArmorTrimMaterials.NETHERITE)) {
+                        addition = 3.0;
                     }
                     armorModifier = new EntityAttributeModifier(armorModifier.getId(), armorModifier.getName(), armorModifier.getValue() + addition, armorModifier.getOperation());
                 }
