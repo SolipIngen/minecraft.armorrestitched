@@ -1,4 +1,4 @@
-# Armor Restitched: a Minecraft Mod.
+# Armor Restitched: a Minecraft Mod
 
 
 ![armorrestitched_icon](https://user-images.githubusercontent.com/117603129/233825996-4582e2a0-d3f6-4367-87fe-68f2dbad9c3e.png)
