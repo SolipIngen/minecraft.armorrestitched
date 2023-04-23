@@ -19,9 +19,11 @@ public class ReplaceLootTableHandler implements LootTableEvents.Replace {
     private static final Identifier DUNGEON_CHEST_ID = new Identifier(ArmorRestitched.MOD_ID, "chests/simple_dungeon");
     private static final Identifier DESERT_PYRAMID_ID = new Identifier(ArmorRestitched.MOD_ID, "chests/desert_pyramid");
     private static final Identifier JUNGLE_TEMPLE_ID = new Identifier(ArmorRestitched.MOD_ID, "chests/jungle_temple");
+    private static final Identifier SHIPWRECK_MAP_ID = new Identifier(ArmorRestitched.MOD_ID, "chests/shipwreck_map");
+    private static final Identifier SHIPWRECK_SUPPLY_ID = new Identifier(ArmorRestitched.MOD_ID, "chests/shipwreck_supply");
     private static final Identifier[] ID_ARRAY = new Identifier[]{ 
         DUNGEON_CHEST_ID, DESERT_PYRAMID_ID, JUNGLE_TEMPLE_ID, 
-        ARMORER_VILLAGER_CHEST_ID, LEATHERWORKER_VILLAGER_CHEST_ID, SHEPHERD_VILLAGER_CHEST_ID
+        ARMORER_VILLAGER_CHEST_ID, LEATHERWORKER_VILLAGER_CHEST_ID, SHEPHERD_VILLAGER_CHEST_ID, SHIPWRECK_MAP_ID, SHIPWRECK_SUPPLY_ID
     };
 
 

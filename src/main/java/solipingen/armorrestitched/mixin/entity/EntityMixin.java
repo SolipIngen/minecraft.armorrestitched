@@ -65,7 +65,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
                 ItemStack equippedStack = livingEntity.getEquippedStack(slot);
-                if (equippedStack.getItem() instanceof ArmorItem && ((ArmorItem)equippedStack.getItem()).getMaterial() == ModArmorMaterials.COPPER) {
+                if (equippedStack.getItem() instanceof ArmorItem && ((ArmorItem)equippedStack.getItem()).getMaterial() == ModArmorMaterials.COPPER && livingEntity.isOnGround()) {
                     damageAmount *= 0.25f;
                     fireBl = false;
                 }

@@ -89,6 +89,9 @@ public abstract class LivingEntityMixin extends Entity {
     @Invoker("onStatusEffectUpgraded")
     public abstract void invokeOnStatusEffectUpgraded(StatusEffectInstance effect, boolean reapplyEffect, @Nullable Entity source);
 
+    @Invoker("clearPotionSwirls")
+    public abstract void invokeClearPotionSwirls();
+
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -495,6 +498,12 @@ public abstract class LivingEntityMixin extends Entity {
         else {
             cbireturn.setReturnValue(false);
         }
+    }
+
+    @Redirect(method = "updatePotionVisibility", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setInvisible(Z)V"))
+    private void redirectedPotionInvisbility(LivingEntity livingEntity, boolean hasInvisibility) {
+        livingEntity.setInvisible(hasInvisibility);
+        this.invokeClearPotionSwirls();
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))

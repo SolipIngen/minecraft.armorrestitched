@@ -54,6 +54,7 @@
     "entity.passive.SheepEntityMixin", 
     "entity.passive.TurtleEntityMixin", 
     "entity.passive.VillagerEntityMixin", 
+    "entity.player.PlayerInventoryMixin", 
     "entity.player.PlayerEntityMixin", 
     "entity.projectile.FireworkRocketEntityMixin", 
     "entity.DamageUtilMixin", 

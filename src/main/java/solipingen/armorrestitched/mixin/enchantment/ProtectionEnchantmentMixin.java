@@ -4,8 +4,11 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.ProtectionEnchantment;
@@ -44,6 +47,23 @@ public abstract class ProtectionEnchantmentMixin extends Enchantment {
             return source.isIn(damageTypeTag) || source.isOf(DamageTypes.FLY_INTO_WALL);
         }
         return source.isIn(damageTypeTag);
+    }
+
+    @Inject(method = "canAccept", at = @At("HEAD"), cancellable = true)
+    private void injectedCanAccept(Enchantment other, CallbackInfoReturnable<Boolean> cbireturn) {
+        if (other instanceof ProtectionEnchantment) {
+            ProtectionEnchantment protectionEnchantment = (ProtectionEnchantment)other;
+            if (((ProtectionEnchantment)(Object)this).protectionType == protectionEnchantment.protectionType) {
+                cbireturn.setReturnValue(false);
+            }
+            else {
+                cbireturn.setReturnValue(((ProtectionEnchantment)(Object)this).protectionType == ProtectionEnchantment.Type.ALL || ((ProtectionEnchantment)(Object)this).protectionType == ProtectionEnchantment.Type.FALL 
+                    || protectionEnchantment.protectionType == ProtectionEnchantment.Type.ALL || protectionEnchantment.protectionType == ProtectionEnchantment.Type.FALL);
+            }
+        }
+        else {
+            cbireturn.setReturnValue(super.canAccept(other));
+        }
     }
     
     @Override

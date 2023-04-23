@@ -12,6 +12,7 @@ public class ModFlammableBlockRegistry {
 
         flammableBlockRegistry.add(ModBlocks.MULBERRY_LEAVES, 30, 60);
         flammableBlockRegistry.add(ModBlocks.MULBERRY_SILKWORM_LEAVES, 30, 60);
+        flammableBlockRegistry.add(ModBlocks.FLAX_BLOCK, 30, 60);
 
         flammableBlockRegistry.add(ModBlockTags.COTTON, 5, 20);
         flammableBlockRegistry.add(ModBlockTags.COTTON_CARPETS, 5, 20);
