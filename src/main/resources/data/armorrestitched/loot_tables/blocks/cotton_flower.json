@@ -1,0 +1,61 @@
+{
+    "type": "minecraft:block",
+    "pools": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:alternatives",
+            "children": [
+              {
+                "type": "minecraft:item",
+                "conditions": [
+                  {
+                    "condition": "minecraft:alternative",
+                    "terms": [
+                      {
+                        "condition": "minecraft:match_tool",
+                        "predicate": {
+                          "items": [
+                            "minecraft:shears"
+                          ]
+                        }
+                      },
+                      {
+                        "condition": "minecraft:match_tool",
+                        "predicate": {
+                          "enchantments": [
+                            {
+                              "enchantment": "minecraft:silk_touch",
+                              "levels": {
+                                "min": 1
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "name": "armorrestitched:cotton_flower"
+              }, 
+              {
+                "type": "minecraft:item",
+                "conditions": [
+                  {
+                    "block": "armorrestitched:flax_flower",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "half": "lower"
+                    }
+                  }
+                ],
+                "name": "armorrestitched:cotton_seeds"
+              }
+            ]
+          }
+        ],
+        "rolls": 1.0
+      }
+    ]
+}

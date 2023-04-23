@@ -15,7 +15,7 @@ import net.minecraft.client.render.entity.model.IllagerEntityModel;
 import net.minecraft.entity.mob.IllagerEntity;
 import solipingen.armorrestitched.client.render.entity.feature.IllagerArmorFeatureRenderer;
 import solipingen.armorrestitched.client.render.entity.model.IllagerArmorEntityModel;
-import solipingen.armorrestitched.client.render.entity.model.ModEntityLayers;
+import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayers;
 
 
 @Mixin(IllagerEntityRenderer.class)
@@ -31,10 +31,10 @@ public abstract class IllagerEntityRendererMixin<T extends IllagerEntity> extend
     @Inject(method = "<init>", at = @At("TAIL"))
     private void injectedInit(EntityRendererFactory.Context context, IllagerEntityModel<T> model, float shadowRadius, CallbackInfo cbi) {
         this.addFeature(new IllagerArmorFeatureRenderer(this, 
-            new IllagerArmorEntityModel<>(context.getPart(ModEntityLayers.ILLAGER_CHEST_ARMOR_LAYER)), 
-            new IllagerArmorEntityModel<>(context.getPart(ModEntityLayers.ILLAGER_LEGS_ARMOR_LAYER)), 
-            new IllagerArmorEntityModel<>(context.getPart(ModEntityLayers.ILLAGER_HEAD_ARMOR_LAYER)), 
-            new IllagerArmorEntityModel<>(context.getPart(ModEntityLayers.ILLAGER_FEET_ARMOR_LAYER)), context.getModelManager()));
+            new IllagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.ILLAGER_CHEST_ARMOR_LAYER)), 
+            new IllagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.ILLAGER_LEGS_ARMOR_LAYER)), 
+            new IllagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.ILLAGER_HEAD_ARMOR_LAYER)), 
+            new IllagerArmorEntityModel<>(context.getPart(ModEntityModelLayers.ILLAGER_FEET_ARMOR_LAYER)), context.getModelManager()));
     }
 
     

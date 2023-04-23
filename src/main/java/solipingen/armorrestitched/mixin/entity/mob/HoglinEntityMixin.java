@@ -5,9 +5,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer.*;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.attribute.DefaultAttributeContainer.*;
 import net.minecraft.entity.mob.Hoglin;
 import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.Monster;

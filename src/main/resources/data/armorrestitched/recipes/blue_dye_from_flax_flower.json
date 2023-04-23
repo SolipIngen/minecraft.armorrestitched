@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "blue_dye",
+    "ingredients": [
+      {
+        "item": "armorrestitched:flax_flower"
+      }
+    ],
+    "result": {
+      "item": "minecraft:blue_dye",
+      "count": 2
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "type": "minecraft:gift",
+    "pools": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:leather"
+          }, 
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:white_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:orange_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:magenta_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_blue_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:yellow_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:lime_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:pink_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:gray_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_gray_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:cyan_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:purple_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:blue_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:brown_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:green_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:red_silk"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:black_silk"
+          }
+        ],
+        "rolls": 1.0
+      }
+    ]
+  }

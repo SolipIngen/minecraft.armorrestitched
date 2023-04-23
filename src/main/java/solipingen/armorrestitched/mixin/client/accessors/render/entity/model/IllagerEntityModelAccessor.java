@@ -13,6 +13,7 @@ import net.minecraft.client.render.entity.model.IllagerEntityModel;
 @Environment(value=EnvType.CLIENT)
 public interface IllagerEntityModelAccessor {
     
+    @Accessor("arms") public ModelPart getArms();
     @Accessor("rightLeg") public ModelPart getRightLeg();
     @Accessor("leftLeg") public ModelPart getLeftLeg();
     @Accessor("rightArm") public ModelPart getRightArm();

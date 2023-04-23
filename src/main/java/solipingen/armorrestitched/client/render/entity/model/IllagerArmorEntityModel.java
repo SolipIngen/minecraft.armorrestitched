@@ -25,6 +25,7 @@ import net.minecraft.util.math.MathHelper;
 public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePartEntityModel<T> implements ModelWithArms, ModelWithHead {
     private final ModelPart root;
     private final ModelPart head;
+    private final ModelPart arms;
     private final ModelPart leftLeg;
     private final ModelPart rightLeg;
     private final ModelPart rightArm;
@@ -36,6 +37,7 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
     public IllagerArmorEntityModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild(EntityModelPartNames.HEAD);
+        this.arms = root.getChild(EntityModelPartNames.ARMS);
         this.leftLeg = root.getChild(EntityModelPartNames.LEFT_LEG);
         this.rightLeg = root.getChild(EntityModelPartNames.RIGHT_LEG);
         this.leftArm = root.getChild(EntityModelPartNames.LEFT_ARM);
@@ -64,7 +66,8 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
             this.leftLeg.pitch = -1.4137167f;
             this.leftLeg.yaw = -0.31415927f;
             this.leftLeg.roll = -0.07853982f;
-        } else {
+        } 
+        else {
             this.rightArm.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f;
             this.rightArm.yaw = 0.0f;
             this.rightArm.roll = 0.0f;
@@ -125,6 +128,7 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
             this.leftArm.yaw = 0.0f;
         }
         boolean bl = state == IllagerEntity.State.CROSSED;
+        this.arms.visible = bl;
         this.leftArm.visible = !bl;
         this.rightArm.visible = !bl;
     }
@@ -133,10 +137,11 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, INNER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.2f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.2f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.ARMS, ModelPartBuilder.create().uv(40, 16).cuboid(-8.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f).uv(40, 16).mirrored().cuboid(4.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f), ModelTransform.of(0.0f, 3.0f, -1.0f, -0.75f, 0.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.1f)), ModelTransform.pivot(-1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, INNER_DILATION.add(0.0997f)), ModelTransform.pivot(1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, INNER_DILATION.add(0.15f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, INNER_DILATION.add(0.15f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
     }
 
@@ -144,10 +149,11 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.ARMS, ModelPartBuilder.create().uv(40, 16).cuboid(-8.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f).uv(40, 16).mirrored().cuboid(4.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f), ModelTransform.of(0.0f, 3.0f, -1.0f, -0.75f, 0.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.0997f)), ModelTransform.pivot(1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
     }
 
@@ -155,10 +161,11 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.099f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.ARMS, ModelPartBuilder.create().uv(40, 16).cuboid(-8.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f).uv(40, 16).mirrored().cuboid(4.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f), ModelTransform.of(0.0f, 3.0f, -1.0f, -0.75f, 0.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.0997f)), ModelTransform.pivot(1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 0.0f, 0.0f, 0.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
     }
 
@@ -167,16 +174,21 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
         ModelPartData modelPartData = modelData.getRoot();
         modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -10.0f, -4.0f, 8.0f, 8.0f, 8.0f, OUTER_DILATION), ModelTransform.NONE);
         modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(16, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.NONE);
-        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
-        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.ARMS, ModelPartBuilder.create().uv(40, 16).cuboid(-8.0f, -2.0f, -2.0f, 4.0f, 8.0f, 4.0f, OUTER_DILATION.add(0.15f)).uv(40, 16).mirrored().cuboid(4.0f, -2.0f, -2.0f, 4.0f, 8.0f, 4.0f, OUTER_DILATION.add(0.2f)), ModelTransform.of(0.0f, 3.0f, -1.0f, -0.75f, 0.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.1f)), ModelTransform.pivot(-1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.0997f)), ModelTransform.pivot(1.9f, 12.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(40, 16).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
+        modelPartData.addChild(EntityModelPartNames.LEFT_ARM, ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, OUTER_DILATION.add(0.15f)), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
         return TexturedModelData.of(modelData, 64, 32);
     }
 
     @Override
     public ModelPart getHead() {
         return this.head;
+    }
+
+    public ModelPart getArms() {
+        return this.arms;
     }
 
     public ModelPart getRightLeg() {

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "armorrestitched",
-  "version": "0.2.0-1.19.4",
+  "version": "0.1.0-1.19.4",
 
   "name": "Armor Restitched",
-  "description": "A mod that adds to and tweaks most things related to armor. Included are copper armor and other new sets of armor, changes to armor mechanics and mob armor behavior. Recommended with Progressive Archery, and/or Spears, Axes, Swords, Shields, and Other Tools. There are mobs outside, dress for the occasion!",
+  "description": "A mod that adds to and tweaks most things related to armor. Features include copper and clothing-based armor sets, changes to armor mechanics, and mob armor behavior. There are mobs outside, dress for the occasion!",
   "authors": [
     "SolipIngen"
   ],
@@ -23,6 +23,9 @@
     ],
     "client": [
       "solipingen.armorrestitched.ArmorRestitchedClient"
+    ],
+    "fabric-datagen": [
+      "solipingen.armorrestitched.ArmorRestitchedDataGenerator"
     ]
   },
   "mixins": [
@@ -32,10 +35,13 @@
   "depends": {
     "fabricloader": ">=0.14.11",
     "fabric-api": "*",
-    "minecraft": ">=1.19.3",
+    "minecraft": ">=1.19.4",
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
+    "another-mod": [
+      "progressivearchery",
+      "sassot"
+    ]
   }
 }

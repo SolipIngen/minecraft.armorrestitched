@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:red_dye"
+    },
+    {
+      "item": "armorrestitched:white_silk"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:red_silk"
+  }
+}

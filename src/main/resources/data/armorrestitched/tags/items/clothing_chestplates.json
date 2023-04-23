@@ -1,6 +1,12 @@
 {
     "replace": false,
     "values": [
-        "minecraft:leather_chestplate"
+        "minecraft:leather_chestplate", 
+        "armorrestitched:cotton_chestplate", 
+        "armorrestitched:fur_chestplate", 
+        "armorrestitched:linen_chestplate", 
+        "armorrestitched:silk_chestplate", 
+        "armorrestitched:wool_chestplate", 
+        "armorrestitched:paper_chestplate"
     ]
 }

@@ -2,8 +2,11 @@ package solipingen.armorrestitched.mixin.entity.passive;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -11,17 +14,13 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.InteractionObserver;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -34,29 +33,30 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
+import net.minecraft.item.trim.ArmorTrim;
+import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.village.TradeOffer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerDataContainer;
+import net.minecraft.village.VillagerGossips;
 import net.minecraft.village.VillagerProfession;
-import net.minecraft.village.TradeOffers.BuyForOneEmeraldFactory;
 import net.minecraft.village.TradeOffers.Factory;
-import net.minecraft.village.TradeOffers.SellEnchantedToolFactory;
-import net.minecraft.village.TradeOffers.SellItemFactory;
 import net.minecraft.world.World;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 import solipingen.armorrestitched.item.ModItems;
+import solipingen.armorrestitched.village.ModVillagerProfessions;
 
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin extends MerchantEntity implements InteractionObserver, VillagerDataContainer {
+    @Shadow @Final private VillagerGossips gossip;
+
 
     @Invoker("sayNo")
     public abstract void invokeSayNo();
@@ -65,7 +65,6 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
     public VillagerEntityMixin(EntityType<? extends MerchantEntity> entityType, World world) {
         super(entityType, world);
     }
-    
 
     @Inject(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/VillagerEntity;isBaby()Z"), cancellable = true)
     private void injectedInteractMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cbireturn) {
@@ -91,71 +90,18 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         VillagerData villagerData = this.getVillagerData();
         Map<VillagerProfession, Int2ObjectMap<Factory[]>> tradeOffers = TradeOffers.PROFESSION_TO_LEVELED_TRADE;
         if (villagerData.getProfession() == VillagerProfession.ARMORER) {
-            VillagerEntityMixin.replaceArmorerProfessionToLeveledTrade(tradeOffers);
+            ModVillagerProfessions.replaceArmorerProfessionToLeveledTrade(tradeOffers);
         }
         else if (villagerData.getProfession() == VillagerProfession.LEATHERWORKER) {
-            VillagerEntityMixin.replaceLeatherworkerProfessionToLeveledTrade(tradeOffers, this);
+            ModVillagerProfessions.replaceLeatherworkerProfessionToLeveledTrade(tradeOffers, this);
+        }
+        else if (villagerData.getProfession() == VillagerProfession.SHEPHERD) {
+            ModVillagerProfessions.replaceShepherdProfessionToLeveledTrade(tradeOffers, this);
+        }
+        else if (villagerData.getProfession() == ModVillagerProfessions.DRESSER) {
+            ModVillagerProfessions.putDresserTradeOffers(tradeOffers, this);
         }
         return tradeOffers.get(villagerData.getProfession());
-    }
-
-    private static void replaceArmorerProfessionToLeveledTrade(Map<VillagerProfession, Int2ObjectMap<Factory[]>> originalTradeOffers) {
-        originalTradeOffers.replace(VillagerProfession.ARMORER, VillagerEntityMixin.copyToFastUtilMap(
-            ImmutableMap.of(
-                1, new Factory[]{new BuyForOneEmeraldFactory(Items.COAL, 15, 16, 2), new BuyForOneEmeraldFactory(Items.CHARCOAL, 15, 16, 2), 
-                    new BuyForOneEmeraldFactory(Items.STICK, 60, 16, 2), new BuyForOneEmeraldFactory(Items.TINTED_GLASS, 2, 16, 2), 
-                    new BuyForOneEmeraldFactory(Items.SMOOTH_STONE_SLAB, 8, 16, 2)}, 
-                2, new Factory[]{new BuyForOneEmeraldFactory(Items.COPPER_INGOT, 8, 12, 10), new BuyForOneEmeraldFactory(Items.LAVA_BUCKET, 1, 12, 10), 
-                    new SellItemFactory(ModItems.COPPER_HELMET, 2, 1, 5), new SellItemFactory(ModItems.COPPER_CHESTPLATE, 4, 1, 5), 
-                    new SellItemFactory(ModItems.COPPER_LEGGINGS, 3, 1, 5), new SellItemFactory(ModItems.COPPER_BOOTS, 2, 1, 5), 
-                    new SellItemFactory(ModItems.COPPER_HORSE_ARMOR, 11, 1, 3, 5)}, 
-                3, new Factory[]{new BuyForOneEmeraldFactory(Items.GOLD_INGOT, 2, 12, 20), 
-                    new SellItemFactory(Items.GOLDEN_HELMET, 5, 1, 10), new SellItemFactory(Items.GOLDEN_CHESTPLATE, 9, 1, 10), 
-                    new SellItemFactory(Items.GOLDEN_LEGGINGS, 7, 1, 10), new SellItemFactory(Items.GOLDEN_BOOTS, 4, 1, 10), 
-                    new SellItemFactory(Items.GOLDEN_HORSE_ARMOR, 17, 1, 3, 10), 
-                    new SellItemFactory(Items.CHAINMAIL_HELMET, 2, 1, 10), new SellItemFactory(Items.CHAINMAIL_CHESTPLATE, 4, 1, 10), 
-                    new SellItemFactory(Items.CHAINMAIL_LEGGINGS, 3, 1, 10), new SellItemFactory(Items.CHAINMAIL_BOOTS, 2, 1, 10)}, 
-                4, new Factory[]{new BuyForOneEmeraldFactory(Items.IRON_INGOT, 4, 12, 30), 
-                    new SellItemFactory(Items.IRON_HELMET, 5, 1, 15), new SellItemFactory(Items.IRON_CHESTPLATE, 9, 1, 15), 
-                    new SellItemFactory(Items.IRON_LEGGINGS, 7, 1, 15), new SellItemFactory(Items.IRON_BOOTS, 4, 1, 15), 
-                    new SellItemFactory(Items.IRON_HORSE_ARMOR, 17, 1, 3, 15)}, 
-                5, new Factory[]{new BuyForOneEmeraldFactory(Items.DIAMOND, 1, 12, 30), 
-                    new SellEnchantedToolFactory(Items.DIAMOND_HELMET, 13, 3, 15), new SellEnchantedToolFactory(Items.DIAMOND_CHESTPLATE, 21, 3, 15), 
-                    new SellEnchantedToolFactory(Items.DIAMOND_LEGGINGS, 19, 3, 15), new SellEnchantedToolFactory(Items.DIAMOND_BOOTS, 13, 3, 15), 
-                    new SellItemFactory(Items.DIAMOND_HORSE_ARMOR, 32, 1, 3, 15)}
-                )
-            )
-	    );
-    }
-
-    private static void replaceLeatherworkerProfessionToLeveledTrade(Map<VillagerProfession, Int2ObjectMap<Factory[]>> originalTradeOffers, LivingEntity villager) {
-        ArrayList<DyeItem> dyeItemList = new ArrayList<DyeItem>();
-        for (Item item : Registries.ITEM) {
-            if (item instanceof DyeItem) {
-                dyeItemList.add(((DyeItem)item));
-            }
-        }
-        originalTradeOffers.replace(VillagerProfession.LEATHERWORKER, VillagerEntityMixin.copyToFastUtilMap(
-            ImmutableMap.of(
-                1, new Factory[]{new BuyForOneEmeraldFactory(Items.LEATHER, 6, 16, 2), new BuyForOneEmeraldFactory(Items.RABBIT_HIDE, 9, 16, 2), 
-                    new SellItemFactory(Items.LEATHER_HELMET, 2, 1, 1), new SellItemFactory(Items.LEATHER_CHESTPLATE, 4, 1, 1), 
-                    new SellItemFactory(Items.LEATHER_LEGGINGS, 3, 1, 1), new SellItemFactory(Items.LEATHER_BOOTS, 2, 1, 1)}, 
-                2, new Factory[]{new BuyForOneEmeraldFactory(dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size())), 4, 12, 10), 
-                    new SellDyedItemFactory(Items.LEATHER_HELMET, 3, 12, 5, false), new SellDyedItemFactory(Items.LEATHER_CHESTPLATE, 5, 12, 5, false), 
-                    new SellDyedItemFactory(Items.LEATHER_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(Items.LEATHER_BOOTS, 3, 12, 5, false), 
-                    new SellItemFactory(Items.ITEM_FRAME, 1, 8, 12, 5)}, 
-                3, new Factory[]{new BuyForOneEmeraldFactory(Items.WATER_BUCKET, 1, 12, 20), new BuyForOneEmeraldFactory(Items.TRIPWIRE_HOOK, 2, 12, 20), 
-                    new SellItemFactory(Items.SADDLE, 6, 1, 10)}, 
-                4, new Factory[]{new BuyForOneEmeraldFactory(Items.SCUTE, 1, 12, 30), new BuyForOneEmeraldFactory(Items.FLINT, 13, 12, 30), 
-                    new SellItemFactory(Items.TURTLE_HELMET, 9, 3, 15), new SellDyedItemFactory(Items.LEATHER_HORSE_ARMOR, 6, 12, 15, false)}, 
-                5, new Factory[]{new SellDyedItemFactory(Items.LEATHER_HELMET, 4, 3, 15, true), 
-                    new SellDyedItemFactory(Items.LEATHER_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(Items.LEATHER_HELMET, 6, 3, 15, true), 
-                    new SellDyedItemFactory(Items.LEATHER_BOOTS, 4, 3, 15, true), 
-                    new SellEnchantedToolFactory(Items.TURTLE_HELMET, 9, 3, 15)}
-                )
-            )
-	    );
     }
 
     @Inject(method = "talkWithVillager", at = @At("TAIL"))
@@ -164,22 +110,22 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
             int leatherworkerLevel = villager.getVillagerData().getLevel();
             if (leatherworkerLevel >= 1) {
                 if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
-                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(Items.LEATHER_BOOTS, false));
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_BOOTS : ModItems.SILK_BOOTS, false));
                 }
             }
             if (leatherworkerLevel >= 2) {
                 if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
-                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(Items.LEATHER_HELMET, false));
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_HELMET : ModItems.SILK_HELMET, false));
                 }
             }
             if (leatherworkerLevel >= 3) {
                 if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
-                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(Items.LEATHER_LEGGINGS, false));
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_LEGGINGS : ModItems.SILK_LEGGINGS, false));
                 }
             }
             if (leatherworkerLevel >= 4) {
                 if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
-                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(Items.LEATHER_CHESTPLATE, false));
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_CHESTPLATE : ModItems.SILK_CHESTPLATE, false));
                 }
             }
             if (leatherworkerLevel == 5) {
@@ -187,16 +133,102 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
                     if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
                     if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
                         if (slot == EquipmentSlot.HEAD) {
-                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(Items.LEATHER_HELMET, true));
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_HELMET : ModItems.SILK_HELMET, true));
                         }
                         else if (slot == EquipmentSlot.CHEST) {
-                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(Items.LEATHER_CHESTPLATE, true));
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_CHESTPLATE : ModItems.SILK_CHESTPLATE, true));
                         }
                         else if (slot == EquipmentSlot.LEGS) {
-                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(Items.LEATHER_LEGGINGS, true));
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_LEGGINGS : ModItems.SILK_LEGGINGS, true));
                         }
                         else if (slot == EquipmentSlot.FEET) {
-                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(Items.LEATHER_BOOTS, true));
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? Items.LEATHER_BOOTS : ModItems.SILK_BOOTS, true));
+                        }
+                    }
+                    this.setEquipmentDropChance(slot, 0.0f);
+                }
+            }
+        }
+        else if (villager.getVillagerData().getProfession() == VillagerProfession.SHEPHERD && !this.isBaby()) {
+            int shepherdLevel = villager.getVillagerData().getLevel();
+            if (shepherdLevel >= 1) {
+                if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(ModItems.WOOL_BOOTS, false));
+                }
+            }
+            if (shepherdLevel >= 2) {
+                if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(ModItems.WOOL_HELMET, false));
+                }
+            }
+            if (shepherdLevel >= 3) {
+                if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(ModItems.WOOL_LEGGINGS, false));
+                }
+            }
+            if (shepherdLevel >= 4) {
+                if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(ModItems.WOOL_CHESTPLATE, false));
+                }
+            }
+            if (shepherdLevel == 5) {
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                    if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
+                        if (slot == EquipmentSlot.HEAD) {
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(ModItems.WOOL_HELMET, true));
+                        }
+                        else if (slot == EquipmentSlot.CHEST) {
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(ModItems.WOOL_CHESTPLATE, true));
+                        }
+                        else if (slot == EquipmentSlot.LEGS) {
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(ModItems.WOOL_LEGGINGS, true));
+                        }
+                        else if (slot == EquipmentSlot.FEET) {
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(ModItems.WOOL_BOOTS, true));
+                        }
+                    }
+                    this.setEquipmentDropChance(slot, 0.0f);
+                }
+            }
+        }
+        else if (villager.getVillagerData().getProfession() == ModVillagerProfessions.DRESSER && !this.isBaby()) {
+            int weaverLevel = villager.getVillagerData().getLevel();
+            if (weaverLevel >= 1) {
+                if (this.getEquippedStack(EquipmentSlot.FEET).isEmpty()) {
+                    this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_BOOTS : ModItems.LINEN_BOOTS, false));
+                }
+            }
+            if (weaverLevel >= 2) {
+                if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+                    this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_HELMET : ModItems.LINEN_HELMET, false));
+                }
+            }
+            if (weaverLevel >= 3) {
+                if (this.getEquippedStack(EquipmentSlot.LEGS).isEmpty()) {
+                    this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_LEGGINGS : ModItems.LINEN_LEGGINGS, false));
+                }
+            }
+            if (weaverLevel >= 4) {
+                if (this.getEquippedStack(EquipmentSlot.CHEST).isEmpty()) {
+                    this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_CHESTPLATE : ModItems.LINEN_CHESTPLATE, false));
+                }
+            }
+            if (weaverLevel == 5) {
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                    if (this.getEquippedStack(slot).isEmpty() || !this.getEquippedStack(slot).hasEnchantments()) {
+                        if (slot == EquipmentSlot.HEAD) {
+                            this.equipStack(EquipmentSlot.HEAD, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_HELMET : ModItems.LINEN_HELMET, true));
+                        }
+                        else if (slot == EquipmentSlot.CHEST) {
+                            this.equipStack(EquipmentSlot.CHEST, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_CHESTPLATE : ModItems.LINEN_CHESTPLATE, true));
+                        }
+                        else if (slot == EquipmentSlot.LEGS) {
+                            this.equipStack(EquipmentSlot.LEGS, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_LEGGINGS : ModItems.LINEN_LEGGINGS, true));
+                        }
+                        else if (slot == EquipmentSlot.FEET) {
+                            this.equipStack(EquipmentSlot.FEET, this.getRandomlyDyedClothing(this.random.nextBoolean() ? ModItems.COTTON_BOOTS : ModItems.LINEN_BOOTS, true));
                         }
                     }
                     this.setEquipmentDropChance(slot, 0.0f);
@@ -316,17 +348,54 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         }
     }
 
+    @Inject(method = "getReputation", at = @At("HEAD"), cancellable = true)
+    private void injectedGetReputation(PlayerEntity player, CallbackInfoReturnable<Integer> cbireturn) {
+        int reputation = this.gossip.getReputationFor(player.getUuid(), gossipType -> true);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = player.getEquippedStack(slot);
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(player.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.EMERALD)) {
+                reputation += 1;
+                reputation = MathHelper.ceil(1.25f*reputation);
+            }
+        }
+        cbireturn.setReturnValue(reputation);
+    }
+
+    @Inject(method = "onStruckByLightning", at = @At("HEAD"), cancellable = true)
+    private void injectedOnStruckByLightning(ServerWorld world, LightningEntity lightning, CallbackInfo cbi) {
+        boolean bl = false;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            ItemStack equippedStack = this.getEquippedStack(slot);
+            if (equippedStack.getItem() instanceof ArmorItem && ((ArmorItem)equippedStack.getItem()).getMaterial() == ModArmorMaterials.COPPER) {
+                super.onStruckByLightning(world, lightning);
+                bl = true;
+            }
+            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
+            if (trimOptional.isEmpty()) continue;
+            if (trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.COPPER)) {
+                super.onStruckByLightning(world, lightning);
+                bl = true;
+            }
+        }
+        if (bl) {
+            cbi.cancel();
+        }
+    }
+
     private ItemStack getRandomlyDyedClothing(Item dyeableArmorItem, boolean enchanted) {
         if (dyeableArmorItem instanceof DyeableArmorItem) {
-            int i = 5 + random.nextInt(15);
+            int i = 5 + this.random.nextInt(15);
             ItemStack itemStack = new ItemStack(dyeableArmorItem);
             ArrayList<DyeItem> list = Lists.newArrayList();
-            list.add(SellDyedItemFactory.getDye(this.random));
-            if (random.nextFloat() > 0.7f) {
-                list.add(SellDyedItemFactory.getDye(this.random));
+            list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
+            if (this.random.nextFloat() > 0.7f) {
+                list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
             }
-            if (random.nextFloat() > 0.8f) {
-                list.add(SellDyedItemFactory.getDye(this.random));
+            if (this.random.nextFloat() > 0.8f) {
+                list.add(ModVillagerProfessions.SellDyedItemFactory.getDye(this.random));
             }
             itemStack = DyeableItem.blendAndSetColor(itemStack, list);
             if (enchanted) {
@@ -335,66 +404,6 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
             return itemStack;
         }
         return ItemStack.EMPTY;
-    }
-
-    private static Int2ObjectMap<Factory[]> copyToFastUtilMap(ImmutableMap<Integer, Factory[]> map) {
-        return new Int2ObjectOpenHashMap<Factory[]>(map);
-    }
-
-
-    public static class SellDyedItemFactory
-    implements Factory {
-        private final ItemStack armor;
-        private final int basePrice;
-        private final int maxUses;
-        private final int experience;
-        private final float multiplier;
-        private final boolean enchanted;
-
-
-        public SellDyedItemFactory(Item item, int basePrice, int maxUses, int experience, boolean enchanted) {
-            this(item, basePrice, maxUses, experience, 0.05f, enchanted);
-        }
-
-        public SellDyedItemFactory(Item item, int basePrice, int maxUses, int experience, float multiplier, boolean enchanted) {
-            this.armor = new ItemStack(item);
-            this.basePrice = basePrice;
-            this.maxUses = maxUses;
-            this.experience = experience;
-            this.multiplier = multiplier;
-            this.enchanted = enchanted;
-        }
-
-        @Override
-        public TradeOffer create(Entity entity, Random random) {
-            int i = 5 + random.nextInt(15);
-            ItemStack itemStack = this.armor;
-            if (itemStack.getItem() instanceof DyeableItem) {
-                ArrayList<DyeItem> list = Lists.newArrayList();
-                list.add(SellDyedItemFactory.getDye(random));
-                if (random.nextFloat() > 0.7f) {
-                    list.add(SellDyedItemFactory.getDye(random));
-                }
-                if (random.nextFloat() > 0.8f) {
-                    list.add(SellDyedItemFactory.getDye(random));
-                }
-                itemStack = DyeableItem.blendAndSetColor(itemStack, list);
-            }
-            if (this.enchanted) {
-                itemStack = EnchantmentHelper.enchant(random, itemStack, i, false);
-            }
-            int j = this.basePrice;
-            if (this.enchanted) {
-                j = Math.min(this.basePrice + i, 64);
-            }
-            ItemStack itemStack2 = new ItemStack(Items.EMERALD, j);
-            return new TradeOffer(itemStack2, itemStack, this.maxUses, this.experience, this.multiplier);
-        }
-    
-        private static DyeItem getDye(Random random) {
-            return DyeItem.byColor(DyeColor.byId(random.nextInt(16)));
-        }
-
     }
 
     

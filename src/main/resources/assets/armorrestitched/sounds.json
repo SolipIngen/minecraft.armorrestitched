@@ -1,4 +1,70 @@
 {
+    "cotton_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.cotton_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
+    "fur_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.fur_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
+    "linen_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.linen_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
+    "silk_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.silk_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
+    "wool_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.wool_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
+    "paper_clothing_equip": {
+        "subtitle": "subtitles.armorrestitched.paper_clothing_equip", 
+        "sounds": [
+            "minecraft:item/armor/equip_leather1", 
+            "minecraft:item/armor/equip_leather2", 
+            "minecraft:item/armor/equip_leather3", 
+            "minecraft:item/armor/equip_leather4", 
+            "minecraft:item/armor/equip_leather5", 
+            "minecraft:item/armor/equip_leather6"
+        ]
+    }, 
     "copper_armor_equip": {
         "subtitle": "subtitles.armorrestitched.copper_armor_equip", 
         "sounds": [
@@ -8,6 +74,62 @@
             "armorrestitched:copper_armor_equip_ver4", 
             "armorrestitched:copper_armor_equip_ver5", 
             "armorrestitched:copper_armor_equip_ver6"
+        ]
+    }, 
+    "cotton_pick": {
+        "subtitle": "subtitles.armorrestitched.cotton_pick", 
+        "sounds": [
+            "minecraft:item/sweet_berries/pick_from_bush1", 
+            "minecraft:item/sweet_berries/pick_from_bush2"
+        ]
+    }, 
+    "silkworm_harvest": {
+        "subtitle": "subtitles.armorrestitched.silkworm_harvest", 
+        "sounds": [
+            "minecraft:item/sweet_berries/pick_from_bush1", 
+            "minecraft:item/sweet_berries/pick_from_bush2"
+        ]
+    }, 
+    "cauldron_used": {
+        "subtitle": "subtitles.armorrestitched.cauldron_used", 
+        "sounds": [
+            "minecraft:block/cauldron/dye1", 
+            "minecraft:block/cauldron/dye2", 
+            "minecraft:block/cauldron/dye3"
+        ]
+    }, 
+    "scutcher_used": {
+        "subtitle": "subtitles.armorrestitched.scutcher_used", 
+        "sounds": [
+            "armorrestitched:scutcher_used"
+        ]
+    }, 
+    "llama_sheared": {
+        "subtitle": "subtitles.armorrestitched.llama_sheared", 
+        "sounds": [
+            "minecraft:mob/sheep/shear"
+        ]
+    }, 
+    "dresser_works": {
+        "subtitle": "subtitles.armorrestitched.dresser_works", 
+        "sounds": [
+            "armorrestitched:scutcher_used"
+        ]
+    }, 
+    "silk_moth_hurt": {
+        "subtitle": "subtitles.armorrestitched.silk_moth_hurt", 
+        "sounds": [
+            "minecraft:damage/hit1", 
+            "minecraft:damage/hit2", 
+            "minecraft:damage/hit3"
+        ]
+    }, 
+    "silk_moth_death": {
+        "subtitle": "subtitles.armorrestitched.silk_moth_death", 
+        "sounds": [
+            "minecraft:damage/hit1", 
+            "minecraft:damage/hit2", 
+            "minecraft:damage/hit3"
         ]
     }
 }

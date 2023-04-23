@@ -35,7 +35,7 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
             }
             cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*this.durabilityMultiplier);
         }
-        else if (type == ArmorItem.Type.HELMET && this.name.equals("iron")) {
+        else if (type != ArmorItem.Type.HELMET && this.name.equals("iron")) {
             cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*2*this.durabilityMultiplier);
         }
         else {
@@ -62,8 +62,8 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
         else if (this.name.equals("chainmail")) {
             newProtectionAmounts = Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 3);
-                map.put(ArmorItem.Type.LEGGINGS, 4);
-                map.put(ArmorItem.Type.CHESTPLATE, 4);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 5);
                 map.put(ArmorItem.Type.HELMET, 3);
             });
         }
@@ -144,7 +144,6 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
             cbireturn.setReturnValue(0.02f);
         }
     }
-    
 
 
 

@@ -9,7 +9,23 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 public class ModSoundEvents {
 
+    public static final SoundEvent COTTON_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("cotton_clothing_equip");
+    public static final SoundEvent FUR_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("fur_clothing_equip");
+    public static final SoundEvent LINEN_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("linen_clothing_equip");
+    public static final SoundEvent SILK_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("silk_clothing_equip");
+    public static final SoundEvent WOOL_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("wool_clothing_equip");
+    public static final SoundEvent PAPER_CLOTHING_EQUIP = ModSoundEvents.registerSoundEvent("paper_clothing_equip");
     public static final SoundEvent COPPER_ARMOR_EQUIP = ModSoundEvents.registerSoundEvent("copper_armor_equip");
+
+    public static final SoundEvent CAULDRON_USED = ModSoundEvents.registerSoundEvent("cauldron_used");
+    public static final SoundEvent COTTON_PICK = ModSoundEvents.registerSoundEvent("cotton_pick");
+    public static final SoundEvent SILKWORM_HARVEST = ModSoundEvents.registerSoundEvent("silkworm_harvest");
+    public static final SoundEvent SCUTCHER_USED = ModSoundEvents.registerSoundEvent("scutcher_used");
+    public static final SoundEvent LLAMA_SHEARED = ModSoundEvents.registerSoundEvent("llama_sheared");
+    public static final SoundEvent DRESSER_WORKS = ModSoundEvents.registerSoundEvent("dresser_works");
+
+    public static final SoundEvent SILK_MOTH_HURT = ModSoundEvents.registerSoundEvent("silk_moth_hurt");
+    public static final SoundEvent SILK_MOTH_DEATH = ModSoundEvents.registerSoundEvent("silk_moth_death");
 
 
     private static SoundEvent registerSoundEvent(String name) {

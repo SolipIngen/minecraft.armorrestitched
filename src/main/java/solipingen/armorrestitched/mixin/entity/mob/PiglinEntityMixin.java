@@ -43,6 +43,11 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
         }
     }
 
+    @ModifyConstant(method = "createPiglinAttributes", constant = @Constant(doubleValue = 16.0))
+    private static double modifiedHealth(double originald) {
+        return 20.0;
+    }
+
     @ModifyConstant(method = "equipAtChance", constant = @Constant(floatValue = 0.1f))
     private float modifiedEquipThreshold(float originalf, EquipmentSlot slot, ItemStack stack, Random random) {
         LocalDifficulty localDifficulty = this.world.getLocalDifficulty(this.getBlockPos());

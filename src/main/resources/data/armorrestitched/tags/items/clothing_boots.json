@@ -1,6 +1,12 @@
 {
     "replace": false,
     "values": [
-        "minecraft:leather_boots"
+        "minecraft:leather_boots", 
+        "armorrestitched:cotton_boots", 
+        "armorrestitched:fur_boots", 
+        "armorrestitched:linen_boots", 
+        "armorrestitched:silk_boots", 
+        "armorrestitched:wool_boots", 
+        "armorrestitched:paper_boots"
     ]
 }

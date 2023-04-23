@@ -15,7 +15,6 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 @Mixin(HorseArmorItem.class)
 public abstract class HorseArmorItemMixin extends Item {
-    @Shadow @Final private static String ENTITY_TEXTURE_PREFIX;
     @Shadow @Final private int bonus;
     @Shadow @Final private String entityTexture;
 

@@ -16,7 +16,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
-import solipingen.armorrestitched.item.armor.ModArmorMaterials;
+import solipingen.armorrestitched.item.ModArmorMaterials;
 
 
 @Mixin(ArmorFeatureRenderer.class)
@@ -30,9 +30,9 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
 
     @Inject(method = "getArmorTexture", at = @At("TAIL"), cancellable = true)
     private void injectedGetArmorTexture(ArmorItem item, boolean secondLayer, @Nullable String overlay, CallbackInfoReturnable<Identifier> cbireturn) {
-        if (item.getMaterial() == ModArmorMaterials.COPPER) {
-            Identifier copperArmorId = new Identifier(ArmorRestitched.MOD_ID, "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (secondLayer ? 2 : 1) + (String)(overlay == null ? "" : "_" + overlay) + ".png");
-            cbireturn.setReturnValue(copperArmorId);
+        if (item.getMaterial() instanceof ModArmorMaterials) {
+            Identifier modArmorId = new Identifier(ArmorRestitched.MOD_ID, "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (secondLayer ? 2 : 1) + (String)(overlay == null ? "" : "_" + overlay) + ".png");
+            cbireturn.setReturnValue(modArmorId);
         }
     }
 

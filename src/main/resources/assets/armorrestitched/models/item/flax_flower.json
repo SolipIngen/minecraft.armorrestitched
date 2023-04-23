@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "armorrestitched:block/flax_flower_top"
+    }
+}
