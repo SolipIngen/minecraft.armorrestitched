@@ -32,6 +32,11 @@ public abstract class MagmaCubeEntityMixin extends SlimeEntity {
         }
     }
 
+    @Override
+    public boolean hurtByWater() {
+        return true;
+    }
+
 
     
 }
