@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -500,10 +501,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Redirect(method = "updatePotionVisibility", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setInvisible(Z)V"))
-    private void redirectedPotionInvisbility(LivingEntity livingEntity, boolean hasInvisibility) {
-        livingEntity.setInvisible(hasInvisibility);
-        this.invokeClearPotionSwirls();
+    @Inject(method = "updatePotionVisibility", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setInvisible(Z)V", shift = At.Shift.AFTER), 
+        slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/potion/PotionUtil;getColor(Ljava/util/Collection;)I")))
+    private void injectedPotionInvisbility(CallbackInfo cbi) {
+        if (((LivingEntity)(Object)this).hasStatusEffect(StatusEffects.INVISIBILITY)) {
+            this.invokeClearPotionSwirls();
+        }
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
