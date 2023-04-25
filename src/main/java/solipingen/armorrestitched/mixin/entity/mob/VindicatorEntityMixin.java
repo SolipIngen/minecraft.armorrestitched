@@ -12,7 +12,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.IllagerEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VindicatorEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,8 +38,8 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
             int level = this.random.nextFloat() < 0.2f*this.world.getDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-                if (slot == EquipmentSlot.HEAD && this.getEquippedStack(slot) == Raid.getOminousBanner()) continue;
-                Item armorItem = MobEntity.getEquipmentForSlot(slot, level);
+                if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
+                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, level);
                 this.equipStack(slot, new ItemStack(armorItem));
             }
         }
@@ -48,27 +47,57 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
 
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
-        super.initEquipment(random, localDifficulty);
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+            if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
+            if (random.nextFloat() < 0.2f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty()) {
+                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*this.world.getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 1 : 2);
+                this.equipStack(slot, new ItemStack(armorItem));
+            }
+        }
         if (this.isPatrolLeader()) {
             this.equipStack(EquipmentSlot.HEAD, Raid.getOminousBanner());
             this.setEquipmentDropChance(EquipmentSlot.HEAD, 2.0f);
         }
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-            boolean randomBl = this.random.nextBoolean();
-            if (!randomBl || this.isPatrolLeader()) continue;
-            ItemStack equippedStack = this.getEquippedStack(slot);
-            if (equippedStack.isOf(Items.GOLDEN_HELMET)) {
-                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_HELMET));
+    }
+
+    @Nullable
+    private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
+        switch (equipmentSlot) {
+            case HEAD: {
+                if (equipmentLevel == 1) {
+                    return Items.CHAINMAIL_HELMET;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_HELMET;
+                }
             }
-            else if (equippedStack.isOf(Items.GOLDEN_CHESTPLATE)) {
-                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_CHESTPLATE));
+            case CHEST: {
+                if (equipmentLevel == 1) {
+                    return Items.CHAINMAIL_CHESTPLATE;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_CHESTPLATE;
+                }
             }
-            else if (equippedStack.isOf(Items.GOLDEN_LEGGINGS)) {
-                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_LEGGINGS));
+            case LEGS: {
+                if (equipmentLevel == 1) {
+                    return Items.CHAINMAIL_LEGGINGS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_LEGGINGS;
+                }
             }
-            else if (equippedStack.isOf(Items.GOLDEN_BOOTS)) {
-                this.equipStack(slot, new ItemStack(Items.CHAINMAIL_BOOTS));
+            case FEET: {
+                if (equipmentLevel == 1) {
+                    return Items.CHAINMAIL_BOOTS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_BOOTS;
+                }
+            }
+            default: {
+                return null;
             }
         }
     }

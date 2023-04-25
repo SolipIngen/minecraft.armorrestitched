@@ -105,11 +105,11 @@ public class ModVillagerProfessions {
                     new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.COTTON_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.COTTON_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.COTTON_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.COTTON_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.COTTON_BOOTS, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.LINEN_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.LINEN_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.LINEN_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.LINEN_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.LINEN_BOOTS, 4, 3, 15, true)}
             )
         ));
@@ -121,7 +121,7 @@ public class ModVillagerProfessions {
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(Items.COAL, 15, 16, 2), new BuyForOneEmeraldFactory(Items.CHARCOAL, 15, 16, 2), 
                     new BuyForOneEmeraldFactory(Items.STICK, 64, 16, 2), new BuyForOneEmeraldFactory(Items.TINTED_GLASS, 2, 16, 2), 
-                    new BuyForOneEmeraldFactory(Items.SMOOTH_STONE_SLAB, 8, 16, 2)}, 
+                    new BuyForOneEmeraldFactory(Items.SMOOTH_STONE_SLAB, 24, 16, 2)}, 
                 2, new Factory[]{new BuyForOneEmeraldFactory(Items.COPPER_INGOT, 8, 12, 10), new BuyForOneEmeraldFactory(Items.LAVA_BUCKET, 1, 12, 10), 
                     new SellItemFactory(ModItems.COPPER_HELMET, 2, 1, 5), new SellItemFactory(ModItems.COPPER_CHESTPLATE, 4, 1, 5), 
                     new SellItemFactory(ModItems.COPPER_LEGGINGS, 3, 1, 5), new SellItemFactory(ModItems.COPPER_BOOTS, 2, 1, 5), 
@@ -184,11 +184,11 @@ public class ModVillagerProfessions {
                     new SellItemFactory(expertWoolCarpet, 1, 32, 10)}, 
                 5, new Factory[]{new SellDyedItemFactory(Items.LEATHER_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(Items.LEATHER_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(Items.LEATHER_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(Items.LEATHER_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(Items.LEATHER_BOOTS, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.SILK_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.SILK_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.SILK_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.SILK_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.SILK_BOOTS, 4, 3, 15, true), 
                     new SellEnchantedToolFactory(Items.TURTLE_HELMET, 9, 3, 15)}
                 )
@@ -247,11 +247,11 @@ public class ModVillagerProfessions {
                     new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.WOOL_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.WOOL_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.WOOL_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_BOOTS, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.FUR_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.FUR_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.FUR_HELMET, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.FUR_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.FUR_BOOTS, 4, 3, 15, true)}
                 )
             )

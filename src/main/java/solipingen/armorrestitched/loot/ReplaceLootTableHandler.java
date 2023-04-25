@@ -31,12 +31,12 @@ public class ReplaceLootTableHandler implements LootTableEvents.Replace {
     @Nullable
     public LootTable replaceLootTable(ResourceManager resourceManager, LootManager lootManager, Identifier id, LootTable original, LootTableSource source) {
         for (Identifier modIdentifier : ID_ARRAY) {
-            if (id.getPath().matches(modIdentifier.getPath()) && (source == LootTableSource.VANILLA || source == LootTableSource.DATA_PACK)) {
+            if (modIdentifier.getPath().matches(id.getPath()) && (source.isBuiltin() || source == LootTableSource.DATA_PACK)) {
                 LootTable newTable = lootManager.getTable(modIdentifier);
                 return newTable;
             }
         }
-        return original;
+        return null;
     }
 
 
