@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.EntityData;
@@ -48,29 +48,30 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
         return 20.0;
     }
 
-    @ModifyConstant(method = "equipAtChance", constant = @Constant(floatValue = 0.1f))
-    private float modifiedEquipThreshold(float originalf, EquipmentSlot slot, ItemStack stack, Random random) {
+    @Inject(method = "equipAtChance", at = @At("HEAD"), cancellable = true)
+    private void redirectedEquipAtChance(EquipmentSlot slot, ItemStack stack, Random random, CallbackInfo cbi) {
         LocalDifficulty localDifficulty = this.world.getLocalDifficulty(this.getBlockPos());
-        return 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty();
-    }
-
-    @Redirect(method = "equipAtChance", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PiglinEntity;equipStack(Lnet/minecraft/entity/EquipmentSlot;Lnet/minecraft/item/ItemStack;)V"))
-    private void redirectedEquipAtChance(PiglinEntity piglinEntity, EquipmentSlot slot, ItemStack stack) {
-        if (slot == EquipmentSlot.HEAD) {
-            ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_HELMET) : new ItemStack(Items.LEATHER_HELMET);
-            this.equipStack(slot, itemStack);
-        }
-        else if (slot == EquipmentSlot.CHEST) {
-            ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_CHESTPLATE) : new ItemStack(Items.LEATHER_CHESTPLATE);
-            this.equipStack(slot, itemStack);
-        }
-        else if (slot == EquipmentSlot.LEGS) {
-            ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_LEGGINGS) : new ItemStack(Items.LEATHER_LEGGINGS);
-            this.equipStack(slot, itemStack);
-        }
-        else if (slot == EquipmentSlot.FEET) {
-            ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_BOOTS) : new ItemStack(Items.LEATHER_BOOTS);
-            this.equipStack(slot, itemStack);
+        if (random.nextFloat() < 0.25f*this.world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty()) {
+            if (slot == EquipmentSlot.HEAD) {
+                ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_HELMET) : new ItemStack(Items.LEATHER_HELMET);
+                this.equipStack(slot, itemStack);
+                cbi.cancel();
+            }
+            else if (slot == EquipmentSlot.CHEST) {
+                ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_CHESTPLATE) : new ItemStack(Items.LEATHER_CHESTPLATE);
+                this.equipStack(slot, itemStack);
+                cbi.cancel();
+            }
+            else if (slot == EquipmentSlot.LEGS) {
+                ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_LEGGINGS) : new ItemStack(Items.LEATHER_LEGGINGS);
+                this.equipStack(slot, itemStack);
+                cbi.cancel();
+            }
+            else if (slot == EquipmentSlot.FEET) {
+                ItemStack itemStack = this.random.nextFloat() < 0.16f*this.world.getDifficulty().getId() + 0.08f*this.world.getLocalDifficulty(this.getBlockPos()).getClampedLocalDifficulty() ? new ItemStack(Items.GOLDEN_BOOTS) : new ItemStack(Items.LEATHER_BOOTS);
+                this.equipStack(slot, itemStack);
+                cbi.cancel();
+            }
         }
     }
 

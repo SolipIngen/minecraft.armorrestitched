@@ -37,70 +37,77 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
     @Override
     public void modifyLootTable(ResourceManager resourceManager, LootManager lootManager, Identifier id, LootTable.Builder tableBuilder, LootTableSource source) {
         for (Identifier identifier : ID_ARRAY) {
-            if (id.getPath().matches(identifier.getPath()) && id.getPath().startsWith("chests")) {
-                LootPool.Builder poolBuilder = LootPool.builder();
-                if (id.getPath().matches(END_CITY_TREASURE_ID.getPath())) {
-                    poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(EmptyEntry.builder().weight(7))
-                        .with(ItemEntry.builder(Items.BOOK).weight(3))
-                        .apply(new EnchantRandomlyLootFunction.Builder().add(ModEnchantments.SOARING));
+            if (identifier.getPath().matches(id.getPath()) && (source == LootTableSource.REPLACED || source.isBuiltin())) {
+                if (identifier.getPath().startsWith("chests")) {
+                    LootPool.Builder poolBuilder = LootPool.builder();
+                    if (identifier.getPath().matches(END_CITY_TREASURE_ID.getPath())) {
+                        poolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(7))
+                            .with(ItemEntry.builder(Items.BOOK).weight(3))
+                            .apply(new EnchantRandomlyLootFunction.Builder().add(ModEnchantments.SOARING));
+                        tableBuilder.pool(poolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(SHIPWRECK_TREASURE_ID.getPath())) {
+                        poolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(8))
+                            .with(ItemEntry.builder(ModItems.FUR_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.FUR_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.FUR_LEGGINGS).weight(1))
+                            .with(ItemEntry.builder(ModItems.FUR_BOOTS).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_LEGGINGS).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_BOOTS).weight(1))
+                            .apply(EnchantRandomlyLootFunction.builder());
+                        tableBuilder.pool(poolBuilder.build());
+                    }
                 }
-                else if (id.getPath().matches(SHIPWRECK_TREASURE_ID.getPath())) {
-                    poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(EmptyEntry.builder().weight(8))
-                        .with(ItemEntry.builder(ModItems.FUR_HELMET).weight(1))
-                        .with(ItemEntry.builder(ModItems.FUR_CHESTPLATE).weight(1))
-                        .with(ItemEntry.builder(ModItems.FUR_LEGGINGS).weight(1))
-                        .with(ItemEntry.builder(ModItems.FUR_BOOTS).weight(1))
-                        .with(ItemEntry.builder(ModItems.SILK_HELMET).weight(1))
-                        .with(ItemEntry.builder(ModItems.SILK_CHESTPLATE).weight(1))
-                        .with(ItemEntry.builder(ModItems.SILK_LEGGINGS).weight(1))
-                        .with(ItemEntry.builder(ModItems.SILK_BOOTS).weight(1))
-                        .apply(EnchantRandomlyLootFunction.builder());
+                else if (identifier.getPath().startsWith("entities")) {
+                    LootPool.Builder furPoolBuilder = LootPool.builder();
+                    if (identifier.getPath().matches(GOAT_ENTITY_ID.getPath())) {
+                        furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(ItemEntry.builder(Blocks.WHITE_WOOL)
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                        tableBuilder.pool(furPoolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(PANDA_ENTITY_ID.getPath())) {
+                        furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(ItemEntry.builder(ModBlocks.BLACK_FUR)
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))))
+                            .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                        tableBuilder.pool(furPoolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(POLAR_BEAR_ENTITY_ID.getPath())) {
+                        furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))));
+                        tableBuilder.pool(furPoolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(WOLF_ENTITY_ID.getPath())) {
+                        furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                        tableBuilder.pool(furPoolBuilder.build());
+                    }
                 }
-                tableBuilder.pool(poolBuilder.build());
-            }
-            if (id.getPath().matches(identifier.getPath()) && id.getPath().startsWith("entities")) {
-                LootPool.Builder furPoolBuilder = LootPool.builder();
-                if (id.getPath().matches(GOAT_ENTITY_ID.getPath())) {
-                    furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(ItemEntry.builder(Blocks.WHITE_WOOL)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                if (source == LootTableSource.REPLACED || source == LootTableSource.MOD) {
+                    LootPool.Builder trimPoolBuilder = LootPool.builder();
+                    if (identifier.getPath().matches(DESERT_PYRAMID_ID.getPath())) {
+                        trimPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(6))
+                            .with(ItemEntry.builder(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1)
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f))));
+                        tableBuilder.pool(trimPoolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(JUNGLE_TEMPLE_ID.getPath())) {
+                        trimPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(2))
+                            .with(ItemEntry.builder(Items.WILD_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)));
+                        tableBuilder.pool(trimPoolBuilder.build());
+                    }
                 }
-                else if (id.getPath().matches(PANDA_ENTITY_ID.getPath())) {
-                    furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(ItemEntry.builder(ModBlocks.BLACK_FUR)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))))
-                        .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
-                }
-                else if (id.getPath().matches(POLAR_BEAR_ENTITY_ID.getPath())) {
-                    furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                    .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                    .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))));
-                }
-                else if (id.getPath().matches(WOLF_ENTITY_ID.getPath())) {
-                    furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                    .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                    .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
-                }
-                tableBuilder.pool(furPoolBuilder.build());
-            }
-            if (id.getPath().matches(identifier.getPath()) && (source == LootTableSource.REPLACED || source == LootTableSource.MOD)) {
-                LootPool.Builder trimPoolBuilder = LootPool.builder();
-                if (id.getPath().matches(DESERT_PYRAMID_ID.getPath())) {
-                    trimPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(EmptyEntry.builder().weight(6))
-                        .with(ItemEntry.builder(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1)
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f))));
-                }
-                else if (id.getPath().matches(JUNGLE_TEMPLE_ID.getPath())) {
-                    trimPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                        .with(EmptyEntry.builder().weight(2))
-                        .with(ItemEntry.builder(Items.WILD_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)));
-                }
-                tableBuilder.pool(trimPoolBuilder.build());
             }
         }
     }

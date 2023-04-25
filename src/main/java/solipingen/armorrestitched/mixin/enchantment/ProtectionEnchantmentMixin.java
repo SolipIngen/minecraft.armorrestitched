@@ -53,12 +53,30 @@ public abstract class ProtectionEnchantmentMixin extends Enchantment {
     private void injectedCanAccept(Enchantment other, CallbackInfoReturnable<Boolean> cbireturn) {
         if (other instanceof ProtectionEnchantment) {
             ProtectionEnchantment protectionEnchantment = (ProtectionEnchantment)other;
+            boolean bl = false;
             if (((ProtectionEnchantment)(Object)this).protectionType == protectionEnchantment.protectionType) {
-                cbireturn.setReturnValue(false);
+                cbireturn.setReturnValue(bl);
             }
             else {
-                cbireturn.setReturnValue(((ProtectionEnchantment)(Object)this).protectionType == ProtectionEnchantment.Type.ALL || ((ProtectionEnchantment)(Object)this).protectionType == ProtectionEnchantment.Type.FALL 
-                    || protectionEnchantment.protectionType == ProtectionEnchantment.Type.ALL || protectionEnchantment.protectionType == ProtectionEnchantment.Type.FALL);
+                switch(((ProtectionEnchantment)(Object)this).protectionType) {
+                    case FIRE: {
+                        bl = !(protectionEnchantment.protectionType == ProtectionEnchantment.Type.EXPLOSION || protectionEnchantment.protectionType == ProtectionEnchantment.Type.PROJECTILE);
+                        break;
+                    }
+                    case EXPLOSION: {
+                        bl = !(protectionEnchantment.protectionType == ProtectionEnchantment.Type.FIRE || protectionEnchantment.protectionType == ProtectionEnchantment.Type.PROJECTILE);
+                        break;
+                    }
+                    case PROJECTILE: {
+                        bl = !(protectionEnchantment.protectionType == ProtectionEnchantment.Type.FIRE || protectionEnchantment.protectionType == ProtectionEnchantment.Type.EXPLOSION);
+                        break;
+                    }
+                    default: {
+                        bl = true;
+                        break;
+                    }
+                }
+                cbireturn.setReturnValue(bl);
             }
         }
         else {

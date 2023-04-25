@@ -2,11 +2,10 @@ package solipingen.armorrestitched.mixin.entity.mob;
 
 import java.util.ArrayList;
 
-import org.objectweb.asm.Opcodes;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.google.common.collect.Lists;
@@ -94,7 +93,7 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
                         level++;
                     }
                 }
-                Item item = MobEntity.getEquipmentForSlot(slot, level);
+                Item item = MobEntityMixin.getModEquipmentForSlot(slot, level);
                 if (item instanceof DyeableArmorItem) {
                     int randomInt = random.nextInt(6);
                     if (randomInt == 0) {
@@ -146,64 +145,81 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         }
     }
 
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;GOLDEN_HELMET:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedGoldenHelmet(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return ModItems.COPPER_HELMET;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;GOLDEN_CHESTPLATE:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedGoldenChestplate(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return ModItems.COPPER_CHESTPLATE;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;GOLDEN_LEGGINGS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedGoldenLeggings(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return ModItems.COPPER_LEGGINGS;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;GOLDEN_BOOTS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedGoldenBoots(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return ModItems.COPPER_BOOTS;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;CHAINMAIL_HELMET:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedChainmailHelmet(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.IRON_HELMET;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;CHAINMAIL_CHESTPLATE:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedChainmailChestplate(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.IRON_CHESTPLATE;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;CHAINMAIL_LEGGINGS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedChainmailLeggings(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.IRON_LEGGINGS;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;CHAINMAIL_BOOTS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedChainmailBoots(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.IRON_BOOTS;
-    }
-    
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;IRON_HELMET:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedIronHelmet(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.GOLDEN_HELMET;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;IRON_CHESTPLATE:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedIronChestplate(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.GOLDEN_CHESTPLATE;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;IRON_LEGGINGS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedIronLeggings(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.GOLDEN_LEGGINGS;
-    }
-
-    @Redirect(method = "getEquipmentForSlot", at = @At(value = "FIELD", target = "Lnet/minecraft/item/Items;IRON_BOOTS:Lnet/minecraft/item/Item;", opcode = Opcodes.GETSTATIC))
-    private static Item redirectedIronBoots(EquipmentSlot equipmentSlot, int equipmentLevel) {
-        return Items.GOLDEN_BOOTS;
+    @Nullable
+    private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
+        switch (equipmentSlot) {
+            case HEAD: {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_HELMET;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_HELMET;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_HELMET;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.GOLDEN_HELMET;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_HELMET;
+                }
+            }
+            case CHEST: {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_CHESTPLATE;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_CHESTPLATE;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_CHESTPLATE;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.GOLDEN_CHESTPLATE;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_CHESTPLATE;
+                }
+            }
+            case LEGS: {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_LEGGINGS;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_LEGGINGS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_LEGGINGS;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.GOLDEN_LEGGINGS;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_LEGGINGS;
+                }
+            }
+            case FEET: {
+                if (equipmentLevel == 0) {
+                    return Items.LEATHER_BOOTS;
+                }
+                else if (equipmentLevel == 1) {
+                    return ModItems.COPPER_BOOTS;
+                }
+                else if (equipmentLevel == 2) {
+                    return Items.IRON_BOOTS;
+                }
+                else if (equipmentLevel == 3) {
+                    return Items.GOLDEN_BOOTS;
+                }
+                else if (equipmentLevel == 4) {
+                    return Items.DIAMOND_BOOTS;
+                }
+            }
+            default: {
+                return null;
+            }
+        }
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
