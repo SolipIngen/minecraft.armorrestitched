@@ -1,7 +1,7 @@
 # Armor Restitched: a Minecraft Mod
 
 
-![armorrestitched_icon](https://user-images.githubusercontent.com/117603129/234380473-85e23536-945e-4883-b14b-cf6a8a16f39d.png)
+![armorrestitched_icon](https://user-images.githubusercontent.com/117603129/234380602-a30dbc8a-df8c-46ca-a7b7-90881a83bbd3.png)
 
 Welcome to Armor Restitched, a mod that reworks almost every aspect to do with armor and damage intake in Minecraft. Please report any technical issues you find here, while I ask you to make content-related feedback on the mod's CurseForge page.
 
