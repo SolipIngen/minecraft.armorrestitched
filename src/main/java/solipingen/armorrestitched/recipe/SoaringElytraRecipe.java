@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import solipingen.armorrestitched.enchantment.ModEnchantments;
 
 
-
 public class SoaringElytraRecipe extends SpecialCraftingRecipe {
     public static final RecipeSerializer<SoaringElytraRecipe> SOARING_ELYTRA_RECIPE_SERIALIZER = new SpecialRecipeSerializer<SoaringElytraRecipe>(SoaringElytraRecipe::new);
 
@@ -35,11 +34,15 @@ public class SoaringElytraRecipe extends SpecialCraftingRecipe {
         for (int i = 0; i < craftingInventory.getWidth(); ++i) {
             for (int j = 0; j < craftingInventory.getHeight(); ++j) {
                 ItemStack itemStack = craftingInventory.getStack(i + j * craftingInventory.getWidth());
-                if (itemStack.isEmpty()) {
+                if (i == 1 && j == 1 && !(itemStack.getItem() instanceof ElytraItem)) {
                     return false;
                 }
-                if (!(i == 1 && j == 1 ? !(itemStack.getItem() instanceof ElytraItem) : !itemStack.isOf(Items.PHANTOM_MEMBRANE))) continue;
-                return false;
+                if (i == 1 && (j == 0 || j == 2) && !itemStack.isEmpty()) {
+                    return false;
+                }
+                if (i != 1 && !itemStack.isOf(Items.PHANTOM_MEMBRANE)) {
+                    return false;
+                }
             }
         }
         return true;
