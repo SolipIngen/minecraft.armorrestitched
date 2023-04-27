@@ -6,7 +6,7 @@
         "item": "minecraft:diamond"
       },
       "S": {
-        "item": "minecraft:wild_armor_trim_smithing_template"
+        "item": "minecraft:coast_armor_trim_smithing_template"
       },
       "C": {
         "item": "minecraft:cobblestone"
@@ -19,7 +19,7 @@
     ],
     "result": {
       "count": 2,
-      "item": "minecraft:wild_armor_trim_smithing_template"
+      "item": "minecraft:coast_armor_trim_smithing_template"
     },
     "show_notification": true
 }

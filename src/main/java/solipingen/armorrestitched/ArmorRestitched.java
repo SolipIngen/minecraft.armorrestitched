@@ -11,6 +11,7 @@ import solipingen.armorrestitched.item.ModItemGroups;
 import solipingen.armorrestitched.item.ModItems;
 import solipingen.armorrestitched.loot.ModifyLootTableHandler;
 import solipingen.armorrestitched.loot.ReplaceLootTableHandler;
+import solipingen.armorrestitched.recipe.ModRecipes;
 import solipingen.armorrestitched.sound.ModSoundEvents;
 import solipingen.armorrestitched.village.ModVillagerProfessions;
 import solipingen.armorrestitched.world.gen.ModWorldGenerator;
@@ -34,6 +35,7 @@ public class ArmorRestitched implements ModInitializer {
 		ModFlammableBlockRegistry.registerFlammableBlocks();
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();
+		ModRecipes.registerModRecipes();
 		ModSoundEvents.registerModSoundEvents();
 		ModVillagerProfessions.registerModVillagerProfessions();
 		ModWorldGenerator.generateModWorldGen();
