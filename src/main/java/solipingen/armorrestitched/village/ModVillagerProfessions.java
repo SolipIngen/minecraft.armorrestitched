@@ -83,8 +83,8 @@ public class ModVillagerProfessions {
         dyeItemList.remove(apprenticeDye);
         DyeItem journeymanDye = dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
         dyeItemList.remove(journeymanDye);
-        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
-        BlockItem journeymanWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
+        BlockItem journeymanFabric = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
+        BlockItem journeymanCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
         BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(bedItemList.size()));
         BannerItem expertBanner = bannerItemList.get(villager.getRandom().nextInt(bannerItemList.size()));
         originalTradeOffers.put(DRESSER, ModVillagerProfessions.copyToFastUtilMap(
@@ -99,8 +99,8 @@ public class ModVillagerProfessions {
                     new SellDyedItemFactory(ModItems.COTTON_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.COTTON_BOOTS, 3, 12, 5, false), 
                     new SellDyedItemFactory(ModItems.LINEN_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.LINEN_CHESTPLATE, 5, 12, 5, false), 
                     new SellDyedItemFactory(ModItems.LINEN_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.LINEN_BOOTS, 3, 12, 5, false)}, 
-                3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanWool, 1, 16, 10), 
-                    new SellItemFactory(journeymanWoolCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
+                3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanFabric, 1, 16, 10), 
+                    new SellItemFactory(journeymanCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.STONE_SLAB, 16, 16, 30), new SellItemFactory(expertBanner, 1, 3, 15), 
                     new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.COTTON_HELMET, 4, 3, 15, true), 
@@ -154,42 +154,42 @@ public class ModVillagerProfessions {
             if (item instanceof DyeItem) {
                 dyeItemList.add(((DyeItem)item));
             }
-            else if ((itemStack.isIn(ModItemTags.SILK_BLOCKS) && item != ModBlocks.WHITE_SILK.asItem())) {
+            else if (itemStack.isIn(ModItemTags.FUR_BLOCKS) && item != ModBlocks.WHITE_FUR.asItem()) {
                 blockItemList.add((BlockItem)item);
             }
-            else if (itemStack.isIn(ModItemTags.SILK_CARPETS)) {
+            else if (itemStack.isIn(ModItemTags.FUR_CARPETS)) {
                 carpetItemList.add((BlockItem)item);
             }
         }
-        BlockItem journeymanWool = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
-        BlockItem expertWoolCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
+        BlockItem journeymanFabric = blockItemList.get(villager.getRandom().nextInt(blockItemList.size()));
+        BlockItem expertCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
         originalTradeOffers.replace(VillagerProfession.LEATHERWORKER, ModVillagerProfessions.copyToFastUtilMap(
             ImmutableMap.of(
                 1, new Factory[]{new BuyForOneEmeraldFactory(Items.LEATHER, 6, 16, 2), new BuyForOneEmeraldFactory(Items.RABBIT_HIDE, 9, 16, 2), 
-                    new BuyForOneEmeraldFactory(ModItems.SILK, 24, 16, 2), 
+                    new BuyForOneEmeraldFactory(ModBlocks.WHITE_FUR, 18, 16, 2), 
                     new SellItemFactory(Items.LEATHER_HELMET, 2, 1, 1), new SellItemFactory(Items.LEATHER_CHESTPLATE, 4, 1, 1), 
                     new SellItemFactory(Items.LEATHER_LEGGINGS, 3, 1, 1), new SellItemFactory(Items.LEATHER_BOOTS, 2, 1, 1), 
-                    new SellItemFactory(ModItems.SILK_HELMET, 2, 1, 1), new SellItemFactory(ModItems.SILK_CHESTPLATE, 4, 1, 1), 
-                    new SellItemFactory(ModItems.SILK_LEGGINGS, 3, 1, 1), new SellItemFactory(ModItems.SILK_BOOTS, 2, 1, 1)}, 
+                    new SellItemFactory(ModItems.FUR_HELMET, 2, 1, 1), new SellItemFactory(ModItems.FUR_CHESTPLATE, 4, 1, 1), 
+                    new SellItemFactory(ModItems.FUR_LEGGINGS, 3, 1, 1), new SellItemFactory(ModItems.FUR_BOOTS, 2, 1, 1)}, 
                 2, new Factory[]{new BuyForOneEmeraldFactory(dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size())), 4, 12, 10), 
                     new SellDyedItemFactory(Items.LEATHER_HELMET, 3, 12, 5, false), new SellDyedItemFactory(Items.LEATHER_CHESTPLATE, 5, 12, 5, false), 
                     new SellDyedItemFactory(Items.LEATHER_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(Items.LEATHER_BOOTS, 3, 12, 5, false), 
                     new SellItemFactory(Items.ITEM_FRAME, 1, 8, 12, 5), 
-                    new SellDyedItemFactory(ModItems.SILK_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.SILK_CHESTPLATE, 5, 12, 5, false), 
-                    new SellDyedItemFactory(ModItems.SILK_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.SILK_BOOTS, 3, 12, 5, false)}, 
+                    new SellDyedItemFactory(ModItems.FUR_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.FUR_CHESTPLATE, 5, 12, 5, false), 
+                    new SellDyedItemFactory(ModItems.FUR_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.FUR_BOOTS, 3, 12, 5, false)}, 
                 3, new Factory[]{new BuyForOneEmeraldFactory(Items.WATER_BUCKET, 1, 12, 20), new BuyForOneEmeraldFactory(Items.TRIPWIRE_HOOK, 2, 12, 20), 
-                    new SellItemFactory(Items.SADDLE, 6, 1, 10), new SellItemFactory(journeymanWool, 1, 16, 10)}, 
+                    new SellItemFactory(Items.SADDLE, 6, 1, 10), new SellItemFactory(journeymanFabric, 1, 16, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.SCUTE, 1, 12, 30), new BuyForOneEmeraldFactory(Items.FLINT, 13, 12, 30), 
                     new SellItemFactory(Items.TURTLE_HELMET, 9, 3, 15), new SellDyedItemFactory(Items.LEATHER_HORSE_ARMOR, 6, 12, 15, false), 
-                    new SellItemFactory(expertWoolCarpet, 1, 32, 10)}, 
+                    new SellItemFactory(expertCarpet, 1, 32, 10)}, 
                 5, new Factory[]{new SellDyedItemFactory(Items.LEATHER_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(Items.LEATHER_CHESTPLATE, 8, 3, 15, true), 
                     new SellDyedItemFactory(Items.LEATHER_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(Items.LEATHER_BOOTS, 4, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.SILK_HELMET, 4, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.SILK_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.SILK_LEGGINGS, 6, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.SILK_BOOTS, 4, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.FUR_HELMET, 4, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.FUR_CHESTPLATE, 8, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.FUR_LEGGINGS, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.FUR_BOOTS, 4, 3, 15, true), 
                     new SellEnchantedToolFactory(Items.TURTLE_HELMET, 9, 3, 15)}
                 )
             )
@@ -198,8 +198,8 @@ public class ModVillagerProfessions {
 
     public static void replaceShepherdProfessionToLeveledTrade(Map<VillagerProfession, Int2ObjectMap<Factory[]>> originalTradeOffers, MerchantEntity villager) {
         ArrayList<DyeItem> dyeItemList = new ArrayList<DyeItem>();
-        ArrayList<BlockItem> woolItemList = new ArrayList<BlockItem>();
-        ArrayList<BlockItem> woolCarpetItemList = new ArrayList<BlockItem>();
+        ArrayList<BlockItem> itemList = new ArrayList<BlockItem>();
+        ArrayList<BlockItem> carpetItemList = new ArrayList<BlockItem>();
         ArrayList<BannerItem> woolBannerItemList = new ArrayList<BannerItem>();
         ArrayList<BedItem> bedItemList = new ArrayList<BedItem>();
         for (Item item : Registries.ITEM) {
@@ -207,11 +207,11 @@ public class ModVillagerProfessions {
             if (item instanceof DyeItem) {
                 dyeItemList.add(((DyeItem)item));
             }
-            else if ((itemStack.isIn(ItemTags.WOOL) && item != Items.WHITE_WOOL) || (itemStack.isIn(ModItemTags.FUR_BLOCKS) && item != ModBlocks.WHITE_FUR.asItem())) {
-                woolItemList.add((BlockItem)item);
+            else if ((itemStack.isIn(ItemTags.WOOL) && item != Items.WHITE_WOOL) || (itemStack.isIn(ModItemTags.SILK_BLOCKS) && item != ModBlocks.WHITE_SILK.asItem())) {
+                itemList.add((BlockItem)item);
             }
-            else if (itemStack.isIn(ItemTags.WOOL_CARPETS) || itemStack.isIn(ModItemTags.FUR_CARPETS)) {
-                woolCarpetItemList.add((BlockItem)item);
+            else if (itemStack.isIn(ItemTags.WOOL_CARPETS) || itemStack.isIn(ModItemTags.SILK_CARPETS)) {
+                carpetItemList.add((BlockItem)item);
             }
             else if (item instanceof BannerItem) {
                 woolBannerItemList.add((BannerItem)item);
@@ -224,35 +224,35 @@ public class ModVillagerProfessions {
         dyeItemList.remove(apprenticeDye);
         DyeItem journeymanDye = dyeItemList.get(villager.getRandom().nextInt(dyeItemList.size()));
         dyeItemList.remove(journeymanDye);
-        BlockItem journeymanWool = woolItemList.get(villager.getRandom().nextInt(woolItemList.size()));
-        BlockItem journeymanWoolCarpet = woolCarpetItemList.get(villager.getRandom().nextInt(woolCarpetItemList.size()));
+        BlockItem journeymanFabric = itemList.get(villager.getRandom().nextInt(itemList.size()));
+        BlockItem journeymanCarpet = carpetItemList.get(villager.getRandom().nextInt(carpetItemList.size()));
         BedItem journeymanBed = bedItemList.get(villager.getRandom().nextInt(bedItemList.size()));
         BannerItem expertBanner = woolBannerItemList.get(villager.getRandom().nextInt(woolBannerItemList.size()));
         originalTradeOffers.replace(VillagerProfession.SHEPHERD, ModVillagerProfessions.copyToFastUtilMap(
             ImmutableMap.of(
-                1, new Factory[]{new BuyForOneEmeraldFactory(Items.WHITE_WOOL, 18, 16, 2), new BuyForOneEmeraldFactory(ModBlocks.WHITE_FUR, 18, 16, 2), new SellItemFactory(Items.SHEARS, 2, 1, 1), 
+                1, new Factory[]{new BuyForOneEmeraldFactory(Items.WHITE_WOOL, 18, 16, 2), new SellItemFactory(Items.SHEARS, 2, 1, 1), 
                     new SellItemFactory(ModItems.WOOL_HELMET, 2, 1, 1), new SellItemFactory(ModItems.WOOL_CHESTPLATE, 4, 1, 1), 
                     new SellItemFactory(ModItems.WOOL_LEGGINGS, 3, 1, 1), new SellItemFactory(ModItems.WOOL_BOOTS, 2, 1, 1), 
-                    new SellItemFactory(ModItems.FUR_HELMET, 2, 1, 1), new SellItemFactory(ModItems.FUR_CHESTPLATE, 4, 1, 1), 
-                    new SellItemFactory(ModItems.FUR_LEGGINGS, 3, 1, 1), new SellItemFactory(ModItems.FUR_BOOTS, 2, 1, 1)}, 
+                    new SellItemFactory(ModItems.SILK_HELMET, 2, 1, 1), new SellItemFactory(ModItems.SILK_CHESTPLATE, 4, 1, 1), 
+                    new SellItemFactory(ModItems.SILK_LEGGINGS, 3, 1, 1), new SellItemFactory(ModItems.SILK_BOOTS, 2, 1, 1)}, 
                 2, new Factory[]{new BuyForOneEmeraldFactory(apprenticeDye, 4, 12, 10), 
                     new SellDyedItemFactory(ModItems.WOOL_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.WOOL_CHESTPLATE, 5, 12, 5, false), 
                     new SellDyedItemFactory(ModItems.WOOL_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.WOOL_BOOTS, 3, 12, 5, false), 
-                    new SellDyedItemFactory(ModItems.FUR_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.FUR_CHESTPLATE, 5, 12, 5, false), 
-                    new SellDyedItemFactory(ModItems.FUR_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.FUR_BOOTS, 3, 12, 5, false),
-                    new SellItemFactory(Items.LEAD, 2, 4, 12, 5)}, 
-                3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanWool, 1, 16, 10), 
-                    new SellItemFactory(journeymanWoolCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
+                    new SellItemFactory(Items.LEAD, 2, 4, 12, 5), 
+                    new SellDyedItemFactory(ModItems.SILK_HELMET, 3, 12, 5, false), new SellDyedItemFactory(ModItems.SILK_CHESTPLATE, 5, 12, 5, false), 
+                    new SellDyedItemFactory(ModItems.SILK_LEGGINGS, 4, 12, 5, false), new SellDyedItemFactory(ModItems.SILK_BOOTS, 3, 12, 5, false)}, 
+                3, new Factory[]{new BuyForOneEmeraldFactory(journeymanDye, 4, 12, 20), new SellItemFactory(journeymanFabric, 1, 16, 10), 
+                    new SellItemFactory(journeymanCarpet, 1, 32, 10), new SellItemFactory(journeymanBed, 1, 1, 10)}, 
                 4, new Factory[]{new BuyForOneEmeraldFactory(Items.WHEAT, 20, 16, 30), new BuyForOneEmeraldFactory(ModItems.FLAX_STEM, 20, 16, 30), new SellItemFactory(expertBanner, 1, 3, 15), 
                     new SellItemFactory(Items.PAINTING, 2, 1, 15), new SellItemFactory(Items.FLOWER_BANNER_PATTERN, 2, 1, 15)}, 
                 5, new Factory[]{new SellDyedItemFactory(ModItems.WOOL_HELMET, 4, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_CHESTPLATE, 8, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_LEGGINGS, 6, 3, 15, true), 
                     new SellDyedItemFactory(ModItems.WOOL_BOOTS, 4, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.FUR_HELMET, 4, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.FUR_CHESTPLATE, 8, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.FUR_LEGGINGS, 6, 3, 15, true), 
-                    new SellDyedItemFactory(ModItems.FUR_BOOTS, 4, 3, 15, true)}
+                    new SellDyedItemFactory(ModItems.SILK_HELMET, 4, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.SILK_CHESTPLATE, 8, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.SILK_LEGGINGS, 6, 3, 15, true), 
+                    new SellDyedItemFactory(ModItems.SILK_BOOTS, 4, 3, 15, true)}
                 )
             )
 	    );
