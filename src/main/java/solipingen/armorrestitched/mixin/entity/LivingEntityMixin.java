@@ -290,7 +290,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
         if (i > 0) {
-            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, this.random.nextBetween(50, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*50), 50)), i - 1, true, true, false));
+            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, this.random.nextBetween(10, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*10), 10)), i - 1, true, true, false));
             this.world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS, MathHelper.clamp(i*amount, 4.0f, i*4.0f), ((LivingEntity)(Object)this).getSoundPitch());
         }
         Box amethystSoundBox = new Box(this.getBlockPos()).expand(4.0*i);
