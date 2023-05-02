@@ -25,19 +25,22 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
     private static final Identifier DESERT_PYRAMID_ID = new Identifier("chests/desert_pyramid");
     private static final Identifier END_CITY_TREASURE_ID = new Identifier("chests/end_city_treasure");
     private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("chests/jungle_temple");
+    private static final Identifier UNDERWATER_RUIN_SMALL_ID = new Identifier("chests/underwater_ruin_small");
+    private static final Identifier UNDERWATER_RUIN_BIG_ID = new Identifier("chests/underwater_ruin_big");
+    private static final Identifier SHIPWRECK_SUPPLY_ID = new Identifier("chests/shipwreck_supply");
     private static final Identifier SHIPWRECK_TREASURE_ID = new Identifier("chests/shipwreck_treasure");
     private static final Identifier GOAT_ENTITY_ID = new Identifier("entities/goat");
     private static final Identifier PANDA_ENTITY_ID = new Identifier("entities/panda");
     private static final Identifier POLAR_BEAR_ENTITY_ID = new Identifier("entities/polar_bear");
     private static final Identifier WOLF_ENTITY_ID = new Identifier("entities/wolf");
-    private static final Identifier[] ID_ARRAY = new Identifier[]{DESERT_PYRAMID_ID, END_CITY_TREASURE_ID, JUNGLE_TEMPLE_ID, SHIPWRECK_TREASURE_ID, 
+    private static final Identifier[] ID_ARRAY = new Identifier[]{DESERT_PYRAMID_ID, END_CITY_TREASURE_ID, JUNGLE_TEMPLE_ID, UNDERWATER_RUIN_SMALL_ID, UNDERWATER_RUIN_BIG_ID, SHIPWRECK_SUPPLY_ID, SHIPWRECK_TREASURE_ID, 
         PANDA_ENTITY_ID, POLAR_BEAR_ENTITY_ID, WOLF_ENTITY_ID};
 
 
     @Override
     public void modifyLootTable(ResourceManager resourceManager, LootManager lootManager, Identifier id, LootTable.Builder tableBuilder, LootTableSource source) {
         for (Identifier identifier : ID_ARRAY) {
-            if (identifier.getPath().matches(id.getPath()) && (source == LootTableSource.REPLACED || source.isBuiltin())) {
+            if (identifier.getPath().matches(id.getPath())) {
                 if (identifier.getPath().startsWith("chests")) {
                     LootPool.Builder poolBuilder = LootPool.builder();
                     if (identifier.getPath().matches(END_CITY_TREASURE_ID.getPath())) {
@@ -45,6 +48,36 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
                             .with(EmptyEntry.builder().weight(7))
                             .with(ItemEntry.builder(Items.BOOK).weight(3))
                             .apply(new EnchantRandomlyLootFunction.Builder().add(ModEnchantments.SOARING));
+                        tableBuilder.pool(poolBuilder.build());
+                    }
+                    else if (identifier.getPath().startsWith("chests/underwater_ruin")) {
+                        poolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(6))
+                            .with(ItemEntry.builder(ModItems.FUR_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.FUR_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.SILK_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.COTTON_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.COTTON_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.COPPER_HELMET).weight(2))
+                            .with(ItemEntry.builder(ModItems.COPPER_CHESTPLATE).weight(2))
+                            .apply(EnchantRandomlyLootFunction.builder());
+                        tableBuilder.pool(poolBuilder.build());
+                    }
+                    else if (identifier.getPath().matches(SHIPWRECK_SUPPLY_ID.getPath())) {
+                        poolBuilder.rolls(ConstantLootNumberProvider.create(1))
+                            .with(EmptyEntry.builder().weight(6))
+                            .with(ItemEntry.builder(ModItems.COTTON_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.COTTON_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.COTTON_LEGGINGS).weight(1))
+                            .with(ItemEntry.builder(ModItems.COTTON_BOOTS).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_HELMET).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_CHESTPLATE).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_LEGGINGS).weight(1))
+                            .with(ItemEntry.builder(ModItems.LINEN_BOOTS).weight(1))
+                            .apply(EnchantRandomlyLootFunction.builder());
                         tableBuilder.pool(poolBuilder.build());
                     }
                     else if (identifier.getPath().matches(SHIPWRECK_TREASURE_ID.getPath())) {

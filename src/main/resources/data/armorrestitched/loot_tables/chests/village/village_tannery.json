@@ -36,6 +36,31 @@
           },
           {
             "type": "minecraft:item",
+            "name": "armorrestitched:fur_chestplate",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:fur_boots",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:fur_helmet",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:fur_leggings",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:leather_leggings",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
             "functions": [
               {
                 "add": false,
@@ -49,11 +74,6 @@
             ],
             "name": "minecraft:bread",
             "weight": 5
-          },
-          {
-            "type": "minecraft:item",
-            "name": "minecraft:leather_leggings",
-            "weight": 2
           },
           {
             "type": "minecraft:item",

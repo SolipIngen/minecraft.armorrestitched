@@ -114,6 +114,26 @@
           },
           {
             "type": "minecraft:item",
+            "name": "armorrestitched:silk_chestplate",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:silk_boots",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:silk_helmet",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:silk_leggings",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
             "functions": [
               {
                 "add": false,

@@ -290,7 +290,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
         if (i > 0 && !((LivingEntity)(Object)this).isBlocking()) {
-            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, i*this.random.nextBetween(10, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*10), 10)), i - 1, true, true, false));
+            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, i*this.random.nextBetween(10, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*10), 11)), 0, true, true, false));
             this.world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS, MathHelper.clamp(i*amount, 4.0f, i*4.0f), ((LivingEntity)(Object)this).getSoundPitch());
             Box amethystSoundBox = new Box(this.getBlockPos()).expand(4.0*i);
             List<Entity> amethystSoundEntities = this.world.getOtherEntities(this, amethystSoundBox);
@@ -299,11 +299,11 @@ public abstract class LivingEntityMixin extends Entity {
                 if (entity instanceof MobEntity && entity.world instanceof ServerWorld) {
                     MobEntity mobEntity = (MobEntity)entity;
                     if (mobEntity.getTarget() == null && mobEntity.getGroup() != EntityGroup.UNDEAD) {
-                        int maxDuration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 5);
-                        mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(10, Math.max(maxDuration, 10)), 0, true, true, false));
+                        int maxDuration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 11);
+                        mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(10, maxDuration), 0, true, true, false));
                     }
                     else if (mobEntity.getTarget() != null && mobEntity.getGroup() != EntityGroup.UNDEAD && (mobEntity instanceof HostileEntity || mobEntity.getTarget() == ((LivingEntity)(Object)this))) {
-                        int duration = mobEntity.getRandom().nextBetween(10, Math.max(i*20, 10));
+                        int duration = mobEntity.getRandom().nextBetween(10, Math.max(i*20, 11));
                         duration *= mobEntity instanceof VibrationListener.Callback ? 2 : 1;
                         ((MobEntityInterface)mobEntity).setEntranced(true, duration);
                     }
@@ -311,8 +311,8 @@ public abstract class LivingEntityMixin extends Entity {
                 else if (entity instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity)entity;
                     if (source.getAttacker() == player || ((LivingEntity)(Object)this).getLastAttacker() == player) continue;
-                    int duration = Math.max(MathHelper.ceil(5*i*amount/Math.max(player.squaredDistanceTo(this), 1.0)), 5);
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextBetween(5, Math.max(duration, 5)), 0, true, true, false));
+                    int duration = Math.max(MathHelper.ceil(5*i*amount/Math.max(player.squaredDistanceTo(this), 1.0)), 6);
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextBetween(5, duration), 0, true, true, false));
                 }
             }
         }
