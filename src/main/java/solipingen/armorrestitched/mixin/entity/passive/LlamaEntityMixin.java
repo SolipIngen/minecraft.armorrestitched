@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -38,6 +39,7 @@ import net.minecraft.world.event.GameEvent;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.item.ModItems;
+import solipingen.armorrestitched.registry.tag.ModItemTags;
 import solipingen.armorrestitched.sound.ModSoundEvents;
 
 
@@ -145,6 +147,12 @@ public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
             case BROWN -> new Identifier(ArmorRestitched.MOD_ID, "entities/llama/brown");
             case GRAY -> new Identifier(ArmorRestitched.MOD_ID, "entities/llama/light_gray");
         };
+    }
+
+    @Inject(method = "isHorseArmor", at = @At("HEAD"), cancellable = true)
+    private void injectedIsHorseArmor(ItemStack item, CallbackInfoReturnable<Boolean> cbireturn) {
+        boolean bl = item.isIn(ItemTags.WOOL_CARPETS) || item.isIn(ModItemTags.COTTON_CARPETS) || item.isIn(ModItemTags.FUR_CARPETS) || item.isIn(ModItemTags.LINEN_CARPETS) || item.isIn(ModItemTags.SILK_CARPETS);
+        cbireturn.setReturnValue(bl);
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))

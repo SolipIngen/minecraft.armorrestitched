@@ -3,11 +3,13 @@ package solipingen.armorrestitched.mixin.enchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
@@ -16,6 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 
@@ -28,8 +31,11 @@ public abstract class FrostWalkerEnchantmentMixin extends Enchantment {
         super(weight, target, slotTypes);
     }
 
-    @Inject(method = "freezeWater", at = @At("HEAD"))
+    @Inject(method = "freezeWater", at = @At("HEAD"), cancellable = true)
     private static void injectedFreezeWater(LivingEntity entity, World world, BlockPos blockPos, int level, CallbackInfo cbi) {
+        if (!(entity.isOnGround() || entity.hasVehicle())) {
+            cbi.cancel();
+        }
         if (entity.isOnFire() || entity.isInLava()) {
             boolean fireBl = world.getFluidState(blockPos).isIn(FluidTags.LAVA) || world.getBlockState(blockPos).isIn(BlockTags.FIRE);
             BlockPos currentBlockPos = fireBl ? blockPos : blockPos.down();
@@ -49,11 +55,20 @@ public abstract class FrostWalkerEnchantmentMixin extends Enchantment {
                 }
             }
         }
-    }
-
-    @Redirect(method = "freezeWater", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isOnGround()Z"))
-    private static boolean redirectedIsOnGround(LivingEntity entity) {
-        return entity.isOnGround() || (entity.hasVehicle() && entity.getVehicle() instanceof LivingEntity);
+        BlockState blockState = Blocks.FROSTED_ICE.getDefaultState();
+        int i = Math.min(16, 2 + level);
+        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        int j = entity.hasVehicle() ? MathHelper.floor(entity.getVehicle().getHeight()) : 1;
+        for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-i, -j, -i), blockPos.add(i, -j, i))) {
+            BlockState blockState3;
+            if (!blockPos2.isWithinDistance(entity.getPos(), (double)i)) continue;
+            mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
+            BlockState blockState2 = world.getBlockState(mutable);
+            if (!blockState2.isAir() || (blockState3 = world.getBlockState(blockPos2)).getMaterial() != Material.WATER || blockState3.get(FluidBlock.LEVEL) != 0 || !blockState.canPlaceAt(world, blockPos2) || !world.canPlace(blockState, blockPos2, ShapeContext.absent())) continue;
+            world.setBlockState(blockPos2, blockState);
+            world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, MathHelper.nextInt(entity.getRandom(), 60, 120));
+        }
+        cbi.cancel();
     }
 
 

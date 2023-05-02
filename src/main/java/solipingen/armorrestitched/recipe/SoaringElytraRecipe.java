@@ -37,7 +37,7 @@ public class SoaringElytraRecipe extends SpecialCraftingRecipe {
                 if (i == 1 && j == 1 && !(itemStack.getItem() instanceof ElytraItem)) {
                     return false;
                 }
-                if (i == 1 && (j == 0 || j == 2) && !itemStack.isEmpty()) {
+                if (i == 1 && (j == 0 || j == 2) && !itemStack.isOf(Items.BLAZE_POWDER)) {
                     return false;
                 }
                 if (i != 1 && !itemStack.isOf(Items.PHANTOM_MEMBRANE)) {
@@ -54,12 +54,10 @@ public class SoaringElytraRecipe extends SpecialCraftingRecipe {
         if (!(itemStack.getItem() instanceof ElytraItem)) {
             return ItemStack.EMPTY;
         }
-
         int soaringLevel = EnchantmentHelper.getLevel(ModEnchantments.SOARING, itemStack);
         if (soaringLevel >= 3) {
             return ItemStack.EMPTY;
         }
-
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
         if (soaringLevel <= 0) {
             enchantments.put(ModEnchantments.SOARING, soaringLevel + 1);

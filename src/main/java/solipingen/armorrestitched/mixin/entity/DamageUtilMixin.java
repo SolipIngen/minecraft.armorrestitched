@@ -16,7 +16,7 @@ public abstract class DamageUtilMixin {
 
     @Inject(method = "getDamageLeft", at = @At("HEAD"), cancellable = true)
     private static void injectedGetDamageLeft(float damage, float armor, float armorToughness, CallbackInfoReturnable<Float> cbireturn) {
-        float f = 1.0f + armorToughness/2.0f;
+        float f = 1.0f + armorToughness/4.0f;
         float g = MathHelper.clamp(2.0f*armor - damage/f, armor*0.1f, 50.0f);
         cbireturn.setReturnValue(damage*(1.0f - g/50.0f));
     }
