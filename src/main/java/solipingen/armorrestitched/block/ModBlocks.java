@@ -168,7 +168,7 @@ public class ModBlocks {
     public static final Block MULBERRY_SAPLING = ModBlocks.registerBlock("mulberry_sapling", new SaplingBlock(new MulberrySaplingGenerator(), AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), true);
 
     // Cotton & Flax
-    public static final Block COTTON_FLOWER = ModBlocks.registerBlock("cotton_flower", new CottonFlowerBlock(StatusEffects.ABSORPTION, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), true);
+    public static final Block COTTON_FLOWER = ModBlocks.registerBlock("cotton_flower", new CottonFlowerBlock(StatusEffects.ABSORPTION, 8, AbstractBlock.Settings.of(Material.PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), true);
     public static final Block COTTON_CROP = ModBlocks.registerBlock("cotton_crop", new CottonCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT)), false);
     public static final Block POTTED_COTTON_FLOWER = ModBlocks.registerBlock("potted_cotton_flower", new FlowerPotBlock(COTTON_FLOWER, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque()), false);
 

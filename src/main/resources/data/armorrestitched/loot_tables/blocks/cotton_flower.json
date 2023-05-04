@@ -43,11 +43,7 @@
                 "type": "minecraft:item",
                 "conditions": [
                   {
-                    "block": "armorrestitched:cotton_flower",
-                    "condition": "minecraft:block_state_property",
-                    "properties": {
-                      "half": "lower"
-                    }
+                    "condition": "minecraft:survives_explosion"
                   }
                 ],
                 "name": "armorrestitched:cotton_seeds"
