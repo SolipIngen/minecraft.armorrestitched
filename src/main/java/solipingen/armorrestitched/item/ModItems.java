@@ -114,7 +114,7 @@ public class ModItems {
         (Item)new ArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
     public static final Item COPPER_HORSE_ARMOR = ModItems.registerItem("copper_horse_armor", 
-        (Item)new HorseArmorItem(7, "copper", new FabricItemSettings()));
+        (Item)new HorseArmorItem(6, "copper", new FabricItemSettings()));
 
 
     // Cotton & Flax
