@@ -30,16 +30,20 @@ public abstract class ArmorMaterialsMixin implements ArmorMaterial, StringIdenti
     @Inject(method = "getDurability", at = @At("HEAD"), cancellable = true)
     private void injectedGetDurability(ArmorItem.Type type, CallbackInfoReturnable<Integer> cbireturn) {
         if (type == ArmorItem.Type.HELMET) {
-            if (this.name.equals("iron")) {
+            if (this.name.matches("iron")) {
                 cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*2*this.durabilityMultiplier);
             }
-            cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*this.durabilityMultiplier);
-        }
-        else if (type != ArmorItem.Type.HELMET && this.name.equals("iron")) {
-            cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*2*this.durabilityMultiplier);
+            else {
+                cbireturn.setReturnValue(MathHelper.ceil(1.75f*14)*this.durabilityMultiplier);
+            }
         }
         else {
-            cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*this.durabilityMultiplier);
+            if (this.name.matches("iron")) {
+                cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*2*this.durabilityMultiplier);
+            }
+            else {
+                cbireturn.setReturnValue(MathHelper.ceil(1.75f*BASE_DURABILITY.get((Object)type))*this.durabilityMultiplier);
+            }
         }
     }
 
