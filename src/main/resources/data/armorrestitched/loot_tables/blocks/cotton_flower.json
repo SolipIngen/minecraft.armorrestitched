@@ -43,7 +43,7 @@
                 "type": "minecraft:item",
                 "conditions": [
                   {
-                    "block": "armorrestitched:flax_flower",
+                    "block": "armorrestitched:cotton_flower",
                     "condition": "minecraft:block_state_property",
                     "properties": {
                       "half": "lower"
