@@ -10,6 +10,7 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.EmptyEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.EnchantRandomlyLootFunction;
+import net.minecraft.loot.function.LootingEnchantLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
@@ -34,7 +35,7 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
     private static final Identifier POLAR_BEAR_ENTITY_ID = new Identifier("entities/polar_bear");
     private static final Identifier WOLF_ENTITY_ID = new Identifier("entities/wolf");
     private static final Identifier[] ID_ARRAY = new Identifier[]{DESERT_PYRAMID_ID, END_CITY_TREASURE_ID, JUNGLE_TEMPLE_ID, UNDERWATER_RUIN_SMALL_ID, UNDERWATER_RUIN_BIG_ID, SHIPWRECK_SUPPLY_ID, SHIPWRECK_TREASURE_ID, 
-        PANDA_ENTITY_ID, POLAR_BEAR_ENTITY_ID, WOLF_ENTITY_ID};
+        GOAT_ENTITY_ID, PANDA_ENTITY_ID, POLAR_BEAR_ENTITY_ID, WOLF_ENTITY_ID};
 
 
     @Override
@@ -100,27 +101,32 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
                     if (identifier.getPath().matches(GOAT_ENTITY_ID.getPath())) {
                         furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
                             .with(ItemEntry.builder(Blocks.WHITE_WOOL)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f)))
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
                         tableBuilder.pool(furPoolBuilder.build());
                     }
                     else if (identifier.getPath().matches(PANDA_ENTITY_ID.getPath())) {
                         furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
                             .with(ItemEntry.builder(ModBlocks.BLACK_FUR)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f)))
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))))
                             .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f)))
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
                         tableBuilder.pool(furPoolBuilder.build());
                     }
                     else if (identifier.getPath().matches(POLAR_BEAR_ENTITY_ID.getPath())) {
                         furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
                             .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f))));
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 2.0f)))
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
                         tableBuilder.pool(furPoolBuilder.build());
                     }
                     else if (identifier.getPath().matches(WOLF_ENTITY_ID.getPath())) {
                         furPoolBuilder.rolls(ConstantLootNumberProvider.create(1))
                             .with(ItemEntry.builder(ModBlocks.WHITE_FUR)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f)))
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0f, 1.0f))));
                         tableBuilder.pool(furPoolBuilder.build());
                     }
                 }

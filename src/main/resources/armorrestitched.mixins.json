@@ -7,7 +7,7 @@
     "block.AbstractCauldronBlockMixin", 
     "block.BlocksMixin", 
     "block.LeavesBlockMixin", 
-    "block.MagroveRootsBlockMixin", 
+    "block.MangroveRootsBlockMixin", 
     "block.PowderSnowBlockMixin", 
     "enchantment.EnchantmentHelperMixin", 
     "enchantment.FrostWalkerEnchantmentMixin", 
