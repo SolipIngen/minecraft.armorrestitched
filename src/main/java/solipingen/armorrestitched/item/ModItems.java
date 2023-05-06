@@ -1,6 +1,8 @@
 package solipingen.armorrestitched.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.DyeableArmorItem;
@@ -13,6 +15,7 @@ import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.entity.ModEntityTypes;
+import solipingen.armorrestitched.registry.tag.ModItemTags;
 
 
 public class ModItems {
@@ -152,6 +155,28 @@ public class ModItems {
     }
 
     public static void registerModItems() {
+        FuelRegistry.INSTANCE.add(ModItemTags.COTTON_BLOCKS, 100);
+        FuelRegistry.INSTANCE.add(ModItemTags.FUR_BLOCKS, 100);
+        FuelRegistry.INSTANCE.add(ModItemTags.LINEN_BLOCKS, 100);
+        FuelRegistry.INSTANCE.add(ModItemTags.SILK_BLOCKS, 100);
+
+        FuelRegistry.INSTANCE.add(ModItemTags.COTTON_CARPETS, 67);
+        FuelRegistry.INSTANCE.add(ModItemTags.FUR_CARPETS, 67);
+        FuelRegistry.INSTANCE.add(ModItemTags.LINEN_CARPETS, 67);
+        FuelRegistry.INSTANCE.add(ModItemTags.SILK_CARPETS, 67);
+
+        FuelRegistry.INSTANCE.add(ModBlocks.MULBERRY_SAPLING, 100);
+
+        CompostingChanceRegistry.INSTANCE.add(ModItems.COTTON_SEEDS, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.FLAXSEED, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.COTTON_FLOWER, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.FLAX_FLOWER, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.COTTON, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.FLAX_STEM, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.FLAX_BLOCK, 0.85f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.MULBERRY_SAPLING, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.MULBERRY_LEAVES, 0.3f);
+
         ArmorRestitched.LOGGER.debug("Registering Mod Items for " + ArmorRestitched.MOD_ID);
     }
     

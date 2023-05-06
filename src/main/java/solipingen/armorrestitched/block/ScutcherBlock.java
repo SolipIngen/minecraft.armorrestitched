@@ -10,7 +10,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
@@ -56,8 +55,8 @@ public class ScutcherBlock extends HorizontalFacingBlock implements Waterloggabl
                 ItemStack itemStack2 = new ItemStack(ModBlocks.WHITE_COTTON);
                 if (!player.isCreative()) {
                     itemStack.decrement(4);
+                    player.setStackInHand(hand, itemStack);
                 }
-                player.setStackInHand(hand, itemStack);
                 if (!player.getInventory().insertStack(itemStack2)) {
                     player.dropItem(itemStack2, false);
                 }
@@ -68,9 +67,19 @@ public class ScutcherBlock extends HorizontalFacingBlock implements Waterloggabl
                 player.incrementStat(Stats.USED.getOrCreateStat(this.asItem()));
                 return ActionResult.SUCCESS;
             }
-            else if (itemStack.isOf(ModItems.FLAX_STEM)) {
-                ItemStack itemStack2 = new ItemStack(ModItems.LINEN);
-                ItemUsage.exchangeStack(itemStack, player, itemStack2);
+            if (itemStack.isOf(ModItems.FLAX_STEM)) {
+                ItemStack itemStack2 = new ItemStack(ModItems.LINEN, itemStack.getCount());
+                if (player.isCreative()) {
+                    if (!player.getInventory().insertStack(itemStack2)) {
+                        player.dropItem(itemStack2, false);
+                    }
+                    else {
+                        player.playerScreenHandler.syncState();
+                    }
+                }
+                else {
+                    player.setStackInHand(hand, itemStack2);
+                }
                 world.playSound(null, pos, ModSoundEvents.SCUTCHER_USED, SoundCategory.PLAYERS);
                 player.incrementStat(Stats.USED.getOrCreateStat(this.asItem()));
                 return ActionResult.SUCCESS;

@@ -1,6 +1,7 @@
 package solipingen.armorrestitched.block;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -20,6 +21,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
+import solipingen.armorrestitched.registry.tag.ModBlockTags;
 import solipingen.armorrestitched.world.tree.MulberrySaplingGenerator;
 
 
@@ -192,6 +194,21 @@ public class ModBlocks {
     }
     
     public static void registerModBlocks() {
+        FlammableBlockRegistry flammableBlockRegistry = FlammableBlockRegistry.getDefaultInstance();
+
+        flammableBlockRegistry.add(ModBlocks.MULBERRY_LEAVES, 30, 60);
+        flammableBlockRegistry.add(ModBlocks.MULBERRY_SILKWORM_LEAVES, 30, 60);
+        flammableBlockRegistry.add(ModBlocks.FLAX_BLOCK, 30, 60);
+
+        flammableBlockRegistry.add(ModBlockTags.COTTON, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.COTTON_CARPETS, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.FUR, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.FUR_CARPETS, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.LINEN, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.LINEN_CARPETS, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.SILK, 5, 20);
+        flammableBlockRegistry.add(ModBlockTags.SILK_CARPETS, 5, 20);
+
         ArmorRestitched.LOGGER.debug("Registering ModBlocks for " + ArmorRestitched.MOD_ID);
     }
 

@@ -3,7 +3,6 @@ package solipingen.armorrestitched;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import solipingen.armorrestitched.block.ModBlocks;
-import solipingen.armorrestitched.block.ModFlammableBlockRegistry;
 import solipingen.armorrestitched.enchantment.ModEnchantments;
 import solipingen.armorrestitched.entity.ModEntityTypes;
 import solipingen.armorrestitched.entity.attribute.ModEntityAttributeRegistry;
@@ -32,7 +31,6 @@ public class ArmorRestitched implements ModInitializer {
 		ModEnchantments.registerModEnchantments();
 		ModEntityAttributeRegistry.registerModEntityAttributes();
 		ModEntityTypes.registerModEntityTypes();
-		ModFlammableBlockRegistry.registerFlammableBlocks();
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemsToVanillaGroups();
 		ModRecipes.registerModRecipes();
