@@ -1,7 +1,5 @@
 package solipingen.armorrestitched.mixin.entity.passive;
 
-import java.util.ArrayList;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -14,10 +12,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.item.ModItems;
@@ -37,17 +33,6 @@ public abstract class AbstractHorseEntityMixin extends AnimalEntity {
             return attributeBuilder.add(entityAttribute, baseValue).add(EntityAttributes.GENERIC_ARMOR, 6.0);
         }
         return attributeBuilder.add(entityAttribute, baseValue);
-    }
-
-    @Redirect(method = "initCustomGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Ingredient;ofItems([Lnet/minecraft/item/ItemConvertible;)Lnet/minecraft/recipe/Ingredient;"))
-    private Ingredient redirectedTemptIngredient(ItemConvertible... originaItemConvertibles) {
-        ArrayList<ItemConvertible> itemConvertibleList = new ArrayList<ItemConvertible>();
-        for (ItemConvertible itemConvertible : originaItemConvertibles) {
-            itemConvertibleList.add(itemConvertible);
-        }
-        itemConvertibleList.add(ModItems.FLAX_STEM);
-        ItemConvertible[] itemConvertibles = itemConvertibleList.toArray(new ItemConvertible[itemConvertibleList.size()]);
-        return Ingredient.ofItems(itemConvertibles);
     }
 
     @Redirect(method = "receiveFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
