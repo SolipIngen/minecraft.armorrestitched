@@ -1,15 +1,10 @@
 package solipingen.armorrestitched.mixin.entity.passive;
 
-import java.util.ArrayList;
 import java.util.Map;
 
-import org.objectweb.asm.Opcodes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -18,14 +13,15 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AbstractDonkeyEntity;
 import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
@@ -45,7 +41,6 @@ import solipingen.armorrestitched.sound.ModSoundEvents;
 
 @Mixin(LlamaEntity.class)
 public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
-    @Shadow @Final private static Ingredient TAMING_INGREDIENT;
     private static final Map<LlamaEntity.Variant, ItemConvertible> DROPS = Util.make(Maps.newEnumMap(LlamaEntity.Variant.class), map -> {
         map.put(LlamaEntity.Variant.CREAMY, Blocks.YELLOW_WOOL);
         map.put(LlamaEntity.Variant.WHITE, Blocks.WHITE_WOOL);
@@ -62,28 +57,16 @@ public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
         this.shearedCooldown = 0;
     }
 
-    @Redirect(method = "initGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Ingredient;ofItems([Lnet/minecraft/item/ItemConvertible;)Lnet/minecraft/recipe/Ingredient;"))
-    private Ingredient redirectedTemptIngredient(ItemConvertible... originaItemConvertibles) {
-        ArrayList<ItemConvertible> itemConvertibleList = new ArrayList<ItemConvertible>();
-        for (ItemConvertible itemConvertible : originaItemConvertibles) {
-            itemConvertibleList.add(itemConvertible);
-        }
-        itemConvertibleList.add(ModBlocks.FLAX_BLOCK);
-        ItemConvertible[] itemConvertibles = itemConvertibleList.toArray(new ItemConvertible[itemConvertibleList.size()]);
-        return Ingredient.ofItems(itemConvertibles);
+    @Inject(method = "initGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Ingredient;ofItems([Lnet/minecraft/item/ItemConvertible;)Lnet/minecraft/recipe/Ingredient;"))
+    private void injectedTemptGoal(CallbackInfo cbi) {
+        this.goalSelector.add(5, new TemptGoal(this, 1.25, Ingredient.ofItems(ModBlocks.FLAX_BLOCK), false));
     }
 
-    @Redirect(method = "isBreedingItem", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/passive/LlamaEntity;TAMING_INGREDIENT:Lnet/minecraft/recipe/Ingredient;", opcode = Opcodes.GETSTATIC))
-    private Ingredient redirectedBreedingIngredient() {
-        ItemStack[] itemStackList = TAMING_INGREDIENT.getMatchingStacks();
-        ArrayList<ItemConvertible> itemList = new ArrayList<ItemConvertible>();
-        for (ItemStack stack : itemStackList) {
-            itemList.add(stack.getItem());
+    @Inject(method = "isBreedingItem", at = @At("HEAD"), cancellable = true)
+    private void injectedBreedingIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cbireturn) {
+        if (stack.isOf(ModBlocks.FLAX_BLOCK.asItem())) {
+            cbireturn.setReturnValue(true);
         }
-        itemList.add(ModItems.FLAX_STEM);
-        itemList.add(ModBlocks.FLAX_BLOCK);
-        ItemConvertible[] breedingItems = itemList.toArray(new ItemConvertible[itemList.size()]);
-        return Ingredient.ofItems(breedingItems);
     }
 
     @Override
@@ -106,25 +89,61 @@ public abstract class LlamaEntityMixin extends AbstractDonkeyEntity {
         return super.interactMob(player, hand);
     }
 
-    @Inject(method = "receiveFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "receiveFood", at = @At("HEAD"), cancellable = true)
     private void injectedReceiveFood(PlayerEntity player, ItemStack item, CallbackInfoReturnable<Boolean> cbireturn) {
-        if (item.isOf(Items.WHEAT) || item.isOf(ModItems.FLAX_STEM)) {
+        int i = 0;
+        int j = 0;
+        float f = 0.0f;
+        boolean bl = false;
+        if (item.isOf(ModItems.FLAX_STEM)) {
+            i = 10;
+            j = 3;
+            f = 2.0f;
             this.shearedCooldown = MathHelper.ceil(0.9f*this.shearedCooldown);
-        }
-        else if (item.isOf(Blocks.HAY_BLOCK.asItem()) || item.isOf(ModBlocks.FLAX_BLOCK.asItem())) {
+        } 
+        else if (item.isOf(ModBlocks.FLAX_BLOCK.asItem())) {
+            i = 90;
+            j = 6;
+            f = 10.0f;
             this.shearedCooldown = MathHelper.ceil(0.67f*this.shearedCooldown);
+            if (this.isTame() && this.getBreedingAge() == 0 && this.canEat()) {
+                bl = true;
+                this.lovePlayer(player);
+            }
+        }
+        if (this.getHealth() < this.getMaxHealth() && f > 0.0f) {
+            this.heal(f);
+            bl = true;
+        }
+        if (this.isBaby() && i > 0) {
+            this.world.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), 0.0, 0.0, 0.0);
+            if (!this.world.isClient) {
+                this.growUp(i);
+            }
+            bl = true;
+        }
+        if (j > 0 && (bl || !this.isTame()) && this.getTemper() < this.getMaxTemper()) {
+            bl = true;
+            if (!this.world.isClient) {
+                this.addTemper(j);
+            }
+        }
+        if (bl && !this.isSilent() && this.getEatSound() != null) {
+            this.world.playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatSound(), this.getSoundCategory(), 1.0f, 1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f);
+        }
+        if (bl) {
+            cbireturn.setReturnValue(bl);
         }
     }
 
-    @Redirect(method = "receiveFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
-    private boolean redirectedReceiveFoodIsOf(ItemStack itemStack, Item item) {
-        if (item == Items.WHEAT) {
-            return itemStack.isOf(item) || itemStack.isOf(ModItems.FLAX_STEM);
+    @Inject(method = "receiveFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z", shift = At.Shift.AFTER), cancellable = true)
+    private void injectedReceiveVanillaFood(PlayerEntity player, ItemStack item, CallbackInfoReturnable<Boolean> cbireturn) {
+        if (item.isOf(Items.WHEAT)) {
+            this.shearedCooldown = MathHelper.ceil(0.9f*this.shearedCooldown);
         }
-        else if (item == Blocks.HAY_BLOCK.asItem()) {
-            return itemStack.isOf(item) || itemStack.isOf(ModBlocks.FLAX_BLOCK.asItem());
+        else if (item.isOf(Blocks.HAY_BLOCK.asItem())) {
+            this.shearedCooldown = MathHelper.ceil(0.67f*this.shearedCooldown);
         }
-        return itemStack.isOf(item);
     }
 
     @Override

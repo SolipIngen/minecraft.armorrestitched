@@ -2,12 +2,12 @@ package solipingen.armorrestitched.mixin.entity.passive;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import solipingen.armorrestitched.item.ModItems;
@@ -21,9 +21,11 @@ public abstract class AnimalEntityMixin extends PassiveEntity {
         super(entityType, world);
     }
 
-    @Redirect(method = "isBreedingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
-    private boolean redirectedIsOf(ItemStack stack, Item originalItem) {
-        return stack.isOf(originalItem) || stack.isOf(ModItems.FLAX_STEM);
+    @Inject(method = "isBreedingItem", at = @At("HEAD"), cancellable = true)
+    private void redirectedIsOf(ItemStack stack, CallbackInfoReturnable<Boolean> cbireturn) {
+        if (stack.isOf(ModItems.FLAX_STEM)) {
+            cbireturn.setReturnValue(true);
+        }
     }
 
     
