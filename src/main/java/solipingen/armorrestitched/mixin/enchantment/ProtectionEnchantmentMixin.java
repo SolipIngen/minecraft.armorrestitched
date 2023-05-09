@@ -14,13 +14,11 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.ProtectionEnchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.TagKey;
+import solipingen.armorrestitched.enchantment.ModEnchantments;
 
 
 @Mixin(ProtectionEnchantment.class)
@@ -41,12 +39,16 @@ public abstract class ProtectionEnchantmentMixin extends Enchantment {
         return EnchantmentTarget.ARMOR_FEET;
     }
 
-    @Redirect(method = "getProtectionAmount", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
-    private boolean redirectedIsInFall(DamageSource source, TagKey<DamageType> damageTypeTag) {
-        if (damageTypeTag == DamageTypeTags.IS_FALL) {
-            return source.isIn(damageTypeTag) || source.isOf(DamageTypes.FLY_INTO_WALL);
+    @Inject(method = "getProtectionAmount", at = @At(value = "FIELD", target = "Lnet/minecraft/registry/tag/DamageTypeTags;IS_FALL:Lnet/minecraft/registry/tag/TagKey;", opcode = Opcodes.GETSTATIC, shift = At.Shift.AFTER), cancellable = true)
+    private void injectedFallProtectionAmount(int level, DamageSource source, CallbackInfoReturnable<Integer> cbireturn) {
+        if (((ProtectionEnchantment)(Object)this) == ModEnchantments.IMPACT_PROTECTION && ((ProtectionEnchantment)(Object)this).target == EnchantmentTarget.ARMOR_HEAD) {
+            if (source.isOf(DamageTypes.FLY_INTO_WALL)) {
+                cbireturn.setReturnValue(3*level);
+            }
+            else {
+                cbireturn.setReturnValue(0);
+            }
         }
-        return source.isIn(damageTypeTag);
     }
 
     @Inject(method = "canAccept", at = @At("HEAD"), cancellable = true)
@@ -86,7 +88,17 @@ public abstract class ProtectionEnchantmentMixin extends Enchantment {
     
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem || (stack.getItem() instanceof ElytraItem && ((ProtectionEnchantment)(Object)this).protectionType != ProtectionEnchantment.Type.FALL) || super.isAcceptableItem(stack);
+        if (stack.getItem() instanceof ArmorItem) {
+            ProtectionEnchantment.Type type = ((ProtectionEnchantment)(Object)this).protectionType;
+            switch (type) {
+                case FALL: return ((ArmorItem)stack.getItem()).getSlotType() == EquipmentSlot.HEAD || ((ArmorItem)stack.getItem()).getSlotType() == EquipmentSlot.FEET;
+                default: return true;
+            }
+        }
+        else if (stack.getItem() instanceof ElytraItem) {
+            return ((ProtectionEnchantment)(Object)this).protectionType != ProtectionEnchantment.Type.FALL;
+        }
+        return super.isAcceptableItem(stack);
     }
 
     @Override

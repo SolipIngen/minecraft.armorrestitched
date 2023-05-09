@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.world.World;
@@ -28,12 +27,6 @@ public abstract class RabbitEntityMixin extends AnimalEntity {
         }
         return attributeBuilder.add(entityAttribute, baseValue);
     }
-
-    @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        return false;
-    }
-
     
 
     

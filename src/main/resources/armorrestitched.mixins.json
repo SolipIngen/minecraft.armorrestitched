@@ -45,7 +45,6 @@
     "entity.passive.CowEntityMixin", 
     "entity.passive.FishEntityMixin", 
     "entity.passive.FoxEntityMixin", 
-    "entity.passive.FrogEntityMixin", 
     "entity.passive.GoatEntityMixin", 
     "entity.passive.IronGolemEntityMixin", 
     "entity.passive.LlamaEntityMixin", 

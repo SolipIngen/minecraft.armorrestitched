@@ -320,7 +320,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Redirect(method = "applyArmorToDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     private boolean redirectedBypassesArmor(DamageSource source, TagKey<DamageType> tag) {
-        return source.isIn(tag) && !(source.isOf(DamageTypes.FALL) || source.isOf(DamageTypes.FLY_INTO_WALL));
+        return source.isIn(tag) && !source.isOf(DamageTypes.STALAGMITE);
     }
 
     @Redirect(method = "getEquipmentChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getAttributeModifiers(Lnet/minecraft/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;"))

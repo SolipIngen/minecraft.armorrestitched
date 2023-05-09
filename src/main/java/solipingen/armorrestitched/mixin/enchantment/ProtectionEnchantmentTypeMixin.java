@@ -24,6 +24,9 @@ public abstract class ProtectionEnchantmentTypeMixin {
         if (((ProtectionEnchantment.Type)(Object)this) == ProtectionEnchantment.Type.PROJECTILE) {
             cbireturn.setReturnValue(8);
         }
+        else if (((ProtectionEnchantment.Type)(Object)this) == ProtectionEnchantment.Type.FALL) {
+            cbireturn.setReturnValue(7);
+        }
     }
     
 
