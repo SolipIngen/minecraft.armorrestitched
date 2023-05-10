@@ -22,9 +22,11 @@ public abstract class SwiftSneakEnchantmentMixin extends Enchantment {
     }
 
     @ModifyConstant(method = "getMinPower", constant = @Constant(intValue = 25))
-    private int modifiedMinPowerFactor(int originalI) {
-        return 15;
+    private int modifiedMinPowerFactor(int originalI, int level) {
+        return 10 + 20*(level - 1);
     }
+
+
 
     @Inject(method = "isAvailableForEnchantedBookOffer", at = @At("HEAD"), cancellable = true)
     private void injectedIsAvailableForEnchantedBookOffer(CallbackInfoReturnable<Boolean> cbireturn) {

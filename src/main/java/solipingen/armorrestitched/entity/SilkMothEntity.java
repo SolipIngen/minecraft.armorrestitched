@@ -387,6 +387,7 @@ public class SilkMothEntity extends PassiveEntity implements Flutterer {
 
     public class SilkMothEscapeDangerGoal extends EscapeDangerGoal {
 
+        
         public SilkMothEscapeDangerGoal(PathAwareEntity mob, double speed) {
             super(mob, speed);
         }
