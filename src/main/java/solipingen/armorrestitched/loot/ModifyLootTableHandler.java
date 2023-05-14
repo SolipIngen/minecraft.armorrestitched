@@ -46,14 +46,14 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
                     LootPool.Builder poolBuilder = LootPool.builder();
                     if (identifier.getPath().matches(END_CITY_TREASURE_ID.getPath())) {
                         poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                            .with(EmptyEntry.builder().weight(7))
+                            .with(EmptyEntry.builder().weight(10))
                             .with(ItemEntry.builder(Items.BOOK).weight(3))
                             .apply(new EnchantRandomlyLootFunction.Builder().add(ModEnchantments.SOARING));
                         tableBuilder.pool(poolBuilder.build());
                     }
                     else if (identifier.getPath().startsWith("chests/underwater_ruin")) {
                         poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                            .with(EmptyEntry.builder().weight(6))
+                            .with(EmptyEntry.builder().weight(9))
                             .with(ItemEntry.builder(ModItems.FUR_HELMET).weight(1))
                             .with(ItemEntry.builder(ModItems.FUR_CHESTPLATE).weight(1))
                             .with(ItemEntry.builder(ModItems.SILK_HELMET).weight(1))
@@ -69,7 +69,7 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
                     }
                     else if (identifier.getPath().matches(SHIPWRECK_SUPPLY_ID.getPath())) {
                         poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                            .with(EmptyEntry.builder().weight(6))
+                            .with(EmptyEntry.builder().weight(7))
                             .with(ItemEntry.builder(ModItems.COTTON_HELMET).weight(1))
                             .with(ItemEntry.builder(ModItems.COTTON_CHESTPLATE).weight(1))
                             .with(ItemEntry.builder(ModItems.COTTON_LEGGINGS).weight(1))
@@ -83,7 +83,7 @@ public class ModifyLootTableHandler implements LootTableEvents.Modify {
                     }
                     else if (identifier.getPath().matches(SHIPWRECK_TREASURE_ID.getPath())) {
                         poolBuilder.rolls(ConstantLootNumberProvider.create(1))
-                            .with(EmptyEntry.builder().weight(8))
+                            .with(EmptyEntry.builder().weight(7))
                             .with(ItemEntry.builder(ModItems.FUR_HELMET).weight(1))
                             .with(ItemEntry.builder(ModItems.FUR_CHESTPLATE).weight(1))
                             .with(ItemEntry.builder(ModItems.FUR_LEGGINGS).weight(1))
