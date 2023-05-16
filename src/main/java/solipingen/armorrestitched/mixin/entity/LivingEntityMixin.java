@@ -276,43 +276,49 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("TAIL"), cancellable = true)
     private void injectedDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cbireturn) {
-        int thornsLevel = EnchantmentHelper.getLevel(Enchantments.THORNS, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
-        if (thornsLevel > 0 && source.getAttacker() != null && source.getAttacker() instanceof LivingEntity && ThornsEnchantment.shouldDamageAttacker(thornsLevel, this.random) && !source.isIn(DamageTypeTags.BYPASSES_ARMOR)) {
-            ((LivingEntity)source.getAttacker()).damage(this.getDamageSources().thorns(this), MathHelper.floor(0.2f*thornsLevel*amount) + this.random.nextInt(thornsLevel + 1));
+        boolean blockingBl = ((LivingEntity)(Object)this).isBlocking() && ((LivingEntity)(Object)this).blockedByShield(source);
+        if (blockingBl) {
+            cbireturn.setReturnValue(blockingBl);
         }
-        int i = 0;
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
-            ItemStack equippedStack = ((LivingEntity)(Object)this).getEquippedStack(slot);
-            Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
-            if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.AMETHYST)) {
-                i++;
+        else {
+            int thornsLevel = EnchantmentHelper.getLevel(Enchantments.THORNS, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
+            if (thornsLevel > 0 && source.getAttacker() != null && source.getAttacker() instanceof LivingEntity && ThornsEnchantment.shouldDamageAttacker(thornsLevel, this.random) && !source.isIn(DamageTypeTags.BYPASSES_ARMOR)) {
+                ((LivingEntity)source.getAttacker()).damage(this.getDamageSources().thorns(this), MathHelper.floor(0.15f*thornsLevel*amount) + this.random.nextInt(thornsLevel + 1));
             }
-        }
-        if (i > 0 && !((LivingEntity)(Object)this).isBlocking()) {
-            ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, i*this.random.nextBetween(10, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*10), 11)), 0, true, true, false));
-            this.world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS, MathHelper.clamp(i*amount, 4.0f, i*4.0f), ((LivingEntity)(Object)this).getSoundPitch());
-            Box amethystSoundBox = new Box(this.getBlockPos()).expand(4.0*i);
-            List<Entity> amethystSoundEntities = this.world.getOtherEntities(this, amethystSoundBox);
-            for (Entity entity : amethystSoundEntities) {
-                if (entity.distanceTo(entity) > 4.0f*i) continue;
-                if (entity instanceof MobEntity && entity.world instanceof ServerWorld) {
-                    MobEntity mobEntity = (MobEntity)entity;
-                    if (mobEntity.getTarget() == null && mobEntity.getGroup() != EntityGroup.UNDEAD) {
-                        int maxDuration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 11);
-                        mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(10, maxDuration), 0, true, true, false));
-                    }
-                    else if (mobEntity.getTarget() != null && mobEntity.getGroup() != EntityGroup.UNDEAD && (mobEntity instanceof HostileEntity || mobEntity.getTarget() == ((LivingEntity)(Object)this))) {
-                        int duration = mobEntity.getRandom().nextBetween(10, Math.max(i*20, 11));
-                        duration *= mobEntity instanceof VibrationListener.Callback ? 2 : 1;
-                        ((MobEntityInterface)mobEntity).setEntranced(true, duration);
-                    }
+            int i = 0;
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+                ItemStack equippedStack = ((LivingEntity)(Object)this).getEquippedStack(slot);
+                Optional<ArmorTrim> trimOptional = ArmorTrim.getTrim(this.world.getRegistryManager(), equippedStack);
+                if (trimOptional.isPresent() && trimOptional.get().getMaterial().matchesKey(ArmorTrimMaterials.AMETHYST)) {
+                    i++;
                 }
-                else if (entity instanceof PlayerEntity) {
-                    PlayerEntity player = (PlayerEntity)entity;
-                    if (source.getAttacker() == player || ((LivingEntity)(Object)this).getLastAttacker() == player) continue;
-                    int duration = Math.max(MathHelper.ceil(5*i*amount/Math.max(player.squaredDistanceTo(this), 1.0)), 6);
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextBetween(5, duration), 0, true, true, false));
+            }
+            if (i > 0) {
+                ((LivingEntity)(Object)this).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, i*this.random.nextBetween(10, Math.max(MathHelper.ceil(((LivingEntity)(Object)this).getSoundPitch()*10), 11)), 0, true, true, false));
+                this.world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.PLAYERS, MathHelper.clamp(i*amount, 4.0f, i*4.0f), ((LivingEntity)(Object)this).getSoundPitch());
+                Box amethystSoundBox = new Box(this.getBlockPos()).expand(4.0*i);
+                List<Entity> amethystSoundEntities = this.world.getOtherEntities(this, amethystSoundBox);
+                for (Entity entity : amethystSoundEntities) {
+                    if (entity.distanceTo(entity) > 4.0f*i) continue;
+                    if (entity instanceof MobEntity && entity.world instanceof ServerWorld) {
+                        MobEntity mobEntity = (MobEntity)entity;
+                        if (mobEntity.getTarget() == null && mobEntity.getGroup() != EntityGroup.UNDEAD) {
+                            int maxDuration = Math.max(MathHelper.ceil(5*i*amount/Math.max(mobEntity.squaredDistanceTo(this), 1.0)), 11);
+                            mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, mobEntity.getRandom().nextBetween(10, maxDuration), 0, true, true, false));
+                        }
+                        else if (mobEntity.getTarget() != null && mobEntity.getGroup() != EntityGroup.UNDEAD && (mobEntity instanceof HostileEntity || mobEntity.getTarget() == ((LivingEntity)(Object)this))) {
+                            int duration = mobEntity.getRandom().nextBetween(10, Math.max(i*20, 11));
+                            duration *= mobEntity instanceof VibrationListener.Callback ? 2 : 1;
+                            ((MobEntityInterface)mobEntity).setEntranced(true, duration);
+                        }
+                    }
+                    else if (entity instanceof PlayerEntity) {
+                        PlayerEntity player = (PlayerEntity)entity;
+                        if (source.getAttacker() == player || ((LivingEntity)(Object)this).getLastAttacker() == player) continue;
+                        int duration = Math.max(MathHelper.ceil(5*i*amount/Math.max(player.squaredDistanceTo(this), 1.0)), 6);
+                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextBetween(5, duration), 0, true, true, false));
+                    }
                 }
             }
         }
