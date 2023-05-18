@@ -277,13 +277,10 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "damage", at = @At("TAIL"), cancellable = true)
     private void injectedDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cbireturn) {
         boolean blockingBl = ((LivingEntity)(Object)this).isBlocking() && ((LivingEntity)(Object)this).blockedByShield(source);
-        if (blockingBl) {
-            cbireturn.setReturnValue(blockingBl);
-        }
-        else {
+        if (!blockingBl) {
             int thornsLevel = EnchantmentHelper.getLevel(Enchantments.THORNS, ((LivingEntity)(Object)this).getEquippedStack(EquipmentSlot.CHEST));
-            if (thornsLevel > 0 && source.getAttacker() != null && source.getAttacker() instanceof LivingEntity && ThornsEnchantment.shouldDamageAttacker(thornsLevel, this.random) && !source.isIn(DamageTypeTags.BYPASSES_ARMOR)) {
-                ((LivingEntity)source.getAttacker()).damage(this.getDamageSources().thorns(this), MathHelper.floor(0.15f*thornsLevel*amount) + this.random.nextInt(thornsLevel + 1));
+            if (thornsLevel > 0 && source.getSource() != null && source.getSource() instanceof LivingEntity && ThornsEnchantment.shouldDamageAttacker(thornsLevel, this.random) && !source.isIn(DamageTypeTags.BYPASSES_ARMOR)) {
+                ((LivingEntity)source.getSource()).damage(this.getDamageSources().thorns(this), MathHelper.floor(0.15f*thornsLevel*amount) + this.random.nextInt(thornsLevel + 1));
             }
             int i = 0;
             for (EquipmentSlot slot : EquipmentSlot.values()) {
