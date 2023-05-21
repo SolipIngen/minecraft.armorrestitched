@@ -35,6 +35,16 @@ public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity imple
         super(entityType, world);
     }
 
+    @Inject(method = "tickMovement", at = @At("TAIL"))
+    private void injectedBurnInSunlight(CallbackInfo cbi) {
+        boolean bl = this.isAlive() && this.isAffectedByDaylight();
+        if (bl) {
+            if (!this.hasArmorInSlot()) {
+                this.setOnFireFor(8);
+            }
+        }
+    }
+
     @Override
     public void onInventoryChanged(Inventory sender) {
         ItemStack itemStack = this.getArmorType();

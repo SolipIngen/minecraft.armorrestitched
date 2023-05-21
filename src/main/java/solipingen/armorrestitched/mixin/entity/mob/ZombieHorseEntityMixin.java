@@ -34,6 +34,17 @@ public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity impleme
     }
 
     @Override
+    public void tickMovement() {
+        super.tickMovement();
+        boolean bl = this.isAlive() && this.isAffectedByDaylight();
+        if (bl) {
+            if (!this.hasArmorInSlot()) {
+                this.setOnFireFor(8);
+            }
+        }
+    }
+
+    @Override
     public void onInventoryChanged(Inventory sender) {
         ItemStack itemStack = this.getArmorType();
         super.onInventoryChanged(sender);
