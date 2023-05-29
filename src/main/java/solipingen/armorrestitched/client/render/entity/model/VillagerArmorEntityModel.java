@@ -16,7 +16,7 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.util.math.MathHelper;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class VillagerArmorEntityModel<T extends VillagerEntity> extends SinglePartEntityModel<T> implements ModelWithHead {
     private final ModelPart root;
     private final ModelPart head;

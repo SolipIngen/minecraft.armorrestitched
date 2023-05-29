@@ -17,7 +17,7 @@ import solipingen.armorrestitched.client.render.entity.feature.ElytraTrimFeature
 
 
 @Mixin(BipedEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class BipedEntityRendererMixin<T extends MobEntity, M extends BipedEntityModel<T>> extends MobEntityRenderer<T, M> {
 
 

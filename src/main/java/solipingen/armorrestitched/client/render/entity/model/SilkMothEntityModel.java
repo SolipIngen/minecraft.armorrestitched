@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import solipingen.armorrestitched.entity.SilkMothEntity;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class SilkMothEntityModel extends SinglePartEntityModel<SilkMothEntity> {
     private final ModelPart root;
     private final ModelPart head;

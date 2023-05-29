@@ -20,7 +20,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 
 @Mixin(EvokerEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class EvokerEntityRendererMixin<T extends SpellcastingIllagerEntity> extends IllagerEntityRenderer<T> {
     @Shadow @Final private static Identifier TEXTURE;
 

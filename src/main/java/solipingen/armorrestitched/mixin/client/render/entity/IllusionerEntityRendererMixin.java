@@ -20,7 +20,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 
 @Mixin(IllusionerEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class IllusionerEntityRendererMixin extends IllagerEntityRenderer<IllusionerEntity> {
     @Shadow @Final private static Identifier TEXTURE;
 

@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import solipingen.armorrestitched.ArmorRestitched;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ModEntityModelLayers {
 
     

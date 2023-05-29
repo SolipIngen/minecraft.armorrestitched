@@ -33,7 +33,7 @@ import solipingen.armorrestitched.item.ModArmorMaterials;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.IllagerEntityModelAccessor;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class IllagerArmorFeatureRenderer<T extends IllagerEntity, M extends IllagerEntityModel<IllagerEntity>> extends FeatureRenderer<IllagerEntity, IllagerEntityModel<IllagerEntity>> {
     private final IllagerArmorEntityModel<IllagerEntity> chestModel;
     private final IllagerArmorEntityModel<IllagerEntity> legsModel;

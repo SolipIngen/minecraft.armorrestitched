@@ -13,7 +13,7 @@ import solipingen.armorrestitched.client.render.entity.model.SilkMothEntityModel
 import solipingen.armorrestitched.entity.SilkMothEntity;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class SilkMothEntityRenderer extends MobEntityRenderer<SilkMothEntity, SilkMothEntityModel> {
     private static final Identifier TEXTURE = new Identifier(ArmorRestitched.MOD_ID, "textures/entity/silk_moth.png");
 

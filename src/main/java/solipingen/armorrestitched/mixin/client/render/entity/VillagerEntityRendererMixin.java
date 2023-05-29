@@ -19,7 +19,7 @@ import solipingen.armorrestitched.client.render.entity.model.VillagerArmorEntity
 
 
 @Mixin(VillagerEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class VillagerEntityRendererMixin extends MobEntityRenderer<VillagerEntity, VillagerResemblingModel<VillagerEntity>> {
 
 

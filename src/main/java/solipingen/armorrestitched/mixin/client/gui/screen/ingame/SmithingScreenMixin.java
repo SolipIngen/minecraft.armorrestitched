@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 
 
 @Mixin(SmithingScreen.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class SmithingScreenMixin extends ForgingScreen<SmithingScreenHandler> {
 
 

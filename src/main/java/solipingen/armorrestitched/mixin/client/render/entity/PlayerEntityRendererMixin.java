@@ -17,7 +17,7 @@ import solipingen.armorrestitched.client.render.entity.feature.ElytraTrimFeature
 
 
 @Mixin(PlayerEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
 

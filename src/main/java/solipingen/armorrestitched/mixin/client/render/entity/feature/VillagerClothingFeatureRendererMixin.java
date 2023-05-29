@@ -25,7 +25,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 
 
 @Mixin(VillagerClothingFeatureRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class VillagerClothingFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     @Shadow @Final private String entityType;
 

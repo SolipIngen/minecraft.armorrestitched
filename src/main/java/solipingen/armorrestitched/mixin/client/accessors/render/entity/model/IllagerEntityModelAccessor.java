@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.model.IllagerEntityModel;
 
 
 @Mixin(IllagerEntityModel.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public interface IllagerEntityModelAccessor {
     
     @Accessor("arms") public ModelPart getArms();

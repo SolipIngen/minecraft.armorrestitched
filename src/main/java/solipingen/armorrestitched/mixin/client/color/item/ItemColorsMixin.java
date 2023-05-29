@@ -12,7 +12,7 @@ import solipingen.armorrestitched.item.ModItems;
 
 
 @Mixin(ItemColors.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class ItemColorsMixin {
     
 

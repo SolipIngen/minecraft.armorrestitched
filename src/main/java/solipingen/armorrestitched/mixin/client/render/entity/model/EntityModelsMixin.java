@@ -17,7 +17,7 @@ import net.minecraft.client.render.entity.model.EntityModels;
 
 
 @Mixin(EntityModels.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class EntityModelsMixin {
     
 

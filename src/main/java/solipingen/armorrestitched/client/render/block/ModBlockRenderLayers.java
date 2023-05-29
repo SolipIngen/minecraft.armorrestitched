@@ -7,7 +7,7 @@ import net.minecraft.client.render.RenderLayer;
 import solipingen.armorrestitched.block.ModBlocks;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ModBlockRenderLayers {
 
     

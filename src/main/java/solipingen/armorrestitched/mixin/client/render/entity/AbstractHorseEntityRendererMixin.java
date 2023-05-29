@@ -19,7 +19,7 @@ import solipingen.armorrestitched.client.render.entity.feature.AbstractHorseArmo
 
 
 @Mixin(AbstractHorseEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class AbstractHorseEntityRendererMixin<T extends AbstractHorseEntity, M extends HorseEntityModel<T>> extends MobEntityRenderer<T, M> {
 
 

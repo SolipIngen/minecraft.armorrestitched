@@ -21,7 +21,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePartEntityModel<T> implements ModelWithArms, ModelWithHead {
     private final ModelPart root;
     private final ModelPart head;

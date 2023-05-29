@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.NonStandardHorseEntityInterface;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class AbstractHorseArmorFeatureRenderer extends FeatureRenderer<AbstractHorseEntity, HorseEntityModel<AbstractHorseEntity>> {
     private final HorseEntityModel<AbstractHorseEntity> model;
 

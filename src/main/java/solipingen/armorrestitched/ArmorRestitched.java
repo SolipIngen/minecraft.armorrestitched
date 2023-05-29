@@ -18,6 +18,7 @@ import solipingen.armorrestitched.world.gen.ModWorldGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class ArmorRestitched implements ModInitializer {
 
 	public static final String MOD_ID = "armorrestitched";

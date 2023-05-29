@@ -36,7 +36,7 @@ import solipingen.armorrestitched.client.render.entity.model.ElytraTrimEntityMod
 import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayers;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ElytraTrimFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     private final ElytraTrimEntityModel<T> elytraTrim;
     private final SpriteAtlasTexture elytraTrimsAtlas;

@@ -20,7 +20,7 @@ import solipingen.armorrestitched.item.ModArmorMaterials;
 
 
 @Mixin(ArmorFeatureRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M>  {
 
 
@@ -28,7 +28,7 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
         super(context);
     }
 
-    @Inject(method = "getArmorTexture", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "getArmorTexture", at = @At("HEAD"), cancellable = true)
     private void injectedGetArmorTexture(ArmorItem item, boolean secondLayer, @Nullable String overlay, CallbackInfoReturnable<Identifier> cbireturn) {
         if (item.getMaterial() instanceof ModArmorMaterials) {
             Identifier modArmorId = new Identifier(ArmorRestitched.MOD_ID, "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (secondLayer ? 2 : 1) + (String)(overlay == null ? "" : "_" + overlay) + ".png");

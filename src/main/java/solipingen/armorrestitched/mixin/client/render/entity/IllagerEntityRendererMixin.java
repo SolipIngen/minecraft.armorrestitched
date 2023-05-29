@@ -19,7 +19,7 @@ import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayer
 
 
 @Mixin(IllagerEntityRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class IllagerEntityRendererMixin<T extends IllagerEntity> extends MobEntityRenderer<T, IllagerEntityModel<T>> {
 
 

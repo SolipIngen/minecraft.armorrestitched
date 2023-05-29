@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.model.VillagerResemblingModel;
 
 
 @Mixin(VillagerResemblingModel.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public interface VillagerResemblingModelAccessor {
     
     @Accessor("rightLeg") public ModelPart getRightLeg();

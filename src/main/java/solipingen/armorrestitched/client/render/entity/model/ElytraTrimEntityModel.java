@@ -18,7 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ElytraTrimEntityModel<T extends LivingEntity> extends AnimalModel<T> {
     private final ModelPart rightWing;
     private final ModelPart leftWing;

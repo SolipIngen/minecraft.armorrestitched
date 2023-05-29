@@ -7,7 +7,7 @@ import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.entity.ModEntityTypes;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ModEntityRendererRegistry {
 
     

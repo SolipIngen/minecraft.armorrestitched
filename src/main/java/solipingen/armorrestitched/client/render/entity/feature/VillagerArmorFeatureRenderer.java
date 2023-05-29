@@ -34,7 +34,7 @@ import solipingen.armorrestitched.item.ModArmorMaterials;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.VillagerResemblingModelAccessor;
 
 
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class VillagerArmorFeatureRenderer<T extends VillagerEntity, M extends VillagerResemblingModel<VillagerEntity>> extends FeatureRenderer<VillagerEntity, VillagerResemblingModel<VillagerEntity>> {
     private final VillagerArmorEntityModel<VillagerEntity> chestModel;
     private final VillagerArmorEntityModel<VillagerEntity> legsModel;

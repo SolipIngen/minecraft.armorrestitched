@@ -18,7 +18,7 @@ import net.minecraft.item.trim.ArmorTrimMaterials;
 
 
 @Mixin(GameRenderer.class)
-@Environment(value=EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public abstract class GameRendererMixin implements AutoCloseable {
     
 
