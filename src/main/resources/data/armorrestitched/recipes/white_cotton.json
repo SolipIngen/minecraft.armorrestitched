@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "key": {
+      "#": {
+        "item": "armorrestitched:cotton"
+      }
+    },
+    "pattern": [
+      "##",
+      "##"
+    ],
+    "result": {
+      "item": "armorrestitched:white_cotton"
+    },
+    "show_notification": true
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_dye"
+    },
+    {
+      "item": "armorrestitched:white_cotton"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:gray_cotton"
+  }
+}

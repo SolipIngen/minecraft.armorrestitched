@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "armorrestitched:cotton_carpets"
+      }
+    },
+    "pattern": [
+      "o o",
+      "ooo", 
+      "ooo"
+    ],
+    "result": {
+      "item": "armorrestitched:cotton_chestplate"
+    }
+}

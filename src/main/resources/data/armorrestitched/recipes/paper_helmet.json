@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "item": "minecraft:paper"
+      }
+    },
+    "pattern": [
+      "ooo",
+      "o o"
+    ],
+    "result": {
+      "item": "armorrestitched:paper_helmet"
+    }
+}
