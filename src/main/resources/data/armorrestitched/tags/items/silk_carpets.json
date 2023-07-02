@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "armorrestitched:white_silk_carpet", 
+        "armorrestitched:black_silk_carpet", 
+        "armorrestitched:gray_silk_carpet", 
+        "armorrestitched:light_gray_silk_carpet", 
+        "armorrestitched:red_silk_carpet", 
+        "armorrestitched:pink_silk_carpet", 
+        "armorrestitched:orange_silk_carpet", 
+        "armorrestitched:yellow_silk_carpet", 
+        "armorrestitched:brown_silk_carpet", 
+        "armorrestitched:lime_silk_carpet", 
+        "armorrestitched:green_silk_carpet", 
+        "armorrestitched:light_blue_silk_carpet", 
+        "armorrestitched:blue_silk_carpet", 
+        "armorrestitched:cyan_silk_carpet", 
+        "armorrestitched:purple_silk_carpet", 
+        "armorrestitched:magenta_silk_carpet"
+    ]
+}

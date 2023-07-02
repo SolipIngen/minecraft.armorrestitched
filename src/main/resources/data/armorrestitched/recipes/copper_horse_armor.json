@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "X": {
+        "item": "minecraft:copper_ingot"
+      }
+    },
+    "pattern": [
+      "X X",
+      "XXX",
+      "X X"
+    ],
+    "result": {
+      "item": "armorrestitched:copper_horse_armor"
+    }
+}

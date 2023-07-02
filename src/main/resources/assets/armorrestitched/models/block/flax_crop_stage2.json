@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/crop",
+    "textures": {
+      "crop": "armorrestitched:block/flax_crop_stage2"
+    }
+}

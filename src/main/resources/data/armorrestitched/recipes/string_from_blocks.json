@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+      {
+        "tag": "armorrestitched:block_string_ingredients"
+      }
+    ],
+    "result": {
+      "item": "minecraft:string", 
+      "count": 4
+    }
+}
