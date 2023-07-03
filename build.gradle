@@ -25,7 +25,7 @@ loom {
     splitEnvironmentSourceSets()
 
     mods {
-        "progressivearchery" {
+        "armorrestitched" {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
         }
