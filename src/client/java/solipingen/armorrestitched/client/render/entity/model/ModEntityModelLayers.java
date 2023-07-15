@@ -15,6 +15,8 @@ public class ModEntityModelLayers {
     
     public static final EntityModelLayer ELYTA_TRIM_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "elytra_trim"), "main");
 
+    public static final EntityModelLayer ZOMBIE_HORSE_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "zombie_horse_armor"), "main");
+
     public static final EntityModelLayer ILLAGER_LEGS_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "illager_armor_legs"), "main");
     public static final EntityModelLayer ILLAGER_HEAD_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "illager_armor_head"), "main");
     public static final EntityModelLayer ILLAGER_FEET_ARMOR_LAYER = new EntityModelLayer(new Identifier(ArmorRestitched.MOD_ID, "illager_armor_feet"), "main");
@@ -31,6 +33,8 @@ public class ModEntityModelLayers {
     public static void registerModEntityLayers() {
 
         EntityModelLayerRegistry.registerModelLayer(ELYTA_TRIM_LAYER, ElytraTrimEntityModel::getTexturedModelData);
+
+        EntityModelLayerRegistry.registerModelLayer(ZOMBIE_HORSE_ARMOR_LAYER, ZombieHorseArmorEntityModel::getTexturedModelData);
 
         EntityModelLayerRegistry.registerModelLayer(ILLAGER_LEGS_ARMOR_LAYER, IllagerArmorEntityModel::getLegsArmorTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ILLAGER_HEAD_ARMOR_LAYER, IllagerArmorEntityModel::getHeadArmorTexturedModelData);

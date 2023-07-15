@@ -3,6 +3,7 @@
 	"package": "solipingen.armorrestitched.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
+		"accessors.render.entity.model.HorseEntityModelAccessor", 
 		"accessors.render.entity.model.IllagerEntityModelAccessor", 
 		"accessors.render.entity.model.VillagerResemblingModelAccessor", 
 		"color.item.ItemColorsMixin", 
@@ -12,7 +13,6 @@
 		"render.entity.model.EntityModelsMixin", 
 		"render.entity.model.IllagerEntityModelMixin", 
 		"render.entity.model.VillagerResemblingModelMixin", 
-		"render.entity.AbstractHorseEntityRendererMixin", 
 		"render.entity.ArmorStandEntityRendererMixin", 
 		"render.entity.BipedEntityRendererMixin", 
 		"render.entity.EvokerEntityRendererMixin", 
@@ -22,6 +22,7 @@
 		"render.entity.PlayerEntityRendererMixin", 
 		"render.entity.VillagerEntityRendererMixin", 
 		"render.entity.VindicatorEntityRendererMixin", 
+		"render.entity.ZombieHorseEntityRendererMixin", 
 		"render.GameRendererMixin", 
 		"WelcomeMixin"
 	  ],

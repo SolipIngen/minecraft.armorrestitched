@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.ModelWithHat;
@@ -18,6 +20,7 @@ import solipingen.armorrestitched.util.interfaces.mixin.render.entity.model.Vill
 
 
 @Mixin(VillagerResemblingModel.class)
+@Environment(value = EnvType.CLIENT)
 public abstract class VillagerResemblingModelMixin<T extends Entity> extends SinglePartEntityModel<T> implements ModelWithHead, ModelWithHat, VillagerResemblingModelInterface {
     @Shadow @Final private ModelPart hat;
     private @Final ModelPart body;
