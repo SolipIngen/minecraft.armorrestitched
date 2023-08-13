@@ -16,6 +16,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -23,12 +24,12 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
-import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.NonStandardHorseEntityInterface;
+import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.ZombieHorseEntityInterface;
 
 
 @Mixin(SkeletonHorseEntity.class)
-public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity implements NonStandardHorseEntityInterface {
-    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F296");
+public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity implements ZombieHorseEntityInterface {
+    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
     
 
     protected SkeletonHorseEntityMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
@@ -37,7 +38,7 @@ public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity imple
 
     @Inject(method = "tickMovement", at = @At("TAIL"))
     private void injectedBurnInSunlight(CallbackInfo cbi) {
-        boolean bl = this.isAlive() && this.isAffectedByDaylight();
+        boolean bl = this.isAlive() && this.isAffectedByDaylight() && !((SkeletonHorseEntity)(Object)this).isTrapped();
         if (bl) {
             if (!this.hasArmorInSlot()) {
                 this.setOnFireFor(8);
@@ -47,9 +48,9 @@ public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity imple
 
     @Override
     public void onInventoryChanged(Inventory sender) {
-        ItemStack itemStack = this.getArmorType();
+        ItemStack itemStack = ((ZombieHorseEntityInterface)this).getArmorType();
         super.onInventoryChanged(sender);
-        ItemStack itemStack2 = this.getArmorType();
+        ItemStack itemStack2 = ((ZombieHorseEntityInterface)this).getArmorType();
         if (this.age > 20 && this.isHorseArmor(itemStack2) && itemStack != itemStack2) {
             this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 0.5f, 1.0f);
         }
@@ -81,9 +82,9 @@ public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity imple
         World world = this.getWorld();
         if (!world.isClient) {
             int i;
-            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).removeModifier(HORSE_ARMOR_BONUS_ID);
+            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).removeModifier(SkeletonHorseEntityMixin.HORSE_ARMOR_BONUS_ID);
             if (this.isHorseArmor(stack) && (i = ((HorseArmorItem)stack.getItem()).getBonus()) != 0) {
-                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).addTemporaryModifier(new EntityAttributeModifier(HORSE_ARMOR_BONUS_ID, "Horse armor bonus", (double)i, EntityAttributeModifier.Operation.ADDITION));
+                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).addTemporaryModifier(new EntityAttributeModifier(SkeletonHorseEntityMixin.HORSE_ARMOR_BONUS_ID, "Horse armor bonus", (double)i, EntityAttributeModifier.Operation.ADDITION));
             }
         }
     }
@@ -96,6 +97,11 @@ public abstract class SkeletonHorseEntityMixin extends AbstractHorseEntity imple
     @Override
     public ItemStack getArmorType() {
         return this.getEquippedStack(EquipmentSlot.CHEST);
+    }
+
+    @Override
+    public SimpleInventory getItems() {
+        return this.items;
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))

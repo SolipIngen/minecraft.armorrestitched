@@ -20,6 +20,7 @@ import net.minecraft.world.gen.placementmodifier.SurfaceWaterDepthFilterPlacemen
 import solipingen.armorrestitched.ArmorRestitched;
 import solipingen.armorrestitched.block.ModBlocks;
 
+
 public class ModPlacedFeatures {
 
     public static final RegistryKey<PlacedFeature> FLOWER_COTTON_PLACED_KEY = ModPlacedFeatures.registerKey("flower_cotton_placed");
@@ -31,10 +32,10 @@ public class ModPlacedFeatures {
         RegistryEntryLookup<ConfiguredFeature<?, ?>> configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
         ModPlacedFeatures.register(context, FLOWER_COTTON_PLACED_KEY, 
             configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.FLOWER_COTTON_KEY), 
-            List.of(RarityFilterPlacementModifier.of(28), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
+            List.of(RarityFilterPlacementModifier.of(24), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
         ModPlacedFeatures.register(context, FLOWER_FLAX_PLACED_KEY, 
             configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.FLOWER_FLAX_KEY), 
-            List.of(RarityFilterPlacementModifier.of(52), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
+            List.of(RarityFilterPlacementModifier.of(54), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
         ModPlacedFeatures.register(context, TREE_MULBERRY_PLACED_KEY, 
             configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.TREE_MULBERRY_KEY), 
             List.of(CountPlacementModifier.of(1), SquarePlacementModifier.of(), SurfaceWaterDepthFilterPlacementModifier.of(0), PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP, PlacedFeatures.wouldSurvive(ModBlocks.MULBERRY_SAPLING), BiomePlacementModifier.of()));

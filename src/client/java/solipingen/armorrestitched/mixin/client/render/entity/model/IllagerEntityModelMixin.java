@@ -6,6 +6,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.IllagerEntityModel;
@@ -17,6 +19,7 @@ import solipingen.armorrestitched.util.interfaces.mixin.render.entity.model.Illa
 
 
 @Mixin(IllagerEntityModel.class)
+@Environment(value = EnvType.CLIENT)
 public abstract class IllagerEntityModelMixin<T extends IllagerEntity> extends SinglePartEntityModel<T> implements ModelWithHead, ModelWithArms, IllagerEntityModelInterface {
     private @Final ModelPart body;
 

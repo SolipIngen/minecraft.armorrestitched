@@ -34,7 +34,7 @@ public class SilkMothEntityRenderer extends MobEntityRenderer<SilkMothEntity, Si
 
     @Override
     protected void setupTransforms(SilkMothEntity silkMothEntity, MatrixStack matrixStack, float f, float g, float h) {
-        matrixStack.translate(-0.1f*(float)silkMothEntity.getRotationVector().getX(), MathHelper.cos(f * 0.2f) * 0.05f - 0.25f, -0.1f*(float)silkMothEntity.getRotationVector().getZ());
+        matrixStack.translate(-0.1f*(float)silkMothEntity.getRotationVector().getX(), MathHelper.cos(f*0.2f)*0.05f - 0.25f, -0.1f*(float)silkMothEntity.getRotationVector().getZ());
         super.setupTransforms(silkMothEntity, matrixStack, f, g, h);
     }
 }
