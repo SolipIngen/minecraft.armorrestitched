@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -42,6 +43,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.trim.ArmorTrim;
@@ -265,6 +267,17 @@ public abstract class LivingEntityMixin extends Entity {
             z += 0.0025*soaringLevel;
         }
         return vec3d.multiply(x, y, z);
+    }
+
+    @ModifyVariable(method = "tickFallFlying", at = @At("STORE"), ordinal = 0)
+    private ItemStack modifiedElytraStack(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof ElytraItem && !ElytraItem.isUsable(itemStack) && ArmorTrim.getTrim(this.getWorld().getRegistryManager(), itemStack).isPresent()) {
+            itemStack.removeSubNbt("Trim");
+            if (!this.isSilent()) {
+                this.getWorld().playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ITEM_BREAK, this.getSoundCategory(), 0.8f, 0.8f + 0.4f*((LivingEntity)(Object)this).getRandom().nextFloat(), false);
+            }
+        }
+        return itemStack;
     }
 
     @ModifyConstant(method = "damage", constant = @Constant(floatValue = 0.75f))

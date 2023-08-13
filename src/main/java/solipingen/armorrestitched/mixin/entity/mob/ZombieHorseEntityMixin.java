@@ -14,6 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -26,7 +27,7 @@ import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.ZombieHorseEn
 
 @Mixin(ZombieHorseEntity.class)
 public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity implements ZombieHorseEntityInterface {
-    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F297");
+    private static final UUID HORSE_ARMOR_BONUS_ID = UUID.fromString("556E1665-8B10-40C8-8F9D-CF9B1667F295");
     
 
     protected ZombieHorseEntityMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
@@ -80,9 +81,9 @@ public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity impleme
         World world = this.getWorld();
         if (!world.isClient) {
             int i;
-            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).removeModifier(HORSE_ARMOR_BONUS_ID);
+            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).removeModifier(ZombieHorseEntityMixin.HORSE_ARMOR_BONUS_ID);
             if (this.isHorseArmor(stack) && (i = ((HorseArmorItem)stack.getItem()).getBonus()) != 0) {
-                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).addTemporaryModifier(new EntityAttributeModifier(HORSE_ARMOR_BONUS_ID, "Horse armor bonus", (double)i, EntityAttributeModifier.Operation.ADDITION));
+                this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).addTemporaryModifier(new EntityAttributeModifier(ZombieHorseEntityMixin.HORSE_ARMOR_BONUS_ID, "Horse armor bonus", (double)i, EntityAttributeModifier.Operation.ADDITION));
             }
         }
     }
@@ -95,6 +96,11 @@ public abstract class ZombieHorseEntityMixin extends AbstractHorseEntity impleme
     @Override
     public ItemStack getArmorType() {
         return this.getEquippedStack(EquipmentSlot.CHEST);
+    }
+
+    @Override
+    public SimpleInventory getItems() {
+        return this.items;
     }
 
     @Override

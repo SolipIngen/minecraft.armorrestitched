@@ -14,7 +14,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.HorseEntityModel;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import solipingen.armorrestitched.client.render.entity.feature.ZombieHorseArmorFeatureRenderer; 
+import solipingen.armorrestitched.client.render.entity.feature.ZombieHorseArmorFeatureRenderer;
 
 
 @Mixin(ZombieHorseEntityRenderer.class)

@@ -1,12 +1,9 @@
 package solipingen.armorrestitched.client.render.entity.model;
 
-import java.util.Collection;
-
 import com.google.common.collect.ImmutableList;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -16,7 +13,7 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import net.minecraft.resource.ResourcePackManager;
+import solipingen.armorrestitched.client.render.entity.feature.ZombieHorseArmorFeatureRenderer;
 
 
 @Environment(value = EnvType.CLIENT)
@@ -56,16 +53,16 @@ public class ZombieHorseArmorEntityModel<T extends AbstractHorseEntity> extends 
       ModelPartData modelPartData = modelData.getRoot();
       ModelPartData modelPartData2 = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 32).cuboid(-5.0f, -8.0f, -17.0f, 10.0f, 10.0f, 22.0f, new Dilation(0.05f)), ModelTransform.pivot(0.0f, 11.0f, 5.0f));
       ModelPartData modelPartData3 = modelPartData.addChild("head_parts", ModelPartBuilder.create().uv(0, 35).cuboid(-2.05f, -6.0f, -2.0f, 4.0f, 12.0f, 7.0f), ModelTransform.of(0.0f, 4.0f, -12.0f, 0.5235988f, 0.0f, 0.0f));
-      ModelPartData modelPartData4 = modelPartData3.addChild("head", ModelPartBuilder.create().uv(0, 13).cuboid(-3.0f, -11.0f, -2.0f, 6.0f, 5.0f, 7.0f), ModelTransform.NONE);
-      modelPartData3.addChild("mane", ModelPartBuilder.create().uv(56, 36).cuboid(-1.0f, -11.0f, 5.01f, 2.0f, 16.0f, 2.0f), ModelTransform.NONE);
-      modelPartData3.addChild("upper_mouth", ModelPartBuilder.create().uv(0, 25).cuboid(-2.0f, -11.0f, -7.0f, 4.0f, 5.0f, 5.0f), ModelTransform.NONE);
+      ModelPartData modelPartData4 = modelPartData3.addChild("head", ModelPartBuilder.create().uv(0, 13).cuboid(-3.0f, -11.0f, -2.0f, 6.0f, 5.0f, 7.0f, new Dilation(0.1f)), ModelTransform.NONE);
+      modelPartData3.addChild("mane", ModelPartBuilder.create().uv(56, 36).cuboid(-1.0f, -11.0f, 5.01f, 2.0f, 16.0f, 2.0f, new Dilation(0.1f)), ModelTransform.NONE);
+      modelPartData3.addChild("upper_mouth", ModelPartBuilder.create().uv(0, 25).cuboid(-2.0f, -11.0f, -7.0f, 4.0f, 5.0f, 5.0f, new Dilation(0.1f)), ModelTransform.NONE);
       modelPartData.addChild("left_hind_leg", ModelPartBuilder.create().uv(48, 21).mirrored().cuboid(-3.0f + ZombieHorseArmorEntityModel.getFreshLegsXCorrection(), -1.01f + ZombieHorseArmorEntityModel.getFreshLegsYCorrection(), -1.0f + ZombieHorseArmorEntityModel.getFreshHindLegsZCorrection(), 4.0f, 11.0f, 4.0f, new Dilation(0.101f)), ModelTransform.pivot(4.0f, 14.0f, 7.0f));
       modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(48, 21).cuboid(-1.0f - ZombieHorseArmorEntityModel.getFreshLegsXCorrection(), -1.01f + ZombieHorseArmorEntityModel.getFreshLegsYCorrection(), -1.0f + ZombieHorseArmorEntityModel.getFreshHindLegsZCorrection(), 4.0f, 11.0f, 4.0f, new Dilation(0.101f)), ModelTransform.pivot(-4.0f, 14.0f, 7.0f));
       modelPartData.addChild("left_front_leg", ModelPartBuilder.create().uv(48, 21).mirrored().cuboid(-3.0f + ZombieHorseArmorEntityModel.getFreshLegsXCorrection(), -1.01f + ZombieHorseArmorEntityModel.getFreshLegsYCorrection(), -1.9f + ZombieHorseArmorEntityModel.getFreshFrontLegsZCorrection(), 4.0f, 11.0f, 4.0f, new Dilation(0.101f)), ModelTransform.pivot(4.0f, 14.0f, -12.0f));
       modelPartData.addChild("right_front_leg", ModelPartBuilder.create().uv(48, 21).cuboid(-1.0f - ZombieHorseArmorEntityModel.getFreshLegsXCorrection(), -1.01f + ZombieHorseArmorEntityModel.getFreshLegsYCorrection(), -1.9f + ZombieHorseArmorEntityModel.getFreshFrontLegsZCorrection(), 4.0f, 11.0f, 4.0f, new Dilation(0.101f)), ModelTransform.pivot(-4.0f, 14.0f, -12.0f));
       modelPartData2.addChild("saddle", ModelPartBuilder.create().uv(26, 0).cuboid(-5.0f, -8.0f, -9.0f, 10.0f, 9.0f, 9.0f, new Dilation(0.5f)), ModelTransform.NONE);
-      modelPartData3.addChild("left_saddle_mouth", ModelPartBuilder.create().uv(29, 5).cuboid(2.0f, -9.0f, -6.0f, 1.0f, 2.0f, 2.0f), ModelTransform.NONE);
-      modelPartData3.addChild("right_saddle_mouth", ModelPartBuilder.create().uv(29, 5).cuboid(-3.0f, -9.0f, -6.0f, 1.0f, 2.0f, 2.0f), ModelTransform.NONE);
+      modelPartData3.addChild("left_saddle_mouth", ModelPartBuilder.create().uv(29, 5).cuboid(2.0f, -9.0f, -6.0f, 1.0f, 2.0f, 2.0f, new Dilation(0.1f)), ModelTransform.NONE);
+      modelPartData3.addChild("right_saddle_mouth", ModelPartBuilder.create().uv(29, 5).cuboid(-3.0f, -9.0f, -6.0f, 1.0f, 2.0f, 2.0f, new Dilation(0.1f)), ModelTransform.NONE);
       modelPartData3.addChild("left_saddle_line", ModelPartBuilder.create().uv(32, 2).cuboid(3.1f, -6.0f, -8.0f, 0.0f, 3.0f, 16.0f), ModelTransform.rotation(-0.5235988f, 0.0f, 0.0f));
       modelPartData3.addChild("right_saddle_line", ModelPartBuilder.create().uv(32, 2).cuboid(-3.1f, -6.0f, -8.0f, 0.0f, 3.0f, 16.0f), ModelTransform.rotation(-0.5235988f, 0.0f, 0.0f));
       modelPartData3.addChild("head_saddle", ModelPartBuilder.create().uv(1, 1).cuboid(-3.0f, -11.0f, -1.9f, 6.0f, 5.0f, 6.0f, new Dilation(0.22f)), ModelTransform.NONE);
@@ -106,6 +103,10 @@ public class ZombieHorseArmorEntityModel<T extends AbstractHorseEntity> extends 
       return this.head;
    }
 
+   public ModelPart getBody() {
+      return this.body;
+   }
+
    public ModelPart getLeftFrontLeg() {
       return this.leftFrontLeg;
    }
@@ -124,52 +125,19 @@ public class ZombieHorseArmorEntityModel<T extends AbstractHorseEntity> extends 
    
 
    private static float getFreshLegsXCorrection() {
-      boolean freshAnimationsEnabled = false;
-      ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-      Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-      for (String enabledPackName : enabledResourcePackNames) {
-         if (enabledPackName.contains("FreshAnimations")) {
-            freshAnimationsEnabled |= true;
-         }
-      }
-      return freshAnimationsEnabled ? 1.0f : 0.0f;
+      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? 1.0f : 0.0f;
    }
 
-
    private static float getFreshLegsYCorrection() {
-      boolean freshAnimationsEnabled = false;
-      ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-      Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-      for (String enabledPackName : enabledResourcePackNames) {
-         if (enabledPackName.contains("FreshAnimations")) {
-            freshAnimationsEnabled |= true;
-         }
-      }
-      return freshAnimationsEnabled ? -9.0f : 0.0f;
+      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -9.0f : 0.0f;
    }
 
    private static float getFreshFrontLegsZCorrection() {
-      boolean freshAnimationsEnabled = false;
-      ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-      Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-      for (String enabledPackName : enabledResourcePackNames) {
-         if (enabledPackName.contains("FreshAnimations")) {
-            freshAnimationsEnabled |= true;
-         }
-      }
-      return freshAnimationsEnabled ? -0.1f : 0.0f;
+      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -0.1f : 0.0f;
    }
 
    private static float getFreshHindLegsZCorrection() {
-      boolean freshAnimationsEnabled = false;
-      ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-      Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-      for (String enabledPackName : enabledResourcePackNames) {
-         if (enabledPackName.contains("FreshAnimations")) {
-            freshAnimationsEnabled |= true;
-         }
-      }
-      return freshAnimationsEnabled ? -1.1f : 0.0f;
+      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -1.1f : 0.0f;
    }
     
 
