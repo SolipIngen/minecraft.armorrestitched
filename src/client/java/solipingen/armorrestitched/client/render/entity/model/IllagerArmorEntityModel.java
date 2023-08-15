@@ -1,10 +1,7 @@
 package solipingen.armorrestitched.client.render.entity.model;
 
-import java.util.Collection;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -20,9 +17,9 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.IllagerEntity;
-import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
+import solipingen.armorrestitched.client.resource.ModClientResourcePacks;
 
 
 @Environment(value = EnvType.CLIENT)
@@ -233,15 +230,7 @@ public class IllagerArmorEntityModel<T extends IllagerEntity> extends SinglePart
     }
 
     private static float getFreshLegsYCorrection() {
-        boolean freshAnimationsEnabled = false;
-        ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-        Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-        for (String enabledPackName : enabledResourcePackNames) {
-            if (enabledPackName.contains("FreshAnimations")) {
-                freshAnimationsEnabled |= true;
-            }
-        }
-        return freshAnimationsEnabled ? -12.0f : 0.0f;
+        return ModClientResourcePacks.isFreshAnimationsEnabled() ? -12.0f : 0.0f;
     }
 
 }
