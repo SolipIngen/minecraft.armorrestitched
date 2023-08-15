@@ -13,7 +13,7 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import solipingen.armorrestitched.client.render.entity.feature.ZombieHorseArmorFeatureRenderer;
+import solipingen.armorrestitched.client.resource.ModClientResourcePacks;
 
 
 @Environment(value = EnvType.CLIENT)
@@ -125,19 +125,19 @@ public class ZombieHorseArmorEntityModel<T extends AbstractHorseEntity> extends 
    
 
    private static float getFreshLegsXCorrection() {
-      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? 1.0f : 0.0f;
+      return ModClientResourcePacks.isFreshAnimationsEnabled() ? 1.0f : 0.0f;
    }
 
    private static float getFreshLegsYCorrection() {
-      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -9.0f : 0.0f;
+      return ModClientResourcePacks.isFreshAnimationsEnabled() ? -9.0f : 0.0f;
    }
 
    private static float getFreshFrontLegsZCorrection() {
-      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -0.1f : 0.0f;
+      return ModClientResourcePacks.isFreshAnimationsEnabled() ? -0.1f : 0.0f;
    }
 
    private static float getFreshHindLegsZCorrection() {
-      return ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled() ? -1.1f : 0.0f;
+      return ModClientResourcePacks.isFreshAnimationsEnabled() ? -1.1f : 0.0f;
    }
     
 

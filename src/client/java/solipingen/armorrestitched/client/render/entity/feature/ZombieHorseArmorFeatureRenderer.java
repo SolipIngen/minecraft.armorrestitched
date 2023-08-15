@@ -1,11 +1,9 @@
 package solipingen.armorrestitched.client.render.entity.feature;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -22,8 +20,8 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.DyeableHorseArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.resource.ResourcePackManager;
 import solipingen.armorrestitched.client.render.entity.model.ZombieHorseArmorEntityModel;
+import solipingen.armorrestitched.client.resource.ModClientResourcePacks;
 import solipingen.armorrestitched.mixin.client.accessors.render.entity.model.HorseEntityModelAccessor;
 import solipingen.armorrestitched.client.render.entity.model.ModEntityModelLayers;
 import solipingen.armorrestitched.util.interfaces.mixin.entity.mob.ZombieHorseEntityInterface;
@@ -62,7 +60,7 @@ public class ZombieHorseArmorFeatureRenderer extends FeatureRenderer<AbstractHor
             p = (float)(m & 255) / 255.0f;
         }
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(horseArmorItem.getEntityTexture()));
-        boolean freshBl = ZombieHorseArmorFeatureRenderer.isFreshAnimationsEnabled();
+        boolean freshBl = ModClientResourcePacks.isFreshAnimationsEnabled();
         this.model.getLeftFrontLeg().visible = freshBl;
         this.model.getLeftHindLeg().visible = freshBl;
         this.model.getRightFrontLeg().visible = freshBl;
@@ -82,17 +80,6 @@ public class ZombieHorseArmorFeatureRenderer extends FeatureRenderer<AbstractHor
         this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, n, o, p, 1.0f);
     }
 
-    public static boolean isFreshAnimationsEnabled() {
-        boolean freshAnimationsEnabled = false;
-        ResourcePackManager resourcePackManager = MinecraftClient.getInstance().getResourcePackManager();
-        Collection<String> enabledResourcePackNames = resourcePackManager.getEnabledNames();
-        for (String enabledPackName : enabledResourcePackNames) {
-            if (enabledPackName.contains("FreshAnimations")) {
-                freshAnimationsEnabled |= true;
-            }
-        }
-        return freshAnimationsEnabled;
-   }
 
 }
 
