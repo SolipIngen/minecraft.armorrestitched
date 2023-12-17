@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "banner",
+    "key": {
+      "#": {
+        "tag": "armorrestitched:purple_woollike_blocks"
+      },
+      "|": {
+        "item": "minecraft:stick"
+      }
+    },
+    "pattern": [
+      "###",
+      "###",
+      " | "
+    ],
+    "result": {
+      "item": "minecraft:purple_banner"
+    },
+    "show_notification": true
+}

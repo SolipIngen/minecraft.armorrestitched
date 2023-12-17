@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/carpet",
+    "textures": {
+      "wool": "armorrestitched:block/light_blue_silk"
+    }
+}

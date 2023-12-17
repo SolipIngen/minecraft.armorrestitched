@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:orange_dye"
+    },
+    {
+      "tag": "armorrestitched:linen_blocks"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:orange_linen"
+  }
+}

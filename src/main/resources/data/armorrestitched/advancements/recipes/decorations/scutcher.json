@@ -1,0 +1,47 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_flax": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:flax_stem"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "has_cotton": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:cotton"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestitched:scutcher"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      }
+    },
+    "requirements": [
+      [
+        "has_flax",
+        "has_cotton",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:scutcher"
+      ]
+    }
+}
