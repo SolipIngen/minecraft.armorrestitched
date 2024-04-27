@@ -1,0 +1,69 @@
+{
+    "parent": "minecraft:story/root",
+    "criteria": {
+      "boots": {
+        "conditions": {
+          "items": [
+            {
+              "tag": "armorrestitched:clothing_boots"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "chestplate": {
+        "conditions": {
+          "items": [
+            {
+              "tag": "armorrestitched:clothing_chestplates"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "helmet": {
+        "conditions": {
+          "items": [
+            {
+              "tag": "armorrestitched:clothing_helmets"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      },
+      "leggings": {
+        "conditions": {
+          "items": [
+            {
+              "tag": "armorrestitched:clothing_leggings"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "display": {
+      "announce_to_chat": true,
+      "description": {
+        "translate": "advancements.story.obtain_clothing.description"
+      },
+      "frame": "task",
+      "hidden": false,
+      "icon": {
+        "item": "minecraft:leather_chestplate",
+        "nbt": "{Damage:0}"
+      },
+      "show_toast": true,
+      "title": {
+        "translate": "advancements.story.obtain_clothing.title"
+      }
+    },
+    "requirements": [
+      [
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots"
+      ]
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:leather_leggings", 
+        "armorrestitched:cotton_leggings", 
+        "armorrestitched:fur_leggings", 
+        "armorrestitched:linen_leggings", 
+        "armorrestitched:silk_leggings", 
+        "armorrestitched:wool_leggings", 
+        "armorrestitched:paper_leggings"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "armorrestitched:silk_carpets"
+      }
+    },
+    "pattern": [
+      "o o",
+      "ooo", 
+      "ooo"
+    ],
+    "result": {
+      "item": "armorrestitched:silk_chestplate"
+    }
+}

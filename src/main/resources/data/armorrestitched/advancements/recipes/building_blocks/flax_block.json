@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestiched:flax_block"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_flax": {
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "armorrestitched:flax_stem"
+              ]
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_flax",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:flax_block"
+      ]
+    }
+}

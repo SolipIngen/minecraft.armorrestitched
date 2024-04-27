@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:green_dye"
+    },
+    {
+      "tag": "armorrestitched:cotton_carpets"
+    }
+  ],
+  "result": {
+    "item": "armorrestitched:green_cotton_carpet"
+  }
+}

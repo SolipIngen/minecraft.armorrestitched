@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "armorrestitched:fur_carpets"
+      }
+    },
+    "pattern": [
+      "ooo",
+      "o o"
+    ],
+    "result": {
+      "item": "armorrestitched:fur_helmet"
+    }
+}
