@@ -35,6 +35,7 @@ import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.item.trim.ArmorTrim;
 import net.minecraft.item.trim.ArmorTrimMaterials;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -92,6 +93,9 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         Map<VillagerProfession, Int2ObjectMap<Factory[]>> tradeOffers = TradeOffers.PROFESSION_TO_LEVELED_TRADE;
         if (villagerData.getProfession() == VillagerProfession.ARMORER) {
             ModVillagerProfessions.replaceArmorerProfessionToLeveledTrade(tradeOffers);
+            if (this.getWorld().getEnabledFeatures().contains(FeatureFlags.TRADE_REBALANCE)) {
+                ModVillagerProfessions.replaceRebalancedArmorerProfessionToLeveledTrade(tradeOffers);
+            }
         }
         else if (villagerData.getProfession() == VillagerProfession.LEATHERWORKER) {
             ModVillagerProfessions.replaceLeatherworkerProfessionToLeveledTrade(tradeOffers, this);
