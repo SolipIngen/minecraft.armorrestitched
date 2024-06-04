@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#armorrestitched:clothing_helmets",
+    "#armorrestitched:clothing_chestplates",
+    "#armorrestitched:clothing_leggings",
+    "#armorrestitched:clothing_boots"
+  ]
+}

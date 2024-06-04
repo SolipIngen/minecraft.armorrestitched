@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "armorrestitched:cotton_carpets"
+      }
+    },
+    "pattern": [
+      "ooo",
+      "o o"
+    ],
+    "result": {
+      "id": "armorrestitched:cotton_helmet"
+    }
+}

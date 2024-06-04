@@ -1,0 +1,32 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestitched:pink_linen"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_linen": {
+        "conditions": {
+          "items": [
+            {
+              "items": "#armorrestitched:linen_blocks"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_linen",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:pink_linen"
+      ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "banner",
+    "key": {
+      "#": {
+        "tag": "armorrestitched:green_woollike_blocks"
+      },
+      "|": {
+        "item": "minecraft:stick"
+      }
+    },
+    "pattern": [
+      "###",
+      "###",
+      " | "
+    ],
+    "result": {
+      "id": "minecraft:green_banner"
+    },
+    "show_notification": true
+}

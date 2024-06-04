@@ -1,0 +1,139 @@
+{
+    "type": "minecraft:gift",
+    "pools": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:white_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:orange_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:magenta_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:light_blue_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:yellow_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:lime_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:pink_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:gray_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:light_gray_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:cyan_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:purple_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:blue_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:brown_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:green_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:red_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:black_wool"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:white_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:orange_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:magenta_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_blue_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:yellow_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:lime_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:pink_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:gray_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_gray_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:cyan_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:purple_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:blue_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:brown_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:green_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:red_fur"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:black_fur"
+          }
+        ],
+        "rolls": 1.0
+      }
+    ]
+  }

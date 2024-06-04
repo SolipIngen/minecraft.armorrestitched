@@ -1,0 +1,31 @@
+{
+  "required": false,
+  "package": "solipingen.armorrestitched.mixin.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "accessors.render.entity.model.HorseEntityModelAccessor",
+    "accessors.render.entity.model.IllagerEntityModelAccessor",
+    "accessors.render.entity.model.VillagerResemblingModelAccessor",
+    "gui.screen.ingame.SmithingScreenMixin",
+    "render.entity.feature.ArmorFeatureRendererMixin",
+    "render.entity.feature.VillagerClothingFeatureRendererMixin",
+    "render.entity.model.EntityModelsMixin",
+    "render.entity.model.IllagerEntityModelMixin",
+    "render.entity.model.VillagerResemblingModelMixin",
+    "render.entity.ArmorStandEntityRendererMixin",
+    "render.entity.BipedEntityRendererMixin",
+    "render.entity.EvokerEntityRendererMixin",
+    "render.entity.IllagerEntityRendererMixin",
+    "render.entity.IllusionerEntityRendererMixin",
+    "render.entity.PillagerEntityRendererMixin",
+    "render.entity.PlayerEntityRendererMixin",
+    "render.entity.VillagerEntityRendererMixin",
+    "render.entity.VindicatorEntityRendererMixin",
+    "render.entity.ZombieHorseEntityRendererMixin",
+    "render.GameRendererMixin",
+    "WelcomeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

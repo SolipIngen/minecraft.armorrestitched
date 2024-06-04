@@ -1,0 +1,11 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:frog", 
+        "minecraft:rabbit",
+        "minecraft:endermite", 
+        "minecraft:silverfish", 
+        "minecraft:slime",
+        "armorrestitched:silk_moth"
+    ]
+}
