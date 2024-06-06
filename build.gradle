@@ -19,6 +19,12 @@ repositories {
 
 	// Entity Model Features integration
 	maven { url "https://api.modrinth.com/maven" }
+
+	// EMI integration
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 loom {
@@ -77,6 +83,10 @@ dependencies {
 
 	// Entity Model Features integration
 	modCompileOnly "maven.modrinth:entity-model-features:${project.entitymodelfeatures_version}"
+
+	// EMI integration
+	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
+	modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
 }
 
 processResources {

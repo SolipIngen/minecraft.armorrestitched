@@ -26,6 +26,9 @@
     ],
     "fabric-datagen": [
       "solipingen.armorrestitched.ArmorRestitchedDataGenerator"
+    ],
+    "emi": [
+      "solipingen.armorrestitched.client.integration.emi.ModEMIClientPlugin"
     ]
   },
   "mixins": [
