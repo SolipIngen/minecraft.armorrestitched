@@ -48,6 +48,8 @@ public class ModItemTags {
 
     public static final TagKey<Item> WHITE_WOOLLIKE_CARPETS = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "white_woollike_carpets"));
 
+    public static final TagKey<Item> TRIMMABLE_ELYTRA = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "trimmable_elytra"));
+
     public static final TagKey<Item> ELYTRA_ENCHANTABLE = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "enchantable/elytra"));
     public static final TagKey<Item> BREACH_ENCHANTABLE = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmorRestitched.MOD_ID, "enchantable/breach"));
 

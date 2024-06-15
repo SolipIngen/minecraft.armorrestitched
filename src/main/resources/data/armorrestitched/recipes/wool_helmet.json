@@ -3,7 +3,7 @@
     "category": "equipment",
     "key": {
       "o": {
-        "tag": "minecraft:wool_carpets"
+        "tag": "minecraft:wool"
       }
     },
     "pattern": [

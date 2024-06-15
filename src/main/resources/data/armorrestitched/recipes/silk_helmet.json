@@ -3,7 +3,7 @@
     "category": "equipment",
     "key": {
       "o": {
-        "tag": "armorrestitched:silk_carpets"
+        "item": "armorrestitched:silk"
       }
     },
     "pattern": [
