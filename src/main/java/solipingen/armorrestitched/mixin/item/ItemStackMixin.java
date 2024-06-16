@@ -1,13 +1,9 @@
 package solipingen.armorrestitched.mixin.item;
 
-import java.util.function.BiConsumer;
-
 import net.minecraft.component.ComponentHolder;
 import net.minecraft.component.DataComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.*;
@@ -18,7 +14,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,6 +29,7 @@ import net.minecraft.item.trim.ArmorTrimMaterials;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
+import solipingen.armorrestitched.registry.tag.ModItemTags;
 
 
 @Mixin(ItemStack.class)
@@ -48,9 +44,6 @@ public abstract class ItemStackMixin implements ComponentHolder, FabricItemStack
     @Shadow
     public abstract boolean isIn(TagKey<Item> tag);
 
-    @Shadow
-    @Nullable
-    public abstract <T> T set(DataComponentType<? super T> type, @Nullable T value);
 
     @Inject(method = "getMaxDamage", at = @At("HEAD"), cancellable = true)
     private void injectedGetMaxDamage(CallbackInfoReturnable<Integer> cbireturn) {
@@ -116,53 +109,89 @@ public abstract class ItemStackMixin implements ComponentHolder, FabricItemStack
         }
     }
 
-    @Inject(method = "applyAttributeModifiers", at = @At("TAIL"), cancellable = true)
-    private void injectedAttributeModifiers(EquipmentSlot slot, BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeModifierConsumer, CallbackInfo cbi) {
-        if (this.isIn(ItemTags.TRIMMABLE_ARMOR)) {
-            ArmorTrim trim = this.get(DataComponentTypes.TRIM);
+    @Override
+    public <T> T get(DataComponentType<? extends T> type) {
+        if (this.isIn(ItemTags.TRIMMABLE_ARMOR) && type == DataComponentTypes.ATTRIBUTE_MODIFIERS) {
+            ArmorTrim trim = this.getComponents().get(DataComponentTypes.TRIM);
             if (trim != null) {
-                AttributeModifiersComponent attributeModifiersComponent = (this.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT).modifiers().isEmpty()) ?
-                        this.getItem().getAttributeModifiers() : this.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
+                AttributeModifiersComponent attributeModifiersComponent = this.getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
                 RegistryEntry<ArmorTrimMaterial> material = trim.getMaterial();
                 AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
                 float armorAddition = 0.0f;
                 float toughnessAddition = (this.getItem() instanceof ArmorItem && material.matchesKey(ArmorTrimMaterials.DIAMOND)) ? 1.0f : 0.0f;
                 float knockbackResistanceAddition = 0.0f;
-                if (this.isOf(Items.ELYTRA)) {
-                    if (material.matchesKey(ArmorTrimMaterials.COPPER) || material.matchesKey(ArmorTrimMaterials.GOLD)) {
-                        armorAddition = 1.0f;
+                if ((this.isIn(ModItemTags.TRIMMABLE_ELYTRA) || this.getItem() instanceof ElytraItem) && attributeModifiersComponent != null) {
+                    armorAddition = 1.0f;
+                    if (material.matchesKey(ArmorTrimMaterials.COPPER) || material.matchesKey(ArmorTrimMaterials.GOLD) || material.matchesKey(ArmorTrimMaterials.EMERALD)) {
                         toughnessAddition = 0.5f;
                     }
                     else if (material.matchesKey(ArmorTrimMaterials.IRON)) {
-                        armorAddition = 2.0f;
                         toughnessAddition = 1.0f;
                     }
                     else if (material.matchesKey(ArmorTrimMaterials.DIAMOND)) {
-                        armorAddition = 2.0f;
                         toughnessAddition = 2.0f;
                     }
-                    else if (material.matchesKey(ArmorTrimMaterials.EMERALD)) {
-                        armorAddition = 2.0f;
-                    }
                     else if (material.matchesKey(ArmorTrimMaterials.NETHERITE)) {
-                        armorAddition = 2.0f;
                         toughnessAddition = 3.0f;
                         knockbackResistanceAddition = 0.04f;
                     }
                 }
                 for (AttributeModifiersComponent.Entry entry : attributeModifiersComponent.modifiers()) {
-                    double addition = (entry.attribute().value() == EntityAttributes.GENERIC_ARMOR) ? armorAddition
-                            : ((entry.attribute().value() == EntityAttributes.GENERIC_ARMOR_TOUGHNESS) ? toughnessAddition
-                            : ((entry.attribute().value() == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE) ? knockbackResistanceAddition
+                    double addition = (entry.attribute() == EntityAttributes.GENERIC_ARMOR) ? armorAddition
+                            : ((entry.attribute() == EntityAttributes.GENERIC_ARMOR_TOUGHNESS) ? toughnessAddition
+                            : ((entry.attribute() == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE) ? knockbackResistanceAddition
                             : 0.0f));
                     builder.add(entry.attribute(),
                             new EntityAttributeModifier(entry.modifier().uuid(), entry.modifier().name(), entry.modifier().value() + addition, entry.modifier().operation()),
                             entry.slot());
                 }
-                this.set(DataComponentTypes.ATTRIBUTE_MODIFIERS, builder.build());
+                return (T)builder.build();
             }
         }
+        return this.getComponents().get(type);
+    }
 
+    @Override
+    public <T> T getOrDefault(DataComponentType<? extends T> type, T fallback) {
+        if (this.isIn(ItemTags.TRIMMABLE_ARMOR) && type == DataComponentTypes.ATTRIBUTE_MODIFIERS) {
+            ArmorTrim trim = this.getComponents().get(DataComponentTypes.TRIM);
+            if (trim != null) {
+                AttributeModifiersComponent attributeModifiersComponent = (this.getComponents().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT).modifiers().isEmpty()) ?
+                        this.getItem().getAttributeModifiers() : this.getComponents().getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
+                RegistryEntry<ArmorTrimMaterial> material = trim.getMaterial();
+                AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
+                float armorAddition = 0.0f;
+                float toughnessAddition = (this.getItem() instanceof ArmorItem && material.matchesKey(ArmorTrimMaterials.DIAMOND)) ? 1.0f : 0.0f;
+                float knockbackResistanceAddition = 0.0f;
+                if (this.isIn(ModItemTags.TRIMMABLE_ELYTRA) || this.getItem() instanceof ElytraItem) {
+                    armorAddition = 1.0f;
+                    if (material.matchesKey(ArmorTrimMaterials.COPPER) || material.matchesKey(ArmorTrimMaterials.GOLD) || material.matchesKey(ArmorTrimMaterials.EMERALD)) {
+                        toughnessAddition = 0.5f;
+                    }
+                    else if (material.matchesKey(ArmorTrimMaterials.IRON)) {
+                        toughnessAddition = 1.0f;
+                    }
+                    else if (material.matchesKey(ArmorTrimMaterials.DIAMOND)) {
+                        toughnessAddition = 2.0f;
+                    }
+                    else if (material.matchesKey(ArmorTrimMaterials.NETHERITE)) {
+                        toughnessAddition = 3.0f;
+                        knockbackResistanceAddition = 0.04f;
+                    }
+                }
+                for (AttributeModifiersComponent.Entry entry : attributeModifiersComponent.modifiers()) {
+                    double addition = (entry.attribute() == EntityAttributes.GENERIC_ARMOR) ? armorAddition
+                            : ((entry.attribute() == EntityAttributes.GENERIC_ARMOR_TOUGHNESS) ? toughnessAddition
+                            : ((entry.attribute() == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE) ? knockbackResistanceAddition
+                            : 0.0f));
+                    builder.add(entry.attribute(),
+                            new EntityAttributeModifier(entry.modifier().uuid(), entry.modifier().name(), entry.modifier().value() + addition, entry.modifier().operation()),
+                            entry.slot());
+                }
+                return (T)builder.build();
+            }
+        }
+        return this.getComponents().getOrDefault(type, fallback);
     }
 
     @Inject(method = "onItemEntityDestroyed", at = @At("HEAD"))

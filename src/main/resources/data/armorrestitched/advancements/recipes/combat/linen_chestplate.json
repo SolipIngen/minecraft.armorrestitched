@@ -5,7 +5,7 @@
         "conditions": {
           "items": [
             {
-              "items": "#armorrestitched:linen_carpets"
+              "items": "armorrestitched:linen"
             }
           ]
         },

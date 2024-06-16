@@ -5,7 +5,7 @@
         "tag": "minecraft:trim_templates"
     },
     "base": {
-        "item": "minecraft:elytra"
+        "tag": "armorrestitched:trimmable_elytra"
     },
     "addition": {
         "tag": "minecraft:trim_materials"
