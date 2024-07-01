@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "armorrestitched",
+  "version": "1.2.0-1.21",
+
+  "name": "Armor Restitched",
+  "description": "A mod that adds to and tweaks most things related to armor. Features include copper and clothing-based armor sets, reworked armor mechanics, new fabrics and blocks, and mob armor behavior. There are mobs outside, dress for the occasion!",
+  "authors": [
+    "SolipIngen"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "https://github.com/SolipIngen/minecraft.armorrestitched"
+  },
+
+  "license": "MIT License",
+  "icon": "assets/armorrestitched/armorrestitched_icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "solipingen.armorrestitched.ArmorRestitched"
+    ],
+    "client": [
+      "solipingen.armorrestitched.ArmorRestitchedClient"
+    ],
+    "fabric-datagen": [
+      "solipingen.armorrestitched.ArmorRestitchedDataGenerator"
+    ],
+    "emi": [
+      "solipingen.armorrestitched.client.integration.emi.ModEMIClientPlugin"
+    ]
+  },
+  "mixins": [
+    "armorrestitched.mixins.json",
+    {
+			"config": "armorrestitched.client.mixins.json",
+			"environment": "client"
+		}
+  ],
+
+  "depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": ">=1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+  "suggests": {
+    "another-mod": [
+      "progressivearchery",
+      "sassot"
+    ]
+  }
+}

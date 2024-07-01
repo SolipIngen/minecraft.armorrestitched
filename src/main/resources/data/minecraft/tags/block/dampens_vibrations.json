@@ -1,0 +1,13 @@
+{
+    "replace": false, 
+    "values": [
+      "#armorrestitched:cotton", 
+      "#armorrestitched:fur", 
+      "#armorrestitched:linen", 
+      "#armorrestitched:silk", 
+      "#armorrestitched:cotton_carpets", 
+      "#armorrestitched:fur_carpets", 
+      "#armorrestitched:linen_carpets", 
+      "#armorrestitched:silk_carpets"
+    ]
+  }

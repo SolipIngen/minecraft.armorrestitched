@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "armorrestitched:white_fur", 
+        "armorrestitched:black_fur", 
+        "armorrestitched:gray_fur", 
+        "armorrestitched:light_gray_fur", 
+        "armorrestitched:red_fur", 
+        "armorrestitched:pink_fur", 
+        "armorrestitched:orange_fur", 
+        "armorrestitched:yellow_fur", 
+        "armorrestitched:brown_fur", 
+        "armorrestitched:lime_fur", 
+        "armorrestitched:green_fur", 
+        "armorrestitched:light_blue_fur", 
+        "armorrestitched:blue_fur", 
+        "armorrestitched:cyan_fur", 
+        "armorrestitched:purple_fur", 
+        "armorrestitched:magenta_fur"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:pink_dye"
+    },
+    {
+      "tag": "armorrestitched:cotton_blocks"
+    }
+  ],
+  "result": {
+    "id": "armorrestitched:pink_cotton"
+  }
+}

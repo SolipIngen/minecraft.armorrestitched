@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "armorrestitched:white_cotton_carpet", 
+        "armorrestitched:black_cotton_carpet", 
+        "armorrestitched:gray_cotton_carpet", 
+        "armorrestitched:light_gray_cotton_carpet", 
+        "armorrestitched:red_cotton_carpet", 
+        "armorrestitched:pink_cotton_carpet", 
+        "armorrestitched:orange_cotton_carpet", 
+        "armorrestitched:yellow_cotton_carpet", 
+        "armorrestitched:brown_cotton_carpet", 
+        "armorrestitched:lime_cotton_carpet", 
+        "armorrestitched:green_cotton_carpet", 
+        "armorrestitched:light_blue_cotton_carpet", 
+        "armorrestitched:blue_cotton_carpet", 
+        "armorrestitched:cyan_cotton_carpet", 
+        "armorrestitched:purple_cotton_carpet", 
+        "armorrestitched:magenta_cotton_carpet"
+    ]
+}

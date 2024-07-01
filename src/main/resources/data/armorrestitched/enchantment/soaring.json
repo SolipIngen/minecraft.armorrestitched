@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.armorrestitched.soaring"
+  },
+  "effects": {
+  },
+  "max_cost": {
+    "base": 75,
+    "per_level_above_first": 25
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 25
+  },
+  "slots": [
+    "chest"
+  ],
+  "supported_items": "#armorrestitched:enchantable/elytra",
+  "weight": 1
+}
