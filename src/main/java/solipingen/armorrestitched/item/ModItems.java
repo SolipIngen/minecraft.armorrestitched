@@ -126,7 +126,7 @@ public class ModItems {
         new Item(new Item.Settings()));
 
     public static final Item FLAXSEED = ModItems.registerItem("flaxseed", 
-        new AliasedBlockItem(ModBlocks.FLAX_CROP, new Item.Settings()));
+        new AliasedBlockItem(ModBlocks.FLAX_CROP, new Item.Settings().food(ModFoodComponents.FLAXSEED)));
 
     public static final Item LINEN = ModItems.registerItem("linen", 
         new Item(new Item.Settings()));
