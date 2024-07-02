@@ -3,9 +3,10 @@ package solipingen.armorrestitched.mixin.entity.mob;
 import net.minecraft.registry.RegistryKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.entity.EntityData;
@@ -22,26 +23,32 @@ import net.minecraft.village.raid.Raid;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import solipingen.armorrestitched.item.ModItems;
 
 
 @Mixin(PillagerEntity.class)
 public abstract class PillagerEntityMixin extends IllagerEntity {
-    
+
+    @Shadow
+    protected abstract void initEquipment(Random random, LocalDifficulty localDifficulty);
+
 
     protected PillagerEntityMixin(EntityType<? extends IllagerEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    @Redirect(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/IllagerEntity;initialize(Lnet/minecraft/world/ServerWorldAccess;Lnet/minecraft/world/LocalDifficulty;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/entity/EntityData;)Lnet/minecraft/entity/EntityData;"))
-    private EntityData redirectedInitialize(IllagerEntity illagerEntity, ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
-        EntityData entityData2 = super.initialize(world, difficulty, spawnReason, entityData);
+    @Inject(method = "initialize", at = @At("HEAD"), cancellable = true)
+    private void injectedInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, CallbackInfoReturnable<EntityData> cbireturn) {
+        this.initEquipment(world.getRandom(), difficulty);
         if (this.isPatrolLeader()) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (!slot.isArmorSlot()) continue;
                 if (slot == EquipmentSlot.HEAD) continue;
                 Item armorItem = PillagerEntityMixin.getModEquipmentForSlot(slot, 3);
-                this.equipStack(slot, new ItemStack(armorItem));
+                if (armorItem != null) {
+                    this.equipStack(slot, new ItemStack(armorItem));
+                }
             }
         }
         if (!this.isPatrolLeader() && spawnReason == SpawnReason.STRUCTURE) {
@@ -49,11 +56,13 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
                 if (!slot.isArmorSlot()) continue;
                 int level = this.random.nextFloat() < 0.1f*this.getWorld().getDifficulty().getId() + 0.1f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
                 Item armorItem = PillagerEntityMixin.getModEquipmentForSlot(slot, level);
-                this.equipStack(slot, new ItemStack(armorItem));
+                if (armorItem != null) {
+                    this.equipStack(slot, new ItemStack(armorItem));
+                }
             }
         }
         this.updateEnchantments(world, world.getRandom(), this.getWorld().getLocalDifficulty(this.getBlockPos()));
-        return entityData2;
+        cbireturn.setReturnValue(super.initialize(world, difficulty, spawnReason, entityData));
     }
 
     @Inject(method = "initEquipment", at = @At("TAIL"))
@@ -83,6 +92,7 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
         }
     }
 
+    @Unique
     @Nullable
     private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         switch (equipmentSlot) {
