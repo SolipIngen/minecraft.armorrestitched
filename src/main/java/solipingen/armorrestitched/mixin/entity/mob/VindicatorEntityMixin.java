@@ -3,6 +3,7 @@ package solipingen.armorrestitched.mixin.entity.mob;
 import net.minecraft.registry.RegistryKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -41,7 +42,9 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
                 if (!slot.isArmorSlot()) continue;
                 if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
                 Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, level);
-                this.equipStack(slot, new ItemStack(armorItem));
+                if (armorItem != null) {
+                    this.equipStack(slot, new ItemStack(armorItem));
+                }
             }
         }
     }
@@ -53,7 +56,9 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
             if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
             if (random.nextFloat() < 0.2f*this.getWorld().getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty()) {
                 Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*this.getWorld().getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 1 : 2);
-                this.equipStack(slot, new ItemStack(armorItem));
+                if (armorItem != null) {
+                    this.equipStack(slot, new ItemStack(armorItem));
+                }
             }
         }
         if (this.isPatrolLeader()) {
@@ -62,6 +67,7 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
         }
     }
 
+    @Unique
     @Nullable
     private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         switch (equipmentSlot) {
