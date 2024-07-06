@@ -19,6 +19,7 @@ import net.minecraft.village.raid.Raid;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Inject;
 import solipingen.armorrestitched.item.ModItems;
 
@@ -66,6 +67,7 @@ public abstract class EvokerEntityMixin extends IllagerEntity {
         }
     }
 
+    @Unique
     @Nullable
     private static Item getModEquipmentForSlot(EquipmentSlot equipmentSlot, int equipmentLevel) {
         switch (equipmentSlot) {

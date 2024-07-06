@@ -15,6 +15,7 @@ import net.minecraft.registry.tag.ItemTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -395,6 +396,7 @@ public abstract class VillagerEntityMixin extends MerchantEntity implements Inte
         }
     }
 
+    @Unique
     private ItemStack getRandomlyDyedClothing(Item dyeableArmorItem, boolean enchanted) {
         if (dyeableArmorItem.getDefaultStack().isIn(ItemTags.DYEABLE)) {
             int i = 5 + this.random.nextInt(15);

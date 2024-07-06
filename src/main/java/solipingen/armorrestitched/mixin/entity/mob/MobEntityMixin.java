@@ -240,6 +240,7 @@ public abstract class MobEntityMixin extends LivingEntity implements MobEntityIn
         return this.entrancedTime;
     }
 
+    @Unique
     private ItemStack getRandomlyDyedClothing(Item dyeableArmorItem) {
         if (dyeableArmorItem.getDefaultStack().isIn(ItemTags.DYEABLE)) {
             ItemStack itemStack = new ItemStack(dyeableArmorItem);
