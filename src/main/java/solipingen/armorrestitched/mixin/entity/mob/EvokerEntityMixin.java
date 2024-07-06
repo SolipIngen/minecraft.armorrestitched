@@ -40,7 +40,7 @@ public abstract class EvokerEntityMixin extends IllagerEntity {
         this.initEquipment(random, difficulty);
         this.updateEnchantments(world, random, difficulty);
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
-            int level = this.random.nextFloat() < 0.2f*this.getWorld().getDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 4 : 3;
+            int level = this.random.nextFloat() < 0.2f*difficulty.getGlobalDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 4 : 3;
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (!slot.isArmorSlot()) continue;
                 if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
@@ -57,7 +57,7 @@ public abstract class EvokerEntityMixin extends IllagerEntity {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (!slot.isArmorSlot()) continue;
             if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
-            Item armorItem = EvokerEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*this.getWorld().getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 4 : 3);
+            Item armorItem = EvokerEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*localDifficulty.getGlobalDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 4 : 3);
             this.equipStack(slot, new ItemStack(armorItem));
             this.setEquipmentDropChance(slot, 0.0f);
         }

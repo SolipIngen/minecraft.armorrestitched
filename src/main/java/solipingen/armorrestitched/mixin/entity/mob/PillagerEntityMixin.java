@@ -54,7 +54,7 @@ public abstract class PillagerEntityMixin extends IllagerEntity {
         if (!this.isPatrolLeader() && spawnReason == SpawnReason.STRUCTURE) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (!slot.isArmorSlot()) continue;
-                int level = this.random.nextFloat() < 0.1f*this.getWorld().getDifficulty().getId() + 0.1f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
+                int level = this.random.nextFloat() < 0.1f*difficulty.getGlobalDifficulty().getId() + 0.1f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
                 Item armorItem = PillagerEntityMixin.getModEquipmentForSlot(slot, level);
                 if (armorItem != null) {
                     this.equipStack(slot, new ItemStack(armorItem));
