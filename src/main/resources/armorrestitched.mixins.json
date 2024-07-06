@@ -22,7 +22,6 @@
     "entity.mob.EndermiteEntityMixin",
     "entity.mob.EvokerEntityMixin",
     "entity.mob.HoglinEntityMixin",
-    "entity.mob.HostileEntityMixin",
     "entity.mob.MagmaCubeEntityMixin",
     "entity.mob.MobEntityMixin",
     "entity.mob.PiglinBruteEntityMixin",
