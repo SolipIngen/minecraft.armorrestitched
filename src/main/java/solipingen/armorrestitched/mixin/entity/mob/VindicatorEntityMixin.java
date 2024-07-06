@@ -37,7 +37,7 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
     @Inject(method = "initialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/VindicatorEntity;initEquipment(Lnet/minecraft/util/math/random/Random;Lnet/minecraft/world/LocalDifficulty;)V", shift = At.Shift.AFTER))
     private void injectedInitialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, CallbackInfoReturnable<EntityData> cbireturn) {
         if (spawnReason == SpawnReason.STRUCTURE || this.isPatrolLeader()) {
-            int level = this.random.nextFloat() < 0.2f*this.getWorld().getDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
+            int level = this.random.nextFloat() < 0.2f*difficulty.getGlobalDifficulty().getId() + 0.2f*difficulty.getClampedLocalDifficulty() ? 2 : 1;
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 if (!slot.isArmorSlot()) continue;
                 if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
@@ -54,8 +54,8 @@ public abstract class VindicatorEntityMixin extends IllagerEntity {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (!slot.isArmorSlot()) continue;
             if (slot == EquipmentSlot.HEAD && this.isPatrolLeader()) continue;
-            if (random.nextFloat() < 0.2f*this.getWorld().getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty()) {
-                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*this.getWorld().getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 1 : 2);
+            if (random.nextFloat() < 0.2f*localDifficulty.getGlobalDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty()) {
+                Item armorItem = VindicatorEntityMixin.getModEquipmentForSlot(slot, random.nextFloat() > 0.2f*localDifficulty.getGlobalDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty() ? 1 : 2);
                 if (armorItem != null) {
                     this.equipStack(slot, new ItemStack(armorItem));
                 }

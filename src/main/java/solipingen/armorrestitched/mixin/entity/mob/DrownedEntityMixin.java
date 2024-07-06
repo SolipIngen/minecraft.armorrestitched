@@ -41,8 +41,8 @@ public abstract class DrownedEntityMixin extends ZombieEntity implements RangedA
     @SuppressWarnings("incomplete-switch")
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
-        float equipThreshold = 0.12f*this.getWorld().getDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty();
-        float armorTypeThreshold = 0.03f*this.getWorld().getDifficulty().getId() + 0.15f*localDifficulty.getClampedLocalDifficulty();
+        float equipThreshold = 0.12f*localDifficulty.getGlobalDifficulty().getId() + 0.2f*localDifficulty.getClampedLocalDifficulty();
+        float armorTypeThreshold = 0.03f*localDifficulty.getGlobalDifficulty().getId() + 0.15f*localDifficulty.getClampedLocalDifficulty();
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (!slot.isArmorSlot()) continue;
             this.equipStack(slot, ItemStack.EMPTY);

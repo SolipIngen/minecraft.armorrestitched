@@ -28,8 +28,8 @@ public abstract class ZombifiedPiglinEntityMixin extends ZombieEntity implements
     @Inject(method = "initEquipment", at = @At("TAIL"))
     private void injectedInitEquipment(Random random, LocalDifficulty localDifficulty, CallbackInfo cbi) {
         World world = this.getWorld();
-        float armorThreshold = 0.25f*world.getDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty();
-        float typeThreshold = 0.16f*world.getDifficulty().getId() + 0.08f*localDifficulty.getClampedLocalDifficulty();
+        float armorThreshold = 0.25f*localDifficulty.getGlobalDifficulty().getId() + 0.25f*localDifficulty.getClampedLocalDifficulty();
+        float typeThreshold = 0.16f*localDifficulty.getGlobalDifficulty().getId() + 0.08f*localDifficulty.getClampedLocalDifficulty();
         if (random.nextFloat() < typeThreshold) {
             if (random.nextFloat() < armorThreshold) {
                 this.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
