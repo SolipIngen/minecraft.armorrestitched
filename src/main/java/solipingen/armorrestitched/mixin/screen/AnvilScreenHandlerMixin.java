@@ -1,9 +1,11 @@
 package solipingen.armorrestitched.mixin.screen;
 
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.*;
 import net.minecraft.util.StringHelper;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,16 +14,25 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.trim.ArmorTrim;
 import net.minecraft.item.trim.ArmorTrimMaterials;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
+    @Shadow @Final private Property levelCost;
     @Shadow @Nullable private String newItemName;
 
 
     public AnvilScreenHandlerMixin(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, context);
+    }
+
+    @Inject(method = "canTakeOutput", at = @At("HEAD"), cancellable = true)
+    private void injectedCanTakeOutput(PlayerEntity player, boolean present, CallbackInfoReturnable<Boolean> cbireturn) {
+        cbireturn.setReturnValue(player.isInCreativeMode() || player.experienceLevel >= this.levelCost.get());
     }
 
     // Removes renaming cost, adds gold trim discount.
@@ -42,6 +53,22 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             t -= 1;
         }
         return t;
+    }
+
+    // Resets cost if item was only renamed.
+    @Inject(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;sendContentUpdates()V"))
+    private void injectedUpdateResult(CallbackInfo cbi) {
+        ItemStack itemStack = this.input.getStack(0).copy();
+        ItemStack itemStack2 = this.output.getStack(0).copy();
+        if (itemStack.get(DataComponentTypes.CUSTOM_NAME) != null) {
+            itemStack.remove(DataComponentTypes.CUSTOM_NAME);
+        }
+        if (itemStack2.get(DataComponentTypes.CUSTOM_NAME) != null) {
+            itemStack2.remove(DataComponentTypes.CUSTOM_NAME);
+        }
+        if (ItemStack.areItemsAndComponentsEqual(itemStack, itemStack2)) {
+            this.levelCost.set(0);
+        }
     }
 
 
