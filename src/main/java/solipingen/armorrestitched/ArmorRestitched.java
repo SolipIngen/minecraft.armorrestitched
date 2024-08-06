@@ -2,7 +2,7 @@ package solipingen.armorrestitched;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import solipingen.armorrestitched.block.ModBlocks;
 import solipingen.armorrestitched.enchantment.ModEnchantments;
 import solipingen.armorrestitched.entity.ModEntityTypes;

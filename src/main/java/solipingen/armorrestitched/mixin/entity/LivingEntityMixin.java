@@ -435,10 +435,12 @@ public abstract class LivingEntityMixin extends Entity {
         if (oldStatusEffectInstance == null) {
             this.activeStatusEffects.put(statusEffectInstance.getEffectType(), statusEffectInstance);
             this.invokeOnStatusEffectApplied(statusEffectInstance, source);
+            effect.onApplied((LivingEntity)(Object)this);
             cbireturn.setReturnValue(true);
         }
         else if (oldStatusEffectInstance != null && oldStatusEffectInstance.upgrade(statusEffectInstance)) {
             this.invokeOnStatusEffectUpgraded(oldStatusEffectInstance, true, source);
+            effect.onApplied((LivingEntity)(Object)this);
             cbireturn.setReturnValue(true);
         }
         else {
