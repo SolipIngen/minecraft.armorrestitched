@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "item": "armorrestitched:cotton"
+      }
+    },
+    "pattern": [
+      "o o",
+      "ooo", 
+      "ooo"
+    ],
+    "result": {
+      "id": "armorrestitched:cotton_chestplate"
+    }
+}

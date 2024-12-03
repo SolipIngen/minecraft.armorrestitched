@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "banner",
+    "key": {
+      "#": {
+        "tag": "armorrestitched:magenta_woollike_blocks"
+      },
+      "|": {
+        "item": "minecraft:stick"
+      }
+    },
+    "pattern": [
+      "###",
+      "###",
+      " | "
+    ],
+    "result": {
+      "id": "minecraft:magenta_banner"
+    },
+    "show_notification": true
+}

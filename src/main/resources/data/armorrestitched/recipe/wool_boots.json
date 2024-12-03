@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "minecraft:wool"
+      }
+    },
+    "pattern": [
+      "o o",
+      "o o"
+    ],
+    "result": {
+      "id": "armorrestitched:wool_boots"
+    }
+}

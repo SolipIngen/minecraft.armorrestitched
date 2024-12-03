@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": {
+        "tag": "minecraft:wool"
+      }
+    },
+    "pattern": [
+      "o o",
+      "ooo", 
+      "ooo"
+    ],
+    "result": {
+      "id": "armorrestitched:wool_chestplate"
+    }
+}

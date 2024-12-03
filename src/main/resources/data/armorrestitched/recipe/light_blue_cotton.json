@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    {
+      "item": "minecraft:light_blue_dye"
+    },
+    {
+      "tag": "armorrestitched:cotton_blocks"
+    }
+  ],
+  "result": {
+    "id": "armorrestitched:light_blue_cotton"
+  }
+}

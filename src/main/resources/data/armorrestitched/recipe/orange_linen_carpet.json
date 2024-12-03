@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "carpet",
+    "key": {
+      "#": {
+        "item": "armorrestitched:orange_linen"
+      }
+    },
+    "pattern": [
+      "##"
+    ],
+    "result": {
+      "count": 3,
+      "id": "armorrestitched:orange_linen_carpet"
+    },
+    "show_notification": true
+}

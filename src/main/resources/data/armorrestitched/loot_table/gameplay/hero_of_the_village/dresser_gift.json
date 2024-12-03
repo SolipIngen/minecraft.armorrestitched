@@ -1,0 +1,139 @@
+{
+    "type": "minecraft:gift",
+    "pools": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:white_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:orange_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:magenta_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_blue_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:yellow_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:lime_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:pink_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:gray_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_gray_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:cyan_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:purple_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:blue_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:brown_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:green_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:red_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:black_cotton"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:white_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:orange_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:magenta_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_blue_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:yellow_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:lime_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:pink_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:gray_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:light_gray_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:cyan_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:purple_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:blue_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:brown_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:green_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:red_linen"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "armorrestitched:black_linen"
+          }
+        ],
+        "rolls": 1.0
+      }
+    ]
+  }

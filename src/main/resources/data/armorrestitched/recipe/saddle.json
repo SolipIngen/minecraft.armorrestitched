@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "X": {
+        "item": "minecraft:leather"
+      }, 
+      "Y": {
+        "item": "minecraft:tripwire_hook"
+      }
+    },
+    "pattern": [
+      "X X",
+      "XXX",
+      "Y Y"
+    ],
+    "result": {
+      "id": "minecraft:saddle"
+    }
+}

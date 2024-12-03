@@ -1,0 +1,26 @@
+{
+    "language.name": "British English",
+    "language.region": "United Kingdom",
+    "language.code": "en_gb", 
+
+    "block.minecraft.red_carpet": "Red Wool Carpet", 
+    "block.minecraft.pink_carpet": "Pink Wool Carpet", 
+    "block.minecraft.orange_carpet": "Orange Wool Carpet", 
+    "block.minecraft.yellow_carpet": "Yellow Wool Carpet", 
+    "block.minecraft.brown_carpet": "Brown Wool Carpet", 
+    "block.minecraft.lime_carpet": "Lime Wool Carpet", 
+    "block.minecraft.green_carpet": "Green Wool Carpet", 
+    "block.minecraft.light_blue_carpet": "Light Blue Wool Carpet", 
+    "block.minecraft.blue_carpet": "Blue Wool Carpet", 
+    "block.minecraft.cyan_carpet": "Cyan Wool Carpet",
+    "block.minecraft.purple_carpet": "Purple Wool Carpet", 
+    "block.minecraft.magenta_carpet": "Magenta Wool Carpet", 
+    "block.minecraft.light_gray_carpet": "Light Gray Wool Carpet", 
+    "block.minecraft.gray_carpet": "Gray Wool Carpet", 
+    "block.minecraft.black_carpet": "Black Wool Carpet", 
+    "block.minecraft.white_carpet": "White Wool Carpet", 
+
+    "subtitles.item.armor.equip_leather": "Leather clothing rustles"
+
+
+}

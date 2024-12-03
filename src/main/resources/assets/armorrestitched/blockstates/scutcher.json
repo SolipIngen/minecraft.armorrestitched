@@ -1,0 +1,19 @@
+{
+    "variants": {
+      "facing=east": {
+        "model": "armorrestitched:block/scutcher",
+        "y": 90
+      },
+      "facing=north": {
+        "model": "armorrestitched:block/scutcher"
+      },
+      "facing=south": {
+        "model": "armorrestitched:block/scutcher",
+        "y": 180
+      },
+      "facing=west": {
+        "model": "armorrestitched:block/scutcher",
+        "y": 270
+      }
+    }
+}

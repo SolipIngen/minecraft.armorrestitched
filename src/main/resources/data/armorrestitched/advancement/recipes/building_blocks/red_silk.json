@@ -1,0 +1,32 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_the_recipe": {
+        "conditions": {
+          "recipe": "armorrestitched:red_silk"
+        },
+        "trigger": "minecraft:recipe_unlocked"
+      },
+      "has_silk": {
+        "conditions": {
+          "items": [
+            {
+              "items": "#armorrestitched:silk_blocks"
+            }
+          ]
+        },
+        "trigger": "minecraft:inventory_changed"
+      }
+    },
+    "requirements": [
+      [
+        "has_silk",
+        "has_the_recipe"
+      ]
+    ],
+    "rewards": {
+      "recipes": [
+        "armorrestitched:red_silk"
+      ]
+    }
+}
