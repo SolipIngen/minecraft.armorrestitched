@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "#": "minecraft:stick",
+      "X": "#armorrestitched:woollike_blocks"
+    },
+    "pattern": [
+      "###",
+      "#X#",
+      "###"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:painting"
+    },
+    "show_notification": true
+}

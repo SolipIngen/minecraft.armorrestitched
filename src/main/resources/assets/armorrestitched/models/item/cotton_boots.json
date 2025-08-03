@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "armorrestitched:item/cotton_boots", 
+      "layer1": "armorrestitched:item/cotton_boots_overlay"
+    }
+}

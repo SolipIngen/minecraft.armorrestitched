@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    "minecraft:cyan_dye",
+    "#armorrestitched:fur_carpets"
+  ],
+  "result": {
+    "id": "armorrestitched:cyan_fur_carpet"
+  }
+}

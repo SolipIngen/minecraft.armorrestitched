@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "bed",
+    "key": {
+      "#": "#armorrestitched:black_woollike_blocks",
+      "X": "#minecraft:planks"
+    },
+    "pattern": [
+      "###",
+      "XXX"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:black_bed"
+    },
+    "show_notification": true
+}

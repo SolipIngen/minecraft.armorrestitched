@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "bed",
+    "key": {
+      "#": "#armorrestitched:blue_woollike_blocks",
+      "X": "#minecraft:planks"
+    },
+    "pattern": [
+      "###",
+      "XXX"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:blue_bed"
+    },
+    "show_notification": true
+}

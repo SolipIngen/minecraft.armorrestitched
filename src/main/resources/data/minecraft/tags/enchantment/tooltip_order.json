@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "armorrestitched:strike_protection",
+    "armorrestitched:magic_protection",
+    "armorrestitched:impact_protection",
+    "armorrestitched:soaring"
+  ]
+}

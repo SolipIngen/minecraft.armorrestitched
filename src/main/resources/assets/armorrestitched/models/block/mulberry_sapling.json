@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/cross",
+    "textures": {
+      "cross": "armorrestitched:block/mulberry_sapling"
+    }
+}

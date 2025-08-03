@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "armorrestitched:item/linen_helmet", 
+      "layer1": "armorrestitched:item/linen_helmet_overlay"
+    }
+}

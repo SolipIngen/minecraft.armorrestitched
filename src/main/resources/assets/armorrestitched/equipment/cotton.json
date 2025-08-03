@@ -1,0 +1,34 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "dyeable": {
+          "color_when_undyed": 16646134
+        },
+        "texture": "armorrestitched:cotton"
+      }
+    ],
+    "humanoid": [
+      {
+        "dyeable": {
+          "color_when_undyed": 16646134
+        },
+        "texture": "armorrestitched:cotton"
+      },
+      {
+        "texture": "armorrestitched:cotton_overlay"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "dyeable": {
+          "color_when_undyed": 16646134
+        },
+        "texture": "armorrestitched:cotton"
+      },
+      {
+        "texture": "armorrestitched:cotton_overlay"
+      }
+    ]
+  }
+}

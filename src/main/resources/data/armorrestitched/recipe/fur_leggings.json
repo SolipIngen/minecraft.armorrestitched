@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": "#armorrestitched:fur_blocks"
+    },
+    "pattern": [
+      "ooo",
+      "o o", 
+      "o o"
+    ],
+    "result": {
+      "count": 1,
+      "id": "armorrestitched:fur_leggings"
+    }
+}

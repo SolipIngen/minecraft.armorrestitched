@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "carpet",
+    "key": {
+      "#": "armorrestitched:cyan_silk"
+    },
+    "pattern": [
+      "##"
+    ],
+    "result": {
+      "count": 3,
+      "id": "armorrestitched:cyan_silk_carpet"
+    },
+    "show_notification": true
+}

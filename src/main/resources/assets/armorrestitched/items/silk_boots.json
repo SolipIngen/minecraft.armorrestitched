@@ -1,0 +1,161 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_quartz_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_iron_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_netherite_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_redstone_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_copper_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_gold_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_emerald_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_diamond_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_lapis_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_amethyst_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/silk_boots_resin_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -1827
+            }
+          ]
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "armorrestitched:item/silk_boots",
+      "tints": [
+        {
+          "type": "minecraft:dye",
+          "default": -1827
+        }
+      ]
+    },
+    "property": "minecraft:trim_material"
+  }
+}

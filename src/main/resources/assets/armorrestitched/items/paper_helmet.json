@@ -1,0 +1,161 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_quartz_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_iron_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:iron"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_netherite_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:netherite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_redstone_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:redstone"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_copper_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:copper"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_gold_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:gold"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_emerald_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:emerald"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_diamond_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:diamond"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_lapis_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:lapis"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_amethyst_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:amethyst"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "armorrestitched:item/paper_helmet_resin_trim",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": -261
+            }
+          ]
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "armorrestitched:item/paper_helmet",
+      "tints": [
+        {
+          "type": "minecraft:dye",
+          "default": -261
+        }
+      ]
+    },
+    "property": "minecraft:trim_material"
+  }
+}

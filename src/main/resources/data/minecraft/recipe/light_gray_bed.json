@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "bed",
+    "key": {
+      "#": "#armorrestitched:light_gray_woollike_blocks",
+      "X": "#minecraft:planks"
+    },
+    "pattern": [
+      "###",
+      "XXX"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:light_gray_bed"
+    },
+    "show_notification": true
+}

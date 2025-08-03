@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:feather_falling",
+    "armorrestitched:impact_protection",
+    "armorrestitched:magic_protection",
+    "armorrestitched:strike_protection"
+  ]
+}

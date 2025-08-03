@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    "minecraft:purple_dye",
+    "#armorrestitched:cotton_carpets"
+  ],
+  "result": {
+    "count": 1,
+    "id": "armorrestitched:purple_cotton_carpet"
+  }
+}

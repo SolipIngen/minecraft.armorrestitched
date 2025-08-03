@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "banner",
+    "key": {
+      "#": "#armorrestitched:gray_woollike_blocks",
+      "|": "minecraft:stick"
+    },
+    "pattern": [
+      "###",
+      "###",
+      " | "
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:gray_banner"
+    },
+    "show_notification": true
+}

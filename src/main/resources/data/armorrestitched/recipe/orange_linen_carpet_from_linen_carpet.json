@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    "minecraft:orange_dye",
+    "#armorrestitched:linen_carpets"
+  ],
+  "result": {
+    "count": 1,
+    "id": "armorrestitched:orange_linen_carpet"
+  }
+}

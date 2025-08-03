@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "bed",
+    "key": {
+      "#": "#armorrestitched:yellow_woollike_blocks",
+      "X": "#minecraft:planks"
+    },
+    "pattern": [
+      "###",
+      "XXX"
+    ],
+    "result": {
+      "id": "minecraft:yellow_bed"
+    },
+    "show_notification": true
+}

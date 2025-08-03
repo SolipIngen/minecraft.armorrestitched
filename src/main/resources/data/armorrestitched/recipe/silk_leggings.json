@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "o": "armorrestitched:silk"
+    },
+    "pattern": [
+      "ooo",
+      "o o", 
+      "o o"
+    ],
+    "result": {
+      "count": 1,
+      "id": "armorrestitched:silk_leggings"
+    }
+}

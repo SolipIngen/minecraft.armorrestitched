@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "carpet",
+    "key": {
+      "#": "armorrestitched:black_linen"
+    },
+    "pattern": [
+      "##"
+    ],
+    "result": {
+      "count": 3,
+      "id": "armorrestitched:black_linen_carpet"
+    },
+    "show_notification": true
+}

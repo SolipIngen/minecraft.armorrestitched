@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    "minecraft:magenta_dye",
+    "#armorrestitched:silk_carpets"
+  ],
+  "result": {
+    "count": 1,
+    "id": "armorrestitched:magenta_silk_carpet"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool",
+  "ingredients": [
+    "minecraft:light_blue_dye",
+    "#armorrestitched:silk_blocks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "armorrestitched:light_blue_silk"
+  }
+}

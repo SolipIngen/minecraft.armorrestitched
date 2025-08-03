@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "building",
+    "ingredients": [
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw",
+      "armorrestitched:flax_straw"
+    ],
+    "result": {
+      "count": 1,
+      "id": "armorrestitched:flax_block"
+    }
+}
